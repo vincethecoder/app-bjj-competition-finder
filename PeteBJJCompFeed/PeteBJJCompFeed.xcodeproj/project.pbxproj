@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EF0372D32CBDEC8F00694F89 /* PeteBJJCompFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */; };
 		EF0372D92CBDEC8F00694F89 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
-		EF0372DE2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */; };
 		EF0372DF2CBDEC8F00694F89 /* PeteBJJCompFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF0372E92CBDED3600694F89 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372E82CBDED3600694F89 /* Competition.swift */; };
 		EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */; };
@@ -31,7 +30,6 @@
 		EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeteBJJCompFeed.h; sourceTree = "<group>"; };
 		EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeed.docc; sourceTree = "<group>"; };
 		EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedTests.swift; sourceTree = "<group>"; };
 		EF0372E82CBDED3600694F89 /* Competition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListLoader.swift; sourceTree = "<group>"; };
 		EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoaderTests.swift; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 		EF0372C42CBDEC8F00694F89 = {
 			isa = PBXGroup;
 			children = (
-				EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */,
 				EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EF0372CF2CBDEC8F00694F89 /* Products */,
@@ -88,7 +85,7 @@
 		EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */,
+				EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */,
 			);
 			path = PeteBJJCompFeedTests;
 			sourceTree = "<group>";
@@ -222,7 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0372EE2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift in Sources */,
-				EF0372DE2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
