@@ -37,10 +37,10 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         client.error = NSError(domain: "Test", code: 0)
-        var captutedError: RemoteCompetitionListLoader.Error?
-        sut.load { error in captutedError = error}
+        var captutedError: [RemoteCompetitionListLoader.Error] = []
+        sut.load { captutedError.append($0) }
         
-        XCTAssertEqual(captutedError, .connectivity)
+        XCTAssertEqual(captutedError, [.connectivity])
     }
     
     // MARK: - Helpers
