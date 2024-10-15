@@ -2,7 +2,7 @@
 //  PeteBJJCompFeedTests.swift
 //  PeteBJJCompFeedTests
 //
-//  Created by Kobe Sam on 10/14/24.
+//  Created by Vince K. Sam on 10/14/24.
 //
 
 import XCTest

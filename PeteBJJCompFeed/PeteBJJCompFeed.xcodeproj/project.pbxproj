@@ -11,6 +11,8 @@
 		EF0372D92CBDEC8F00694F89 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 		EF0372DE2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */; };
 		EF0372DF2CBDEC8F00694F89 /* PeteBJJCompFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF0372E92CBDED3600694F89 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372E82CBDED3600694F89 /* Competition.swift */; };
+		EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeed.docc; sourceTree = "<group>"; };
 		EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedTests.swift; sourceTree = "<group>"; };
+		EF0372E82CBDED3600694F89 /* Competition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
+		EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			children = (
 				EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */,
 				EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */,
+				EF0372EC2CBDF02D00694F89 /* List Feature */,
 			);
 			path = PeteBJJCompFeed;
 			sourceTree = "<group>";
@@ -83,6 +88,15 @@
 				EF0372DD2CBDEC8F00694F89 /* PeteBJJCompFeedTests.swift */,
 			);
 			path = PeteBJJCompFeedTests;
+			sourceTree = "<group>";
+		};
+		EF0372EC2CBDF02D00694F89 /* List Feature */ = {
+			isa = PBXGroup;
+			children = (
+				EF0372E82CBDED3600694F89 /* Competition.swift */,
+				EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */,
+			);
+			path = "List Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
 				EF0372D32CBDEC8F00694F89 /* PeteBJJCompFeed.docc in Sources */,
+				EF0372E92CBDED3600694F89 /* Competition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +426,7 @@
 		EF0372E62CBDEC8F00694F89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
@@ -425,6 +442,7 @@
 		EF0372E72CBDEC8F00694F89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
