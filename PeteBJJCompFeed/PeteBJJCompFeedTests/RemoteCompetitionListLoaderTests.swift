@@ -47,13 +47,16 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
         let (sut, client) = makeSUT()
-        
-        var captutedError: [RemoteCompetitionListLoader.Error] = []
-        sut.load { captutedError.append($0) }
 
-        client.complete(withStatusCode: 400) // invalid data
+        let samples = [199, 201, 300, 400, 500]
+
+        samples.enumerated().forEach { index, code in
+            var captutedError: [RemoteCompetitionListLoader.Error] = []
+            sut.load { captutedError.append($0) }
+            client.complete(withStatusCode: code, at: index)
+            XCTAssertEqual(captutedError, [.invalidData])
+        }
         
-        XCTAssertEqual(captutedError, [.invalidData])
     }
     
     // MARK: - Helpers
