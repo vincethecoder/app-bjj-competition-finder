@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Competition
 
-struct Competition {
+public struct Competition: Equatable {
     let id: UUID
     let name: String
     let startDate: Date
