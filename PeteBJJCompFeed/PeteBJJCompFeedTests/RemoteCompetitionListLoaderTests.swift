@@ -37,12 +37,10 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
         
-        var captutedError: [RemoteCompetitionListLoader.Error] = []
-        sut.load { captutedError.append($0) }
-        let clientError = NSError(domain: "Test", code: 0)
-        client.complete(with: clientError)
-        
-        XCTAssertEqual(captutedError, [.connectivity])
+        expect(sut, toCompleteWithError: .connectivity, when: {
+            let clientError = NSError(domain: "Test", code: 0)
+            client.complete(with: clientError)
+        })
     }
     
     func test_load_deliversErrorOnNon200HTTPResponse() {
@@ -51,23 +49,19 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         let samples = [199, 201, 300, 400, 500]
 
         samples.enumerated().forEach { index, code in
-            var captutedError: [RemoteCompetitionListLoader.Error] = []
-            sut.load { captutedError.append($0) }
-            client.complete(withStatusCode: code, at: index)
-            XCTAssertEqual(captutedError, [.invalidData])
+            expect(sut, toCompleteWithError: .invalidData, when: {
+                client.complete(withStatusCode: code, at: index)
+            })
         }
     }
     
     func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
         
-        var capturedErrors = [RemoteCompetitionListLoader.Error]()
-        sut.load { capturedErrors.append($0) }
-        
-        let invalidJSON = Data("invalid json".utf8)
-        client.complete(withStatusCode: 200, data: invalidJSON)
-        
-        XCTAssertEqual(capturedErrors, [.invalidData])
+        expect(sut, toCompleteWithError: .invalidData, when: {
+            let invalidJSON = Data("invalid json".utf8)
+            client.complete(withStatusCode: 200, data: invalidJSON)
+        })
     }
     
     // MARK: - Helpers
@@ -76,6 +70,15 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteCompetitionListLoader(url: url, client: client)
         return (sut, client)
+    }
+    
+    private func expect(_ sut: RemoteCompetitionListLoader, toCompleteWithError error: RemoteCompetitionListLoader.Error, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        var capturedErrors = [RemoteCompetitionListLoader.Error]()
+        sut.load { capturedErrors.append($0) }
+        
+        action()
+        
+        XCTAssertEqual(capturedErrors, [error], file: file, line: line)
     }
     
     private class HTTPClientSpy: HTTPClient {
