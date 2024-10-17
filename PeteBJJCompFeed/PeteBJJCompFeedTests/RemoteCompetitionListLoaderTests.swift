@@ -64,6 +64,17 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         })
     }
     
+    func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
+        let (sut, client) = makeSUT()
+        var capturedResults = [RemoteCompetitionListLoader.Result]()
+        sut.load { capturedResults.append($0) }
+        
+        let emptyListJSON = Data("{\"competitions\": []}".utf8)
+        client.complete(withStatusCode: 200, data: emptyListJSON)
+        
+        XCTAssertEqual(capturedResults, [.success([])])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteCompetitionListLoader, client: HTTPClientSpy) {
@@ -107,3 +118,27 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         }
     }
 }
+
+/*
+ "competitions": [
+    {
+      "id": "ibjjf-2024-001",
+      "name": "World IBJJF Jiu-Jitsu Championship 2024",
+      "startDate": "2024-05-30",
+      "endDate": "2024-06-02",
+      "venue": "The Walter Pyramid (CSULB)",
+      "city": "Long Beach",
+      "state": "CA",
+      "country": "USA",
+      "type": "gi",
+      "status": "upcoming",
+      "registrationStatus": "open",
+      "registrationLink": "https://ibjjf.com/events/registration/world-2024",
+      "eventLink": "https://ibjjf.com/events/world-ibjjf-jiu-jitsu-championship-2024",
+      "categories": ["adult", "master"],
+      "divisions": ["gi"],
+      "rankingPoints": 1000,
+      "isKidsEvent": false,
+      "notes": "63 IBJJF ranking points required for Black belt division."
+    }
+ */
