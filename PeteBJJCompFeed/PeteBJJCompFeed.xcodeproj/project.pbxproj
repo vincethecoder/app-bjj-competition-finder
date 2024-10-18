@@ -15,6 +15,7 @@
 		EF0372EE2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */; };
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
+		EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoaderTests.swift; sourceTree = "<group>"; };
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoader.swift; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
 				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
+				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
 			);
 			path = "List API";
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
 				EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */,
 				EF0372D32CBDEC8F00694F89 /* PeteBJJCompFeed.docc in Sources */,
