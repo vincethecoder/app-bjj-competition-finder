@@ -12,6 +12,6 @@ public enum LoadCompetitionListResult {
     case failure(Error)
 }
 
-protocol CompetitionListLoader {
+public protocol CompetitionListLoader {
     func load(completion: @escaping (LoadCompetitionListResult) -> Void)
 }
