@@ -7,11 +7,15 @@
 
 import Foundation
 
-enum LoadCompetitionListResult {
-    case succes([Competition])
-    case error(Error)
+public enum LoadCompetitionListResult<Error: Swift.Error> {
+    case success([Competition])
+    case failure(Error)
 }
 
+extension LoadCompetitionListResult: Equatable where Error: Equatable {}
+
 protocol CompetitionListLoader {
-    func load(completion: @escaping () -> Void)
+    associatedtype Error: Swift.Error
+
+    func load(completion: @escaping (LoadCompetitionListResult<Error>) -> Void)
 }

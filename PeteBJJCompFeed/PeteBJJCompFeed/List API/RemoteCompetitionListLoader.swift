@@ -16,10 +16,7 @@ public final class RemoteCompetitionListLoader {
         case invalidData
     }
     
-    public enum Result: Equatable {
-        case success([Competition])
-        case failure(Error)
-    }
+    public typealias Result = LoadCompetitionListResult<Error>
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
