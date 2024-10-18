@@ -16,7 +16,7 @@ public final class RemoteCompetitionListLoader: CompetitionListLoader {
         case invalidData
     }
     
-    public typealias Result = LoadCompetitionListResult<Error>
+    public typealias Result = LoadCompetitionListResult
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -31,7 +31,7 @@ public final class RemoteCompetitionListLoader: CompetitionListLoader {
             case let .success(data, response):
                 completion(CompetitionListMapper.map(data, from: response))
             case .failure:
-                completion(.failure(.connectivity))
+                completion(.failure(Error.connectivity))
             }
         }
     }
