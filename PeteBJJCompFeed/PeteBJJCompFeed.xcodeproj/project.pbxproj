@@ -92,7 +92,7 @@
 		EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */,
+				EFAD8AD42CC2E74C00981FB9 /* List API */,
 			);
 			path = PeteBJJCompFeedTests;
 			sourceTree = "<group>";
@@ -112,6 +112,14 @@
 				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
 				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
 				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
+			);
+			path = "List API";
+			sourceTree = "<group>";
+		};
+		EFAD8AD42CC2E74C00981FB9 /* List API */ = {
+			isa = PBXGroup;
+			children = (
+				EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */,
 			);
 			path = "List API";
 			sourceTree = "<group>";
