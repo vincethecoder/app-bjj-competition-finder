@@ -39,9 +39,10 @@ public final class RemoteCompetitionListLoader {
         client.get(from: url) { result in
             switch result {
             case let .success(data, response):
-                if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
-                    completion(.success(root.competitions))
-                } else {
+                do {
+                    let competitions = try CompetitionListMapper.map(data, response)
+                    completion(.success(competitions))
+                } catch {
                     completion(.failure(.invalidData))
                 }
             case .failure:
@@ -51,6 +52,16 @@ public final class RemoteCompetitionListLoader {
     }
 }
 
-private struct Root: Decodable {
-    let competitions: [Competition]
+private enum CompetitionListMapper {
+    private struct Root: Decodable {
+        let competitions: [Competition]
+    }
+
+    static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [Competition] {
+        guard response.statusCode == 200 else {
+            throw RemoteCompetitionListLoader.Error.invalidData
+        }
+        return try JSONDecoder().decode(Root.self, from: data).competitions
+    }
 }
+
