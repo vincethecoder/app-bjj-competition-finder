@@ -27,23 +27,13 @@ public final class RemoteCompetitionListLoader {
     }
 
     public func load(completion: @escaping (Result) -> Void) {
-        client.get(from: url) { [weak self] result in
-            guard let self else { return }
+        client.get(from: url) { result in
             switch result {
             case let .success(data, response):
-                completion(self.map(data, from: response))
+                completion(CompetitionListMapper.map(data, from: response))
             case .failure:
                 completion(.failure(.connectivity))
             }
-        }
-    }
-    
-    private func map(_ data: Data, from response: HTTPURLResponse) -> Result {
-        do {
-            let competitions = try CompetitionListMapper.map(data, response)
-            return .success(competitions)
-        } catch {
-            return .failure(.invalidData)
         }
     }
 }
