@@ -121,10 +121,18 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
  
     // MARK: - Helpers
     
-    private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteCompetitionListLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteCompetitionListLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemoteCompetitionListLoader(url: url, client: client)
+        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(client)
         return (sut, client)
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak", file: file, line: line)
+        }
     }
     
     private func makeItem(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
