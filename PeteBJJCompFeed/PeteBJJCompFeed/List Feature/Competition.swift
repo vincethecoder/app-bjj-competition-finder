@@ -23,7 +23,7 @@ public struct Competition: Decodable, Equatable {
     public let registrationStatus: RegistrationStatus
     public let registrationLink: URL?
     public let eventLink: URL
-    public let categories: [Category]
+    public let categories: [CompetitionCategory]
     public let rankingPoints: Int
     public let notes: String?
     
@@ -41,7 +41,7 @@ public struct Competition: Decodable, Equatable {
         registrationStatus: RegistrationStatus,
         registrationLink: URL?,
         eventLink: URL,
-        categories: [Category],
+        categories: [CompetitionCategory],
         rankingPoints: Int,
         notes: String?
     ) {
@@ -91,7 +91,7 @@ public enum RegistrationStatus: String, Decodable {
 
 // MARK: - Category
 
-public enum Category: String, Decodable {
+public enum CompetitionCategory: String, Decodable {
     case kids
     case juvenile
     case adult

@@ -76,11 +76,11 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
 
-        let item1 = Competition(
+        let item1 = makeItem(
             id: UUID(),
             name: "World IBJJF Jiu-Jitsu Championship - CA",
-            startDate: Date.dateFromString("2024-05-30"),
-            endDate: Date.dateFromString("2024-06-02"),
+            startDateString: "2024-05-30",
+            endDateString: "2024-06-02",
             venue: "The Walter Pyramid (CSULB)",
             city: "Long Beach",
             state: "CA",
@@ -93,31 +93,12 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
             categories: [.adult, .master],
             rankingPoints: 1000,
             notes: "63 ranking points required for Black belt division.")
-       
-        let item1JSON = [
-            "id": item1.id.uuidString,
-            "name": item1.name,
-            "startDate": item1.startDate.timeIntervalSinceReferenceDate,
-            "endDate": item1.endDate.timeIntervalSinceReferenceDate,
-            "venue": item1.venue,
-            "city": item1.city,
-            "state": item1.state!,
-            "country": item1.country,
-            "type": item1.type.rawValue,
-            "status": item1.status.rawValue,
-            "registrationStatus": item1.registrationStatus.rawValue,
-            "registrationLink": item1.registrationLink!.absoluteString,
-            "eventLink": item1.eventLink.absoluteString,
-            "categories": item1.categories.map { $0.rawValue },
-            "rankingPoints": item1.rankingPoints,
-            "notes": item1.notes!
-        ] as [String : Any]
         
-        let item2 = Competition(
+        let item2 = makeItem(
             id: UUID(),
             name: "World IBJJF Jiu-Jitsu Championship - TX",
-            startDate: Date.dateFromString("2024-11-01"),
-            endDate: Date.dateFromString("2024-11-03"),
+            startDateString: "2024-11-01",
+            endDateString: "2024-11-03",
             venue: "Fort Worth Convention Center & Arena",
             city: "Fort Worth",
             state: "TX",
@@ -125,34 +106,14 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
             type: .nogi,
             status: .upcoming,
             registrationStatus: .notOpen,
-            registrationLink: nil,
             eventLink: URL(string: "http://a-url.com/events/jiu-jitsu-championship")!,
             categories: [.juvenile, .adult, .master],
-            rankingPoints: 750, notes: nil)
+            rankingPoints: 750)
+
+        let items = [item1.model, item2.model]
         
-        let item2JSON = [
-            "id": item2.id.uuidString,
-            "name": item2.name,
-            "startDate": item2.startDate.timeIntervalSinceReferenceDate,
-            "endDate": item2.endDate.timeIntervalSinceReferenceDate,
-            "venue": item2.venue,
-            "city": item2.city,
-            "state": item2.state!,
-            "country": item2.country,
-            "type": item2.type.rawValue,
-            "status": item2.status.rawValue,
-            "registrationStatus": item2.registrationStatus.rawValue,
-            "eventLink": item2.eventLink.absoluteString,
-            "categories": item2.categories.map { $0.rawValue },
-            "rankingPoints": item2.rankingPoints
-        ] as [String : Any]
-        
-        let itemsJSON = [
-            "competitions": [item1JSON, item2JSON]
-        ]
-        
-        expect(sut, toCompleteWith: .success([item1, item2]), when: {
-            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+        expect(sut, toCompleteWith: .success(items), when: {
+            let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
@@ -163,6 +124,37 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         let client = HTTPClientSpy()
         let sut = RemoteCompetitionListLoader(url: url, client: client)
         return (sut, client)
+    }
+    
+    private func makeItem(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
+        
+        let model = Competition(id: id, name: name, startDate: Date.dateFromString(startDateString), endDate: Date.dateFromString(endDateString), venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
+        
+        let json = [
+            "id": model.id.uuidString,
+            "name": model.name,
+            "startDate": model.startDate.timeIntervalSinceReferenceDate,
+            "endDate": model.endDate.timeIntervalSinceReferenceDate,
+            "venue": model.venue,
+            "city": model.city,
+            "state": model.state as Any,
+            "country": model.country,
+            "type": model.type.rawValue,
+            "status": model.status.rawValue,
+            "registrationStatus": model.registrationStatus.rawValue,
+            "registrationLink": model.registrationLink?.absoluteString as Any,
+            "eventLink": model.eventLink.absoluteString,
+            "categories": model.categories.map { $0.rawValue },
+            "rankingPoints": model.rankingPoints,
+            "notes": model.notes as Any
+        ].compactMapValues { $0 } as [String: Any]
+
+        return (model, json)
+    }
+    
+    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
+        let json = ["competitions": items]
+        return try! JSONSerialization.data(withJSONObject: json)
     }
     
     private func expect(_ sut: RemoteCompetitionListLoader, toCompleteWith result: RemoteCompetitionListLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
