@@ -118,6 +118,20 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
             client.complete(withStatusCode: 200, data: json)
         })
     }
+    
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
+        let url = URL(string: "http://any-url.com")!
+        let client = HTTPClientSpy()
+        var sut: RemoteCompetitionListLoader? = RemoteCompetitionListLoader(url: url, client: client)
+
+        var capturedResults = [RemoteCompetitionListLoader.Result]()
+        sut?.load { capturedResults.append($0) }
+
+        sut = nil
+        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
+
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
  
     // MARK: - Helpers
     
