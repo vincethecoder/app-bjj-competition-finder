@@ -73,6 +73,90 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         })
     }
     
+    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
+        let (sut, client) = makeSUT()
+
+        let item1 = Competition(
+            id: UUID(),
+            name: "World IBJJF Jiu-Jitsu Championship - CA",
+            startDate: Date.dateFromString("2024-05-30"),
+            endDate: Date.dateFromString("2024-06-02"),
+            venue: "The Walter Pyramid (CSULB)",
+            city: "Long Beach",
+            state: "CA",
+            country: "USA",
+            type: .gi,
+            status: .upcoming,
+            registrationStatus: .open,
+            registrationLink: URL(string: "http://a-url.com/events/registration")!,
+            eventLink: URL(string: "http://a-url.com/events/jiu-jitsu-championship")!,
+            categories: [.adult, .master],
+            rankingPoints: 1000,
+            notes: "63 ranking points required for Black belt division.")
+       
+        let item1JSON = [
+            "id": item1.id.uuidString,
+            "name": item1.name,
+            "startDate": item1.startDate.timeIntervalSinceReferenceDate,
+            "endDate": item1.endDate.timeIntervalSinceReferenceDate,
+            "venue": item1.venue,
+            "city": item1.city,
+            "state": item1.state!,
+            "country": item1.country,
+            "type": item1.type.rawValue,
+            "status": item1.status.rawValue,
+            "registrationStatus": item1.registrationStatus.rawValue,
+            "registrationLink": item1.registrationLink!.absoluteString,
+            "eventLink": item1.eventLink.absoluteString,
+            "categories": item1.categories.map { $0.rawValue },
+            "rankingPoints": item1.rankingPoints,
+            "notes": item1.notes!
+        ] as [String : Any]
+        
+        let item2 = Competition(
+            id: UUID(),
+            name: "World IBJJF Jiu-Jitsu Championship - TX",
+            startDate: Date.dateFromString("2024-11-01"),
+            endDate: Date.dateFromString("2024-11-03"),
+            venue: "Fort Worth Convention Center & Arena",
+            city: "Fort Worth",
+            state: "TX",
+            country: "USA",
+            type: .nogi,
+            status: .upcoming,
+            registrationStatus: .notOpen,
+            registrationLink: nil,
+            eventLink: URL(string: "http://a-url.com/events/jiu-jitsu-championship")!,
+            categories: [.juvenile, .adult, .master],
+            rankingPoints: 750, notes: nil)
+        
+        let item2JSON = [
+            "id": item2.id.uuidString,
+            "name": item2.name,
+            "startDate": item2.startDate.timeIntervalSinceReferenceDate,
+            "endDate": item2.endDate.timeIntervalSinceReferenceDate,
+            "venue": item2.venue,
+            "city": item2.city,
+            "state": item2.state!,
+            "country": item2.country,
+            "type": item2.type.rawValue,
+            "status": item2.status.rawValue,
+            "registrationStatus": item2.registrationStatus.rawValue,
+            "eventLink": item2.eventLink.absoluteString,
+            "categories": item2.categories.map { $0.rawValue },
+            "rankingPoints": item2.rankingPoints
+        ] as [String : Any]
+        
+        let itemsJSON = [
+            "competitions": [item1JSON, item2JSON]
+        ]
+        
+        expect(sut, toCompleteWith: .success([item1, item2]), when: {
+            let json = try! JSONSerialization.data(withJSONObject: itemsJSON)
+            client.complete(withStatusCode: 200, data: json)
+        })
+    }
+ 
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://a-url.com")!) -> (sut: RemoteCompetitionListLoader, client: HTTPClientSpy) {
@@ -117,26 +201,22 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     }
 }
 
-/*
- "competitions": [
-    {
-      "id": "ibjjf-2024-001",
-      "name": "World IBJJF Jiu-Jitsu Championship 2024",
-      "startDate": "2024-05-30",
-      "endDate": "2024-06-02",
-      "venue": "The Walter Pyramid (CSULB)",
-      "city": "Long Beach",
-      "state": "CA",
-      "country": "USA",
-      "type": "gi",
-      "status": "upcoming",
-      "registrationStatus": "open",
-      "registrationLink": "https://ibjjf.com/events/registration/world-2024",
-      "eventLink": "https://ibjjf.com/events/world-ibjjf-jiu-jitsu-championship-2024",
-      "categories": ["adult", "master"],
-      "divisions": ["gi"],
-      "rankingPoints": 1000,
-      "isKidsEvent": false,
-      "notes": "63 IBJJF ranking points required for Black belt division."
+private extension Date {
+    static func dateFromString(_ dateString: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = dateFormatter.date(from: dateString) else {
+            fatalError("invalid date from dateString: \(dateString)")
+        }
+        
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        guard let _year = components.year,
+              let _month = components.month,
+              let _day = components.day else {
+            fatalError("invalid components dateString: \(dateString)")
+        }
+        
+        return Calendar.current.date(from: DateComponents(year: _year, month: _month, day: _day))!
     }
- */
+}
