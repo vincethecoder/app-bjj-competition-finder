@@ -12,8 +12,6 @@ public enum LoadCompetitionListResult<Error: Swift.Error> {
     case failure(Error)
 }
 
-extension LoadCompetitionListResult: Equatable where Error: Equatable {}
-
 protocol CompetitionListLoader {
     associatedtype Error: Swift.Error
 
