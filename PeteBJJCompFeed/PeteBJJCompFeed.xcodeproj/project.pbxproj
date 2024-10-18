@@ -81,8 +81,8 @@
 		EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */ = {
 			isa = PBXGroup;
 			children = (
-				EF0372EF2CBEE98C00694F89 /* List API */,
 				EF0372EC2CBDF02D00694F89 /* List Feature */,
+				EF0372EF2CBEE98C00694F89 /* List API */,
 				EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */,
 				EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */,
 			);
@@ -110,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
-				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
 				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
+				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
 			);
 			path = "List API";
 			sourceTree = "<group>";
