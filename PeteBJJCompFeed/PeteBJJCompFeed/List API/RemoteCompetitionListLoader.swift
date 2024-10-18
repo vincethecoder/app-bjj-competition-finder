@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteCompetitionListLoader {
+public final class RemoteCompetitionListLoader: CompetitionListLoader {
     private let url: URL
     private let client: HTTPClient
     
