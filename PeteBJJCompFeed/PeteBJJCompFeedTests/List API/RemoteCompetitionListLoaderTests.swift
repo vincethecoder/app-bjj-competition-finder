@@ -147,12 +147,6 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
         return .failure(error)
     }
     
-    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #filePath, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak", file: file, line: line)
-        }
-    }
-    
     private func makeItem(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
         
         let model = Competition(id: id, name: name, startDate: Date.dateFromString(startDateString), endDate: Date.dateFromString(endDateString), venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
