@@ -18,6 +18,7 @@
 		EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
 		EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
+		EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
 				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
 				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
+				EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */,
 			);
 			path = "List API";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
 				EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
 				EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */,
