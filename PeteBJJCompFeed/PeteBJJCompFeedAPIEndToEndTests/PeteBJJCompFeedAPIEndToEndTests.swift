@@ -26,7 +26,7 @@ final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
         
         switch receivedResult {
         case let .success(competitions):
-            XCTAssertEqual(competitions.count, 4, "Expected 8 items in the test account feed")
+            XCTAssertEqual(competitions.count, 4, "Expected 4 items in the test account feed")
             XCTAssertEqual(competitions[0], expectedCompetition(at: 0))
             XCTAssertEqual(competitions[1], expectedCompetition(at: 1))
             XCTAssertEqual(competitions[2], expectedCompetition(at: 2))
