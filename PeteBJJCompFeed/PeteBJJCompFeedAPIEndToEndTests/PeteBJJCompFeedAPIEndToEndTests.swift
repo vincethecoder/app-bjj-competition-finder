@@ -11,7 +11,7 @@ import PeteBJJCompFeed
 final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
-        let testServerURL = URL(string: "https://gist.githubusercontent.com/vincethecoder/6cd8e98604d3e5587be79c7f7a4ff3e4/raw/3a9ecec36a206468c9b17f42e521df57b5b79564/app-bjj-competition-finder-case-study-mock-api-list.json")!
+        let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
         let client = URLSessionHTTPClient()
         let loader = RemoteCompetitionListLoader(url: testServerURL, client: client)
         
