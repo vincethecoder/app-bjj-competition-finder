@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Competition
 
 public struct Competition: Decodable, Equatable {
-    public let id: UUID
+    public let id: String
     public let name: String
     public let startDate: Date
     public let endDate: Date
@@ -28,7 +28,7 @@ public struct Competition: Decodable, Equatable {
     public let notes: String?
     
     public init(
-        id: UUID,
+        id: String,
         name: String,
         startDate: Date,
         endDate: Date,

@@ -149,13 +149,13 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
     
     private func makeItem(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
         
-        let model = Competition(id: id, name: name, startDate: Date.dateFromString(startDateString), endDate: Date.dateFromString(endDateString), venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
+        let model = Competition(id: id.uuidString, name: name, startDate: Date.dateFromString(startDateString), endDate: Date.dateFromString(endDateString), venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
         
         let json = [
-            "id": model.id.uuidString,
+            "id": model.id,
             "name": model.name,
-            "startDate": model.startDate.timeIntervalSinceReferenceDate,
-            "endDate": model.endDate.timeIntervalSinceReferenceDate,
+            "startDate": startDateString,
+            "endDate": endDateString,
             "venue": model.venue,
             "city": model.city,
             "state": model.state as Any,
@@ -226,25 +226,5 @@ final class RemoteCompetitionListLoaderTests: XCTestCase {
             )!
             messages[index].completion(.success(data, response))
         }
-    }
-}
-
-private extension Date {
-    static func dateFromString(_ dateString: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-
-        guard let date = dateFormatter.date(from: dateString) else {
-            fatalError("invalid date from dateString: \(dateString)")
-        }
-        
-        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
-        guard let _year = components.year,
-              let _month = components.month,
-              let _day = components.day else {
-            fatalError("invalid components dateString: \(dateString)")
-        }
-        
-        return Calendar.current.date(from: DateComponents(year: _year, month: _month, day: _day))!
     }
 }

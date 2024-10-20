@@ -19,10 +19,19 @@
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
 		EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */; };
+		EFAD8AE32CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */; };
+		EFAD8AE42CC5871700981FB9 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		EF0372DA2CBDEC8F00694F89 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF0372CD2CBDEC8F00694F89;
+			remoteInfo = PeteBJJCompFeed;
+		};
+		EFAD8AE52CC5871700981FB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
 			proxyType = 1;
@@ -45,6 +54,8 @@
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +74,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFAD8ADD2CC5871700981FB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFAD8AE42CC5871700981FB9 /* PeteBJJCompFeed.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +90,7 @@
 			children = (
 				EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
+				EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
 				EF0372CF2CBDEC8F00694F89 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +100,7 @@
 			children = (
 				EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */,
 				EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */,
+				EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +162,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */ = {
+			isa = PBXGroup;
+			children = (
+				EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */,
+			);
+			path = PeteBJJCompFeedAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -191,6 +220,24 @@
 			productReference = EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EFAD8ADF2CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFAD8AE72CC5871700981FB9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeedAPIEndToEndTests" */;
+			buildPhases = (
+				EFAD8ADC2CC5871700981FB9 /* Sources */,
+				EFAD8ADD2CC5871700981FB9 /* Frameworks */,
+				EFAD8ADE2CC5871700981FB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EFAD8AE62CC5871700981FB9 /* PBXTargetDependency */,
+			);
+			name = PeteBJJCompFeedAPIEndToEndTests;
+			productName = PeteBJJCompFeedAPIEndToEndTests;
+			productReference = EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,6 +252,9 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					EF0372D72CBDEC8F00694F89 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					EFAD8ADF2CC5871700981FB9 = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
@@ -224,6 +274,7 @@
 			targets = (
 				EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372D72CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
+				EFAD8ADF2CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
 			);
 		};
 /* End PBXProject section */
@@ -237,6 +288,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EF0372D62CBDEC8F00694F89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFAD8ADE2CC5871700981FB9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,6 +328,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFAD8ADC2CC5871700981FB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFAD8AE32CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -277,6 +343,11 @@
 			isa = PBXTargetDependency;
 			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
 			targetProxy = EF0372DA2CBDEC8F00694F89 /* PBXContainerItemProxy */;
+		};
+		EFAD8AE62CC5871700981FB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
+			targetProxy = EFAD8AE52CC5871700981FB9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -503,6 +574,36 @@
 			};
 			name = Release;
 		};
+		EFAD8AE82CC5871700981FB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeedAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EFAD8AE92CC5871700981FB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeedAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -529,6 +630,15 @@
 			buildConfigurations = (
 				EF0372E62CBDEC8F00694F89 /* Debug */,
 				EF0372E72CBDEC8F00694F89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EFAD8AE72CC5871700981FB9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeedAPIEndToEndTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFAD8AE82CC5871700981FB9 /* Debug */,
+				EFAD8AE92CC5871700981FB9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
