@@ -39,11 +39,11 @@ jobs:
           scheme: ${{ env.default_scheme }}
         run: |
           cd $(dirname "$project_dir")
-          xcodebuild clean build -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=x86_64' -verbose | xcpretty -c && exit ${PIPESTATUS[0]}
+          xcodebuild clean build -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=x86_64' -verbose
       
       - name: Analyze
         env:
           scheme: ${{ env.default_scheme }}
         run: |
           cd $(dirname "$project_dir")
-          xcodebuild analyze -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=x86_64' -verbose | xcpretty -c && exit ${PIPESTATUS[0]}
+          xcodebuild analyze -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=x86_64' -verbose
