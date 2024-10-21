@@ -11,20 +11,7 @@ import PeteBJJCompFeed
 final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
-        let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
-        let client = URLSessionHTTPClient()
-        let loader = RemoteCompetitionListLoader(url: testServerURL, client: client)
-        
-        let exp = expectation(description: "Wait for load completion")
-        
-        var receivedResult: LoadCompetitionListResult?
-        loader.load { result in
-            receivedResult = result
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5.0)
-        
-        switch receivedResult {
+        switch competitionListResult {
         case let .success(competitions):
             XCTAssertEqual(competitions.count, 4, "Expected 4 items in the test account feed")
             XCTAssertEqual(competitions[0], expectedCompetition(at: 0))
@@ -40,6 +27,23 @@ final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private var competitionListResult: LoadCompetitionListResult? {
+        let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
+        let client = URLSessionHTTPClient()
+        let loader = RemoteCompetitionListLoader(url: testServerURL, client: client)
+        
+        let exp = expectation(description: "Wait for load completion")
+        
+        var receivedResult: LoadCompetitionListResult?
+        loader.load { result in
+            receivedResult = result
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5.0)
+        
+        return receivedResult
+    }
     
     private func expectedCompetition(at index: Int) -> Competition {
         return Competition(
