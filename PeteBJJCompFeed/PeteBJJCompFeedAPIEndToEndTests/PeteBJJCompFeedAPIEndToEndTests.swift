@@ -11,6 +11,7 @@ import PeteBJJCompFeed
 final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
 
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
+        let competitionListResult = getCompetitionListResult()
         switch competitionListResult {
         case let .success(competitions):
             XCTAssertEqual(competitions.count, 4, "Expected 4 items in the test account feed")
@@ -28,11 +29,12 @@ final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private var competitionListResult: LoadCompetitionListResult? {
+    private func getCompetitionListResult(file: StaticString = #filePath, line: UInt = #line) -> LoadCompetitionListResult? {
         let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
         let client = URLSessionHTTPClient()
         let loader = RemoteCompetitionListLoader(url: testServerURL, client: client)
-        
+        trackForMemoryLeaks(client, file: file, line: line)
+        trackForMemoryLeaks(loader, file: file, line: line)
         let exp = expectation(description: "Wait for load completion")
         
         var receivedResult: LoadCompetitionListResult?
