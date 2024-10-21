@@ -15,46 +15,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: List directory contents
+      - name: Find Xcode project
         run: |
-          echo "Current directory:"
-          pwd
-          echo "Contents:"
-          ls -R
+          project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
+          if [ -z "$project_dir" ]; then
+            echo "No Xcode project found."
+            exit 1
+          fi
+          echo "Found project: $project_dir"
+          echo "project_dir=$project_dir" >> $GITHUB_ENV
       
       - name: Set Default Scheme
         run: |
-          # Find the .xcodeproj or .xcworkspace file
-          project_file=$(find . -maxdepth 1 -name "*.xc*proj" -type d | head -n 1)
-          
-          if [ -z "$project_file" ]; then
-            echo "No Xcode project or workspace found in the root directory."
-            exit 1
-          fi
-          
-          echo "Found project: $project_file"
-          
-          scheme_list=$(xcodebuild -list -json -project "$project_file" | tr -d "\n")
+          cd $(dirname "$project_dir")
+          scheme_list=$(xcodebuild -list -json -project $(basename "$project_dir") | tr -d "\n")
           default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
           echo $default | cat >default
+          echo "default_scheme=$default" >> $GITHUB_ENV
           echo Using default scheme: $default
       
       - name: Build
         env:
-          scheme: ${{ 'default' }}
+          scheme: ${{ env.default_scheme }}
         run: |
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          project_file=$(find . -maxdepth 1 -name "*.xc*proj" -type d | head -n 1)
-          
-          if [ -z "$project_file" ]; then
-            echo "No Xcode project or workspace found in the root directory."
-            exit 1
-          fi
-          
-          if [[ "$project_file" == *.xcworkspace ]]; then
-            filetype_parameter="workspace"
-          else
-            filetype_parameter="project"
-          fi
-          
-          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$project_file" | xcpretty && exit ${PIPESTATUS[0]}
+          cd $(dirname "$project_dir")
+          xcodebuild clean build analyze -scheme "$scheme" -project $(basename "$project_dir") | xcpretty && exit ${PIPESTATUS[0]}
