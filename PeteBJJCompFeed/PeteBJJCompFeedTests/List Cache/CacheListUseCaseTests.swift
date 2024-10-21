@@ -28,14 +28,19 @@ class LocalListLoader {
 
 class ListStore {
     typealias DeletionCompletion = (Error?) -> Void
-    var deleteCachedListCallCount = 0
-    var insertions = [(items: [Competition], timestamp: Date)]()
+
+    enum ReceivedMessage: Equatable {
+        case deleteCachedList
+        case insert([Competition], Date)
+    }
+    
+    private(set) var receivedMessages = [ReceivedMessage]()
     
     private var deletionCompletions = [DeletionCompletion]()
     
     func deleteCachedList(compeletion: @escaping (Error?) -> Void) {
-        deleteCachedListCallCount += 1
         deletionCompletions.append(compeletion)
+        receivedMessages.append(.deleteCachedList)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
@@ -47,16 +52,16 @@ class ListStore {
     }
     
     func insert(_ items: [Competition], timestamp: Date) {
-        insertions.append((items, timestamp))
+        receivedMessages.append(.insert(items, timestamp))
     }
 }
 
 class CacheListUseCaseTests: XCTestCase {
     
-    func test_init_doesNotDeleteCacheUponCreation() {
+    func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         
-        XCTAssertEqual(store.deleteCachedListCallCount, 0)
+        XCTAssertTrue(store.receivedMessages.isEmpty)
     }
     
     func test_save_requestsCacheDeletion() {
@@ -65,17 +70,18 @@ class CacheListUseCaseTests: XCTestCase {
         
         sut.save(items)
         
-        XCTAssertEqual(store.deleteCachedListCallCount, 1)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
         let items = [uniqueItem, uniqueItem]
         let deletionError = anyNSError
+        
         sut.save(items)
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.insertions.count, 0)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
     }
     
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
@@ -86,9 +92,7 @@ class CacheListUseCaseTests: XCTestCase {
         sut.save(items)
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.insertions.count, 1)
-        XCTAssertEqual(store.insertions.first?.items, items)
-        XCTAssertEqual(store.insertions.first?.timestamp, timestamp)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(items, timestamp)])
     }
     
     // MARK: - Helper
