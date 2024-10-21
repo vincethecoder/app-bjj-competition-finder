@@ -28,45 +28,12 @@ class LocalListLoader {
     }
 }
 
-class ListStore {
+protocol ListStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-
-    enum ReceivedMessage: Equatable {
-        case deleteCachedList
-        case insert([Competition], Date)
-    }
     
-    private(set) var receivedMessages = [ReceivedMessage]()
-    
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    
-    func deleteCachedList(compeletion: @escaping DeletionCompletion) {
-        deletionCompletions.append(compeletion)
-        receivedMessages.append(.deleteCachedList)
-    }
-    
-    func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
-    }
-    
-    func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
-    }
-    
-    func insert(_ items: [Competition], timestamp: Date, completion: @escaping InsertionCompletion) {
-        insertionCompletions.append(completion)
-        receivedMessages.append(.insert(items, timestamp))
-    }
-    
-    func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
-    }
-    
-    func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
-    }
+    func deleteCachedList(compeletion: @escaping DeletionCompletion)
+    func insert(_ items: [Competition], timestamp: Date, completion: @escaping InsertionCompletion)
 }
 
 class CacheListUseCaseTests: XCTestCase {
@@ -150,8 +117,8 @@ class CacheListUseCaseTests: XCTestCase {
         NSError(domain: "any error", code: 0)
     }
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStore) {
-        let store = ListStore()
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStoreSpy) {
+        let store = ListStoreSpy()
         let sut = LocalListLoader(store: store, currentDate: currentDate)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -171,5 +138,43 @@ class CacheListUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+    }
+    
+    private class ListStoreSpy: ListStore {
+        enum ReceivedMessage: Equatable {
+            case deleteCachedList
+            case insert([Competition], Date)
+        }
+        
+        private(set) var receivedMessages = [ReceivedMessage]()
+        
+        private var deletionCompletions = [DeletionCompletion]()
+        private var insertionCompletions = [InsertionCompletion]()
+        
+        func deleteCachedList(compeletion: @escaping DeletionCompletion) {
+            deletionCompletions.append(compeletion)
+            receivedMessages.append(.deleteCachedList)
+        }
+        
+        func completeDeletion(with error: Error, at index: Int = 0) {
+            deletionCompletions[index](error)
+        }
+        
+        func completeDeletionSuccessfully(at index: Int = 0) {
+            deletionCompletions[index](nil)
+        }
+        
+        func insert(_ items: [Competition], timestamp: Date, completion: @escaping InsertionCompletion) {
+            insertionCompletions.append(completion)
+            receivedMessages.append(.insert(items, timestamp))
+        }
+        
+        func completeInsertion(with error: Error, at index: Int = 0) {
+            insertionCompletions[index](error)
+        }
+        
+        func completeInsertionSuccessfully(at index: Int = 0) {
+            insertionCompletions[index](nil)
+        }
     }
 }
