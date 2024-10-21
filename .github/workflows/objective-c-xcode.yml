@@ -1,0 +1,60 @@
+name: Xcode - Build and Analyze
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and analyse default scheme using xcodebuild command
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: List directory contents
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Contents:"
+          ls -R
+      
+      - name: Set Default Scheme
+        run: |
+          # Find the .xcodeproj or .xcworkspace file
+          project_file=$(find . -maxdepth 1 -name "*.xc*proj" -type d | head -n 1)
+          
+          if [ -z "$project_file" ]; then
+            echo "No Xcode project or workspace found in the root directory."
+            exit 1
+          fi
+          
+          echo "Found project: $project_file"
+          
+          scheme_list=$(xcodebuild -list -json -project "$project_file" | tr -d "\n")
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+          echo $default | cat >default
+          echo Using default scheme: $default
+      
+      - name: Build
+        env:
+          scheme: ${{ 'default' }}
+        run: |
+          if [ $scheme = default ]; then scheme=$(cat default); fi
+          project_file=$(find . -maxdepth 1 -name "*.xc*proj" -type d | head -n 1)
+          
+          if [ -z "$project_file" ]; then
+            echo "No Xcode project or workspace found in the root directory."
+            exit 1
+          fi
+          
+          if [[ "$project_file" == *.xcworkspace ]]; then
+            filetype_parameter="workspace"
+          else
+            filetype_parameter="project"
+          fi
+          
+          xcodebuild clean build analyze -scheme "$scheme" -"$filetype_parameter" "$project_file" | xcpretty && exit ${PIPESTATUS[0]}
