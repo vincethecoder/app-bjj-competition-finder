@@ -57,6 +57,7 @@
 		EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
+		EFAD8AEB2CC5F83800981FB9 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI.xctestplan; path = PeteBJJCompFeedTests/CI.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +90,7 @@
 		EF0372C42CBDEC8F00694F89 = {
 			isa = PBXGroup;
 			children = (
+				EFAD8AEB2CC5F83800981FB9 /* CI.xctestplan */,
 				EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,

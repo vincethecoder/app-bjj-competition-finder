@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "CF74118B-E335-47C4-9B75-42C89E72C867",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:PeteBJJCompFeed.xcodeproj",
+        "identifier" : "EFAD8ADF2CC5871700981FB9",
+        "name" : "PeteBJJCompFeedAPIEndToEndTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PeteBJJCompFeed.xcodeproj",
+        "identifier" : "EF0372D72CBDEC8F00694F89",
+        "name" : "PeteBJJCompFeedTests"
+      }
+    }
+  ],
+  "version" : 1
+}
