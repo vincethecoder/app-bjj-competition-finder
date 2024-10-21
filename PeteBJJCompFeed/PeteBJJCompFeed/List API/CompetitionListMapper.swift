@@ -16,12 +16,6 @@ enum CompetitionListMapper {
     
     static func map(_ data: Data, from response: HTTPURLResponse) -> RemoteCompetitionListLoader.Result {
         
-        do {
-            let _ = try JSONDecoder().decode(Root.self, from: data)
-        } catch {
-            print(error)
-        }
-        
         guard response.statusCode == OK_200,
               let root = try? JSONDecoder().decode(Root.self, from: data) else {
             return .failure(RemoteCompetitionListLoader.Error.invalidData)
@@ -52,7 +46,8 @@ private extension Array where Element == RemoteCompetition {
                 eventLink: $0.eventLink,
                 categories: $0.categories,
                 rankingPoints: $0.rankingPoints,
-                notes: $0.notes)
+                notes: $0.notes
+            )
         }
     }
 }
