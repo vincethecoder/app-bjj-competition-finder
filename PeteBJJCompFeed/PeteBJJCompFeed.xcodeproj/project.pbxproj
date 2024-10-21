@@ -12,7 +12,7 @@
 		EF0372DF2CBDEC8F00694F89 /* PeteBJJCompFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF0372E92CBDED3600694F89 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372E82CBDED3600694F89 /* Competition.swift */; };
 		EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */; };
-		EF0372EE2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */; };
+		EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */; };
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
 		EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */; };
@@ -50,7 +50,7 @@
 		EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0372E82CBDED3600694F89 /* Competition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
 		EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListLoader.swift; sourceTree = "<group>"; };
-		EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoaderTests.swift; sourceTree = "<group>"; };
+		EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromServerUseCaseTests.swift; sourceTree = "<group>"; };
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoader.swift; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListMapper.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				EFAD8AD72CC516BE00981FB9 /* Helpers */,
-				EF0372ED2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift */,
+				EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */,
 				EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = "List API";
@@ -341,7 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF0372EE2CBDF28600694F89 /* RemoteCompetitionListLoaderTests.swift in Sources */,
+				EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */,
 				EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */,
 				EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);

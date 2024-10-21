@@ -1,5 +1,5 @@
 //
-//  RemoteCompetitionListLoader.swift
+//  LoadCompetitionsFromServerUseCaseTests.swift
 //  PeteBJJCompFeedTests
 //
 //  Created by Kobe Sam on 10/14/24.
@@ -8,7 +8,7 @@
 import XCTest
 import PeteBJJCompFeed
 
-final class RemoteCompetitionListLoaderTests: XCTestCase {
+final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
 
     func test_init_doesNotRequestDataFromURL() {
         let url = URL(string: "https://a-url.com")!
