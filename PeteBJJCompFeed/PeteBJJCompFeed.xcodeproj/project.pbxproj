@@ -22,6 +22,8 @@
 		EFAD8AE32CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */; };
 		EFAD8AE42CC5871700981FB9 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 		EFAD8AEA2CC5F6B200981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
+		EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */; };
+		EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		EFAD8AEB2CC5F83800981FB9 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI.xctestplan; path = PeteBJJCompFeedTests/CI.xctestplan; sourceTree = "<group>"; };
+		EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetition.swift; sourceTree = "<group>"; };
+		EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				EF0372E82CBDED3600694F89 /* Competition.swift */,
+				EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */,
 				EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */,
 			);
 			path = "List Feature";
@@ -139,6 +144,7 @@
 		EF0372EF2CBEE98C00694F89 /* List API */ = {
 			isa = PBXGroup;
 			children = (
+				EFAD8AEE2CC617B600981FB9 /* Helpers */,
 				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
 				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
 				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
@@ -171,6 +177,14 @@
 				EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */,
 			);
 			path = PeteBJJCompFeedAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
+		EFAD8AEE2CC617B600981FB9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +326,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
+				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
+				EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */,
 				EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
 				EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */,
