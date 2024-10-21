@@ -42,8 +42,15 @@ So I can explore competitive events
 ```
 Given the user doesn't have internet connectivity
  And there is a cached version of the feed
+ And the cached version is less than 7 days old
   When the user requests to see the list of competitions
    Then the app should display the most recently saved competitions
+
+Given the user doesn't have internet connectivity
+ And there is a cached version of the feed
+ And the cached version is 7 days old or more
+  When the user requests to see the list of competitions
+   Then the app should display an error message
 
 Given the user doesn't have internet connectivity
  And the cache is empty
