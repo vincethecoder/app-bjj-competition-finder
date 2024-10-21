@@ -55,9 +55,11 @@ class CacheListUseCaseTests: XCTestCase {
         URL(string: "http://any-url.com")!
     }
     
-    private func makeSUT() -> (sut: LocalListLoader, store: ListStore) {
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStore) {
         let store = ListStore()
         let sut = LocalListLoader(store: store)
+        trackForMemoryLeaks(store, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
     }
 }
