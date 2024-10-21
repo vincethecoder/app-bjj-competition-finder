@@ -31,7 +31,7 @@ final class PeteBJJCompFeedAPIEndToEndTests: XCTestCase {
     
     private func getCompetitionListResult(file: StaticString = #filePath, line: UInt = #line) -> LoadCompetitionListResult? {
         let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteCompetitionListLoader(url: testServerURL, client: client)
         trackForMemoryLeaks(client, file: file, line: line)
         trackForMemoryLeaks(loader, file: file, line: line)
