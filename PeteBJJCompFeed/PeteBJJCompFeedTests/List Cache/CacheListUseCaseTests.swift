@@ -31,15 +31,13 @@ class ListStore {
 class CacheListUseCaseTests: XCTestCase {
     
     func test_init_doesNotDeleteCacheUponCreation() {
-        let store = ListStore()
-        _ = LocalListLoader(store: store)
+        let (_, store) = makeSUT()
         
         XCTAssertEqual(store.deleteCachedListCallCount, 0)
     }
     
     func test_save_requestsCacheDeletion() {
-        let store = ListStore()
-        let sut = LocalListLoader(store: store)
+        let (sut, store) = makeSUT()
         let items = [uniqueItem, uniqueItem]
         
         sut.save(items)
@@ -50,7 +48,16 @@ class CacheListUseCaseTests: XCTestCase {
     // MARK: - Helper
     
     private var uniqueItem: Competition {
-        Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: URL(string: "https://any-event-link.com")!, categories: [.adult], rankingPoints: 0, notes: nil)
+        Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
     }
     
+    private var anyURL: URL {
+        URL(string: "http://any-url.com")!
+    }
+    
+    private func makeSUT() -> (sut: LocalListLoader, store: ListStore) {
+        let store = ListStore()
+        let sut = LocalListLoader(store: store)
+        return (sut, store)
+    }
 }
