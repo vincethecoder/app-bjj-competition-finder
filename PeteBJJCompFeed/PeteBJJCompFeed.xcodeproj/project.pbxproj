@@ -128,6 +128,7 @@
 		EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				EFAD8AD72CC516BE00981FB9 /* Helpers */,
 				EFAD8AF12CC6F29700981FB9 /* List Cache */,
 				EFAD8AD42CC2E74C00981FB9 /* List API */,
 			);
@@ -159,7 +160,6 @@
 		EFAD8AD42CC2E74C00981FB9 /* List API */ = {
 			isa = PBXGroup;
 			children = (
-				EFAD8AD72CC516BE00981FB9 /* Helpers */,
 				EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */,
 				EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */,
 			);
