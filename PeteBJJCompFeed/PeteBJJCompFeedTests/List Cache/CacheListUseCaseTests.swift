@@ -22,9 +22,14 @@ class LocalListLoader {
 
 class ListStore {
     var deleteCachedListCallCount = 0
+    var insertCallCount = 0
     
     func deleteCachedList() {
         deleteCachedListCallCount += 1
+    }
+    
+    func completeDeletion(with error: Error, at index: Int = 0) {
+        
     }
 }
 
@@ -45,6 +50,16 @@ class CacheListUseCaseTests: XCTestCase {
         XCTAssertEqual(store.deleteCachedListCallCount, 1)
     }
     
+    func test_save_doesNotRequestCacheInsertionOnDeletionError() {
+        let (sut, store) = makeSUT()
+        let items = [uniqueItem, uniqueItem]
+        let deletionError = anyNSError
+        sut.save(items)
+        store.completeDeletion(with: deletionError)
+        
+        XCTAssertEqual(store.insertCallCount, 0)
+    }
+    
     // MARK: - Helper
     
     private var uniqueItem: Competition {
@@ -53,6 +68,10 @@ class CacheListUseCaseTests: XCTestCase {
     
     private var anyURL: URL {
         URL(string: "http://any-url.com")!
+    }
+    
+    private var anyNSError: NSError {
+        NSError(domain: "any error", code: 0)
     }
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStore) {
