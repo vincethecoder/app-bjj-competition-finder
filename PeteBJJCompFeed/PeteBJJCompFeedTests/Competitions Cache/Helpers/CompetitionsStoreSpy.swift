@@ -19,6 +19,7 @@ class CompetitionsStoreSpy: CompetitionsStore {
     
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
+    private var retrievalCompeletions = [RetrievalCompletion]()
     
     func deleteCachedCompetitions(compeletion: @escaping DeletionCompletion) {
         deletionCompletions.append(compeletion)
@@ -46,7 +47,12 @@ class CompetitionsStoreSpy: CompetitionsStore {
         insertionCompletions[index](nil)
     }
     
-    func retrieve() {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         receivedMessages.append(.retrieve)
+        retrievalCompeletions.append(completion)
+    }
+    
+    func completeRetrieval(with error: Error, at index: Int = 0) {
+        retrievalCompeletions[index](error)
     }
 }

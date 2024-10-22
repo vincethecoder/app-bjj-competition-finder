@@ -10,8 +10,9 @@ import Foundation
 public protocol CompetitionsStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
+    typealias RetrievalCompletion = (Error?) -> Void
     
     func deleteCachedCompetitions(compeletion: @escaping DeletionCompletion)
     func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion)
-    func retrieve()
+    func retrieve(completion: @escaping RetrievalCompletion)
 }
