@@ -20,13 +20,14 @@ class LocalListLoader {
     func save(_ items: [Competition], completion: @escaping (Error?) -> Void) {
         store.deleteCachedList { [weak self] error in
             guard let self else { return }
-            if error == nil {
+            if let cacheDeletionError = error {
+                completion(cacheDeletionError)
+            } else {
                 self.store.insert(items, timestamp: self.currentDate()){ [weak self] error in
                     guard self != nil else { return }
                     completion(error)
                 }
-            } else {
-                completion(error)
+                
             }
         }
     }
