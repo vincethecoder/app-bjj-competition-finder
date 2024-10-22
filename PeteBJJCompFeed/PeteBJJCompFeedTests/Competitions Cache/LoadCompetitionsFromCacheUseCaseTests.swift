@@ -30,8 +30,13 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let retrievalError = anyNSError
         let exp = expectation(description: "Wait for load competition")
         var receivedError: Error?
-        sut.load { error in
-            receivedError = error
+        sut.load { result in
+            switch result {
+            case let .failure(error):
+                receivedError = error
+            default:
+                XCTFail("Expected failure, got \(String(describing: result)) instead")
+            }
             exp.fulfill()
         }
         
