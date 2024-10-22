@@ -29,10 +29,19 @@ public final class RemoteCompetitionListLoader: CompetitionListLoader {
 
             switch result {
             case let .success(data, response):
-                completion(CompetitionListMapper.map(data, from: response))
+                completion(Self.map(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))
             }
+        }
+    }
+    
+    private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
+        do {
+            let items = try CompetitionListMapper.map(data, from: response)
+            return .success(items.mapped)
+        } catch {
+            return .failure(error)
         }
     }
 }

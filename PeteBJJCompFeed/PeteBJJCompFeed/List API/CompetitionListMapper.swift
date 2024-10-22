@@ -14,20 +14,20 @@ enum CompetitionListMapper {
     
     private static var OK_200: Int { 200 }
     
-    static func map(_ data: Data, from response: HTTPURLResponse) -> RemoteCompetitionListLoader.Result {
+    static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteCompetition] {
         
         guard response.statusCode == OK_200,
               let root = try? JSONDecoder().decode(Root.self, from: data) else {
-            return .failure(RemoteCompetitionListLoader.Error.invalidData)
+            throw RemoteCompetitionListLoader.Error.invalidData
         }
         
-        return .success(root.competitions.mapped)
+        return root.competitions
     }
 }
 
 // MARK: Helpers
 
-private extension Array where Element == RemoteCompetition {
+extension Array where Element == RemoteCompetition {
     var mapped: [Competition] {
         return map {
             Competition(
