@@ -63,6 +63,17 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         }
     }
     
+    func test_load_deliversNoCachedCompetitionsOnMoreThanSevenDaysOldCache() {
+        let competitions = uniqueCompetitions
+        let fixedCurrentDate = Date()
+        let moreThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success([])) {
+            store.completeRetrieval(with: competitions.localCompetitions, timestamp: moreThanSevenDaysOldTimestamp)
+        }
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: CompetitionsStoreSpy) {
