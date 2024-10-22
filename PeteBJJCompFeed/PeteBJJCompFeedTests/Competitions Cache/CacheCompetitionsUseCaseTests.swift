@@ -76,7 +76,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
     }
     
     func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = ListStoreSpy()
+        let store = CompetitionsStoreSpy()
         var sut: LocalCompetitionsLoader? = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         
         var receivedResults = [LocalCompetitionsLoader.SaveResult]()
@@ -89,7 +89,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
     }
     
     func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = ListStoreSpy()
+        let store = CompetitionsStoreSpy()
         var sut: LocalCompetitionsLoader? = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         
         var receivedResults = [LocalCompetitionsLoader.SaveResult]()
@@ -124,8 +124,8 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         return (models, localCompetitions)
     }
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: ListStoreSpy) {
-        let store = ListStoreSpy()
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: CompetitionsStoreSpy) {
+        let store = CompetitionsStoreSpy()
         let sut = LocalCompetitionsLoader(store: store, currentDate: currentDate)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -145,43 +145,5 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
-    }
-    
-    private class ListStoreSpy: CompetitionsStore {
-        enum ReceivedMessage: Equatable {
-            case deleteCachedList
-            case insert([LocalCompetition], Date)
-        }
-        
-        private(set) var receivedMessages = [ReceivedMessage]()
-        
-        private var deletionCompletions = [DeletionCompletion]()
-        private var insertionCompletions = [InsertionCompletion]()
-        
-        func deleteCachedList(compeletion: @escaping DeletionCompletion) {
-            deletionCompletions.append(compeletion)
-            receivedMessages.append(.deleteCachedList)
-        }
-        
-        func completeDeletion(with error: Error, at index: Int = 0) {
-            deletionCompletions[index](error)
-        }
-        
-        func completeDeletionSuccessfully(at index: Int = 0) {
-            deletionCompletions[index](nil)
-        }
-        
-        func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
-            insertionCompletions.append(completion)
-            receivedMessages.append(.insert(competitions, timestamp))
-        }
-        
-        func completeInsertion(with error: Error, at index: Int = 0) {
-            insertionCompletions[index](error)
-        }
-        
-        func completeInsertionSuccessfully(at index: Int = 0) {
-            insertionCompletions[index](nil)
-        }
     }
 }
