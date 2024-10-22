@@ -39,12 +39,12 @@ class CacheListUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT(currentDate: { timestamp })
-        let items = [uniqueItem, uniqueItem]
+        let (items, localItems) = localItemsInfo
 
         sut.save(items) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(items, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(localItems, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -116,6 +116,14 @@ class CacheListUseCaseTests: XCTestCase {
         NSError(domain: "any error", code: 0)
     }
     
+    private var localItemsInfo: (items: [Competition], localItems: [LocalCompetition]) {
+        let items = [uniqueItem, uniqueItem]
+        let localItems = items.map {
+            LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
+        }
+        return (items, localItems)
+    }
+    
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStoreSpy) {
         let store = ListStoreSpy()
         let sut = LocalListLoader(store: store, currentDate: currentDate)
@@ -142,7 +150,7 @@ class CacheListUseCaseTests: XCTestCase {
     private class ListStoreSpy: ListStore {
         enum ReceivedMessage: Equatable {
             case deleteCachedList
-            case insert([Competition], Date)
+            case insert([LocalCompetition], Date)
         }
         
         private(set) var receivedMessages = [ReceivedMessage]()
@@ -163,7 +171,7 @@ class CacheListUseCaseTests: XCTestCase {
             deletionCompletions[index](nil)
         }
         
-        func insert(_ items: [Competition], timestamp: Date, completion: @escaping InsertionCompletion) {
+        func insert(_ items: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
             insertionCompletions.append(completion)
             receivedMessages.append(.insert(items, timestamp))
         }

@@ -29,7 +29,7 @@ public final class LocalListLoader {
     }
     
     private func cache(_ items: [Competition], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(items, timestamp: self.currentDate()){ [weak self] error in
+        store.insert(items.localCompetitions, timestamp: self.currentDate()){ [weak self] error in
             guard self != nil else { return }
             
             completion(error)
@@ -37,10 +37,27 @@ public final class LocalListLoader {
     }
 }
 
-public protocol ListStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    
-    func deleteCachedList(compeletion: @escaping DeletionCompletion)
-    func insert(_ items: [Competition], timestamp: Date, completion: @escaping InsertionCompletion)
+private extension Array where Element == Competition {
+    var localCompetitions: [LocalCompetition] {
+        return map {
+            LocalCompetition(
+                id: $0.id,
+                name: $0.name,
+                startDate: $0.startDate,
+                endDate: $0.endDate,
+                venue: $0.venue,
+                city: $0.city,
+                state: $0.state,
+                country: $0.country,
+                type: $0.type,
+                status: $0.status,
+                registrationStatus: $0.registrationStatus,
+                registrationLink: $0.registrationLink,
+                eventLink: $0.eventLink,
+                categories: $0.categories,
+                rankingPoints: $0.rankingPoints,
+                notes: $0.notes
+            )
+        }
+    }
 }
