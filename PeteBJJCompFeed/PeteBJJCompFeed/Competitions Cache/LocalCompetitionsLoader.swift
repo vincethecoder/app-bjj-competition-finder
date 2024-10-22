@@ -10,6 +10,7 @@ import Foundation
 public final class LocalCompetitionsLoader {
     private let store: CompetitionsStore
     private let currentDate: () -> Date
+    private let calender = Calendar(identifier: .gregorian)
     
     public typealias SaveResult = Error?
     public typealias LoadResult = LoadCompetitionsResult?
@@ -46,9 +47,10 @@ public final class LocalCompetitionsLoader {
         }
     }
     
+    private var maxCacheAgeInDays: Int { 7 }
+    
     private func isValid(_ timestamp: Date) -> Bool {
-        let calender = Calendar(identifier: .gregorian)
-        guard let maxCacheAge = calender.date(byAdding: .day, value: 7, to: timestamp) else {
+        guard let maxCacheAge = calender.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
         return currentDate() < maxCacheAge
