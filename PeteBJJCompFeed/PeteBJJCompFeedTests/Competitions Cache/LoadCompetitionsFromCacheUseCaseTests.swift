@@ -52,7 +52,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversCachedCompetitionsOnSevenDaysOldCache() {
+    func test_load_deliversNoCachedCompetitionsOnSevenDaysOldCache() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
         let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7)
