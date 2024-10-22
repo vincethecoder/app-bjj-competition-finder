@@ -18,7 +18,8 @@ class LocalListLoader {
     }
     
     func save(_ items: [Competition], completion: @escaping (Error?) -> Void) {
-        store.deleteCachedList { [unowned self] error in
+        store.deleteCachedList { [weak self] error in
+            guard let self else { return }
             if error == nil {
                 self.store.insert(items, timestamp: self.currentDate(), completion: completion)
             } else {
@@ -101,6 +102,19 @@ class CacheListUseCaseTests: XCTestCase {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         }
+    }
+    
+    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = ListStoreSpy()
+        var sut: LocalListLoader? = LocalListLoader(store: store, currentDate: Date.init)
+        
+        var receivedResults = [Error?]()
+        sut?.save([uniqueItem]) { receivedResults.append($0) }
+        
+        sut = nil
+        store.completeDeletion(with: anyNSError)
+        
+        XCTAssertTrue(receivedResults.isEmpty)
     }
     
     // MARK: - Helper
