@@ -48,7 +48,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success(competitions.models)) {
-            store.completeRetrieval(with: competitions.localCompetitions, timestamp: lessThanSevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: lessThanSevenDaysOldTimestamp)
         }
     }
     
@@ -59,7 +59,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: competitions.localCompetitions, timestamp: sevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: sevenDaysOldTimestamp)
         }
     }
     
@@ -70,7 +70,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: competitions.localCompetitions, timestamp: moreThanSevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: moreThanSevenDaysOldTimestamp)
         }
     }
     
@@ -88,6 +88,18 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         
         sut.load { _ in }
         store.completeRetrievalWithEmptyCache()
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
+    
+    func test_load_deleteNotDeleteCacheOnLessThanSevenDaysOldError() {
+        let competitions = uniqueCompetitions
+        let fixedCurrentDate = Date()
+        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        sut.load { _ in }
+        store.completeRetrieval(with: competitions.local, timestamp: fixedCurrentDate)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
@@ -136,7 +148,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
     }
     
-    private var uniqueCompetitions: (models: [Competition], localCompetitions: [LocalCompetition]) {
+    private var uniqueCompetitions: (models: [Competition], local: [LocalCompetition]) {
         let models = [uniqueCompetition, uniqueCompetition]
         let localCompetitions = models.map {
             LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)

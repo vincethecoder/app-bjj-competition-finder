@@ -58,7 +58,7 @@ public final class LocalCompetitionsLoader {
     }
     
     private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(competitions.localCompetitions, timestamp: self.currentDate()){ [weak self] error in
+        store.insert(competitions.local, timestamp: self.currentDate()){ [weak self] error in
             guard self != nil else { return }
             
             completion(error)
@@ -67,7 +67,7 @@ public final class LocalCompetitionsLoader {
 }
 
 private extension Array where Element == Competition {
-    var localCompetitions: [LocalCompetition] {
+    var local: [LocalCompetition] {
         return map {
             LocalCompetition(
                 id: $0.id,
