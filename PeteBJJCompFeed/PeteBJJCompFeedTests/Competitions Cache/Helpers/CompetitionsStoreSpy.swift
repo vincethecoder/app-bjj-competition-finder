@@ -10,8 +10,9 @@ import PeteBJJCompFeed
 
 class CompetitionsStoreSpy: CompetitionsStore {
     enum ReceivedMessage: Equatable {
-        case deleteCachedList
+        case deleteCachedCompetitions
         case insert([LocalCompetition], Date)
+        case retrieve
     }
     
     private(set) var receivedMessages = [ReceivedMessage]()
@@ -19,9 +20,9 @@ class CompetitionsStoreSpy: CompetitionsStore {
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
     
-    func deleteCachedList(compeletion: @escaping DeletionCompletion) {
+    func deleteCachedCompetitions(compeletion: @escaping DeletionCompletion) {
         deletionCompletions.append(compeletion)
-        receivedMessages.append(.deleteCachedList)
+        receivedMessages.append(.deleteCachedCompetitions)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
@@ -43,5 +44,9 @@ class CompetitionsStoreSpy: CompetitionsStore {
     
     func completeInsertionSuccessfully(at index: Int = 0) {
         insertionCompletions[index](nil)
+    }
+    
+    func retrieve() {
+        receivedMessages.append(.retrieve)
     }
 }

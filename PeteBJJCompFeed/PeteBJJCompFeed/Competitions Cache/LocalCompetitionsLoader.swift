@@ -18,7 +18,7 @@ public final class LocalCompetitionsLoader {
     }
     
     public func save(_ competitions: [Competition], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedList { [weak self] error in
+        store.deleteCachedCompetitions { [weak self] error in
             guard let self else { return }
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
@@ -26,6 +26,10 @@ public final class LocalCompetitionsLoader {
                 self.cache(competitions, with: completion)
             }
         }
+    }
+    
+    public func load() {
+        store.retrieve()
     }
     
     private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {

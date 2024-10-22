@@ -22,7 +22,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         
         sut.save(competitions) { _ in }
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedCompetitions])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
@@ -33,7 +33,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         sut.save(competitions) { _ in }
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedCompetitions])
     }
     
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
@@ -44,7 +44,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         sut.save(competitions) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(localCompetitions, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedCompetitions, .insert(localCompetitions, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
