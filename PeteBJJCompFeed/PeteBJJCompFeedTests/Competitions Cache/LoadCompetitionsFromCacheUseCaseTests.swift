@@ -28,41 +28,17 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         let retrievalError = anyNSError
-        let exp = expectation(description: "Wait for load competition")
-        var receivedError: Error?
-        sut.load { result in
-            switch result {
-            case let .failure(error):
-                receivedError = error
-            default:
-                XCTFail("Expected failure, got \(String(describing: result)) instead")
-            }
-            exp.fulfill()
+        expect(sut, toCompleteWith: .failure(retrievalError)) {
+            store.completeRetrieval(with: retrievalError)
         }
-        
-        store.completeRetrieval(with: retrievalError)
-        wait(for: [exp], timeout: 1.0)
-        XCTAssertEqual(receivedError as NSError?, retrievalError)
     }
     
     func test_load_deliversNoCompetitionsOnEmptyCache() {
         let (sut, store) = makeSUT()
         
-        let exp = expectation(description: "Wait for load competition")
-        var receivedCompetitions = [Competition]()
-        sut.load { result in
-            switch result {
-            case let .success(competitions):
-                receivedCompetitions = competitions
-            default:
-                XCTFail("Expected success, got \(String(describing: result)) instead")
-            }
-            exp.fulfill()
+        expect(sut, toCompleteWith: .success([])) {
+            store.completeRetrievalWithEmptyCache()
         }
-        
-        store.completeRetrievalWithEmptyCache()
-        wait(for: [exp], timeout: 1.0)
-        XCTAssertTrue(receivedCompetitions.isEmpty)
     }
     
     // MARK: Helpers
@@ -73,6 +49,28 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
+    }
+    
+    private func expect(_ sut: LocalCompetitionsLoader, toCompleteWith expectedResult: LocalCompetitionsLoader.LoadResult, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Wait for load competition")
+        
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedCompetitions), .success(expectedCompetitions)):
+                XCTAssertEqual(receivedCompetitions, expectedCompetitions, file: file, line: line)
+            
+            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            
+            default:
+                XCTFail("Expected result \(String(describing: expectedResult)), got \(String(describing: receivedResult)) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        action()
+
+        wait(for: [exp], timeout: 1.0)
     }
     
     private var anyNSError: NSError {
