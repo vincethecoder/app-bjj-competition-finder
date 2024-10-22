@@ -18,7 +18,7 @@ class CacheListUseCaseTests: XCTestCase {
     
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem, uniqueItem]
+        let items = uniqueItems.models
         
         sut.save(items) { _ in }
         
@@ -27,7 +27,7 @@ class CacheListUseCaseTests: XCTestCase {
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem, uniqueItem]
+        let items = uniqueItems.models
         let deletionError = anyNSError
         
         sut.save(items) { _ in }
@@ -39,7 +39,7 @@ class CacheListUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT(currentDate: { timestamp })
-        let (items, localItems) = localItemsInfo
+        let (items, localItems) = uniqueItems
 
         sut.save(items) { _ in }
         store.completeDeletionSuccessfully()
@@ -80,7 +80,7 @@ class CacheListUseCaseTests: XCTestCase {
         var sut: LocalListLoader? = LocalListLoader(store: store, currentDate: Date.init)
         
         var receivedResults = [LocalListLoader.SaveResult]()
-        sut?.save([uniqueItem]) { receivedResults.append($0) }
+        sut?.save(uniqueItems.models) { receivedResults.append($0) }
         
         sut = nil
         store.completeDeletion(with: anyNSError)
@@ -93,7 +93,7 @@ class CacheListUseCaseTests: XCTestCase {
         var sut: LocalListLoader? = LocalListLoader(store: store, currentDate: Date.init)
         
         var receivedResults = [LocalListLoader.SaveResult]()
-        sut?.save([uniqueItem]) { receivedResults.append($0) }
+        sut?.save(uniqueItems.models) { receivedResults.append($0) }
         
         store.completeDeletionSuccessfully()
         sut = nil
@@ -116,12 +116,12 @@ class CacheListUseCaseTests: XCTestCase {
         NSError(domain: "any error", code: 0)
     }
     
-    private var localItemsInfo: (items: [Competition], localItems: [LocalCompetition]) {
-        let items = [uniqueItem, uniqueItem]
-        let localItems = items.map {
+    private var uniqueItems: (models: [Competition], localItems: [LocalCompetition]) {
+        let models = [uniqueItem, uniqueItem]
+        let localItems = models.map {
             LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
         }
-        return (items, localItems)
+        return (models, localItems)
     }
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStoreSpy) {
@@ -136,7 +136,7 @@ class CacheListUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for expectation")
 
         var receivedError: Error?
-        sut.save([uniqueItem]) { error in
+        sut.save(uniqueItems.models) { error in
             receivedError = error
             exp.fulfill()
         }
