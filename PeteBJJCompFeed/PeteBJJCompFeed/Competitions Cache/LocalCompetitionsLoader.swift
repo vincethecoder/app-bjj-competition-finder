@@ -40,8 +40,12 @@ public final class LocalCompetitionsLoader {
                 
             case let .found(competitions, timestamp) where self.isValid(timestamp):
                 completion(.success(competitions.mapped))
+            
+            case .found:
+                self.store.deleteCachedCompetitions { _ in }
+                fallthrough
                 
-            case .found, .empty:
+            case .empty:
                 completion(.success([]))
                 
             }
