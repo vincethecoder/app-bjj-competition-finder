@@ -14,6 +14,7 @@
 		EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */; };
 		EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */; };
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */; };
+		EF73260D2CC75D3500E819DE /* LocalListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalListLoader.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
 		EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
@@ -53,6 +54,7 @@
 		EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListLoader.swift; sourceTree = "<group>"; };
 		EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromServerUseCaseTests.swift; sourceTree = "<group>"; };
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoader.swift; sourceTree = "<group>"; };
+		EF73260C2CC75D3500E819DE /* LocalListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalListLoader.swift; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */ = {
 			isa = PBXGroup;
 			children = (
+				EF73260B2CC75D1500E819DE /* List Cache */,
 				EF0372EC2CBDF02D00694F89 /* List Feature */,
 				EF0372EF2CBEE98C00694F89 /* List API */,
 				EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */,
@@ -155,6 +158,14 @@
 				EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */,
 			);
 			path = "List API";
+			sourceTree = "<group>";
+		};
+		EF73260B2CC75D1500E819DE /* List Cache */ = {
+			isa = PBXGroup;
+			children = (
+				EF73260C2CC75D3500E819DE /* LocalListLoader.swift */,
+			);
+			path = "List Cache";
 			sourceTree = "<group>";
 		};
 		EFAD8AD42CC2E74C00981FB9 /* List API */ = {
@@ -338,6 +349,7 @@
 			files = (
 				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
+				EF73260D2CC75D3500E819DE /* LocalListLoader.swift in Sources */,
 				EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */,
 				EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
