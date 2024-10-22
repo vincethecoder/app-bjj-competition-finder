@@ -102,6 +102,19 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         XCTAssertTrue(receivedResults.isEmpty)
     }
     
+    func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDealloacted() {
+        let store = CompetitionsStoreSpy()
+        var sut: LocalCompetitionsLoader? = LocalCompetitionsLoader(store: store, currentDate: Date.init)
+        
+        var receivedResults = [LocalCompetitionsLoader.LoadResult]()
+        sut?.load { receivedResults.append($0) }
+        
+        sut = nil
+        store.completeRetrievalWithEmptyCache()
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
     // MARK: - Helper
     
     private var uniqueCompetition: Competition {
