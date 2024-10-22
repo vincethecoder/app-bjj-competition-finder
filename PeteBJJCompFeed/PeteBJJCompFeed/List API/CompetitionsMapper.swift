@@ -1,5 +1,5 @@
 //
-//  CompetitionListMapper.swift
+//  CompetitiosMapper.swift
 //  PeteBJJCompFeed
 //
 //  Created by Kobe Sam on 10/18/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CompetitionListMapper {
+enum CompetitionsMapper {
     private struct Root: Decodable {
         let competitions: [RemoteCompetition]
     }
@@ -18,7 +18,7 @@ enum CompetitionListMapper {
         
         guard response.statusCode == OK_200,
               let root = try? JSONDecoder().decode(Root.self, from: data) else {
-            throw RemoteCompetitionListLoader.Error.invalidData
+            throw RemoteCompetitionsLoader.Error.invalidData
         }
         
         return root.competitions

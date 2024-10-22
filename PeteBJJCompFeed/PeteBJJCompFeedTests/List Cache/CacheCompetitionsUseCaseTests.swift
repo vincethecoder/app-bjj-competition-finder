@@ -8,7 +8,7 @@
 import XCTest
 import PeteBJJCompFeed
 
-class CacheListUseCaseTests: XCTestCase {
+class CacheCompetitionsUseCaseTests: XCTestCase {
     
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
@@ -18,19 +18,19 @@ class CacheListUseCaseTests: XCTestCase {
     
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        let items = uniqueItems.models
+        let competitions = uniqueCompetitions.models
         
-        sut.save(items) { _ in }
+        sut.save(competitions) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        let items = uniqueItems.models
+        let competitions = uniqueCompetitions.models
         let deletionError = anyNSError
         
-        sut.save(items) { _ in }
+        sut.save(competitions) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedList])
@@ -39,12 +39,12 @@ class CacheListUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT(currentDate: { timestamp })
-        let (items, localItems) = uniqueItems
+        let (competitions, localCompetitions) = uniqueCompetitions
 
-        sut.save(items) { _ in }
+        sut.save(competitions) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(localItems, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedList, .insert(localCompetitions, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -77,10 +77,10 @@ class CacheListUseCaseTests: XCTestCase {
     
     func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
         let store = ListStoreSpy()
-        var sut: LocalListLoader? = LocalListLoader(store: store, currentDate: Date.init)
+        var sut: LocalCompetitionsLoader? = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         
-        var receivedResults = [LocalListLoader.SaveResult]()
-        sut?.save(uniqueItems.models) { receivedResults.append($0) }
+        var receivedResults = [LocalCompetitionsLoader.SaveResult]()
+        sut?.save(uniqueCompetitions.models) { receivedResults.append($0) }
         
         sut = nil
         store.completeDeletion(with: anyNSError)
@@ -90,10 +90,10 @@ class CacheListUseCaseTests: XCTestCase {
     
     func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
         let store = ListStoreSpy()
-        var sut: LocalListLoader? = LocalListLoader(store: store, currentDate: Date.init)
+        var sut: LocalCompetitionsLoader? = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         
-        var receivedResults = [LocalListLoader.SaveResult]()
-        sut?.save(uniqueItems.models) { receivedResults.append($0) }
+        var receivedResults = [LocalCompetitionsLoader.SaveResult]()
+        sut?.save(uniqueCompetitions.models) { receivedResults.append($0) }
         
         store.completeDeletionSuccessfully()
         sut = nil
@@ -104,7 +104,7 @@ class CacheListUseCaseTests: XCTestCase {
     
     // MARK: - Helper
     
-    private var uniqueItem: Competition {
+    private var uniqueCompetition: Competition {
         Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
     }
     
@@ -116,27 +116,27 @@ class CacheListUseCaseTests: XCTestCase {
         NSError(domain: "any error", code: 0)
     }
     
-    private var uniqueItems: (models: [Competition], localItems: [LocalCompetition]) {
-        let models = [uniqueItem, uniqueItem]
-        let localItems = models.map {
+    private var uniqueCompetitions: (models: [Competition], localCompetitions: [LocalCompetition]) {
+        let models = [uniqueCompetition, uniqueCompetition]
+        let localCompetitions = models.map {
             LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
         }
-        return (models, localItems)
+        return (models, localCompetitions)
     }
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalListLoader, store: ListStoreSpy) {
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: ListStoreSpy) {
         let store = ListStoreSpy()
-        let sut = LocalListLoader(store: store, currentDate: currentDate)
+        let sut = LocalCompetitionsLoader(store: store, currentDate: currentDate)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalListLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: LocalCompetitionsLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Wait for expectation")
 
         var receivedError: Error?
-        sut.save(uniqueItems.models) { error in
+        sut.save(uniqueCompetitions.models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -147,7 +147,7 @@ class CacheListUseCaseTests: XCTestCase {
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
     }
     
-    private class ListStoreSpy: ListStore {
+    private class ListStoreSpy: CompetitionsStore {
         enum ReceivedMessage: Equatable {
             case deleteCachedList
             case insert([LocalCompetition], Date)
@@ -171,9 +171,9 @@ class CacheListUseCaseTests: XCTestCase {
             deletionCompletions[index](nil)
         }
         
-        func insert(_ items: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
+        func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
             insertionCompletions.append(completion)
-            receivedMessages.append(.insert(items, timestamp))
+            receivedMessages.append(.insert(competitions, timestamp))
         }
         
         func completeInsertion(with error: Error, at index: Int = 0) {

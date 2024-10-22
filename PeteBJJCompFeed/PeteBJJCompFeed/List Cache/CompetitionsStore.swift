@@ -7,10 +7,10 @@
 
 import Foundation
 
-public protocol ListStore {
+public protocol CompetitionsStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
     
     func deleteCachedList(compeletion: @escaping DeletionCompletion)
-    func insert(_ items: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion)
+    func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion)
 }

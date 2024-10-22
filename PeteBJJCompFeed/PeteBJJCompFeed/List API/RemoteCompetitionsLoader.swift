@@ -1,5 +1,5 @@
 //
-//  RemoteCompetitionListLoader.swift
+//  RemoteCompetitionsLoader.swift
 //  PeteBJJCompFeed
 //
 //  Created by Kobe Sam on 10/15/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class RemoteCompetitionListLoader: CompetitionListLoader {
+public final class RemoteCompetitionsLoader: CompetitionsLoader {
     private let url: URL
     private let client: HTTPClient
     
@@ -16,7 +16,7 @@ public final class RemoteCompetitionListLoader: CompetitionListLoader {
         case invalidData
     }
     
-    public typealias Result = LoadCompetitionListResult
+    public typealias Result = LoadCompetitionsResult
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -38,8 +38,8 @@ public final class RemoteCompetitionListLoader: CompetitionListLoader {
     
     private static func map(_ data: Data, from response: HTTPURLResponse) -> Result {
         do {
-            let items = try CompetitionListMapper.map(data, from: response)
-            return .success(items.mapped)
+            let competitions = try CompetitionsMapper.map(data, from: response)
+            return .success(competitions.mapped)
         } catch {
             return .failure(error)
         }

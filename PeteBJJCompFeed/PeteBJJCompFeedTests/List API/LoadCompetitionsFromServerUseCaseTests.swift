@@ -50,7 +50,7 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
 
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: failure(.invalidData), when: {
-                let json = makeItemsJSON([])
+                let json = makeCompetitionsJSON([])
                 client.complete(withStatusCode: code, data: json, at: index)
             })
         }
@@ -65,19 +65,19 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
         })
     }
     
-    func test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList() {
+    func test_load_deliversNoCompetitionsOn200HTTPResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
         
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = makeItemsJSON([])
+            let emptyListJSON = makeCompetitionsJSON([])
             client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
     
-    func test_load_deliversItemsOn200HTTPResponseWithJSONItems() {
+    func test_load_deliversCompetitionsOn200HTTPResponseWithJSONCompetitions() {
         let (sut, client) = makeSUT()
 
-        let item1 = makeItem(
+        let competition1 = makeCompetition(
             id: UUID(),
             name: "World IBJJF Jiu-Jitsu Championship - CA",
             startDateString: "2024-05-30",
@@ -95,7 +95,7 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
             rankingPoints: 1000,
             notes: "63 ranking points required for Black belt division.")
         
-        let item2 = makeItem(
+        let competition2 = makeCompetition(
             id: UUID(),
             name: "World IBJJF Jiu-Jitsu Championship - TX",
             startDateString: "2024-11-01",
@@ -111,10 +111,10 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
             categories: [.juvenile, .adult, .master],
             rankingPoints: 750)
 
-        let items = [item1.model, item2.model]
+        let competitions = [competition1.model, competition2.model]
         
-        expect(sut, toCompleteWith: .success(items), when: {
-            let json = makeItemsJSON([item1.json, item2.json])
+        expect(sut, toCompleteWith: .success(competitions), when: {
+            let json = makeCompetitionsJSON([competition1.json, competition2.json])
             client.complete(withStatusCode: 200, data: json)
         })
     }
@@ -122,32 +122,32 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
     func test_load_doesNotDeliverResultAfterSUTInstanceHasBeenDeallocated() {
         let url = URL(string: "http://any-url.com")!
         let client = HTTPClientSpy()
-        var sut: RemoteCompetitionListLoader? = RemoteCompetitionListLoader(url: url, client: client)
+        var sut: RemoteCompetitionsLoader? = RemoteCompetitionsLoader(url: url, client: client)
 
-        var capturedResults = [RemoteCompetitionListLoader.Result]()
+        var capturedResults = [RemoteCompetitionsLoader.Result]()
         sut?.load { capturedResults.append($0) }
 
         sut = nil
-        client.complete(withStatusCode: 200, data: makeItemsJSON([]))
+        client.complete(withStatusCode: 200, data: makeCompetitionsJSON([]))
 
         XCTAssertTrue(capturedResults.isEmpty)
     }
  
     // MARK: - Helpers
     
-    private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteCompetitionListLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://a-url.com")!, file: StaticString = #filePath, line: UInt = #line) -> (sut: RemoteCompetitionsLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
-        let sut = RemoteCompetitionListLoader(url: url, client: client)
+        let sut = RemoteCompetitionsLoader(url: url, client: client)
         trackForMemoryLeaks(sut)
         trackForMemoryLeaks(client)
         return (sut, client)
     }
     
-    private func failure(_ error: RemoteCompetitionListLoader.Error) -> RemoteCompetitionListLoader.Result {
+    private func failure(_ error: RemoteCompetitionsLoader.Error) -> RemoteCompetitionsLoader.Result {
         return .failure(error)
     }
     
-    private func makeItem(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
+    private func makeCompetition(id: UUID, name: String, startDateString: String, endDateString: String, venue: String, city: String, state: String? = nil, country: String, type: CompetitionType, status: CompetitionStatus, registrationStatus: RegistrationStatus, registrationLink: URL? = nil, eventLink: URL, categories: [CompetitionCategory], rankingPoints: Int, notes: String? = nil) -> (model: Competition, json: [String: Any]) {
         
         let model = Competition(id: id.uuidString, name: name, startDate: Date.dateFromString(startDateString), endDate: Date.dateFromString(endDateString), venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
         
@@ -173,21 +173,21 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
         return (model, json)
     }
     
-    private func makeItemsJSON(_ items: [[String: Any]]) -> Data {
-        let json = ["competitions": items]
+    private func makeCompetitionsJSON(_ competitions: [[String: Any]]) -> Data {
+        let json = ["competitions": competitions]
         return try! JSONSerialization.data(withJSONObject: json)
     }
     
-    private func expect(_ sut: RemoteCompetitionListLoader, toCompleteWith expectedResult: RemoteCompetitionListLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: RemoteCompetitionsLoader, toCompleteWith expectedResult: RemoteCompetitionsLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         
         let exp = expectation(description: "Wait for load completion")
 
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
-            case let (.success(receivedItems), .success(expectedItems)):
-                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
+            case let (.success(receivedCompetitions), .success(expectedCompetitions)):
+                XCTAssertEqual(receivedCompetitions, expectedCompetitions, file: file, line: line)
                 
-            case let (.failure(receivedError as RemoteCompetitionListLoader.Error), .failure(expectedError as RemoteCompetitionListLoader.Error)):
+            case let (.failure(receivedError as RemoteCompetitionsLoader.Error), .failure(expectedError as RemoteCompetitionsLoader.Error)):
                 XCTAssertEqual(receivedError, expectedError, file: file, line: line)
             
             default:
