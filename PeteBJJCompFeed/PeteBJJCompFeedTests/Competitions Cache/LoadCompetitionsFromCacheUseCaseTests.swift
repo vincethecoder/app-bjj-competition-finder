@@ -41,6 +41,17 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         }
     }
     
+    func test_load_deliversCachedCompetitionsOnLessThanSevenDaysOldCache() {
+        let competitions = uniqueCompetitions
+        let fixedCurrentDate = Date()
+        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
+        
+        expect(sut, toCompleteWith: .success(competitions.models)) {
+            store.completeRetrieval(with: competitions.localCompetitions, timestamp: lessThanSevenDaysOldTimestamp)
+        }
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: CompetitionsStoreSpy) {
@@ -75,5 +86,31 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
     
     private var anyNSError: NSError {
         NSError(domain: "any error", code: 0)
+    }
+    
+    private var anyURL: URL {
+        URL(string: "http://any-url.com")!
+    }
+    
+    private var uniqueCompetition: Competition {
+        Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
+    }
+    
+    private var uniqueCompetitions: (models: [Competition], localCompetitions: [LocalCompetition]) {
+        let models = [uniqueCompetition, uniqueCompetition]
+        let localCompetitions = models.map {
+            LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
+        }
+        return (models, localCompetitions)
+    }
+}
+
+private extension Date {
+    func adding(days: Int) -> Date {
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+    
+    func adding(seconds: TimeInterval) -> Date {
+        return self + seconds
     }
 }

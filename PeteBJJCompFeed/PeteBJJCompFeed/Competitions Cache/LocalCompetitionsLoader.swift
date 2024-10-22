@@ -31,11 +31,17 @@ public final class LocalCompetitionsLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { error in
-            if let loadResultError = error {
-                completion(.failure(loadResultError))
-            } else {
+        store.retrieve { result in
+            switch result {
+            case let .failure(error):
+                completion(.failure(error))
+                
+            case let .found(competitions, _):
+                completion(.success(competitions.mapped))
+                
+            case .empty:
                 completion(.success([]))
+                
             }
         }
     }
@@ -53,6 +59,31 @@ private extension Array where Element == Competition {
     var localCompetitions: [LocalCompetition] {
         return map {
             LocalCompetition(
+                id: $0.id,
+                name: $0.name,
+                startDate: $0.startDate,
+                endDate: $0.endDate,
+                venue: $0.venue,
+                city: $0.city,
+                state: $0.state,
+                country: $0.country,
+                type: $0.type,
+                status: $0.status,
+                registrationStatus: $0.registrationStatus,
+                registrationLink: $0.registrationLink,
+                eventLink: $0.eventLink,
+                categories: $0.categories,
+                rankingPoints: $0.rankingPoints,
+                notes: $0.notes
+            )
+        }
+    }
+}
+
+private extension Array where Element == LocalCompetition {
+    var mapped: [Competition] {
+        return map {
+            Competition(
                 id: $0.id,
                 name: $0.name,
                 startDate: $0.startDate,

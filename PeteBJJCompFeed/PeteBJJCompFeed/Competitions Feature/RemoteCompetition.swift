@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RemoteCompetition: Decodable {
+public struct RemoteCompetition: Decodable {
     let id: String
     let name: String
     let startDate: String

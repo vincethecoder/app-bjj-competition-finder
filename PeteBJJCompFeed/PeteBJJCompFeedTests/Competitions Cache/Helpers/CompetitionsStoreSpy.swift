@@ -53,10 +53,14 @@ class CompetitionsStoreSpy: CompetitionsStore {
     }
     
     func completeRetrieval(with error: Error, at index: Int = 0) {
-        retrievalCompeletions[index](error)
+        retrievalCompeletions[index](.failure(error))
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompeletions[index](nil)
+        retrievalCompeletions[index](.empty)
+    }
+    
+    func completeRetrieval(with competitions: [LocalCompetition], timestamp: Date, at index: Int = 0) {
+        retrievalCompeletions[index](.found(competitions: competitions, timestamp: timestamp))
     }
 }
