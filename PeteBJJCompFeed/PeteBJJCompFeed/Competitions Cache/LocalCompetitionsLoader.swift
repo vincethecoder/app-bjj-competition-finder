@@ -31,19 +31,27 @@ public final class LocalCompetitionsLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { result in
+        store.retrieve { [unowned self] result in
             switch result {
             case let .failure(error):
                 completion(.failure(error))
                 
-            case let .found(competitions, _):
+            case let .found(competitions, timestamp) where self.isValid(timestamp):
                 completion(.success(competitions.mapped))
                 
-            case .empty:
+            case .found, .empty:
                 completion(.success([]))
                 
             }
         }
+    }
+    
+    private func isValid(_ timestamp: Date) -> Bool {
+        let calender = Calendar(identifier: .gregorian)
+        guard let maxCacheAge = calender.date(byAdding: .day, value: 7, to: timestamp) else {
+            return false
+        }
+        return currentDate() < maxCacheAge
     }
     
     private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {
