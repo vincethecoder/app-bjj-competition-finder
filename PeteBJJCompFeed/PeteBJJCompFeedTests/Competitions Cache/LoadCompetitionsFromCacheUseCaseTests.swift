@@ -45,6 +45,26 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(receivedError as NSError?, retrievalError)
     }
     
+    func test_load_deliversNoCompetitionsOnEmptyCache() {
+        let (sut, store) = makeSUT()
+        
+        let exp = expectation(description: "Wait for load competition")
+        var receivedCompetitions = [Competition]()
+        sut.load { result in
+            switch result {
+            case let .success(competitions):
+                receivedCompetitions = competitions
+            default:
+                XCTFail("Expected success, got \(String(describing: result)) instead")
+            }
+            exp.fulfill()
+        }
+        
+        store.completeRetrievalWithEmptyCache()
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertTrue(receivedCompetitions.isEmpty)
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalCompetitionsLoader, store: CompetitionsStoreSpy) {

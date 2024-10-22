@@ -34,6 +34,8 @@ public final class LocalCompetitionsLoader {
         store.retrieve { error in
             if let loadResultError = error {
                 completion(.failure(loadResultError))
+            } else {
+                completion(.success([]))
             }
         }
     }
