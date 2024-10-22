@@ -35,6 +35,7 @@ public final class LocalCompetitionsLoader {
         store.retrieve { [unowned self] result in
             switch result {
             case let .failure(error):
+                self.store.deleteCachedCompetitions { _ in }
                 completion(.failure(error))
                 
             case let .found(competitions, timestamp) where self.isValid(timestamp):
