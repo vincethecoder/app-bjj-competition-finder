@@ -62,7 +62,11 @@ final class CodableCompetitionStore {
         
     }
     
-    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("competitions.store")
+    private let storeURL: URL
+    
+    init(storeURL: URL) {
+        self.storeURL = storeURL
+    }
     
     func retrieve(completion: @escaping CompetitionsStore.RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
@@ -166,7 +170,8 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     // MARK: Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
-        let sut = CodableCompetitionStore()
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("competitions.store")
+        let sut = CodableCompetitionStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
