@@ -184,8 +184,10 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
 private extension Date {
     
     var minusCompetitionsCacheMaxAge: Date {
-        adding(days: -7)
+        adding(days: -competitionsCacheMaxAgeInDays)
     }
+    
+    private var competitionsCacheMaxAgeInDays: Int { 7 }
     
     func adding(days: Int) -> Date {
         return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
