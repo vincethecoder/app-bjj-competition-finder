@@ -11,8 +11,55 @@ import PeteBJJCompFeed
 final class CodableCompetitionStore {
 
     private struct Cache: Codable {
-        let competitions: [LocalCompetition]
+        let competitions: [CodableCompetition]
         let timestamp: Date
+        
+        var localCompetitions: [LocalCompetition] {
+            competitions.map { $0.local }
+        }
+    }
+    
+    private struct CodableCompetition: Codable {
+        private let id: String
+        private let name: String
+        private let startDate: Date
+        private let endDate: Date
+        private let venue: String
+        private let city: String
+        private let state: String?
+        private let country: String
+        private let type: CompetitionType
+        private let status: CompetitionStatus
+        private let registrationStatus: RegistrationStatus
+        private let registrationLink: URL?
+        private let eventLink: URL
+        private let categories: [CompetitionCategory]
+        private let rankingPoints: Int
+        private let notes: String?
+        
+        init(_ competition: LocalCompetition) {
+            self.id = competition.id
+            self.name = competition.name
+            self.startDate = competition.startDate
+            self.endDate = competition.endDate
+            self.venue = competition.venue
+            self.city = competition.city
+            self.state = competition.state
+            self.country = competition.country
+            self.type = competition.type
+            self.status = competition.status
+            self.registrationStatus = competition.registrationStatus
+            self.registrationLink = competition.registrationLink
+            self.eventLink = competition.eventLink
+            self.categories = competition.categories
+            self.rankingPoints = competition.rankingPoints
+            self.notes = competition.notes
+        }
+        
+        var local: LocalCompetition {
+            LocalCompetition(id: id, name: name, startDate: startDate, endDate: startDate, venue: venue, city: city, state: state, country: country, type: type, status: status, registrationStatus: registrationStatus, registrationLink: registrationLink, eventLink: eventLink, categories: categories, rankingPoints: rankingPoints, notes: notes)
+        }
+        
     }
     
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("competitions.store")
@@ -25,12 +72,13 @@ final class CodableCompetitionStore {
         
         let decoder = JSONDecoder()
         let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(competitions: cache.competitions, timestamp: cache.timestamp))
+        completion(.found(competitions: cache.localCompetitions, timestamp: cache.timestamp))
     }
     
     func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping CompetitionsStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(Cache(competitions: competitions, timestamp: timestamp))
+        let cache = Cache(competitions: competitions.map(CodableCompetition.init), timestamp: timestamp)
+        let encoded = try! encoder.encode(cache)
         try! encoded.write(to: storeURL)
         completion(nil)
     }

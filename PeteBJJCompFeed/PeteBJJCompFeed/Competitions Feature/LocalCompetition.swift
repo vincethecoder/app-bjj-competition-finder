@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LocalCompetition: Equatable, Codable {
+public struct LocalCompetition: Equatable {
     public let id: String
     public let name: String
     public let startDate: Date
