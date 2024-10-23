@@ -7,19 +7,6 @@
 
 import Foundation
 
-private enum CompetitionsCachePolicy {
-    private static let calender = Calendar(identifier: .gregorian)
-
-    private static var maxCacheAgeInDays: Int { 7 }
-    
-    static func isValid(_ timestamp: Date, against date: Date) -> Bool {
-        guard let maxCacheAge = calender.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        return date < maxCacheAge
-    }
-}
-
 public final class LocalCompetitionsLoader {
     private let store: CompetitionsStore
     private let currentDate: () -> Date

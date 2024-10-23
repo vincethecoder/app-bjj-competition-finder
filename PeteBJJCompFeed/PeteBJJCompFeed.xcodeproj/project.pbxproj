@@ -30,6 +30,7 @@
 		EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */; };
 		EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */; };
 		EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */; };
+		EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetition.swift; sourceTree = "<group>"; };
 		EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCompetitionsUseCaseTests.swift; sourceTree = "<group>"; };
+		EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCachePolicy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 			children = (
 				EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */,
 				EF7326102CC762D500E819DE /* CompetitionsStore.swift */,
+				EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */,
+				EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */,
 				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
 				EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */,
