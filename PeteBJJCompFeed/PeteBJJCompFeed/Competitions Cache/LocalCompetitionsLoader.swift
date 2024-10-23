@@ -8,27 +8,22 @@
 import Foundation
 
 private final class CompetitionsCachePolicy {
-    private let currentDate: () -> Date
     private let calender = Calendar(identifier: .gregorian)
 
     private var maxCacheAgeInDays: Int { 7 }
     
-    init(currentDate: @escaping () -> Date) {
-        self.currentDate = currentDate
-    }
-    
-    func isValid(_ timestamp: Date) -> Bool {
+    func isValid(_ timestamp: Date, against date: Date) -> Bool {
         guard let maxCacheAge = calender.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
-        return currentDate() < maxCacheAge
+        return date < maxCacheAge
     }
 }
 
 public final class LocalCompetitionsLoader {
     private let store: CompetitionsStore
     private let currentDate: () -> Date
-    private let cachePolicy: CompetitionsCachePolicy
+    private let cachePolicy = CompetitionsCachePolicy()
     
     public typealias SaveResult = Error?
     public typealias LoadResult = LoadCompetitionsResult?
@@ -36,7 +31,6 @@ public final class LocalCompetitionsLoader {
     public init(store: CompetitionsStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
-        self.cachePolicy = CompetitionsCachePolicy(currentDate: currentDate)
     }
     
     public func save(_ competitions: [Competition], completion: @escaping (SaveResult) -> Void) {
@@ -59,7 +53,7 @@ public final class LocalCompetitionsLoader {
                 self.store.deleteCachedCompetitions { _ in }
                 completion(.failure(error))
                 
-            case let .found(competitions, timestamp) where self.cachePolicy.isValid(timestamp):
+            case let .found(competitions, timestamp) where self.cachePolicy.isValid(timestamp, against: self.currentDate()):
                 completion(.success(competitions.mapped))
             
             case .found:
