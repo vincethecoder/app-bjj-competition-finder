@@ -31,6 +31,7 @@
 		EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */; };
 		EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */; };
 		EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */; };
+		EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCompetitionsUseCaseTests.swift; sourceTree = "<group>"; };
 		EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCachePolicy.swift; sourceTree = "<group>"; };
+		EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCompetitionsStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +238,7 @@
 				EF7326182CC813FE00E819DE /* Helpers */,
 				EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */,
 				EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */,
+				EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */,
 				EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */,
 				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
+				EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */,
 				EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
