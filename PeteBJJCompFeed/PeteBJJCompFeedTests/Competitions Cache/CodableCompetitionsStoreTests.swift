@@ -93,13 +93,13 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        try? FileManager.default.removeItem(at: storeURL)
+        try? FileManager.default.removeItem(at: testSpecificStoreURL)
     }
     
     override func tearDown() {
         super.tearDown()
 
-        try? FileManager.default.removeItem(at: storeURL)
+        try? FileManager.default.removeItem(at: testSpecificStoreURL)
     }
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
@@ -168,13 +168,13 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     // MARK: Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
-        let sut = CodableCompetitionStore(storeURL: storeURL)
+        let sut = CodableCompetitionStore(storeURL: testSpecificStoreURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
-    private var storeURL: URL {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("competitions.store")
+    private var testSpecificStoreURL: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
     }
     
     private var anyURL: URL {
