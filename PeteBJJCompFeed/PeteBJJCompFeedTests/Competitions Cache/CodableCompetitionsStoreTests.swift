@@ -101,7 +101,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     }
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
-        let sut = CodableCompetitionStore()
+        let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { result in
@@ -119,7 +119,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     }
     
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
-        let sut = CodableCompetitionStore()
+        let sut = makeSUT()
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { firstResult in
@@ -139,7 +139,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     }
     
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
-        let sut = CodableCompetitionStore()
+        let sut = makeSUT()
         let competitions = uniqueCompetitions.local
         let timestamp = Date()
         let exp = expectation(description: "Wait for cache retrieval")
@@ -164,6 +164,10 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     }
     
     // MARK: Helpers
+    
+    private func makeSUT() -> CodableCompetitionStore {
+        return CodableCompetitionStore()
+    }
     
     private var anyURL: URL {
         URL(string: "http://any-url.com")!
