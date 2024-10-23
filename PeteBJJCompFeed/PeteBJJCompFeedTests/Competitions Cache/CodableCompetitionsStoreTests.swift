@@ -165,8 +165,10 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT() -> CodableCompetitionStore {
-        return CodableCompetitionStore()
+    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
+        let sut = CodableCompetitionStore()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
     }
     
     private var anyURL: URL {
