@@ -66,14 +66,14 @@ public struct Competition: Decodable, Equatable {
 
 // MARK: - CompetitionType
 
-public enum CompetitionType: String, Decodable {
+public enum CompetitionType: String, Codable {
     case gi
     case nogi
 }
 
 // MARK: - CompetitionStatus
 
-public enum CompetitionStatus: String, Decodable {
+public enum CompetitionStatus: String, Codable {
     case upcoming
     case ongoing
     case finished
@@ -82,7 +82,7 @@ public enum CompetitionStatus: String, Decodable {
 
 // MARK: - RegistrationStatus
 
-public enum RegistrationStatus: String, Decodable {
+public enum RegistrationStatus: String, Codable {
     case open
     case closed
     case notOpen = "not_open"
@@ -91,7 +91,7 @@ public enum RegistrationStatus: String, Decodable {
 
 // MARK: - Category
 
-public enum CompetitionCategory: String, Decodable {
+public enum CompetitionCategory: String, Codable {
     case kids
     case juvenile
     case adult
