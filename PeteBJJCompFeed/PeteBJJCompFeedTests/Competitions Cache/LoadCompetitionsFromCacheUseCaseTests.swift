@@ -41,36 +41,36 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliversCachedCompetitionsOnLessThanSevenDaysOldCache() {
+    func test_load_deliversCachedCompetitionsOnNonExpiredCache() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge.adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success(competitions.models)) {
-            store.completeRetrieval(with: competitions.local, timestamp: lessThanSevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: nonExpiredTimestamp)
         }
     }
     
-    func test_load_deliversNoCachedCompetitionsOnSevenDaysOldCache() {
+    func test_load_deliversNoCachedCompetitionsOnCacheExpiration() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7)
+        let expirationTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: competitions.local, timestamp: sevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: expirationTimestamp)
         }
     }
     
-    func test_load_deliversNoCachedCompetitionsOnMoreThanSevenDaysOldCache() {
+    func test_load_deliversNoCachedCompetitionsOnExpiredCache() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let moreThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge.adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         expect(sut, toCompleteWith: .success([])) {
-            store.completeRetrieval(with: competitions.local, timestamp: moreThanSevenDaysOldTimestamp)
+            store.completeRetrieval(with: competitions.local, timestamp: expiredTimestamp)
         }
     }
     
@@ -92,38 +92,38 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
     
-    func test_load_deleteNotDeleteCacheOnLessThanSevenDaysOldError() {
+    func test_load_deleteNotDeleteCacheOnNonExpiredCacheError() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let lessThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: 1)
+        let nonExpiredTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge.adding(seconds: 1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         sut.load { _ in }
-        store.completeRetrieval(with: competitions.local, timestamp: lessThanSevenDaysOldTimestamp)
+        store.completeRetrieval(with: competitions.local, timestamp: nonExpiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
     
-    func test_load_deletesCacheOnSevenDaysOldError() {
+    func test_load_deletesCacheOnCacheExpirationError() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let sevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7)
+        let expirationTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         sut.load { _ in }
-        store.completeRetrieval(with: competitions.local, timestamp: sevenDaysOldTimestamp)
+        store.completeRetrieval(with: competitions.local, timestamp: expirationTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedCompetitions])
     }
     
-    func test_load_deletesCacheOnMoreThanSevenDaysOldError() {
+    func test_load_deletesCacheOnExpiredCacheError() {
         let competitions = uniqueCompetitions
         let fixedCurrentDate = Date()
-        let moreThanSevenDaysOldTimestamp = fixedCurrentDate.adding(days: -7).adding(seconds: -1)
+        let expiredTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge.adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
         sut.load { _ in }
-        store.completeRetrieval(with: competitions.local, timestamp: moreThanSevenDaysOldTimestamp)
+        store.completeRetrieval(with: competitions.local, timestamp: expiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedCompetitions])
     }
@@ -182,6 +182,11 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
 }
 
 private extension Date {
+    
+    var minusCompetitionsCacheMaxAge: Date {
+        adding(days: -7)
+    }
+    
     func adding(days: Int) -> Date {
         return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
     }
