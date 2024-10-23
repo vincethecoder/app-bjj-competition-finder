@@ -7,12 +7,12 @@
 
 import Foundation
 
-private final class CompetitionsCachePolicy {
-    private let calender = Calendar(identifier: .gregorian)
+private enum CompetitionsCachePolicy {
+    private static let calender = Calendar(identifier: .gregorian)
 
-    private var maxCacheAgeInDays: Int { 7 }
+    private static var maxCacheAgeInDays: Int { 7 }
     
-    func isValid(_ timestamp: Date, against date: Date) -> Bool {
+    static func isValid(_ timestamp: Date, against date: Date) -> Bool {
         guard let maxCacheAge = calender.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
@@ -23,7 +23,6 @@ private final class CompetitionsCachePolicy {
 public final class LocalCompetitionsLoader {
     private let store: CompetitionsStore
     private let currentDate: () -> Date
-    private let cachePolicy = CompetitionsCachePolicy()
     
     public typealias SaveResult = Error?
     public typealias LoadResult = LoadCompetitionsResult?
@@ -53,7 +52,7 @@ public final class LocalCompetitionsLoader {
                 self.store.deleteCachedCompetitions { _ in }
                 completion(.failure(error))
                 
-            case let .found(competitions, timestamp) where self.cachePolicy.isValid(timestamp, against: self.currentDate()):
+            case let .found(competitions, timestamp) where CompetitionsCachePolicy.isValid(timestamp, against: self.currentDate()):
                 completion(.success(competitions.mapped))
             
             case .found:
