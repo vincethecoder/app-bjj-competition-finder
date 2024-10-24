@@ -236,14 +236,14 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CompetitionsStore {
         let sut = CodableCompetitionStore(storeURL: storeURL ?? testSpecificStoreURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
     @discardableResult
-    private func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CodableCompetitionStore) -> Error? {
+    private func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CompetitionsStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
         sut.insert(cache.competition, timestamp: cache.timestamp) { receivedInsertionError in
@@ -254,7 +254,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         return insertionError
     }
     
-    private func deleteCache(from sut: CodableCompetitionStore) -> Error? {
+    private func deleteCache(from sut: CompetitionsStore) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
         sut.deleteCachedCompetitions { receivedDeletionError in
@@ -265,12 +265,12 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         return deletionError
     }
     
-    private func expect(_ sut: CodableCompetitionStore, toRetrieveTwice expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: CompetitionsStore, toRetrieveTwice expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func expect(_ sut: CodableCompetitionStore, toRetrieve expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut: CompetitionsStore, toRetrieve expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { retrievedResult in
