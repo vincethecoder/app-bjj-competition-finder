@@ -114,7 +114,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .empty)
     }
     
-    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
         let sut = makeSUT()
         let competitions = uniqueCompetitions.local
         let timestamp = Date()
