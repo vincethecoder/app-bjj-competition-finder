@@ -84,11 +84,15 @@ final class CodableCompetitionStore {
     }
     
     func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping CompetitionsStore.InsertionCompletion) {
-        let encoder = JSONEncoder()
-        let cache = Cache(competitions: competitions.map(CodableCompetition.init), timestamp: timestamp)
-        let encoded = try! encoder.encode(cache)
-        try! encoded.write(to: storeURL)
-        completion(nil)
+        do {
+            let encoder = JSONEncoder()
+            let cache = Cache(competitions: competitions.map(CodableCompetition.init), timestamp: timestamp)
+            let encoded = try! encoder.encode(cache)
+            try encoded.write(to: storeURL)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
     }
 }
 
@@ -170,6 +174,18 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         expect(sut, toRetrieve: .found(competitions: latestCompetitions, timestamp: latestTimestamp))
     }
 
+    func test_insert_deliversErrorOnInsertionError() {
+        let invalidStoreURL = URL(string: "invalid://store-url")!
+        let sut = makeSUT(storeURL: invalidStoreURL)
+        let competitions = uniqueCompetitions.local
+        let timestamp = Date()
+        
+        let insertionError = insert((competitions, timestamp), to: sut)
+        
+        XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        expect(sut, toRetrieve: .empty)
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
