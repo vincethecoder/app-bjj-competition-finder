@@ -119,13 +119,8 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let competitions = uniqueCompetitions.local
         let timestamp = Date()
 
-        let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(competitions, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected competitions to be inserted successfully")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        
+        insert((competitions, timestamp), to: sut)
+
         expect(sut, toRetrieveTwice: .found(competitions: competitions, timestamp: timestamp))
     }
     
@@ -133,13 +128,9 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let sut = makeSUT()
         let competitions = uniqueCompetitions.local
         let timestamp = Date()
-        let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(competitions, timestamp: timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected competitions to be inserted successfully")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
         
+        insert((competitions, timestamp), to: sut)
+
         expect(sut, toRetrieveTwice: .found(competitions: competitions, timestamp: timestamp))
     }
     
@@ -149,6 +140,15 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let sut = CodableCompetitionStore(storeURL: testSpecificStoreURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CodableCompetitionStore) {
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insert(cache.competition, timestamp: cache.timestamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected competitions to be inserted successfully")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func expect(_ sut: CodableCompetitionStore, toRetrieveTwice expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
