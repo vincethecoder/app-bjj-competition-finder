@@ -104,20 +104,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wait for cache retrieval")
-        
-        sut.retrieve { result in
-            switch result {
-            case .empty:
-                break
-                
-            default:
-                XCTFail("Expected empty result, got \(result) instead")
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toRetrieve: .empty)
     }
     
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
@@ -144,25 +131,15 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let sut = makeSUT()
         let competitions = uniqueCompetitions.local
         let timestamp = Date()
+
         let exp = expectation(description: "Wait for cache retrieval")
-        
         sut.insert(competitions, timestamp: timestamp) { insertionError in
             XCTAssertNil(insertionError, "Expected competitions to be inserted successfully")
-            
-            sut.retrieve { retrieveResult in
-                switch retrieveResult {
-                case let (.found(competitions: retrievedCompetitions, timestamp: retrievedTimestamp)):
-                    XCTAssertEqual(retrievedCompetitions, competitions)
-                    XCTAssertEqual(retrievedTimestamp, timestamp)
-                    
-                default:
-                    XCTFail("Expected found result with competitions \(competitions) and timestamp \(timestamp), got \(retrieveResult) instead")
-                }
-            }
             exp.fulfill()
         }
-        
         wait(for: [exp], timeout: 1.0)
+        
+        expect(sut, toRetrieve: .found(competitions: competitions, timestamp: timestamp))
     }
     
     func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
@@ -203,6 +180,30 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
+    
+    private func expect(_ sut: CodableCompetitionStore, toRetrieve expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
+        let exp = expectation(description: "Wait for cache retrieval")
+        
+        sut.retrieve { retrievedResult in
+            switch (expectedResult, retrievedResult) {
+            case (.empty, .empty):
+                break
+            
+            case let (.found(competitions: expectedCompetitions, timestamp: expectedTimestamp),
+                      .found(competitions: retrievedCompetitions, timestamp: retrievedTimestamp)):
+                XCTAssertEqual(retrievedCompetitions, expectedCompetitions, file: file, line: line)
+                XCTAssertEqual(retrievedTimestamp, expectedTimestamp, file: file, line: line)
+                
+            default:
+                XCTFail("Expectetd to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
+            }
+            
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     
     private var testSpecificStoreURL: URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
