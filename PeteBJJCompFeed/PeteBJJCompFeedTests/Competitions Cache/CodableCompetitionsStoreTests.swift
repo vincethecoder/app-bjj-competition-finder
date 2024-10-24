@@ -139,7 +139,8 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
-        let sut = makeSUT()
+        let storeURL = testSpecificStoreURL
+        let sut = makeSUT(storeURL: storeURL)
         
         try! "Invalid data".write(to: testSpecificStoreURL, atomically: false, encoding: .utf8)
         
@@ -148,8 +149,8 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
-        let sut = CodableCompetitionStore(storeURL: testSpecificStoreURL)
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
+        let sut = CodableCompetitionStore(storeURL: storeURL ?? testSpecificStoreURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
