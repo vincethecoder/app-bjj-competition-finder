@@ -94,6 +94,10 @@ final class CodableCompetitionStore {
             completion(error)
         }
     }
+    
+    func deleteCachedCompetitions(completion: CompetitionsStore.DeletionCompletion) {
+        completion(nil)
+    }
 }
 
 final class CodableCompetitionsStoreTests: XCTestCase {
@@ -183,6 +187,19 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let insertionError = insert((competitions, timestamp), to: sut)
         
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+        let exp = expectation(description: "Wait for cache deletion")
+        
+        sut.deleteCachedCompetitions { deletionError in
+            XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        
         expect(sut, toRetrieve: .empty)
     }
     
