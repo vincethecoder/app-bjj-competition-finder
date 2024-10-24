@@ -155,6 +155,20 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         
         expect(sut, toRetrieveTwice: .failure(anyNSError))
     }
+    
+    func test_insert_overridesPreviouslyInsertedCacheValues() {
+        let sut = makeSUT()
+        
+        let firstInsertionError = insert((uniqueCompetitions.local, Date()), to: sut)
+        XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
+        
+        let latestCompetitions = uniqueCompetitions.local
+        let latestTimestamp = Date()
+        let latestInsertionError = insert((latestCompetitions, latestTimestamp), to: sut)
+        
+        XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
+        expect(sut, toRetrieve: .found(competitions: latestCompetitions, timestamp: latestTimestamp))
+    }
 
     // MARK: Helpers
     
@@ -164,13 +178,16 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         return sut
     }
     
-    private func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CodableCompetitionStore) {
+    @discardableResult
+    private func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CodableCompetitionStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(cache.competition, timestamp: cache.timestamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected competitions to be inserted successfully")
+        var insertionError: Error?
+        sut.insert(cache.competition, timestamp: cache.timestamp) { receivedInsertionError in
+            insertionError = receivedInsertionError
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
+        return insertionError
     }
     
     private func expect(_ sut: CodableCompetitionStore, toRetrieveTwice expectedResult: RetrieveCachedCompetitionResult, file: StaticString = #filePath, line: UInt = #line) {
