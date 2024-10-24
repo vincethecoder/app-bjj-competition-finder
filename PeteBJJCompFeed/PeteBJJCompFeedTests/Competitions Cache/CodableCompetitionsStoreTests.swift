@@ -8,7 +8,7 @@
 import XCTest
 import PeteBJJCompFeed
 
-final class CodableCompetitionStore {
+final class CodableCompetitionStore: CompetitionsStore {
 
     private struct Cache: Codable {
         let competitions: [CodableCompetition]
@@ -68,7 +68,7 @@ final class CodableCompetitionStore {
         self.storeURL = storeURL
     }
     
-    func retrieve(completion: @escaping CompetitionsStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             completion(.empty)
             return
@@ -95,7 +95,7 @@ final class CodableCompetitionStore {
         }
     }
     
-    func deleteCachedCompetitions(completion: CompetitionsStore.DeletionCompletion) {
+    func deleteCachedCompetitions(completion: DeletionCompletion) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
             completion(nil)
             return

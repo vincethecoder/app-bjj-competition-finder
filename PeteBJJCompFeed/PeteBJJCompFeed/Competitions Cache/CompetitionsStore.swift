@@ -18,7 +18,7 @@ public protocol CompetitionsStore {
     typealias InsertionCompletion = (Error?) -> Void
     typealias RetrievalCompletion = (RetrieveCachedCompetitionResult) -> Void
     
-    func deleteCachedCompetitions(compeletion: @escaping DeletionCompletion)
+    func deleteCachedCompetitions(completion: @escaping DeletionCompletion)
     func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion)
     func retrieve(completion: @escaping RetrievalCompletion)
 }

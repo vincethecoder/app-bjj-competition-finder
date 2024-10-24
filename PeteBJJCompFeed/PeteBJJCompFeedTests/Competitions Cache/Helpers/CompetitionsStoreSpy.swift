@@ -19,10 +19,10 @@ class CompetitionsStoreSpy: CompetitionsStore {
     
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
-    private var retrievalCompeletions = [RetrievalCompletion]()
+    private var retrievalcompletions = [RetrievalCompletion]()
     
-    func deleteCachedCompetitions(compeletion: @escaping DeletionCompletion) {
-        deletionCompletions.append(compeletion)
+    func deleteCachedCompetitions(completion: @escaping DeletionCompletion) {
+        deletionCompletions.append(completion)
         receivedMessages.append(.deleteCachedCompetitions)
     }
     
@@ -49,18 +49,18 @@ class CompetitionsStoreSpy: CompetitionsStore {
     
     func retrieve(completion: @escaping RetrievalCompletion) {
         receivedMessages.append(.retrieve)
-        retrievalCompeletions.append(completion)
+        retrievalcompletions.append(completion)
     }
     
     func completeRetrieval(with error: Error, at index: Int = 0) {
-        retrievalCompeletions[index](.failure(error))
+        retrievalcompletions[index](.failure(error))
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompeletions[index](.empty)
+        retrievalcompletions[index](.empty)
     }
     
     func completeRetrieval(with competitions: [LocalCompetition], timestamp: Date, at index: Int = 0) {
-        retrievalCompeletions[index](.found(competitions: competitions, timestamp: timestamp))
+        retrievalcompletions[index](.found(competitions: competitions, timestamp: timestamp))
     }
 }
