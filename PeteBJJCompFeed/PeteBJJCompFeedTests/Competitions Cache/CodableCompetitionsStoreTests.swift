@@ -75,8 +75,12 @@ final class CodableCompetitionStore {
         }
         
         let decoder = JSONDecoder()
-        let cache = try! decoder.decode(Cache.self, from: data)
-        completion(.found(competitions: cache.localCompetitions, timestamp: cache.timestamp))
+        do {
+            let cache = try decoder.decode(Cache.self, from: data)
+            completion(.found(competitions: cache.localCompetitions, timestamp: cache.timestamp))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping CompetitionsStore.InsertionCompletion) {
@@ -134,6 +138,14 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .found(competitions: competitions, timestamp: timestamp))
     }
     
+    func test_retrieve_deliversFailureOnRetrievalError() {
+        let sut = makeSUT()
+        
+        try! "Invalid data".write(to: testSpecificStoreURL, atomically: false, encoding: .utf8)
+        
+        expect(sut, toRetrieve: .failure(anyNSError))
+    }
+    
     // MARK: Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> CodableCompetitionStore {
@@ -161,14 +173,15 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         
         sut.retrieve { retrievedResult in
             switch (expectedResult, retrievedResult) {
-            case (.empty, .empty):
+            case (.empty, .empty),
+                 (.failure, .failure):
                 break
             
             case let (.found(competitions: expectedCompetitions, timestamp: expectedTimestamp),
                       .found(competitions: retrievedCompetitions, timestamp: retrievedTimestamp)):
                 XCTAssertEqual(retrievedCompetitions, expectedCompetitions, file: file, line: line)
                 XCTAssertEqual(retrievedTimestamp, expectedTimestamp, file: file, line: line)
-                
+
             default:
                 XCTFail("Expectetd to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
             }
@@ -186,6 +199,10 @@ final class CodableCompetitionsStoreTests: XCTestCase {
     
     private var anyURL: URL {
         URL(string: "http://any-url.com")!
+    }
+    
+    private var anyNSError: NSError {
+        NSError(domain: "any error", code: 0)
     }
     
     private var uniqueCompetition: Competition {
