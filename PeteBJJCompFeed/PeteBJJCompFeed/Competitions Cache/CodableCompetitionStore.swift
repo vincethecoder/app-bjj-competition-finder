@@ -89,7 +89,7 @@ public final class CodableCompetitionStore: CompetitionsStore {
     
     public func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping CompetitionsStore.InsertionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             do {
                 let encoder = JSONEncoder()
                 let cache = Cache(competitions: competitions.map(CodableCompetition.init), timestamp: timestamp)
@@ -104,7 +104,7 @@ public final class CodableCompetitionStore: CompetitionsStore {
     
     public func deleteCachedCompetitions(completion: @escaping DeletionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeURL.path) else {
                 completion(nil)
                 return
