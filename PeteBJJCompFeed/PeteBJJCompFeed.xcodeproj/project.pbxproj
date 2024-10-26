@@ -33,6 +33,7 @@
 		EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */; };
 		EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */; };
 		EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */; };
+		EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCompetitionsUseCaseTests.swift; sourceTree = "<group>"; };
 		EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCachePolicy.swift; sourceTree = "<group>"; };
 		EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCompetitionsStoreTests.swift; sourceTree = "<group>"; };
+		EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStoreSpecs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				EF7326102CC762D500E819DE /* CompetitionsStore.swift */,
 				EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */,
 				EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */,
+				EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				EF6E36872CCAF9C1005AE501 /* CodableCompetitionStore.swift in Sources */,
 				EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */,
 				EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */,
+				EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */,
 				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
 				EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */,
