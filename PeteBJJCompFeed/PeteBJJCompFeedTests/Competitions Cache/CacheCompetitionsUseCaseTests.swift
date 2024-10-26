@@ -121,14 +121,6 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
     }
     
-    private var anyURL: URL {
-        URL(string: "http://any-url.com")!
-    }
-    
-    private var anyNSError: NSError {
-        NSError(domain: "any error", code: 0)
-    }
-    
     private var uniqueCompetitions: (models: [Competition], localCompetitions: [LocalCompetition]) {
         let models = [uniqueCompetition, uniqueCompetition]
         let localCompetitions = models.map {

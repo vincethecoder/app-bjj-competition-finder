@@ -173,11 +173,6 @@ final class LoadCompetitionsFromServerUseCaseTests: XCTestCase {
         return (model, json)
     }
     
-    private func makeCompetitionsJSON(_ competitions: [[String: Any]]) -> Data {
-        let json = ["competitions": competitions]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
-    
     private func expect(_ sut: RemoteCompetitionsLoader, toCompleteWith expectedResult: RemoteCompetitionsLoader.Result, when action: () -> Void, file: StaticString = #filePath, line: UInt = #line) {
         
         let exp = expectation(description: "Wait for load completion")

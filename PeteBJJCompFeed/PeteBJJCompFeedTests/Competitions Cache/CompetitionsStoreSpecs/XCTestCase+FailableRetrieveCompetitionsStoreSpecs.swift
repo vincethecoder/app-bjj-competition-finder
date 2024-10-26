@@ -16,8 +16,4 @@ extension FailableRetrieveCompetitionsStoreSpecs where Self: XCTestCase {
     func assertThatRetrieveHasNoSideEffectsOnFailure(on sut: CompetitionsStore, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieveTwice: .failure(anyNSError), file: file, line: line)
     }
-    
-    private var anyNSError: NSError {
-        NSError(domain: "any error", code: 0)
-    }
 }

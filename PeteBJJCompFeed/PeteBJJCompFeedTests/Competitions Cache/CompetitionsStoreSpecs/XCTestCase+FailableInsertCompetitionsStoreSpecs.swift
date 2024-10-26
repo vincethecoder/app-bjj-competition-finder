@@ -32,8 +32,4 @@ extension FailableInsertCompetitionsStoreSpecs where Self: XCTestCase {
         }
         return (models, localCompetitions)
     }
-    
-    private var anyURL: URL {
-        URL(string: "http://any-url.com")!
-    }
 }

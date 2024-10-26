@@ -38,6 +38,7 @@
 		EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */; };
 		EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */; };
 		EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */; };
+		EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */,
+				EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */,
 				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
 				EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */,
+				EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */,
 				EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */,
 				EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */,
 				EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,

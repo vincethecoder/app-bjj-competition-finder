@@ -160,14 +160,6 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    private var anyNSError: NSError {
-        NSError(domain: "any error", code: 0)
-    }
-    
-    private var anyURL: URL {
-        URL(string: "http://any-url.com")!
-    }
-    
     private var uniqueCompetition: Competition {
         Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
     }
@@ -178,24 +170,5 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
             LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
         }
         return (models, localCompetitions)
-    }
-}
-
-private extension Date {
-    
-    var minusCompetitionsCacheMaxAge: Date {
-        adding(days: -competitionsCacheMaxAgeInDays)
-    }
-    
-    private var competitionsCacheMaxAgeInDays: Int { 7 }
-    
-    private func adding(days: Int) -> Date {
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
-    }
-}
-
-extension Date {
-    func adding(seconds: TimeInterval) -> Date {
-        return self + seconds
     }
 }
