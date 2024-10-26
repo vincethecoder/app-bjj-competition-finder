@@ -37,6 +37,7 @@
 		EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */; };
 		EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */; };
 		EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */; };
+		EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+CompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */,
 				EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */,
 				EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */,
+				EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */,
 				EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */,
 				EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */,
+				EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */,
 				EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */,
 				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
 				EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */,
