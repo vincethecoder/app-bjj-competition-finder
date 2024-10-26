@@ -8,6 +8,39 @@
 import XCTest
 import PeteBJJCompFeed
 
+protocol CompetitionsStoreSpecs {
+    func test_retrieve_deliversEmptyOnEmptyCache()
+    func test_retrieve_hasNoSideEffectsOnEmptyCache()
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache()
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache()
+
+    func test_insert_deliversNoErrorOnEmptyCache()
+    func test_insert_deliversNoErrorOnNonEmptyCache()
+    func test_insert_overridesPreviouslyInsertedCacheValues()
+
+    func test_delete_deliversNoErrorOnEmptyCache()
+    func test_delete_hasNoSideEffectsOnEmptyCache()
+    func test_delete_deliversNoErrorOnNonEmptyCache()
+    func test_delete_emptiesPreviouslyInsertedCache()
+
+    func test_storeSideEffects_runSerially()
+}
+
+protocol FailableRetrieveCompetitionsStoreSpecs {
+    func test_retrieve_deliversFailureOnRetrievalError()
+    func test_retrieve_hasNoSideEffectsOnFailure()
+}
+
+protocol FailableInsertCompetitionsStoreSpecs {
+    func test_insert_deliversErrorOnInsertionError()
+    func test_insert_hasNoSideEffectsOnInsertionError()
+}
+
+protocol FailableDeleteCompetitionsStoreSpecs {
+    func test_delete_deliversErrorOnDeletionError()
+    func test_delete_hasNoSideEffectsOnDeletionError()
+}
+
 final class CodableCompetitionsStoreTests: XCTestCase {
     
     override func setUp() {
@@ -72,17 +105,32 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .failure(anyNSError))
     }
     
-    func test_insert_overridesPreviouslyInsertedCacheValues() {
+    func test_insert_deliversNoErrorOnEmptyCache() {
         let sut = makeSUT()
         
-        let firstInsertionError = insert((uniqueCompetitions.local, Date()), to: sut)
-        XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
+        let insertionError = insert((uniqueCompetitions.local, Date()), to: sut)
         
+        XCTAssertNil(insertionError, "Expected to insert cache successfully")
+    }
+    
+    func test_insert_deliversNoErrorOnNonEmptyCache() {
+        let sut = makeSUT()
+        insert((uniqueCompetitions.local, Date()), to: sut)
+        
+        let insertionError = insert((uniqueCompetitions.local, Date()), to: sut)
+        
+        XCTAssertNil(insertionError, "Expected to override cache successfully")
+    }
+    
+    func test_insert_overridesPreviouslyInsertedCacheValues() {
+        let sut = makeSUT()
+        insert((uniqueCompetitions.local, Date()), to: sut)
+                
         let latestCompetitions = uniqueCompetitions.local
         let latestTimestamp = Date()
-        let latestInsertionError = insert((latestCompetitions, latestTimestamp), to: sut)
         
-        XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
+        insert((latestCompetitions, latestTimestamp), to: sut)
+        
         expect(sut, toRetrieve: .found(competitions: latestCompetitions, timestamp: latestTimestamp))
     }
 
@@ -95,30 +143,50 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let insertionError = insert((competitions, timestamp), to: sut)
         
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+    }
+    
+    func test_insert_hasNoSideEffectsOnInsertionError() {
+        let invalidStoreURL = URL(string: "invalid://store-url")!
+        let sut = makeSUT(storeURL: invalidStoreURL)
+        let competitions = uniqueCompetitions.local
+        let timestamp = Date()
+        
+        insert((competitions, timestamp), to: sut)
+
         expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
     }
     
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wait for cache deletion")
         
-        sut.deleteCachedCompetitions { deletionError in
-            XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
+        deleteCache(from: sut)
         
         expect(sut, toRetrieve: .empty)
+    }
+    
+    func test_delete_deliversNoErrorOnNonEmptyCache() {
+        let sut = makeSUT()
+        insert((uniqueCompetitions.local, Date()), to: sut)
+
+        let deletionError = deleteCache(from: sut)
+
+        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
     }
     
     func test_delete_emptiesPreviouslyInsertedCache() {
         let sut = makeSUT()
         insert((uniqueCompetitions.local, Date()), to: sut)
-        
 
-        let deletionError = deleteCache(from: sut)
-    
-        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+        deleteCache(from: sut)
+
         expect(sut, toRetrieve: .empty)
     }
     
@@ -129,6 +197,14 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         let deletionError = deleteCache(from: sut)
         
         XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
+    }
+    
+    func test_delete_hasNoSideEffectsOnDeletionError() {
+        let noDeletePermissionURL = cachesDirectory
+        let sut = makeSUT(storeURL: noDeletePermissionURL)
+        
+        deleteCache(from: sut)
+
         expect(sut, toRetrieve: .empty)
     }
     
@@ -179,6 +255,7 @@ final class CodableCompetitionsStoreTests: XCTestCase {
         return insertionError
     }
     
+    @discardableResult
     private func deleteCache(from sut: CompetitionsStore) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
