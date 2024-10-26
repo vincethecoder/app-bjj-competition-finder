@@ -250,15 +250,23 @@
 			isa = PBXGroup;
 			children = (
 				EF7326182CC813FE00E819DE /* Helpers */,
+				EFE3B5B82CCCFD48009E9195 /* CompetitionsStoreSpecs */,
 				EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */,
 				EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */,
 				EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */,
+			);
+			path = "Competitions Cache";
+			sourceTree = "<group>";
+		};
+		EFE3B5B82CCCFD48009E9195 /* CompetitionsStoreSpecs */ = {
+			isa = PBXGroup;
+			children = (
 				EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */,
 				EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */,
 				EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */,
 				EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */,
 			);
-			path = "Competitions Cache";
+			path = CompetitionsStoreSpecs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
