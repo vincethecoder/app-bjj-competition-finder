@@ -104,23 +104,13 @@ final class CodableCompetitionsStoreTests: XCTestCase, FailableCompetitionsStore
     func test_insert_deliversErrorOnInsertionError() {
         let invalidStoreURL = URL(string: "invalid://store-url")!
         let sut = makeSUT(storeURL: invalidStoreURL)
-        let competitions = uniqueCompetitions.local
-        let timestamp = Date()
-        
-        let insertionError = insert((competitions, timestamp), to: sut)
-        
-        XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        assertThatInsertDeliversErrorOnInsertionError(on: sut)
     }
     
     func test_insert_hasNoSideEffectsOnInsertionError() {
         let invalidStoreURL = URL(string: "invalid://store-url")!
         let sut = makeSUT(storeURL: invalidStoreURL)
-        let competitions = uniqueCompetitions.local
-        let timestamp = Date()
-        
-        insert((competitions, timestamp), to: sut)
-
-        expect(sut, toRetrieve: .empty)
+        assertThatInsertHasNoSideEffectsOnInsertionError(on: sut)
     }
     
     func test_delete_deliversNoErrorOnEmptyCache() {
