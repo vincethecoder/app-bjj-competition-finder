@@ -14,6 +14,10 @@ extension CompetitionsStoreSpecs where Self: XCTestCase {
         expect(sut, toRetrieve: .empty, file: file, line: line)
     }
     
+    func assertThatRetrieveHasNoSideEffectsOnEmptyCache(on sut: CompetitionsStore, file: StaticString = #filePath, line: UInt = #line) {
+        expect(sut, toRetrieveTwice: .empty, file: file, line: line)
+    }
+    
     @discardableResult
     func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CompetitionsStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
