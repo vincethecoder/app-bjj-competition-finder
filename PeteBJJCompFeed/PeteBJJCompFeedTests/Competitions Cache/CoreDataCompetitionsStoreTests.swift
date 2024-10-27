@@ -11,7 +11,9 @@ import PeteBJJCompFeed
 class CoreDataCompetitionsStoreTests: XCTestCase, CompetitionsStoreSpecs {
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
+        let sut = makeSUT()
         
+        assertThatRetrieveDeliversEmptyOnEmptyCache(on: sut)
     }
     
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
@@ -56,5 +58,13 @@ class CoreDataCompetitionsStoreTests: XCTestCase, CompetitionsStoreSpecs {
     
     func test_storeSideEffects_runSerially() {
         
+    }
+    
+    // - MARK: Helpers
+    
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CompetitionsStore {
+        let sut = CoreDataCompetitionsStore()
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
     }
 }

@@ -10,6 +10,10 @@ import PeteBJJCompFeed
 
 extension CompetitionsStoreSpecs where Self: XCTestCase {
     
+    func assertThatRetrieveDeliversEmptyOnEmptyCache(on sut: CompetitionsStore, file: StaticString = #filePath, line: UInt = #line) {
+        expect(sut, toRetrieve: .empty, file: file, line: line)
+    }
+    
     @discardableResult
     func insert(_ cache: (competition: [LocalCompetition], timestamp: Date), to sut: CompetitionsStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")

@@ -40,6 +40,7 @@
 		EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */; };
 		EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
 		EFE3B5BC2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */; };
+		EFE3B5C02CCE4543009E9195 /* CoreDataCompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 		EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCompetitionsStoreTests.swift; sourceTree = "<group>"; };
+		EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCompetitionsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */,
 				EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */,
 				EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */,
+				EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
 				EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */,
 				EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */,
+				EFE3B5C02CCE4543009E9195 /* CoreDataCompetitionsStore.swift in Sources */,
 				EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionsLoader.swift in Sources */,
 				EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */,
