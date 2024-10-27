@@ -39,6 +39,7 @@
 		EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */; };
 		EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */; };
 		EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
+		EFE3B5BC2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCompetitionsStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */,
 				EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */,
 				EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */,
+				EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */,
 				EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */,
 				EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */,
+				EFE3B5BC2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift in Sources */,
 				EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */,
 				EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */,
 				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
