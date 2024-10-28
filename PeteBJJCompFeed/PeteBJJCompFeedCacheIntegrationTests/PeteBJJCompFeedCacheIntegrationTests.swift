@@ -13,6 +13,23 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
     func test_load_deliversNoItemsOnEmptyCache() {
         let sut = makeSUT()
         
+        expect(sut, toLoad: [])
+    }
+    
+    func test_load_deliversItemsSavedOnASeparateInstance() {
+        // MARK: TODO
+    }
+    
+    // MARK: Helpers
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
+        let store = CoreDataCompetitionsStore()
+        let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
+        trackForMemoryLeaks(store, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
+    }
+    
+    private func expect(_ sut: LocalCompetitionsLoader, toLoad expectedCompetitions: [Competition], file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
         sut.load { result in
             switch result {
@@ -30,19 +47,6 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
-    }
-    
-    func test_load_deliversItemsSavedOnASeparateInstance() {
-        // MARK: TODO
-    }
-    
-    // MARK: Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
-        let store = CoreDataCompetitionsStore()
-        let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
-        trackForMemoryLeaks(store, file: file, line: line)
-        trackForMemoryLeaks(sut, file: file, line: line)
-        return sut
     }
     
     private func testSpecificStoreURL() -> URL {
