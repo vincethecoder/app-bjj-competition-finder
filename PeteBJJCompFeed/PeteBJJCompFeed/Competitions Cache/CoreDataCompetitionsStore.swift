@@ -8,7 +8,7 @@
 import Foundation
 
 public final class CoreDataCompetitionsStore: CompetitionsStore {
-
+    
     public init() {}
 
     public func retrieve(completion: @escaping RetrievalCompletion) {
