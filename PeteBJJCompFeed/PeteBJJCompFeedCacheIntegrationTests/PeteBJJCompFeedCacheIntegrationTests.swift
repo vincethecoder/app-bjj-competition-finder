@@ -16,10 +16,6 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
         expect(sut, toLoad: [])
     }
     
-    func test_load_deliversItemsSavedOnASeparateInstance() {
-        // MARK: TODO
-    }
-    
     // MARK: Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
         let store = CoreDataCompetitionsStore()
