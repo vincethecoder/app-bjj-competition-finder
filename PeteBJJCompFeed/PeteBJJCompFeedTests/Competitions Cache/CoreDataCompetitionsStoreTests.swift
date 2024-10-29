@@ -66,7 +66,8 @@ class CoreDataCompetitionsStoreTests: XCTestCase, CompetitionsStoreSpecs {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CompetitionsStore {
         let storeBundle = Bundle(for: CoreDataCompetitionsStore.self)
-        let sut = try! CoreDataCompetitionsStore(bundle: storeBundle)
+        let storeURL = URL(fileURLWithPath: "/dev/null")
+        let sut = try! CoreDataCompetitionsStore(storeURL: storeURL, bundle: storeBundle)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
