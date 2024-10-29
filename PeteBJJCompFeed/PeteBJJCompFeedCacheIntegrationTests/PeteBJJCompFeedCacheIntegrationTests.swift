@@ -18,7 +18,8 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
     
     // MARK: Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
-        let store = CoreDataCompetitionsStore()
+        let storeBundle = Bundle(for: CoreDataCompetitionsStore.self)
+        let store = try! CoreDataCompetitionsStore(bundle: storeBundle)
         let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
