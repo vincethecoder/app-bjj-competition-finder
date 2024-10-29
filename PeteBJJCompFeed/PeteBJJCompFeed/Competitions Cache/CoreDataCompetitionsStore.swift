@@ -7,26 +7,45 @@
 
 import CoreData
 
-public final class CoreDataCompetitionsStore: CompetitionsStore {
+public final class CoreDataCompetitionsStore {
+    private static let modelName = "CompetitionsStore"
+    private static let model = NSManagedObjectModel.with(name: modelName, in: Bundle(for: CoreDataCompetitionsStore.self))
     
     private let container: NSPersistentContainer
     private let context: NSManagedObjectContext
     
-    public init(storeURL: URL, bundle: Bundle = .main) throws {
-        container = try NSPersistentContainer.load(modelName: "CompetitionsStore", url: storeURL, in: bundle)
-        context = container.newBackgroundContext()
+    enum StoreError: Error {
+        case modelNotFound
+        case failedToLoadPersistentContainer(Error)
     }
-
-    public func retrieve(completion: @escaping RetrievalCompletion) {
-        completion(.empty)
+    
+    public init(storeURL: URL) throws {
+        guard let model = CoreDataCompetitionsStore.model else {
+            throw StoreError.modelNotFound
+        }
+        
+        do {
+            container = try NSPersistentContainer.load(name: CoreDataCompetitionsStore.modelName, model: model, url: storeURL)
+            context = container.newBackgroundContext()
+        } catch {
+            throw StoreError.failedToLoadPersistentContainer(error)
+        }
     }
-
-    public func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
-
+    
+    func perform(_ action: @escaping (NSManagedObjectContext) -> Void) {
+        let context = self.context
+        context.perform { action(context) }
     }
-
-    public func deleteCachedCompetitions(completion: @escaping DeletionCompletion) {
-
+    
+    private func cleanUpReferencesToPersistentStores() {
+        context.performAndWait {
+            let coordinator = self.container.persistentStoreCoordinator
+            try? coordinator.persistentStores.forEach(coordinator.remove)
+        }
+    }
+    
+    deinit {
+        cleanUpReferencesToPersistentStores()
     }
 }
 
@@ -36,11 +55,7 @@ private extension NSPersistentContainer {
         case failedToLoadPersistentStores(Swift.Error)
     }
     
-    static func load(modelName name: String, url: URL, in bundle: Bundle) throws -> NSPersistentContainer {
-        guard let model = NSManagedObjectModel.with(name: name, in: bundle) else {
-            throw LoadingError.modelNotFound
-        }
-        
+    static func load(name: String, model: NSManagedObjectModel, url: URL) throws -> NSPersistentContainer {
         let description = NSPersistentStoreDescription(url: url)
         let container = NSPersistentContainer(name: name, managedObjectModel: model)
         container.persistentStoreDescriptions = [description]
@@ -77,11 +92,80 @@ extension ManagedCompetitions {
         set { registrationStatusRawValue = newValue.rawValue }
     }
     
-    var categories: Set<CompetitionCategory> {
+    var categories: [CompetitionCategory] {
         get {
             guard let categoryValues = categoriesRawValue?.components(separatedBy: ",") else { return [] }
-            return Set(categoryValues.compactMap { CompetitionCategory(rawValue: $0) })
+            return categoryValues.compactMap { CompetitionCategory(rawValue: $0) }
         }
         set { categoriesRawValue = newValue.map { $0.rawValue }.joined(separator: ",") }
+    }
+}
+
+extension ManagedCache {
+    static func find(in context: NSManagedObjectContext) throws -> ManagedCache? {
+        let request = NSFetchRequest<ManagedCache>(entityName: entity().name!)
+        request.returnsObjectsAsFaults = false
+        return try context.fetch(request).first
+    }
+    
+    static func newUniqueInstance(in context: NSManagedObjectContext) throws -> ManagedCache {
+        try find(in: context).map(context.delete)
+        return ManagedCache(context: context)
+    }
+    
+    static func mapped(_ competitions: [LocalCompetition], in context: NSManagedObjectContext) -> NSSet {
+        let mappedCompetitions = competitions.map { $0.toManagedObject(in: context) }
+        return NSSet(array: mappedCompetitions)
+    }
+}
+
+extension LocalCompetition {
+    func toManagedObject(in context: NSManagedObjectContext) -> ManagedCompetitions {
+        let managed = ManagedCompetitions(context: context)
+        managed.id = id
+        managed.name = name
+        managed.startDate = startDate
+        managed.endDate = endDate
+        managed.venue = venue
+        managed.city = city
+        managed.state = state
+        managed.country = country
+        managed.type = type
+        managed.status = status
+        managed.registrationStatus = registrationStatus
+        managed.registrationLink = registrationLink
+        managed.eventLink = eventLink
+        managed.categories = categories
+        managed.rankingPoints = Int32(rankingPoints)
+        managed.notes = notes
+
+        return managed
+    }
+}
+
+extension ManagedCompetitions {
+    func toModel() -> LocalCompetition? {
+        guard let id, let name, let startDate, let endDate,
+              let venue, let city, let country, let eventLink else {
+            return nil
+        }
+        return LocalCompetition(
+            id: id,
+            name: name,
+            startDate: startDate,
+            endDate: endDate,
+            venue: venue,
+            city: city,
+            state: state,
+            country: country,
+            type: type,
+            status: status,
+            registrationStatus: registrationStatus,
+            registrationLink: registrationLink,
+            eventLink: eventLink,
+            categories: categories,
+            rankingPoints: Int(rankingPoints),
+            notes: notes
+        )
     }
 }

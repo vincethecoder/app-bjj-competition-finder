@@ -141,8 +141,10 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for expectation")
 
         var receivedError: Error?
-        sut.save(uniqueCompetitions.models) { error in
-            receivedError = error
+        sut.save(uniqueCompetitions.models) { result in
+            if case let .failure(error) = result {
+                receivedError = error
+            }
             exp.fulfill()
         }
         

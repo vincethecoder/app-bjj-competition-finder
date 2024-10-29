@@ -14,7 +14,7 @@
 		EF0372EB2CBDEEDC00694F89 /* CompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionsLoader.swift */; };
 		EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */; };
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
-		EF6E36872CCAF9C1005AE501 /* CodableCompetitionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */; };
+		EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */; };
 		EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */; };
 		EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326102CC762D500E819DE /* CompetitionsStore.swift */; };
 		EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326122CC7FD0300E819DE /* LocalCompetition.swift */; };
@@ -32,7 +32,6 @@
 		EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */; };
 		EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */; };
 		EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */; };
-		EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */; };
 		EFE34E992CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */; };
 		EFE34E9A2CD0422B0052096C /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 		EFE34EA02CD0444D0052096C /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
@@ -81,7 +80,7 @@
 		EF0372EA2CBDEEDC00694F89 /* CompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromServerUseCaseTests.swift; sourceTree = "<group>"; };
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsLoader.swift; sourceTree = "<group>"; };
-		EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCompetitionStore.swift; sourceTree = "<group>"; };
+		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCompetitionsUseCaseTests.swift; sourceTree = "<group>"; };
 		EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCachePolicy.swift; sourceTree = "<group>"; };
-		EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCompetitionsStoreTests.swift; sourceTree = "<group>"; };
 		EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedCacheIntegrationTests.swift; sourceTree = "<group>"; };
 		EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
@@ -221,9 +219,9 @@
 				EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */,
 				EF7326102CC762D500E819DE /* CompetitionsStore.swift */,
 				EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */,
-				EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */,
 				EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */,
 				EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */,
+				EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */,
 				EFE34EA52CD128E70052096C /* CompetitionsStore.xcdatamodeld */,
 			);
 			path = "Competitions Cache";
@@ -287,7 +285,6 @@
 				EFE3B5B82CCCFD48009E9195 /* CompetitionsStoreSpecs */,
 				EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */,
 				EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */,
-				EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */,
 				EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */,
 			);
 			path = "Competitions Cache";
@@ -479,7 +476,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF6E36872CCAF9C1005AE501 /* CodableCompetitionStore.swift in Sources */,
 				EFE34EA72CD128E70052096C /* CompetitionsStore.xcdatamodeld in Sources */,
 				EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */,
 				EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */,
@@ -488,6 +484,7 @@
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
 				EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */,
 				EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */,
+				EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */,
 				EFE3B5C02CCE4543009E9195 /* CoreDataCompetitionsStore.swift in Sources */,
 				EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */,
 				EF0372EB2CBDEEDC00694F89 /* CompetitionsLoader.swift in Sources */,
@@ -513,7 +510,6 @@
 				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
 				EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */,
 				EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */,
-				EFBCDF3F2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift in Sources */,
 				EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */,
 				EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);

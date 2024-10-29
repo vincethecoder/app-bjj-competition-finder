@@ -7,16 +7,17 @@
 
 import Foundation
 
-public enum RetrieveCachedCompetitionResult {
-    case empty
-    case found(competitions: [LocalCompetition], timestamp: Date)
-    case failure(Error)
-}
+public typealias CachedCompetitions = (competitions: [LocalCompetition], timestamp: Date)
 
 public protocol CompetitionsStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    typealias RetrievalCompletion = (RetrieveCachedCompetitionResult) -> Void
+    typealias DeletionResult = Result<Void, Error>
+    typealias DeletionCompletion = (DeletionResult) -> Void
+    
+    typealias InsertionResult = Result<Void, Error>
+    typealias InsertionCompletion = (InsertionResult) -> Void
+
+    typealias RetrievalResult = Result<CachedCompetitions?, Error>
+    typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropriate threads, if needed.

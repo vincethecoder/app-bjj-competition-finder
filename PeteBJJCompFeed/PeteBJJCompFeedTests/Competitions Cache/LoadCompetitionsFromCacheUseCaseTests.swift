@@ -110,7 +110,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let expirationTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
-        sut.load { _ in }
+        sut.validateCache { _ in }
         store.completeRetrieval(with: competitions.local, timestamp: expirationTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedCompetitions])
@@ -122,7 +122,7 @@ class LoadCompetitionsFromCacheUseCaseTests: XCTestCase {
         let expiredTimestamp = fixedCurrentDate.minusCompetitionsCacheMaxAge.adding(seconds: -1)
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
-        sut.load { _ in }
+        sut.validateCache { _ in }
         store.completeRetrieval(with: competitions.local, timestamp: expiredTimestamp)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve, .deleteCachedCompetitions])

@@ -18,9 +18,8 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
     
     // MARK: Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
-        let storeBundle = Bundle(for: CoreDataCompetitionsStore.self)
         let storeURL = URL(fileURLWithPath: "/dev/null")
-        let store = try! CoreDataCompetitionsStore(storeURL: storeURL, bundle: storeBundle)
+        let store = try! CoreDataCompetitionsStore(storeURL: storeURL)
         let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
@@ -36,9 +35,6 @@ final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
                 
             case let .failure(error):
                 XCTFail("Expected successful competitions result, got \(error) instead")
-            
-            default:
-                break
             }
             
             exp.fulfill()

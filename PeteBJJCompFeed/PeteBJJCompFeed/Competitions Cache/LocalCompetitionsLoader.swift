@@ -11,24 +11,44 @@ public final class LocalCompetitionsLoader {
     private let store: CompetitionsStore
     private let currentDate: () -> Date
     
-    public typealias SaveResult = Error?
-    public typealias LoadResult = LoadCompetitionsResult?
-    
     public init(store: CompetitionsStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
     }
+}
+
+public protocol CompetitionsCache {
+    typealias Result = Swift.Result<Void, Error>
     
+    func save(_ competitions: [Competition], completion: @escaping (Result) -> Void)
+}
+
+extension LocalCompetitionsLoader {
+    public typealias SaveResult = CompetitionsCache.Result
     public func save(_ competitions: [Competition], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedCompetitions { [weak self] error in
+        store.deleteCachedCompetitions { [weak self] deletionResult in
             guard let self else { return }
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
+            
+            switch deletionResult {
+            case .success:
                 self.cache(competitions, with: completion)
+                
+            case let .failure(error):
+                completion(.failure(error))
             }
         }
     }
+    
+    private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {
+        store.insert(competitions.local, timestamp: self.currentDate()){ [weak self] insertionResult in
+            guard self != nil else { return }
+            
+            completion(insertionResult)
+        }
+    }
+}
+extension LocalCompetitionsLoader {
+    public typealias LoadResult = Swift.Result<[Competition], Error>
     
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
@@ -39,28 +59,38 @@ public final class LocalCompetitionsLoader {
                 self.store.deleteCachedCompetitions { _ in }
                 completion(.failure(error))
                 
-            case let .found(competitions, timestamp) where CompetitionsCachePolicy.isValid(timestamp, against: self.currentDate()):
-                completion(.success(competitions.mapped))
+            case let .success(.some(cache)) where CompetitionsCachePolicy.isValid(cache.timestamp, against: self.currentDate()):
+                completion(.success(cache.competitions.mapped))
             
-            case .found:
-                self.store.deleteCachedCompetitions { _ in }
-                fallthrough
-                
-            case .empty:
+            case .success:
                 completion(.success([]))
                 
             }
         }
     }
-    
-    private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(competitions.local, timestamp: self.currentDate()){ [weak self] error in
-            guard self != nil else { return }
-            
-            completion(error)
+}
+
+extension LocalCompetitionsLoader {
+    public typealias ValidationResult = Result<Void, Error>
+
+    public func validateCache(completion: @escaping (ValidationResult) -> Void) {
+        store.retrieve { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .failure:
+                self.store.deleteCachedCompetitions(completion: completion)
+
+            case let .success(.some(cache)) where !CompetitionsCachePolicy.isValid(cache.timestamp, against: self.currentDate()):
+                self.store.deleteCachedCompetitions(completion: completion)
+
+            case .success:
+                completion(.success(()))
+            }
         }
     }
 }
+
 
 private extension Array where Element == Competition {
     var local: [LocalCompetition] {

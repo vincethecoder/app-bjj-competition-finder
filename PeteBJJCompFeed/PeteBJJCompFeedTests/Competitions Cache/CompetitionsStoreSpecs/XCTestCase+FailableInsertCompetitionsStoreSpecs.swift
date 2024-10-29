@@ -18,7 +18,7 @@ extension FailableInsertCompetitionsStoreSpecs where Self: XCTestCase {
     func assertThatInsertHasNoSideEffectsOnInsertionError(on sut: CompetitionsStore, file: StaticString = #file, line: UInt = #line) {
         insert((uniqueCompetitions.local, Date()), to: sut)
         
-        expect(sut, toRetrieve: .empty, file: file, line: line)
+        expect(sut, toRetrieve: .success(.none), file: file, line: line)
     }
     
     private var uniqueCompetition: Competition {

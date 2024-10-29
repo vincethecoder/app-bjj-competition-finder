@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ManagedCache" representedClassName="ManagedCache" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="competitions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCompetitions" inverseName="cache" inverseEntity="ManagedCompetitions"/>
+        <relationship name="competitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedCompetitions" inverseName="cache" inverseEntity="ManagedCompetitions"/>
     </entity>
     <entity name="ManagedCompetitions" representedClassName="ManagedCompetitions" syncable="YES" codeGenerationType="class">
         <attribute name="categoriesRawValue" attributeType="String"/>
