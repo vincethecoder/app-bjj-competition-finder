@@ -37,6 +37,7 @@
 		EFE34E9A2CD0422B0052096C /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 		EFE34EA02CD0444D0052096C /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFE34EA12CD048A20052096C /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
+		EFE34EA72CD128E70052096C /* CompetitionsStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFE34EA52CD128E70052096C /* CompetitionsStore.xcdatamodeld */; };
 		EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */; };
 		EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */; };
 		EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */; };
@@ -101,6 +102,7 @@
 		EFBCDF3E2CC99A4E0042FA59 /* CodableCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableCompetitionsStoreTests.swift; sourceTree = "<group>"; };
 		EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedCacheIntegrationTests.swift; sourceTree = "<group>"; };
+		EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
 		EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStoreSpecs.swift; sourceTree = "<group>"; };
 		EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+CompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
 		EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				EF6E36862CCAF9C1005AE501 /* CodableCompetitionStore.swift */,
 				EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */,
 				EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */,
+				EFE34EA52CD128E70052096C /* CompetitionsStore.xcdatamodeld */,
 			);
 			path = "Competitions Cache";
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF6E36872CCAF9C1005AE501 /* CodableCompetitionStore.swift in Sources */,
+				EFE34EA72CD128E70052096C /* CompetitionsStore.xcdatamodeld in Sources */,
 				EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */,
 				EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */,
 				EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */,
@@ -886,6 +890,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EFE34EA52CD128E70052096C /* CompetitionsStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */,
+			);
+			currentVersion = EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */;
+			name = CompetitionsStore.xcdatamodeld;
+			path = "/Users/kobesam/ios-lead-essentials-projects/Untitled/app-bjj-competition-finder/PeteBJJCompFeed/PeteBJJCompFeed/Competitions Cache/CompetitionsStore.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EF0372C52CBDEC8F00694F89 /* Project object */;
 }
