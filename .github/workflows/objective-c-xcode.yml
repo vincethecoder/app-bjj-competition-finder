@@ -24,7 +24,7 @@ jobs:
           fi
           echo "Found project: $project_dir"
           echo "project_dir=$project_dir" >> $GITHUB_ENV
-      
+
       - name: Set Default Scheme
         run: |
           cd $(dirname "$project_dir")
@@ -36,7 +36,7 @@ jobs:
 
       - name: Setup Core Data Model
         run: |
-          cd PeteBJJCompFeed
+          cd PeteBJJCompFeed/PeteBJJCompFeed
           
           # Create directory structure
           mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
@@ -62,11 +62,6 @@ jobs:
           EOL
           
           chmod -R 644 CompetitionsCache/CompetitionsStore.xcdatamodeld
-
-      - name: Setup Environment
-        run: |
-          mkdir -p "${{ github.workspace }}/PeteBJJCompFeed/DerivedData"
-          mkdir -p "${{ github.workspace }}/PeteBJJCompFeed/DerivedData/CoreDataGenerated"
 
       - name: Build
         env:
