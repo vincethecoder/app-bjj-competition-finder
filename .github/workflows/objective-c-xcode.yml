@@ -33,7 +33,36 @@ jobs:
           echo $default | cat >default
           echo "default_scheme=$default" >> $GITHUB_ENV
           echo Using default scheme: $default
-      
+
+      - name: Setup Core Data Model
+        run: |
+          cd PeteBJJCompFeed
+          
+          # Create directory structure
+          mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
+          
+          # Create the model file
+          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
+          <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+          <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+              <elements/>
+          </model>
+          EOL
+          
+          # Create current version file
+          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>_XCCurrentVersionName</key>
+              <string>CompetitionsStore.xcdatamodel</string>
+          </dict>
+          </plist>
+          EOL
+          
+          chmod -R 644 CompetitionsCache/CompetitionsStore.xcdatamodeld
+
       - name: Setup Environment
         run: |
           mkdir -p "${{ github.workspace }}/PeteBJJCompFeed/DerivedData"
@@ -51,9 +80,6 @@ jobs:
             -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            DERIVED_FILE_DIR="${SRCROOT}/DerivedData" \
-            CORE_DATA_MODEL_DIR="${SRCROOT}" \
-            MOMC_OUTPUT_DIR="${SRCROOT}/DerivedData/CoreDataGenerated" \
             -verbose
             
       - name: Analyze
@@ -68,5 +94,4 @@ jobs:
             -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            MOMC_OUTPUT_DIR="${SRCROOT}" \
             -verbose
