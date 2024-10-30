@@ -37,11 +37,15 @@ jobs:
       - name: Setup Core Data Model
         run: |
           cd PeteBJJCompFeed/PeteBJJCompFeed
-          rm -rf CompetitionsStore.xcdatamodeld
-          mkdir -p CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
+          # First remove any existing Core Data files
+          rm -rf CompetitionsCache/CompetitionsStore.xcdatamodeld
+          mkdir -p CompetitionsCache
+          
+          # Create model directly in CompetitionsCache
+          mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
           
           # Create the model file
-          cat > CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
+          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
           <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
           <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
               <elements/>
@@ -49,7 +53,7 @@ jobs:
           EOL
           
           # Create current version file
-          cat > CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
+          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -60,8 +64,8 @@ jobs:
           </plist>
           EOL
           
-          chmod -R 644 CompetitionsStore.xcdatamodeld
-          mv CompetitionsStore.xcdatamodeld CompetitionsCache/
+          # Set permissions
+          chmod -R 644 CompetitionsCache/CompetitionsStore.xcdatamodeld
 
       - name: Build
         env:
