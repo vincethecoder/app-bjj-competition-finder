@@ -16,7 +16,7 @@ public final class RemoteCompetitionsLoader: CompetitionsLoader {
         case invalidData
     }
     
-    public typealias Result = LoadCompetitionsResult
+    public typealias Result = CompetitionsLoader.Result
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -28,7 +28,7 @@ public final class RemoteCompetitionsLoader: CompetitionsLoader {
             guard self != nil else { return }
 
             switch result {
-            case let .success(data, response):
+            case let .success((data, response)):
                 completion(Self.map(data, from: response))
             case .failure:
                 completion(.failure(Error.connectivity))

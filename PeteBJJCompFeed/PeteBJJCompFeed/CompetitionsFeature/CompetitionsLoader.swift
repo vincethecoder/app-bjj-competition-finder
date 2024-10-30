@@ -7,11 +7,8 @@
 
 import Foundation
 
-public enum LoadCompetitionsResult {
-    case success([Competition])
-    case failure(Error)
-}
-
 public protocol CompetitionsLoader {
-    func load(completion: @escaping (LoadCompetitionsResult) -> Void)
+    typealias Result = Swift.Result<[Competition], Error>
+    
+    func load(completion: @escaping (Result) -> Void)
 }
