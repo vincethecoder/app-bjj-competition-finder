@@ -1,98 +1,64 @@
 name: Xcode - Build and Analyze
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+ push:
+   branches: [ "main" ]
+ pull_request:
+   branches: [ "main" ]
 
 jobs:
-  build:
-    name: Build and analyse default scheme using xcodebuild command
-    runs-on: macos-latest
+ build:
+   name: Build and analyse default scheme using xcodebuild command
+   runs-on: macos-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Find Xcode project
-        run: |
-          project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
-          if [ -z "$project_dir" ]; then
-            echo "No Xcode project found."
-            exit 1
-          fi
-          echo "Found project: $project_dir"
-          echo "project_dir=$project_dir" >> $GITHUB_ENV
+   steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+     
+     - name: Find Xcode project
+       run: |
+         project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
+         if [ -z "$project_dir" ]; then
+           echo "No Xcode project found."
+           exit 1
+         fi
+         echo "Found project: $project_dir"
+         echo "project_dir=$project_dir" >> $GITHUB_ENV
 
-      - name: Set Default Scheme
-        run: |
-          cd $(dirname "$project_dir")
-          scheme_list=$(xcodebuild -list -json -project $(basename "$project_dir") | tr -d "\n")
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default | cat >default
-          echo "default_scheme=$default" >> $GITHUB_ENV
-          echo Using default scheme: $default
+     - name: Set Default Scheme
+       run: |
+         cd $(dirname "$project_dir")
+         scheme_list=$(xcodebuild -list -json -project $(basename "$project_dir") | tr -d "\n")
+         default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+         echo $default | cat >default
+         echo "default_scheme=$default" >> $GITHUB_ENV
+         echo Using default scheme: $default
 
-      - name: Setup Core Data Model
-        run: |
-          cd PeteBJJCompFeed/PeteBJJCompFeed
-          # First remove any existing Core Data files
-          rm -rf CompetitionsCache/CompetitionsStore.xcdatamodeld
-          mkdir -p CompetitionsCache
-          
-          # Create model directly in CompetitionsCache
-          mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
-          
-          # Create the model file
-          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
-          <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-          <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-              <elements/>
-          </model>
-          EOL
-          
-          # Create current version file
-          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>_XCCurrentVersionName</key>
-              <string>CompetitionsStore.xcdatamodel</string>
-          </dict>
-          </plist>
-          EOL
-          
-          # Set permissions
-          chmod -R 644 CompetitionsCache/CompetitionsStore.xcdatamodeld
-
-      - name: Build
-        env:
-          scheme: ${{ env.default_scheme }}
-          WORKSPACE_PATH: ${{ github.workspace }}
-        run: |
-          cd $(dirname "$project_dir")
-          xcodebuild clean build \
-            -scheme "$scheme" \
-            -project $(basename "$project_dir") \
-            -destination 'platform=macOS,arch=arm64' \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS=YES \
-            MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR=YES \
-            SOURCE_ROOT="$WORKSPACE_PATH/PeteBJJCompFeed/PeteBJJCompFeed" \
-            -verbose
-            
-      - name: Analyze
-        env:
-          scheme: ${{ env.default_scheme }}
-        run: |
-          cd $(dirname "$project_dir")
-          xcodebuild analyze \
-            -scheme "$scheme" \
-            -project $(basename "$project_dir") \
-            -destination 'platform=macOS,arch=arm64' \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            -verbose
+     - name: Build
+       env:
+         scheme: ${{ env.default_scheme }}
+         WORKSPACE_PATH: ${{ github.workspace }}
+       run: |
+         cd $(dirname "$project_dir")
+         xcodebuild clean build \
+           -scheme "$scheme" \
+           -project $(basename "$project_dir") \
+           -destination 'platform=macOS,arch=arm64' \
+           CODE_SIGN_IDENTITY="" \
+           CODE_SIGNING_REQUIRED=NO \
+           MOMC_PLATFORMS=no \
+           SOURCE_ROOT="$WORKSPACE_PATH/PeteBJJCompFeed/PeteBJJCompFeed" \
+           -verbose
+           
+     - name: Analyze
+       env:
+         scheme: ${{ env.default_scheme }}
+       run: |
+         cd $(dirname "$project_dir")
+         xcodebuild analyze \
+           -scheme "$scheme" \
+           -project $(basename "$project_dir") \
+           -destination 'platform=macOS,arch=arm64' \
+           CODE_SIGN_IDENTITY="" \
+           CODE_SIGNING_REQUIRED=NO \
+           -verbose
