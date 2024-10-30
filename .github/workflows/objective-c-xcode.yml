@@ -46,9 +46,9 @@ jobs:
            -destination 'platform=macOS,arch=arm64' \
            CODE_SIGN_IDENTITY="" \
            CODE_SIGNING_REQUIRED=NO \
-           MOMC_PLATFORMS=no \
-           MOMC_PATH="" \
-           SOURCE_ROOT="$WORKSPACE_PATH/PeteBJJCompFeed/PeteBJJCompFeed" \
+           DERIVED_DATA_PATH="${WORKSPACE_PATH}/DerivedData" \
+           SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
+           MOMC_OUTPUT_DIR="${WORKSPACE_PATH}/DerivedData/CoreData" \
            -verbose
            
      - name: Analyze
