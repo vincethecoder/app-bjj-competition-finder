@@ -77,6 +77,7 @@
 		EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromServerUseCaseTests.swift; sourceTree = "<group>"; };
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
+		EF41EDDF2CD203B700A5F976 /* CompetitionsStore v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CompetitionsStore v1.xcdatamodel"; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -670,7 +671,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -703,7 +704,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -875,9 +876,10 @@
 		EFE34EA52CD128E70052096C /* CompetitionsStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EF41EDDF2CD203B700A5F976 /* CompetitionsStore v1.xcdatamodel */,
 				EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */,
 			);
-			currentVersion = EFE34EA62CD128E70052096C /* CompetitionsStore.xcdatamodel */;
+			currentVersion = EF41EDDF2CD203B700A5F976 /* CompetitionsStore v1.xcdatamodel */;
 			name = CompetitionsStore.xcdatamodeld;
 			path = "/Users/kobesam/ios-lead-essentials-projects/Untitled/app-bjj-competition-finder/PeteBJJCompFeed/PeteBJJCompFeed/Competitions Cache/CompetitionsStore.xcdatamodeld";
 			sourceTree = "<group>";
