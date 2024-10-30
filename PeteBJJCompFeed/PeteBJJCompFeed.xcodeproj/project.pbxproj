@@ -7,23 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EF0372D32CBDEC8F00694F89 /* PeteBJJCompFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */; };
 		EF0372D92CBDEC8F00694F89 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
-		EF0372DF2CBDEC8F00694F89 /* PeteBJJCompFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EF0372E92CBDED3600694F89 /* Competition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372E82CBDED3600694F89 /* Competition.swift */; };
-		EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */; };
+		EF0372EB2CBDEEDC00694F89 /* CompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372EA2CBDEEDC00694F89 /* CompetitionsLoader.swift */; };
 		EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */; };
-		EF0372F12CBEE9F500694F89 /* RemoteCompetitionListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */; };
+		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
+		EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */; };
+		EF695FF92CD2B618009249D9 /* CompetitionsStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */; };
+		EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */; };
+		EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326102CC762D500E819DE /* CompetitionsStore.swift */; };
+		EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326122CC7FD0300E819DE /* LocalCompetition.swift */; };
+		EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */; };
+		EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326192CC8143500E819DE /* CompetitionsStoreSpy.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
-		EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */; };
+		EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
 		EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */; };
-		EFAD8AE32CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */; };
+		EFAD8AE32CC5871700981FB9 /* BJJCompetitionsFinderAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AE22CC5871700981FB9 /* BJJCompetitionsFinderAPIEndToEndTests.swift */; };
 		EFAD8AE42CC5871700981FB9 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
 		EFAD8AEA2CC5F6B200981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */; };
 		EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */; };
+		EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */; };
+		EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */; };
+		EFE34E992CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */; };
+		EFE34E9A2CD0422B0052096C /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; };
+		EFE34EA02CD0444D0052096C /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
+		EFE34EA12CD048A20052096C /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
+		EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */; };
+		EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */; };
+		EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */; };
+		EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */; };
+		EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */; };
+		EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
+		EFE3B5BC2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */; };
+		EFE3B5C02CCE4543009E9195 /* CoreDataCompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,27 +60,52 @@
 			remoteGlobalIDString = EF0372CD2CBDEC8F00694F89;
 			remoteInfo = PeteBJJCompFeed;
 		};
+		EFE34E9B2CD0422B0052096C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF0372CD2CBDEC8F00694F89;
+			remoteInfo = PeteBJJCompFeed;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeteBJJCompFeed.h; sourceTree = "<group>"; };
-		EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeed.docc; sourceTree = "<group>"; };
 		EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0372E82CBDED3600694F89 /* Competition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Competition.swift; sourceTree = "<group>"; };
-		EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListLoader.swift; sourceTree = "<group>"; };
+		EF0372EA2CBDEEDC00694F89 /* CompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromServerUseCaseTests.swift; sourceTree = "<group>"; };
-		EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionListLoader.swift; sourceTree = "<group>"; };
+		EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsLoader.swift; sourceTree = "<group>"; };
+		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
+		EF695FF62CD2B601009249D9 /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
+		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
+		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
+		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
+		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
+		EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadCompetitionsFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		EF7326192CC8143500E819DE /* CompetitionsStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStoreSpy.swift; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
-		EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionListMapper.swift; sourceTree = "<group>"; };
+		EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedAPIEndToEndTests.swift; sourceTree = "<group>"; };
+		EFAD8AE22CC5871700981FB9 /* BJJCompetitionsFinderAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BJJCompetitionsFinderAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		EFAD8AEB2CC5F83800981FB9 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI.xctestplan; path = PeteBJJCompFeedTests/CI.xctestplan; sourceTree = "<group>"; };
 		EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetition.swift; sourceTree = "<group>"; };
 		EFAD8AEF2CC617D000981FB9 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheCompetitionsUseCaseTests.swift; sourceTree = "<group>"; };
+		EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCachePolicy.swift; sourceTree = "<group>"; };
+		EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeteBJJCompFeedCacheIntegrationTests.swift; sourceTree = "<group>"; };
+		EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStoreSpecs.swift; sourceTree = "<group>"; };
+		EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+CompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift"; sourceTree = "<group>"; };
+		EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCompetitionsStoreTests.swift; sourceTree = "<group>"; };
+		EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCompetitionsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +132,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFE34E932CD0422B0052096C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFE34E9A2CD0422B0052096C /* PeteBJJCompFeed.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,6 +150,7 @@
 				EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
+				EFE34E972CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */,
 				EF0372CF2CBDEC8F00694F89 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +161,7 @@
 				EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */,
 				EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */,
 				EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */,
+				EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,10 +169,9 @@
 		EF0372D02CBDEC8F00694F89 /* PeteBJJCompFeed */ = {
 			isa = PBXGroup;
 			children = (
-				EF0372EC2CBDF02D00694F89 /* List Feature */,
-				EF0372EF2CBEE98C00694F89 /* List API */,
-				EF0372D12CBDEC8F00694F89 /* PeteBJJCompFeed.h */,
-				EF0372D22CBDEC8F00694F89 /* PeteBJJCompFeed.docc */,
+				EF73260B2CC75D1500E819DE /* CompetitionsCache */,
+				EF0372EC2CBDF02D00694F89 /* CompetitionsFeature */,
+				EF0372EF2CBEE98C00694F89 /* CompetitionsAPI */,
 			);
 			path = PeteBJJCompFeed;
 			sourceTree = "<group>";
@@ -126,47 +179,72 @@
 		EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				EFAD8AD42CC2E74C00981FB9 /* List API */,
+				EFAD8AD72CC516BE00981FB9 /* Helpers */,
+				EFAD8AF12CC6F29700981FB9 /* CompetitionsCache */,
+				EFAD8AD42CC2E74C00981FB9 /* CompetitionsAPI */,
 			);
 			path = PeteBJJCompFeedTests;
 			sourceTree = "<group>";
 		};
-		EF0372EC2CBDF02D00694F89 /* List Feature */ = {
+		EF0372EC2CBDF02D00694F89 /* CompetitionsFeature */ = {
 			isa = PBXGroup;
 			children = (
 				EF0372E82CBDED3600694F89 /* Competition.swift */,
 				EFAD8AEC2CC616BC00981FB9 /* RemoteCompetition.swift */,
-				EF0372EA2CBDEEDC00694F89 /* CompetitionListLoader.swift */,
+				EF7326122CC7FD0300E819DE /* LocalCompetition.swift */,
+				EF0372EA2CBDEEDC00694F89 /* CompetitionsLoader.swift */,
 			);
-			path = "List Feature";
+			path = CompetitionsFeature;
 			sourceTree = "<group>";
 		};
-		EF0372EF2CBEE98C00694F89 /* List API */ = {
+		EF0372EF2CBEE98C00694F89 /* CompetitionsAPI */ = {
 			isa = PBXGroup;
 			children = (
 				EFAD8AEE2CC617B600981FB9 /* Helpers */,
-				EF0372F02CBEE9F500694F89 /* RemoteCompetitionListLoader.swift */,
-				EFAD8AD22CC2E01700981FB9 /* CompetitionListMapper.swift */,
+				EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */,
+				EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */,
 				EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */,
 				EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */,
 			);
-			path = "List API";
+			path = CompetitionsAPI;
 			sourceTree = "<group>";
 		};
-		EFAD8AD42CC2E74C00981FB9 /* List API */ = {
+		EF73260B2CC75D1500E819DE /* CompetitionsCache */ = {
 			isa = PBXGroup;
 			children = (
-				EFAD8AD72CC516BE00981FB9 /* Helpers */,
+				EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */,
+				EF7326102CC762D500E819DE /* CompetitionsStore.swift */,
+				EFBCDF3C2CC913210042FA59 /* CompetitionsCachePolicy.swift */,
+				EFE3B5AE2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift */,
+				EFE3B5BF2CCE4543009E9195 /* CoreDataCompetitionsStore.swift */,
+				EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */,
+				EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */,
+			);
+			path = CompetitionsCache;
+			sourceTree = "<group>";
+		};
+		EF7326182CC813FE00E819DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF7326192CC8143500E819DE /* CompetitionsStoreSpy.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EFAD8AD42CC2E74C00981FB9 /* CompetitionsAPI */ = {
+			isa = PBXGroup;
+			children = (
 				EF0372ED2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift */,
 				EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */,
 			);
-			path = "List API";
+			path = CompetitionsAPI;
 			sourceTree = "<group>";
 		};
 		EFAD8AD72CC516BE00981FB9 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */,
+				EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -174,7 +252,7 @@
 		EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */ = {
 			isa = PBXGroup;
 			children = (
-				EFAD8AE22CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift */,
+				EFAD8AE22CC5871700981FB9 /* BJJCompetitionsFinderAPIEndToEndTests.swift */,
 			);
 			path = PeteBJJCompFeedAPIEndToEndTests;
 			sourceTree = "<group>";
@@ -187,6 +265,37 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		EFAD8AF12CC6F29700981FB9 /* CompetitionsCache */ = {
+			isa = PBXGroup;
+			children = (
+				EF7326182CC813FE00E819DE /* Helpers */,
+				EFE3B5B82CCCFD48009E9195 /* CompetitionsStoreSpecs */,
+				EFAD8AF22CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift */,
+				EF7326162CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift */,
+				EFE3B5BB2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift */,
+			);
+			path = CompetitionsCache;
+			sourceTree = "<group>";
+		};
+		EFE34E972CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */ = {
+			isa = PBXGroup;
+			children = (
+				EFE34E982CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift */,
+			);
+			path = PeteBJJCompFeedCacheIntegrationTests;
+			sourceTree = "<group>";
+		};
+		EFE3B5B82CCCFD48009E9195 /* CompetitionsStoreSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				EFE3B5B02CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift */,
+				EFE3B5B22CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift */,
+				EFE3B5B42CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift */,
+				EFE3B5B62CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift */,
+			);
+			path = CompetitionsStoreSpecs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -194,7 +303,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF0372DF2CBDEC8F00694F89 /* PeteBJJCompFeed.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +363,24 @@
 			productReference = EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		EFE34E952CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EFE34E9F2CD0422B0052096C /* Build configuration list for PBXNativeTarget "PeteBJJCompFeedCacheIntegrationTests" */;
+			buildPhases = (
+				EFE34E922CD0422B0052096C /* Sources */,
+				EFE34E932CD0422B0052096C /* Frameworks */,
+				EFE34E942CD0422B0052096C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EFE34E9C2CD0422B0052096C /* PBXTargetDependency */,
+			);
+			name = PeteBJJCompFeedCacheIntegrationTests;
+			productName = PeteBJJCompFeedCacheIntegrationTests;
+			productReference = EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -272,6 +398,9 @@
 						CreatedOnToolsVersion = 15.4;
 					};
 					EFAD8ADF2CC5871700981FB9 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					EFE34E952CD0422B0052096C = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
@@ -292,6 +421,7 @@
 				EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */,
 				EF0372D72CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EFAD8ADF2CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
+				EFE34E952CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +448,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EFE34E942CD0422B0052096C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -325,15 +462,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */,
+				EF695FF92CD2B618009249D9 /* CompetitionsStore.xcdatamodeld in Sources */,
+				EFBCDF3D2CC913210042FA59 /* CompetitionsCachePolicy.swift in Sources */,
+				EFE3B5AF2CCCF3A9009E9195 /* CompetitionsStoreSpecs.swift in Sources */,
 				EFAD8ADB2CC52B7C00981FB9 /* URLSessionHTTPClient.swift in Sources */,
 				EFAD8AED2CC616BC00981FB9 /* RemoteCompetition.swift in Sources */,
+				EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */,
 				EFAD8AF02CC617D000981FB9 /* Date+Extensions.swift in Sources */,
-				EFAD8AD32CC2E01700981FB9 /* CompetitionListMapper.swift in Sources */,
-				EF0372EB2CBDEEDC00694F89 /* CompetitionListLoader.swift in Sources */,
+				EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */,
+				EFE3B5C02CCE4543009E9195 /* CoreDataCompetitionsStore.swift in Sources */,
+				EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */,
+				EF0372EB2CBDEEDC00694F89 /* CompetitionsLoader.swift in Sources */,
 				EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */,
-				EF0372D32CBDEC8F00694F89 /* PeteBJJCompFeed.docc in Sources */,
-				EF0372F12CBEE9F500694F89 /* RemoteCompetitionListLoader.swift in Sources */,
+				EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */,
 				EF0372E92CBDED3600694F89 /* Competition.swift in Sources */,
+				EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +487,15 @@
 			files = (
 				EF0372EE2CBDF28600694F89 /* LoadCompetitionsFromServerUseCaseTests.swift in Sources */,
 				EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */,
+				EFE3B5B52CCCFA2B009E9195 /* XCTestCase+FailableInsertCompetitionsStoreSpecs.swift in Sources */,
+				EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */,
+				EFE3B5BC2CCDEDA1009E9195 /* CoreDataCompetitionsStoreTests.swift in Sources */,
+				EFE3B5B72CCCFC44009E9195 /* XCTestCase+FailableDeleteCompetitionsStoreSpecs.swift in Sources */,
+				EF7326172CC812F600E819DE /* LoadCompetitionsFromCacheUseCaseTests.swift in Sources */,
+				EFAD8AF32CC6F32400981FB9 /* CacheCompetitionsUseCaseTests.swift in Sources */,
+				EFE3B5B12CCCF65F009E9195 /* XCTestCase+CompetitionsStoreSpecs.swift in Sources */,
+				EFE3B5BA2CCCFDFC009E9195 /* SharedTestHelpers.swift in Sources */,
+				EFE3B5B32CCCF80F009E9195 /* XCTestCase+FailableRetrieveCompetitionsStoreSpecs.swift in Sources */,
 				EFAD8AD92CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,8 +504,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFAD8AE32CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.swift in Sources */,
+				EFAD8AE32CC5871700981FB9 /* BJJCompetitionsFinderAPIEndToEndTests.swift in Sources */,
 				EFAD8AEA2CC5F6B200981FB9 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFE34E922CD0422B0052096C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFE34E992CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.swift in Sources */,
+				EFE34EA02CD0444D0052096C /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				EFE34EA12CD048A20052096C /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +531,11 @@
 			isa = PBXTargetDependency;
 			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
 			targetProxy = EFAD8AE52CC5871700981FB9 /* PBXContainerItemProxy */;
+		};
+		EFE34E9C2CD0422B0052096C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
+			targetProxy = EFE34E9B2CD0422B0052096C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -502,8 +670,9 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CORE_DATA_MODEL_DIR = "$(SRCROOT)";
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -520,12 +689,15 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MOMC_INPUT_PATH = "$(SRCROOT)/CompetitionsCache";
+				MOMC_OUTPUT_PATH = "$(DERIVED_FILE_DIR)/CoreDataGenerated";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
+				USER_HEADER_SEARCH_PATHS = "$(DERIVED_FILE_DIR)/CoreDataGenerated";
 			};
 			name = Debug;
 		};
@@ -535,8 +707,9 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CORE_DATA_MODEL_DIR = "$(SRCROOT)";
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -553,12 +726,15 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MOMC_INPUT_PATH = "$(SRCROOT)/CompetitionsCache";
+				MOMC_OUTPUT_PATH = "$(DERIVED_FILE_DIR)/CoreDataGenerated";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
+				USER_HEADER_SEARCH_PATHS = "$(DERIVED_FILE_DIR)/CoreDataGenerated";
 			};
 			name = Release;
 		};
@@ -624,6 +800,36 @@
 			};
 			name = Release;
 		};
+		EFE34E9D2CD0422B0052096C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeedCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		EFE34E9E2CD0422B0052096C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeedCacheIntegrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -663,7 +869,30 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		EFE34E9F2CD0422B0052096C /* Build configuration list for PBXNativeTarget "PeteBJJCompFeedCacheIntegrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EFE34E9D2CD0422B0052096C /* Debug */,
+				EFE34E9E2CD0422B0052096C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EF695FF62CD2B601009249D9 /* CompetitionsStore.xcdatamodel */,
+				EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */,
+			);
+			currentVersion = EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */;
+			path = CompetitionsStore.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EF0372C52CBDEC8F00694F89 /* Project object */;
 }

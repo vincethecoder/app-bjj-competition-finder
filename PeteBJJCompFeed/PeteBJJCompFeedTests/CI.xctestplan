@@ -10,6 +10,7 @@
   ],
   "defaultOptions" : {
     "codeCoverage" : false,
+    "testExecutionOrdering" : "random",
     "threadSanitizerEnabled" : true
   },
   "testTargets" : [
@@ -25,6 +26,13 @@
         "containerPath" : "container:PeteBJJCompFeed.xcodeproj",
         "identifier" : "EF0372D72CBDEC8F00694F89",
         "name" : "PeteBJJCompFeedTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PeteBJJCompFeed.xcodeproj",
+        "identifier" : "EFE34E952CD0422B0052096C",
+        "name" : "PeteBJJCompFeedCacheIntegrationTests"
       }
     }
   ],
