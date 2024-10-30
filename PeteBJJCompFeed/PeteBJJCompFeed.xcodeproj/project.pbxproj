@@ -78,6 +78,7 @@
 		EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
 		EF41EDE22CD20CD100A5F976 /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
+		EF41EDE42CD2109800A5F976 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -875,9 +876,10 @@
 		EF41EDE12CD20CD100A5F976 /* CompetitionsStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				EF41EDE42CD2109800A5F976 /* CompetitionsStore2.xcdatamodel */,
 				EF41EDE22CD20CD100A5F976 /* CompetitionsStore.xcdatamodel */,
 			);
-			currentVersion = EF41EDE22CD20CD100A5F976 /* CompetitionsStore.xcdatamodel */;
+			currentVersion = EF41EDE42CD2109800A5F976 /* CompetitionsStore2.xcdatamodel */;
 			name = CompetitionsStore.xcdatamodeld;
 			path = "/Users/kobesam/ios-lead-essentials-projects/Untitled/app-bjj-competition-finder/PeteBJJCompFeed/PeteBJJCompFeed/Competitions Cache/CompetitionsStore.xcdatamodeld";
 			sourceTree = "<group>";
