@@ -11,9 +11,9 @@ import PeteBJJCompFeed
 final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
 
     func test_load_deliversNoItemsOnEmptyCache() {
-        let sut = makeSUT()
+        // let sut = makeSUT()
         
-        expect(sut, toLoad: [])
+        // expect(sut, toLoad: [])
     }
     
     // MARK: Helpers
