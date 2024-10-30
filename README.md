@@ -4,8 +4,8 @@ Dear reader,
  thank you for visiting my project repository. This app is designed to display upcoming Jiu Jitsu tournaments.
 Enjoy!
 
- ![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/CI-iOS/badge.svg) ![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/CI-macOS/badge.svg) ![](https://github.com/essentialdevelopercom/essential-feed-case-study/workflows/Deploy/badge.svg)
-  
+[![Xcode - Build and Analyze](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
+ 
 ### Feature Specs
 - Display a list of competitive events
 - Persist (store) the list of competitive events
