@@ -47,8 +47,10 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             MOMC_OUTPUT_DIR="${SRCROOT}" \
+            MOMC_INPUT_RELATIVE_PATH="${SRCROOT}" \
+            CORE_DATA_MODEL_PATH="${SRCROOT}/CompetitionsCache/CompetitionsStore.xcdatamodeld" \
             -verbose
-      
+            
       - name: Analyze
         env:
           scheme: ${{ env.default_scheme }}
