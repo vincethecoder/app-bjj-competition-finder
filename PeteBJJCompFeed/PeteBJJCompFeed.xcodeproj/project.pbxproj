@@ -879,7 +879,7 @@
 				EF695FC32CD236B6009249D9 /* CompetitionsStore2.xcdatamodel */,
 				EF695FC12CD23524009249D9 /* CompetitionsStore.xcdatamodel */,
 			);
-			currentVersion = EF695FC32CD236B6009249D9 /* CompetitionsStore2.xcdatamodel */;
+			currentVersion = EF695FC12CD23524009249D9 /* CompetitionsStore.xcdatamodel */;
 			name = CompetitionsStore.xcdatamodeld;
 			path = "/Users/kobesam/ios-lead-essentials-projects/Untitled/app-bjj-competition-finder/PeteBJJCompFeed/PeteBJJCompFeed/CompetitionsStore.xcdatamodeld";
 			sourceTree = "<group>";
