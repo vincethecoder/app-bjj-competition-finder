@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ManagedCache" representedClassName="ManagedCache" syncable="YES">
+    <entity name="ManagedCache" representedClassName="ManagedCache" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="competitions" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedCompetition" inverseName="cache" inverseEntity="ManagedCompetition"/>
+        <relationship name="competitions" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ManagedCompetition"/>
     </entity>
-    <entity name="ManagedCompetition" representedClassName="ManagedCompetition" syncable="YES">
+    <entity name="ManagedCompetition" representedClassName=".ManagedCompetition" syncable="YES" codeGenerationType="class">
         <attribute name="categoriesRawValue" attributeType="String"/>
         <attribute name="city" attributeType="String"/>
         <attribute name="country" attributeType="String"/>
@@ -21,6 +21,6 @@
         <attribute name="statusRawValue" attributeType="String"/>
         <attribute name="typeRawValue" attributeType="String"/>
         <attribute name="venue" attributeType="String"/>
-        <relationship name="cache" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache" inverseName="competitions" inverseEntity="ManagedCache"/>
+        <relationship name="cache" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache"/>
     </entity>
 </model>
