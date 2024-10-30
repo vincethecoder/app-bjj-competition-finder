@@ -51,6 +51,10 @@ jobs:
             CORE_DATA_MODEL_PATH="${SRCROOT}/CompetitionsCache/CompetitionsStore.xcdatamodeld" \
             BUILD_ROOT="${SRCROOT}/build" \
             CONFIGURATION_BUILD_DIR="${SRCROOT}/build" \
+            DERIVED_FILE_DIR="${SRCROOT}/build/DerivedSources" \
+            BUILT_PRODUCTS_DIR="${SRCROOT}/build" \
+            PROJECT_DIR="${SRCROOT}" \
+            SOURCE_ROOT="${SRCROOT}" \
             -verbose
             
       - name: Analyze
