@@ -9,9 +9,9 @@
         <attribute name="city" attributeType="String"/>
         <attribute name="country" attributeType="String"/>
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="eventLink" optional="YES" attributeType="URI"/>
+        <attribute name="eventLink" attributeType="URI"/>
         <attribute name="id" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="rankingPoints" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="registrationLink" optional="YES" attributeType="URI"/>
@@ -21,6 +21,6 @@
         <attribute name="statusRawValue" attributeType="String"/>
         <attribute name="typeRawValue" attributeType="String"/>
         <attribute name="venue" attributeType="String"/>
-        <relationship name="cache" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache" inverseName="competitions" inverseEntity="ManagedCache"/>
+        <relationship name="cache" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedCache" inverseName="competitions" inverseEntity="ManagedCache"/>
     </entity>
 </model>
