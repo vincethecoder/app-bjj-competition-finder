@@ -11,20 +11,20 @@ import PeteBJJCompFeed
 final class PeteBJJCompFeedCacheIntegrationTests: XCTestCase {
 
     func test_load_deliversNoItemsOnEmptyCache() {
-//         let sut = makeSUT()
-//        
-//         expect(sut, toLoad: [])
+        let sut = makeSUT()
+        
+        expect(sut, toLoad: [])
     }
     
     // MARK: Helpers
-//    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
-//        let storeURL = URL(fileURLWithPath: "/dev/null")
-//        let store = try! CoreDataCompetitionsStore(storeURL: storeURL)
-//        let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
-//        trackForMemoryLeaks(store, file: file, line: line)
-//        trackForMemoryLeaks(sut, file: file, line: line)
-//        return sut
-//    }
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> LocalCompetitionsLoader {
+        let storeURL = URL(fileURLWithPath: "/dev/null")
+        let store = try! CoreDataCompetitionsStore(storeURL: storeURL)
+        let sut = LocalCompetitionsLoader(store: store, currentDate: Date.init)
+        trackForMemoryLeaks(store, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        return sut
+    }
     
     private func expect(_ sut: LocalCompetitionsLoader, toLoad expectedCompetitions: [Competition], file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
