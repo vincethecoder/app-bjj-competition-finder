@@ -49,7 +49,7 @@ jobs:
             MOMC_OUTPUT_DIR="${SRCROOT}" \
             MOMC_INPUT_RELATIVE_PATH="${SRCROOT}" \
             CORE_DATA_MODEL_PATH="${SRCROOT}/CompetitionsCache/CompetitionsStore.xcdatamodeld" \
-            BUILD_ROOT="${SRCROOT}/build" \ 
+            BUILD_ROOT="${SRCROOT}/build" \
             CONFIGURATION_BUILD_DIR="${SRCROOT}/build" \
             -verbose
             
