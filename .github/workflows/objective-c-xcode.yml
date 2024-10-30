@@ -37,8 +37,7 @@ jobs:
       - name: Setup Core Data Model
         run: |
           cd PeteBJJCompFeed/PeteBJJCompFeed
-          
-          # Create directory structure
+          rm -rf CompetitionsCache/CompetitionsStore.xcdatamodeld
           mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
           
           # Create the model file
@@ -66,21 +65,25 @@ jobs:
       - name: Build
         env:
           scheme: ${{ env.default_scheme }}
-          SRCROOT: ${{ github.workspace }}/PeteBJJCompFeed
         run: |
           cd $(dirname "$project_dir")
+          export DERIVED_DATA_PATH=${{ github.workspace }}/DerivedData
+          mkdir -p $DERIVED_DATA_PATH
+          
           xcodebuild clean build \
             -scheme "$scheme" \
             -project $(basename "$project_dir") \
             -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
+            CONFIGURATION_BUILD_DIR="$DERIVED_DATA_PATH/Build/Products" \
+            SYMROOT="$DERIVED_DATA_PATH" \
+            -derivedDataPath "$DERIVED_DATA_PATH" \
             -verbose
             
       - name: Analyze
         env:
           scheme: ${{ env.default_scheme }}
-          SRCROOT: ${{ github.workspace }}/PeteBJJCompFeed
         run: |
           cd $(dirname "$project_dir")
           xcodebuild analyze \
