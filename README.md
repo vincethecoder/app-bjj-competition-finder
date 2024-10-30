@@ -1,7 +1,7 @@
 # Brazilian Jiu Jitsu Competitions Finder App
 
 Dear reader, 
- thank you for visiting my project repository. This app is designed to display upcoming Jiu Jitsu tournaments.
+ thank you for visiting my project repository. This project is designed to display upcoming Jiu Jitsu tournaments.
 Enjoy!
 
 [![Xcode - Build and Analyze](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
