@@ -47,6 +47,7 @@ jobs:
            CODE_SIGN_IDENTITY="" \
            CODE_SIGNING_REQUIRED=NO \
            MOMC_PLATFORMS=no \
+           MOMC_PATH="" \
            SOURCE_ROOT="$WORKSPACE_PATH/PeteBJJCompFeed/PeteBJJCompFeed" \
            -verbose
            
