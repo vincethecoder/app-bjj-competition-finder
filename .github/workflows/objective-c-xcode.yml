@@ -37,13 +37,29 @@ jobs:
       - name: Build
         env:
           scheme: ${{ env.default_scheme }}
+          SRCROOT: ${{ github.workspace }}/PeteBJJCompFeed
         run: |
           cd $(dirname "$project_dir")
-          xcodebuild clean build -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=arm64' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -verbose
+          xcodebuild clean build \
+            -scheme "$scheme" \
+            -project $(basename "$project_dir") \
+            -destination 'platform=macOS,arch=arm64' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            MOMC_OUTPUT_DIR="${SRCROOT}" \
+            -verbose
       
       - name: Analyze
         env:
           scheme: ${{ env.default_scheme }}
+          SRCROOT: ${{ github.workspace }}/PeteBJJCompFeed
         run: |
           cd $(dirname "$project_dir")
-          xcodebuild analyze -scheme "$scheme" -project $(basename "$project_dir") -destination 'platform=macOS,arch=arm64' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -verbose
+          xcodebuild analyze \
+            -scheme "$scheme" \
+            -project $(basename "$project_dir") \
+            -destination 'platform=macOS,arch=arm64' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            MOMC_OUTPUT_DIR="${SRCROOT}" \
+            -verbose
