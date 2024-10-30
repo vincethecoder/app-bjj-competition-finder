@@ -34,6 +34,11 @@ jobs:
           echo "default_scheme=$default" >> $GITHUB_ENV
           echo Using default scheme: $default
       
+      - name: Setup Environment
+        run: |
+          mkdir -p "${{ github.workspace }}/PeteBJJCompFeed/DerivedData"
+          mkdir -p "${{ github.workspace }}/PeteBJJCompFeed/DerivedData/CoreDataGenerated"
+
       - name: Build
         env:
           scheme: ${{ env.default_scheme }}
@@ -47,6 +52,8 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             DERIVED_FILE_DIR="${SRCROOT}/DerivedData" \
+            CORE_DATA_MODEL_DIR="${SRCROOT}" \
+            MOMC_OUTPUT_DIR="${SRCROOT}/DerivedData/CoreDataGenerated" \
             -verbose
             
       - name: Analyze
