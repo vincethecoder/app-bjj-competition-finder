@@ -7,8 +7,8 @@
 
 import Foundation
 
-public typealias LoadCompetitionsResult = Result<[Competition], Error>
-
 public protocol CompetitionsLoader {
-    func load(completion: @escaping (LoadCompetitionsResult) -> Void)
+    typealias Result = Swift.Result<[Competition], Error>
+    
+    func load(completion: @escaping (Result) -> Void)
 }

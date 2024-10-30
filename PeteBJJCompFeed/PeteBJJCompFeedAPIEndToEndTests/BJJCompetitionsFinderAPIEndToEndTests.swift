@@ -29,7 +29,7 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func getCompetitionsResult(file: StaticString = #filePath, line: UInt = #line) -> LoadCompetitionsResult? {
+    private func getCompetitionsResult(file: StaticString = #filePath, line: UInt = #line) -> CompetitionsLoader.Result? {
         let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let loader = RemoteCompetitionsLoader(url: testServerURL, client: client)
@@ -38,7 +38,7 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
         
         let exp = expectation(description: "Wait for load completion")
         
-        var receivedResult: LoadCompetitionsResult?
+        var receivedResult: CompetitionsLoader.Result?
         loader.load { result in
             receivedResult = result
             exp.fulfill()

@@ -16,7 +16,7 @@ public final class RemoteCompetitionsLoader: CompetitionsLoader {
         case invalidData
     }
     
-    public typealias Result = LoadCompetitionsResult
+    public typealias Result = CompetitionsLoader.Result
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
