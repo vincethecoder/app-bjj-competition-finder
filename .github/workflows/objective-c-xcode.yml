@@ -37,11 +37,11 @@ jobs:
       - name: Setup Core Data Model
         run: |
           cd PeteBJJCompFeed/PeteBJJCompFeed
-          rm -rf CompetitionsCache/CompetitionsStore.xcdatamodeld
-          mkdir -p CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
+          rm -rf CompetitionsStore.xcdatamodeld
+          mkdir -p CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel
           
           # Create the model file
-          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
+          cat > CompetitionsStore.xcdatamodeld/CompetitionsStore.xcdatamodel/contents << 'EOL'
           <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
           <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23H124" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
               <elements/>
@@ -49,7 +49,7 @@ jobs:
           EOL
           
           # Create current version file
-          cat > CompetitionsCache/CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
+          cat > CompetitionsStore.xcdatamodeld/.xccurrentversion << 'EOL'
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
           <plist version="1.0">
@@ -60,25 +60,24 @@ jobs:
           </plist>
           EOL
           
-          chmod -R 644 CompetitionsCache/CompetitionsStore.xcdatamodeld
+          chmod -R 644 CompetitionsStore.xcdatamodeld
+          mv CompetitionsStore.xcdatamodeld CompetitionsCache/
 
       - name: Build
         env:
           scheme: ${{ env.default_scheme }}
+          WORKSPACE_PATH: ${{ github.workspace }}
         run: |
           cd $(dirname "$project_dir")
-          export DERIVED_DATA_PATH=${{ github.workspace }}/DerivedData
-          mkdir -p $DERIVED_DATA_PATH
-          
           xcodebuild clean build \
             -scheme "$scheme" \
             -project $(basename "$project_dir") \
             -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            CONFIGURATION_BUILD_DIR="$DERIVED_DATA_PATH/Build/Products" \
-            SYMROOT="$DERIVED_DATA_PATH" \
-            -derivedDataPath "$DERIVED_DATA_PATH" \
+            MOMC_NO_INVERSE_RELATIONSHIP_WARNINGS=YES \
+            MOMC_SUPPRESS_INVERSE_TRANSIENT_ERROR=YES \
+            SOURCE_ROOT="$WORKSPACE_PATH/PeteBJJCompFeed/PeteBJJCompFeed" \
             -verbose
             
       - name: Analyze
