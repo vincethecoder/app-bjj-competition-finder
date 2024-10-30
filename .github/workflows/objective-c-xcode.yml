@@ -60,8 +60,6 @@ jobs:
             CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
             CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
             SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
-            MOMC_NO_WARN_EMPTY_FILE="" \
-            MOMC_OUTPUT_SUFFIX="" \
             -verbose
             
       - name: Analyze
