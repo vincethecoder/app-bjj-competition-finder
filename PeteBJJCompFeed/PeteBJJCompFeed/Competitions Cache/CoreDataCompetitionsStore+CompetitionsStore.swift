@@ -9,7 +9,7 @@ import CoreData
 
 extension ManagedCache {
     var localCompetitions: [LocalCompetition] {
-        return competitions?.compactMap { ($0 as? ManagedCompetitions)?.toModel() } ?? []
+        return competitions?.compactMap { ($0 as? ManagedCompetition)?.toModel() } ?? []
     }
 }
 

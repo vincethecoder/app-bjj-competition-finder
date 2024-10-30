@@ -157,7 +157,7 @@ extension CompetitionsStoreSpecs where Self: XCTestCase {
             case let (.success(.some(expected)), .success(.some(retrieved))):
                 XCTAssertEqual(retrieved.timestamp, expected.timestamp, file: file, line: line)
                 XCTAssertEqual(retrieved.competitions.count, expected.competitions.count, file: file, line: line)
-                XCTAssertEqual(Set(retrieved.competitions), Set(expected.competitions), file: file, line: line)
+                XCTAssertEqual(retrieved.competitions, expected.competitions, file: file, line: line)
                 
             default:
                 XCTFail("Expectetd to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)

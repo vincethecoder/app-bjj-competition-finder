@@ -76,7 +76,7 @@ private extension NSManagedObjectModel {
     }
 }
 
-extension ManagedCompetitions {
+extension ManagedCompetition {
     var type: CompetitionType {
         get { CompetitionType(rawValue: typeRawValue!) ?? .gi }
         set { typeRawValue = newValue.rawValue }
@@ -113,15 +113,15 @@ extension ManagedCache {
         return ManagedCache(context: context)
     }
     
-    static func mapped(_ competitions: [LocalCompetition], in context: NSManagedObjectContext) -> NSSet {
+    static func mapped(_ competitions: [LocalCompetition], in context: NSManagedObjectContext) -> NSOrderedSet {
         let mappedCompetitions = competitions.map { $0.toManagedObject(in: context) }
-        return NSSet(array: mappedCompetitions)
+        return NSOrderedSet(array: mappedCompetitions)
     }
 }
 
 extension LocalCompetition {
-    func toManagedObject(in context: NSManagedObjectContext) -> ManagedCompetitions {
-        let managed = ManagedCompetitions(context: context)
+    func toManagedObject(in context: NSManagedObjectContext) -> ManagedCompetition {
+        let managed = ManagedCompetition(context: context)
         managed.id = id
         managed.name = name
         managed.startDate = startDate
@@ -143,7 +143,7 @@ extension LocalCompetition {
     }
 }
 
-extension ManagedCompetitions {
+extension ManagedCompetition {
     func toModel() -> LocalCompetition? {
         guard let id, let name, let startDate, let endDate,
               let venue, let city, let country, let eventLink else {
