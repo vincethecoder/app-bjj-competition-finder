@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="idm-6F-h7j">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Events View Controller-->
+        <scene sceneID="y8h-hR-mU0">
+            <objects>
+                <tableViewController id="ZlL-2F-AoH" customClass="EventsViewController" customModule="Prototype" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="GDh-YM-Ach">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventCell" rowHeight="153" id="jV8-EJ-3uf">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="153"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jV8-EJ-3uf" id="1LH-wD-mN9">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="153"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-s3-4hP" userLabel="CardView">
+                                            <rect key="frame" x="0.0" y="16" width="353" height="121"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nEO-cR-GWw" userLabel="ColorBarView">
+                                                    <rect key="frame" x="20" y="0.0" width="4" height="121"/>
+                                                    <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="4" id="Uqa-Pn-YM4"/>
+                                                    </constraints>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ghd-cs-8Bg">
+                                                    <rect key="frame" x="32" y="0.0" width="321" height="121"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nov 15 - Nov 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBS-Ux-WBP" userLabel="DateLabel">
+                                                            <rect key="frame" x="0.0" y="0.0" width="321" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="GxQ-Yc-LYN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFx-OW-yia" userLabel="DividerView">
+                                                            <rect key="frame" x="0.0" y="32" width="321" height="1"/>
+                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="t6V-3X-zOS"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Tampa Kids International Open IBJJF Jiu-Jitsu Championship 2024" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0is-1S-y4m" userLabel="VenueLabel">
+                                                            <rect key="frame" x="0.0" y="45" width="321" height="44"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QcP-xJ-p91">
+                                                            <rect key="frame" x="0.0" y="101" width="321" height="20"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="oTV-cX-WJk" userLabel="LocationIcon">
+                                                                    <rect key="frame" x="0.0" y="0.99999999999999822" width="20" height="18.666666666666664"/>
+                                                                    <color key="tintColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="oTV-cX-WJk" secondAttribute="height" multiplier="1:1" id="2sD-Wh-Ccd"/>
+                                                                        <constraint firstAttribute="width" constant="20" id="c6E-ET-b4B"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wiregrass Ranch Sports Campus, Wesley Chapel" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQg-FH-cxt" userLabel="LocationLabel">
+                                                                    <rect key="frame" x="28" y="0.0" width="293" height="20"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="oTV-cX-WJk" firstAttribute="centerY" secondItem="jQg-FH-cxt" secondAttribute="centerY" id="evd-a5-NhH"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="nEO-cR-GWw" firstAttribute="top" secondItem="Ghd-cs-8Bg" secondAttribute="top" id="7kT-rH-OaY"/>
+                                                <constraint firstItem="nEO-cR-GWw" firstAttribute="leading" secondItem="Fdo-s3-4hP" secondAttribute="leading" constant="20" symbolic="YES" id="B2N-Uf-Ht1"/>
+                                                <constraint firstItem="Ghd-cs-8Bg" firstAttribute="top" secondItem="Fdo-s3-4hP" secondAttribute="top" id="L4I-db-6Vv"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ghd-cs-8Bg" secondAttribute="bottom" id="LDm-cb-0Ew"/>
+                                                <constraint firstItem="QcP-xJ-p91" firstAttribute="width" secondItem="Fdo-s3-4hP" secondAttribute="width" multiplier="0.909348" id="PiB-l2-1yf"/>
+                                                <constraint firstItem="Ghd-cs-8Bg" firstAttribute="centerY" secondItem="nEO-cR-GWw" secondAttribute="centerY" id="Z6g-JG-wcY"/>
+                                                <constraint firstItem="Ghd-cs-8Bg" firstAttribute="leading" secondItem="nEO-cR-GWw" secondAttribute="trailing" constant="8" id="cgz-Zq-GQs"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ghd-cs-8Bg" secondAttribute="trailing" id="k49-Pq-ta9"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.shadowColor">
+                                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                                                    <size key="value" width="0.0" height="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                                    <real key="value" value="0.10000000000000001"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                                    <integer key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="tintColor" red="0.60784313729999995" green="0.60784313729999995" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="Fdo-s3-4hP" firstAttribute="leading" secondItem="1LH-wD-mN9" secondAttribute="leading" id="79W-TK-I9e"/>
+                                        <constraint firstAttribute="bottom" secondItem="Fdo-s3-4hP" secondAttribute="bottom" priority="999" constant="16" id="AMg-xB-Y6n"/>
+                                        <constraint firstAttribute="trailing" secondItem="Fdo-s3-4hP" secondAttribute="trailing" id="IA6-pb-xmh"/>
+                                        <constraint firstItem="Fdo-s3-4hP" firstAttribute="top" secondItem="1LH-wD-mN9" secondAttribute="top" priority="999" constant="16" id="Y5n-Km-Ptq"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZlL-2F-AoH" id="6Di-m0-xtY"/>
+                            <outlet property="delegate" destination="ZlL-2F-AoH" id="uRi-7G-38j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="a2A-sm-y5u"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5NR-VH-khv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069.4656488549617" y="-277.46478873239437"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sfH-Yb-QaI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="idm-6F-h7j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rxF-dR-jIL">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZlL-2F-AoH" kind="relationship" relationship="rootViewController" id="IFf-VH-McX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFt-wZ-CD7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="142.74809160305344" y="-277.46478873239437"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="mappin.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
