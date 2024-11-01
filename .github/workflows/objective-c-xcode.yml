@@ -7,10 +7,47 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    name: Build and analyze default scheme using xcodebuild command
+  prepare:
+    name: Prepare Build Environment
     runs-on: macos-latest
+    outputs:
+      project_dir: ${{ steps.find-project.outputs.project_dir }}
+      default_scheme: ${{ steps.set-scheme.outputs.default_scheme }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Find Xcode project
+        id: find-project
+        run: |
+          project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
+          if [ -z "$project_dir" ]; then
+            echo "No Xcode project found."
+            exit 1
+          fi
+          echo "Found project: $project_dir"
+          echo "project_dir=$project_dir" >> "$GITHUB_OUTPUT"
 
+      - name: Set Default Scheme
+        id: set-scheme
+        run: |
+          cd $(dirname "${{ steps.find-project.outputs.project_dir }}")
+          scheme_list=$(xcodebuild -list -json -project $(basename "${{ steps.find-project.outputs.project_dir }}"))
+          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
+          if [ -z "$default" ]; then
+            echo "No scheme found."
+            exit 1
+          fi
+          echo $default | cat >default
+          echo "default_scheme=$default" >> "$GITHUB_OUTPUT"
+          echo Using default scheme: $default
+
+  build-macos:
+    name: Build and Analyze for macOS
+    needs: prepare
+    runs-on: macos-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,57 +57,80 @@ jobs:
           echo "CODE_SIGN_IDENTITY=" >> $GITHUB_ENV
           echo "CODE_SIGNING_REQUIRED=NO" >> $GITHUB_ENV
 
-      - name: Find Xcode project
-        run: |
-          project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
-          if [ -z "$project_dir" ]; then
-            echo "No Xcode project found."
-            exit 1
-          fi
-          echo "Found project: $project_dir"
-          echo "project_dir=$project_dir" >> $GITHUB_ENV
-
-      - name: Set Default Scheme
-        run: |
-          cd $(dirname "$project_dir")
-          scheme_list=$(xcodebuild -list -json -project $(basename "$project_dir"))
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
-          if [ -z "$default" ]; then
-            echo "No scheme found."
-            exit 1
-          fi
-          echo $default | cat >default
-          echo "default_scheme=$default" >> $GITHUB_ENV
-          echo Using default scheme: $default
-
       - name: Clean Derived Data
         run: |
           rm -rf ~/Library/Developer/Xcode/DerivedData
 
-      - name: Build
+      - name: Build macOS
         env:
-          scheme: ${{ env.default_scheme }}
+          scheme: ${{ needs.prepare.outputs.default_scheme }}
           WORKSPACE_PATH: ${{ github.workspace }}
         run: |
-          cd $(dirname "$project_dir")
+          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
           xcodebuild clean build \
             -scheme "$scheme" \
-            -project $(basename "$project_dir") \
+            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
             -destination 'platform=macOS,arch=arm64' \
             CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
             CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
             SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
             -verbose
             
-      - name: Analyze
+      - name: Analyze macOS
         env:
-          scheme: ${{ env.default_scheme }}
+          scheme: ${{ needs.prepare.outputs.default_scheme }}
         run: |
-          cd $(dirname "$project_dir")
+          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
           xcodebuild analyze \
             -scheme "$scheme" \
-            -project $(basename "$project_dir") \
+            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
             -destination 'platform=macOS,arch=arm64' \
+            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
+            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
+            -verbose
+
+  build-ios:
+    name: Build and Analyze for iOS Simulator
+    needs: prepare
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Set Environment Variables
+        run: |
+          echo "CODE_SIGN_IDENTITY=" >> $GITHUB_ENV
+          echo "CODE_SIGNING_REQUIRED=NO" >> $GITHUB_ENV
+
+      - name: Clean Derived Data
+        run: |
+          rm -rf ~/Library/Developer/Xcode/DerivedData
+
+      - name: Build iOS
+        env:
+          scheme: ${{ needs.prepare.outputs.default_scheme }}
+          WORKSPACE_PATH: ${{ github.workspace }}
+        run: |
+          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
+          xcodebuild clean build \
+            -scheme "$scheme" \
+            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
+            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
+            SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
+            -verbose
+            
+      - name: Analyze iOS
+        env:
+          scheme: ${{ needs.prepare.outputs.default_scheme }}
+        run: |
+          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
+          xcodebuild analyze \
+            -scheme "$scheme" \
+            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
             CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
             CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
             -verbose
