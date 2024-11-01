@@ -14,6 +14,8 @@
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
 		EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */; };
 		EF695FF92CD2B618009249D9 /* CompetitionsStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */; };
+		EF6960292CD453DA009249D9 /* PeteBJJCompFeediOS.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */; };
+		EF69602F2CD453DA009249D9 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */; };
 		EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */; };
 		EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326102CC762D500E819DE /* CompetitionsStore.swift */; };
 		EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326122CC7FD0300E819DE /* LocalCompetition.swift */; };
@@ -53,6 +55,13 @@
 			remoteGlobalIDString = EF0372CD2CBDEC8F00694F89;
 			remoteInfo = PeteBJJCompFeed;
 		};
+		EF6960302CD453DA009249D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF6960242CD453DA009249D9;
+			remoteInfo = PeteBJJCompFeediOS;
+		};
 		EFAD8AE52CC5871700981FB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
@@ -79,6 +88,9 @@
 		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
 		EF695FF62CD2B601009249D9 /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
 		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
+		EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeediOS.docc; sourceTree = "<group>"; };
+		EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -124,6 +136,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF6960222CD453DA009249D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF69602B2CD453DA009249D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF69602F2CD453DA009249D9 /* PeteBJJCompFeediOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFAD8ADD2CC5871700981FB9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +178,8 @@
 				EF0372DC2CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EFAD8AE12CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
 				EFE34E972CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */,
+				EF6960262CD453DA009249D9 /* PeteBJJCompFeediOS */,
+				EF6960322CD453DA009249D9 /* PeteBJJCompFeediOSTests */,
 				EF0372CF2CBDEC8F00694F89 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -162,6 +191,8 @@
 				EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */,
 				EFAD8AE02CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests.xctest */,
 				EFE34E962CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests.xctest */,
+				EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */,
+				EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +238,21 @@
 				EFAD8ADA2CC52B7C00981FB9 /* URLSessionHTTPClient.swift */,
 			);
 			path = CompetitionsAPI;
+			sourceTree = "<group>";
+		};
+		EF6960262CD453DA009249D9 /* PeteBJJCompFeediOS */ = {
+			isa = PBXGroup;
+			children = (
+				EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */,
+			);
+			path = PeteBJJCompFeediOS;
+			sourceTree = "<group>";
+		};
+		EF6960322CD453DA009249D9 /* PeteBJJCompFeediOSTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PeteBJJCompFeediOSTests;
 			sourceTree = "<group>";
 		};
 		EF73260B2CC75D1500E819DE /* CompetitionsCache */ = {
@@ -306,6 +352,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF6960202CD453DA009249D9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -343,6 +396,42 @@
 			name = PeteBJJCompFeedTests;
 			productName = PeteBJJCompFeedTests;
 			productReference = EF0372D82CBDEC8F00694F89 /* PeteBJJCompFeedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF6960242CD453DA009249D9 /* PeteBJJCompFeediOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF6960362CD453DA009249D9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeediOS" */;
+			buildPhases = (
+				EF6960202CD453DA009249D9 /* Headers */,
+				EF6960212CD453DA009249D9 /* Sources */,
+				EF6960222CD453DA009249D9 /* Frameworks */,
+				EF6960232CD453DA009249D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeteBJJCompFeediOS;
+			productName = PeteBJJCompFeediOS;
+			productReference = EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EF69602D2CD453DA009249D9 /* PeteBJJCompFeediOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF6960392CD453DA009249D9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeediOSTests" */;
+			buildPhases = (
+				EF69602A2CD453DA009249D9 /* Sources */,
+				EF69602B2CD453DA009249D9 /* Frameworks */,
+				EF69602C2CD453DA009249D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF6960312CD453DA009249D9 /* PBXTargetDependency */,
+			);
+			name = PeteBJJCompFeediOSTests;
+			productName = PeteBJJCompFeediOSTests;
+			productReference = EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		EFAD8ADF2CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */ = {
@@ -397,6 +486,12 @@
 					EF0372D72CBDEC8F00694F89 = {
 						CreatedOnToolsVersion = 15.4;
 					};
+					EF6960242CD453DA009249D9 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					EF69602D2CD453DA009249D9 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					EFAD8ADF2CC5871700981FB9 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -422,6 +517,8 @@
 				EF0372D72CBDEC8F00694F89 /* PeteBJJCompFeedTests */,
 				EFAD8ADF2CC5871700981FB9 /* PeteBJJCompFeedAPIEndToEndTests */,
 				EFE34E952CD0422B0052096C /* PeteBJJCompFeedCacheIntegrationTests */,
+				EF6960242CD453DA009249D9 /* PeteBJJCompFeediOS */,
+				EF69602D2CD453DA009249D9 /* PeteBJJCompFeediOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -435,6 +532,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EF0372D62CBDEC8F00694F89 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF6960232CD453DA009249D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF69602C2CD453DA009249D9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -500,6 +611,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF6960212CD453DA009249D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6960292CD453DA009249D9 /* PeteBJJCompFeediOS.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF69602A2CD453DA009249D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFAD8ADC2CC5871700981FB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,6 +652,11 @@
 			isa = PBXTargetDependency;
 			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
 			targetProxy = EF0372DA2CBDEC8F00694F89 /* PBXContainerItemProxy */;
+		};
+		EF6960312CD453DA009249D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF6960242CD453DA009249D9 /* PeteBJJCompFeediOS */;
+			targetProxy = EF6960302CD453DA009249D9 /* PBXContainerItemProxy */;
 		};
 		EFAD8AE62CC5871700981FB9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -774,6 +905,114 @@
 			};
 			name = Release;
 		};
+		EF6960372CD453DA009249D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeediOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF6960382CD453DA009249D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeediOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF69603A2CD453DA009249D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeediOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF69603B2CD453DA009249D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompFeediOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		EFAD8AE82CC5871700981FB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -864,6 +1103,24 @@
 			buildConfigurations = (
 				EF0372E62CBDEC8F00694F89 /* Debug */,
 				EF0372E72CBDEC8F00694F89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF6960362CD453DA009249D9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeediOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF6960372CD453DA009249D9 /* Debug */,
+				EF6960382CD453DA009249D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF6960392CD453DA009249D9 /* Build configuration list for PBXNativeTarget "PeteBJJCompFeediOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF69603A2CD453DA009249D9 /* Debug */,
+				EF69603B2CD453DA009249D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
