@@ -71,7 +71,7 @@ final class EventTableViewCell: UITableViewCell {
     
     private let locationIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "info.circle.fill")
+        imageView.image = UIImage(named: "pin")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
