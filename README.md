@@ -1,4 +1,4 @@
-# Brazilian Jiu Jitsu Competitions Finder App
+# Brazilian Jiu Jitsu Competitions Listings App
 
 Dear reader, 
  thank you for visiting my project repository. This project is designed to display upcoming Jiu Jitsu tournaments.
