@@ -7,9 +7,18 @@
 
 import XCTest
 
-final class CompetitionsViewController {
-    init(loader: CompetitionsViewControllerTests.LoaderSpy) {
+final class CompetitionsViewController: UIViewController {
+    private var loader: CompetitionsViewControllerTests.LoaderSpy?
+    
+    convenience init(loader: CompetitionsViewControllerTests.LoaderSpy) {
+        self.init()
+        self.loader = loader
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        loader?.load()
     }
 }
 
@@ -22,11 +31,23 @@ final class CompetitionsViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadCallCount, 0)
     }
     
+    func test_viewDidLoad_loadsFeed() {
+        let loader = LoaderSpy()
+        let sut = CompetitionsViewController(loader: loader)
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(loader.loadCallCount, 1)
+    }
     
     // MARK: - Helpers
     
     class LoaderSpy {
         private(set) var loadCallCount: Int = 0
+        
+        func load() {
+            loadCallCount += 1
+        }
     }
 
 }
