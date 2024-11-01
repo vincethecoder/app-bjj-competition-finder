@@ -6,11 +6,12 @@
 //
 
 import XCTest
+import PeteBJJCompFeed
 
 final class CompetitionsViewController: UIViewController {
-    private var loader: CompetitionsViewControllerTests.LoaderSpy?
+    private var loader: CompetitionsLoader?
     
-    convenience init(loader: CompetitionsViewControllerTests.LoaderSpy) {
+    convenience init(loader: CompetitionsLoader) {
         self.init()
         self.loader = loader
     }
@@ -18,7 +19,7 @@ final class CompetitionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loader?.load()
+        loader?.load { _ in }
     }
 }
 
@@ -42,10 +43,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
     
     // MARK: - Helpers
     
-    class LoaderSpy {
+    class LoaderSpy: CompetitionsLoader {
         private(set) var loadCallCount: Int = 0
         
-        func load() {
+        func load(completion: @escaping (CompetitionsLoader.Result) -> Void) {
             loadCallCount += 1
         }
     }

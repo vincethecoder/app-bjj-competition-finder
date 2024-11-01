@@ -17,6 +17,8 @@
 		EF69602F2CD453DA009249D9 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */; };
 		EF69603F2CD54471009249D9 /* PeteBJJCompFeediOS.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF69603E2CD54471009249D9 /* PeteBJJCompFeediOS.docc */; };
 		EF6960412CD567CB009249D9 /* CompetitionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */; };
+		EF6FF7B02CD56C1A00620845 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; platformFilter = ios; };
+		EF6FF7B12CD56C1A00620845 /* PeteBJJCompFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */; };
 		EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326102CC762D500E819DE /* CompetitionsStore.swift */; };
 		EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326122CC7FD0300E819DE /* LocalCompetition.swift */; };
@@ -63,6 +65,13 @@
 			remoteGlobalIDString = EF6960242CD453DA009249D9;
 			remoteInfo = PeteBJJCompFeediOS;
 		};
+		EF6FF7B22CD56C1A00620845 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF0372CD2CBDEC8F00694F89;
+			remoteInfo = PeteBJJCompFeed;
+		};
 		EFAD8AE52CC5871700981FB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF0372C52CBDEC8F00694F89 /* Project object */;
@@ -78,6 +87,20 @@
 			remoteInfo = PeteBJJCompFeed;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF6FF7B42CD56C1A00620845 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EF6FF7B12CD56C1A00620845 /* PeteBJJCompFeed.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EF0372CE2CBDEC8F00694F89 /* PeteBJJCompFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF6FF7B02CD56C1A00620845 /* PeteBJJCompFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,6 +207,7 @@
 				EF6960262CD453DA009249D9 /* PeteBJJCompFeediOS */,
 				EF6960322CD453DA009249D9 /* PeteBJJCompFeediOSTests */,
 				EF0372CF2CBDEC8F00694F89 /* Products */,
+				EF6FF7AF2CD56C1A00620845 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +281,13 @@
 			children = (
 			);
 			path = PeteBJJCompFeediOSTests;
+			sourceTree = "<group>";
+		};
+		EF6FF7AF2CD56C1A00620845 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EF73260B2CC75D1500E819DE /* CompetitionsCache */ = {
@@ -409,10 +441,12 @@
 				EF6960212CD453DA009249D9 /* Sources */,
 				EF6960222CD453DA009249D9 /* Frameworks */,
 				EF6960232CD453DA009249D9 /* Resources */,
+				EF6FF7B42CD56C1A00620845 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF6FF7B32CD56C1A00620845 /* PBXTargetDependency */,
 			);
 			name = PeteBJJCompFeediOS;
 			productName = PeteBJJCompFeediOS;
@@ -661,6 +695,12 @@
 			isa = PBXTargetDependency;
 			target = EF6960242CD453DA009249D9 /* PeteBJJCompFeediOS */;
 			targetProxy = EF6960302CD453DA009249D9 /* PBXContainerItemProxy */;
+		};
+		EF6FF7B32CD56C1A00620845 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = EF0372CD2CBDEC8F00694F89 /* PeteBJJCompFeed */;
+			targetProxy = EF6FF7B22CD56C1A00620845 /* PBXContainerItemProxy */;
 		};
 		EFAD8AE62CC5871700981FB9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
