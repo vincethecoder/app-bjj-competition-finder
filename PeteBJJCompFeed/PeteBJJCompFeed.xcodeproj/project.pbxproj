@@ -14,8 +14,8 @@
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
 		EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */; };
 		EF695FF92CD2B618009249D9 /* CompetitionsStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */; };
-		EF6960292CD453DA009249D9 /* PeteBJJCompFeediOS.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */; };
 		EF69602F2CD453DA009249D9 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */; };
+		EF69603F2CD54471009249D9 /* PeteBJJCompFeediOS.docc in Sources */ = {isa = PBXBuildFile; fileRef = EF69603E2CD54471009249D9 /* PeteBJJCompFeediOS.docc */; };
 		EF73260D2CC75D3500E819DE /* LocalCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */; };
 		EF7326112CC762D500E819DE /* CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326102CC762D500E819DE /* CompetitionsStore.swift */; };
 		EF7326132CC7FD0300E819DE /* LocalCompetition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326122CC7FD0300E819DE /* LocalCompetition.swift */; };
@@ -89,8 +89,8 @@
 		EF695FF62CD2B601009249D9 /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
 		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
 		EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeediOS.docc; sourceTree = "<group>"; };
 		EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF69603E2CD54471009249D9 /* PeteBJJCompFeediOS.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = PeteBJJCompFeediOS.docc; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		EF6960262CD453DA009249D9 /* PeteBJJCompFeediOS */ = {
 			isa = PBXGroup;
 			children = (
-				EF6960282CD453DA009249D9 /* PeteBJJCompFeediOS.docc */,
+				EF69603E2CD54471009249D9 /* PeteBJJCompFeediOS.docc */,
 			);
 			path = PeteBJJCompFeediOS;
 			sourceTree = "<group>";
@@ -615,7 +615,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF6960292CD453DA009249D9 /* PeteBJJCompFeediOS.docc in Sources */,
+				EF69603F2CD54471009249D9 /* PeteBJJCompFeediOS.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,7 +911,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -946,7 +946,7 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
