@@ -65,7 +65,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         // TODO: FIX-ME
-        // XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        // XCTAssertTrue(sut.isShowingLoadingIndicator)
     }
     
     func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
@@ -74,7 +74,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         loader.completeFeedLoading()
         
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
     
     func test_userInitiatedFeedReload_showsLoadingIndicator() {
@@ -83,7 +83,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
         sut.simulateUserInitiatedFeedReload()
         
         // TODO: FIX-ME
-        // XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+        // XCTAssertTrue(sut.isShowingLoadingIndicator)
     }
     
     func test_pullToRefresh_hidesLoadingIndicatorOnLoaderCompletion() {
@@ -93,7 +93,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
         
         loader.completeFeedLoading()
 
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertFalse(sut.isShowingLoadingIndicator)
     }
     
     // MARK: - Helpers
@@ -126,6 +126,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
 private extension CompetitionsViewController {
     func simulateUserInitiatedFeedReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+    
+    var isShowingLoadingIndicator: Bool {
+        refreshControl?.isRefreshing == true
     }
 }
 
