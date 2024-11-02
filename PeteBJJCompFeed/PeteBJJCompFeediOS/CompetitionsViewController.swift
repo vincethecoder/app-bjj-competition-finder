@@ -10,6 +10,7 @@ import PeteBJJCompFeed
 
 final public class CompetitionsViewController: UITableViewController {
     private var loader: CompetitionsLoader?
+    private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     
     public convenience init(loader: CompetitionsLoader) {
         self.init()
@@ -21,7 +22,17 @@ final public class CompetitionsViewController: UITableViewController {
         
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        load()
+        
+        onViewIsAppearing = { vc in
+            vc.load()
+            vc.onViewIsAppearing = nil
+        }
+    }
+    
+    public override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
+        
+        onViewIsAppearing?(self)
     }
     
     @objc private func load() {
