@@ -39,14 +39,11 @@ final public class CompetitionsViewController: UITableViewController {
     @objc private func load() {
         refreshControl?.beginRefreshing()
         loader?.load { [weak self] result in
-            switch result {
-            case let .success(competitions):
+            if let competitions = try? result.get() {
                 self?.tableModel = competitions
                 self?.tableView.reloadData()
-                self?.refreshControl?.endRefreshing()
-
-            case .failure: break
             }
+            self?.refreshControl?.endRefreshing() 
         }
     }
     
