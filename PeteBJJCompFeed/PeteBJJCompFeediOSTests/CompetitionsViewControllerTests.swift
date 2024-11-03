@@ -47,19 +47,34 @@ final class CompetitionsViewControllerTests: XCTestCase {
     }
     
     func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
-        let competitiveEvents = uniqueCompetitions.models
+        let competitions = uniqueCompetitions.models
 
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
         assertThat(sut, isRendering: [])
         
-        loader.completeFeedLoading(with: [competitiveEvents[0]], at: 0)
-        assertThat(sut, isRendering: [competitiveEvents[0]])
+        loader.completeFeedLoading(with: [competitions[0]], at: 0)
+        assertThat(sut, isRendering: [competitions[0]])
         
         sut.simulateUserInitiatedFeedReload()
-        loader.completeFeedLoading(with: competitiveEvents, at: 1)
-        assertThat(sut, isRendering: competitiveEvents)
+        loader.completeFeedLoading(with: competitions, at: 1)
+        assertThat(sut, isRendering: competitions)
+    }
+    
+    func test_loadFeedCompletion_doesNotAlterCurrentRenderingStateOnError() {
+        let competitions = uniqueCompetitions.models
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        
+        loader.completeFeedLoading(with: [competitions[0]], at: 0)
+        assertThat(sut, isRendering: [competitions[0]])
+        
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedLoadingWithError(at: 1)
+        assertThat(sut, isRendering: [competitions[0]])
     }
     
     // MARK: - Helpers
@@ -127,6 +142,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
         
         func completeFeedLoading(with events: [Competition] = [], at index: Int = 0) {
             completions[index](.success(events))
+        }
+        
+        func completeFeedLoadingWithError(at index: Int = 0) {
+            completions[index](.failure(anyNSError))
         }
     }
 }
