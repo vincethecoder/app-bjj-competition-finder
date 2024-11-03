@@ -11,6 +11,7 @@ import PeteBJJCompFeed
 final public class CompetitionsViewController: UITableViewController {
     private var loader: CompetitionsLoader?
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
+    private var tableModel = [Competition]()
     
     public convenience init(loader: CompetitionsLoader) {
         self.init()
@@ -37,8 +38,24 @@ final public class CompetitionsViewController: UITableViewController {
     
     @objc private func load() {
         refreshControl?.beginRefreshing()
-        loader?.load { [weak self] _ in
+        loader?.load { [weak self] result in
+            self?.tableModel = (try? result.get()) ?? []
+            self?.tableView.reloadData()
             self?.refreshControl?.endRefreshing()
         }
+    }
+    
+    public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableModel.count
+    }
+    
+    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellModel = tableModel[indexPath.row]
+        let cell = CompetitionsCell()
+        let event = cellModel.toCompetitiveEvent()
+        cell.dateLabel.text = event.date
+        cell.eventLabel.text = event.name
+        cell.venueLabel.text = event.venue
+        return cell
     }
 }

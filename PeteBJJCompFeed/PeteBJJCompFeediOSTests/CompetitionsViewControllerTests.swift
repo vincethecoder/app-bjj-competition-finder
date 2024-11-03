@@ -46,6 +46,22 @@ final class CompetitionsViewControllerTests: XCTestCase {
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading is completed")
     }
     
+    func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
+        let competitiveEvents = uniqueCompetitions.models
+
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        assertThat(sut, isRendering: [])
+        
+        loader.completeFeedLoading(with: [competitiveEvents[0]], at: 0)
+        assertThat(sut, isRendering: [competitiveEvents[0]])
+        
+        sut.simulateUserInitiatedFeedReload()
+        loader.completeFeedLoading(with: competitiveEvents, at: 1)
+        assertThat(sut, isRendering: competitiveEvents)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {
@@ -54,6 +70,48 @@ final class CompetitionsViewControllerTests: XCTestCase {
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
+    }
+    
+    private func assertThat(_ sut: CompetitionsViewController, isRendering competitions: [Competition], file: StaticString = #file, line: UInt = #line) {
+        guard sut.numberOfRenderedCompetitionViews() == competitions.count else {
+            return XCTFail("Expected \(competitions.count) events, got \(sut.numberOfRenderedCompetitionViews()) instead.", file: file, line: line)
+        }
+        
+        competitions.enumerated().forEach { index, event in
+            assertThat(sut, hasViewConfiguredFor: event, at: index, file: file, line: line)
+        }
+    }
+    
+    private func assertThat(_ sut: CompetitionsViewController, hasViewConfiguredFor competition: Competition, at index: Int, file: StaticString = #file, line: UInt = #line) {
+        let view = sut.competitionsView(at: index)
+        
+        guard let cell = view as? CompetitionsCell else {
+            return XCTFail("Expected \(CompetitionsCell.self) instance, got \(String(describing: view)) instead", file: file, line: line)
+        }
+        
+        let event = competition.toCompetitiveEvent()
+        XCTAssertEqual(cell.dateText, event.date, "Expected date text to be \(event.date) for competition view at index (\(index))", file: file, line: line)
+        
+        XCTAssertEqual(cell.eventText, event.name, "Expected name text to be \(event.name) for competition view at index (\(index))", file: file, line: line)
+        
+        XCTAssertEqual(cell.venueText, event.venue, "Expected venue text to be \(event.venue) for competition view at index (\(index))", file: file, line: line)
+        
+    }
+    
+    private func makeCompetitiveEvent(date: String, name: String, venue: String) -> CompetitiveEvent {
+        return CompetitiveEvent(date: date, name: name, venue: venue)
+    }
+    
+    private var uniqueCompetition: Competition {
+        Competition(id: UUID().uuidString, name: "any-name", startDate: Date(), endDate: Date(), venue: "any-venue", city: "any-city", state: nil, country: "any-country", type: .gi, status: .upcoming, registrationStatus: .notOpen, registrationLink: nil, eventLink: anyURL, categories: [.adult], rankingPoints: 0, notes: nil)
+    }
+    
+    private var uniqueCompetitions: (models: [Competition], local: [LocalCompetition]) {
+        let models = [uniqueCompetition, uniqueCompetition]
+        let localCompetitions = models.map {
+            LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
+        }
+        return (models, localCompetitions)
     }
     
     class LoaderSpy: CompetitionsLoader {
@@ -67,8 +125,8 @@ final class CompetitionsViewControllerTests: XCTestCase {
             completions.append(completion)
         }
         
-        func completeFeedLoading(at index: Int) {
-            completions[index](.success([]))
+        func completeFeedLoading(with events: [Competition] = [], at index: Int = 0) {
+            completions[index](.success(events))
         }
     }
 }
@@ -81,6 +139,24 @@ private extension CompetitionsViewController {
     var isShowingLoadingIndicator: Bool {
         refreshControl?.isRefreshing == true
     }
+    
+    func numberOfRenderedCompetitionViews() -> Int {
+        tableView.numberOfRows(inSection: competitionsSection)
+    }
+    
+    func competitionsView(at row: Int) -> UITableViewCell? {
+        let ds = tableView.dataSource
+        let index = IndexPath(row: row, section: competitionsSection)
+        return ds?.tableView(tableView, cellForRowAt: index)
+    }
+    
+    private var competitionsSection: Int { 0 }
+}
+
+private extension CompetitionsCell {
+    var dateText: String? { dateLabel.text }
+    var eventText: String? { eventLabel.text }
+    var venueText: String? { venueLabel.text }
 }
 
 private extension UIRefreshControl {
