@@ -13,7 +13,8 @@ public extension Competition {
         return CompetitiveEvent(
             date: formattedDateRange,
             name: name,
-            venue: formattedVenue
+            venue: formattedVenue,
+            url: eventLink
         )
     }
 }

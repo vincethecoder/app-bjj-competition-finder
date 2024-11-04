@@ -14,20 +14,20 @@ final class CompetitionsViewControllerTests: XCTestCase {
     func test_init_doesNotLoadCompetitions() {
         let (_, loader) = makeSUT()
         
-        XCTAssertEqual(loader.loadCallCount, 0)
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 0)
     }
     
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
-        XCTAssertEqual(loader.loadCallCount, 1, "Expected a loading request once view is loaded")
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 1, "Expected a loading request once view is loaded")
         
         sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.loadCallCount, 2, "Expected another loading request once user initiates a reload")
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 2, "Expected another loading request once user initiates a reload")
         
         sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(loader.loadCallCount, 3, "Expected yet another loading request once user initiates another reload")
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 3, "Expected yet another loading request once user initiates another reload")
     }
     
     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
@@ -81,7 +81,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = CompetitionsViewController(loader: loader)
+        let sut = CompetitionsViewController(loader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)
@@ -110,11 +110,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
         XCTAssertEqual(cell.eventText, event.name, "Expected name text to be \(event.name) for competition view at index (\(index))", file: file, line: line)
         
         XCTAssertEqual(cell.venueText, event.venue, "Expected venue text to be \(event.venue) for competition view at index (\(index))", file: file, line: line)
-        
     }
     
-    private func makeCompetitiveEvent(date: String, name: String, venue: String) -> CompetitiveEvent {
-        return CompetitiveEvent(date: date, name: name, venue: venue)
+    private func makeCompetitiveEvent(date: String, name: String, venue: String, url: URL) -> CompetitiveEvent {
+        return CompetitiveEvent(date: date, name: name, venue: venue, url: url)
     }
     
     private var uniqueCompetition: Competition {
@@ -129,23 +128,56 @@ final class CompetitionsViewControllerTests: XCTestCase {
         return (models, localCompetitions)
     }
     
-    class LoaderSpy: CompetitionsLoader {
-        private var completions = [(CompetitionsLoader.Result) -> Void]()
+    class LoaderSpy: CompetitionsLoader, EventImageDataLoader {
         
-        var loadCallCount: Int {
-            completions.count
+        // MARK: - CompetitionsLoader
+        
+        private var competitionsRequests = [(CompetitionsLoader.Result) -> Void]()
+        
+        var loadCompetitionsCallCount: Int {
+            competitionsRequests.count
         }
         
         func load(completion: @escaping (CompetitionsLoader.Result) -> Void) {
-            completions.append(completion)
+            competitionsRequests.append(completion)
         }
         
         func completeFeedLoading(with events: [Competition] = [], at index: Int = 0) {
-            completions[index](.success(events))
+            competitionsRequests[index](.success(events))
         }
         
         func completeFeedLoadingWithError(at index: Int = 0) {
-            completions[index](.failure(anyNSError))
+            let error = anyNSError
+            competitionsRequests[index](.failure(error))
+        }
+        
+        private struct TaskSpy: EventImageDataLoaderTask {
+            let cancelCallback: () -> Void
+            func cancel() {
+                cancelCallback()
+            }
+        }
+        
+        private var imageRequests = [(url: URL, completition: (EventImageDataLoader.Result) -> Void)]()
+        
+        var loadedImageURLs: [URL] {
+            imageRequests.map { $0.url }
+        }
+        
+        private(set) var cacelledImageURLs = [URL]()
+        
+        func loadImageData(from url: URL, completition: @escaping (EventImageDataLoader.Result) -> Void) -> any EventImageDataLoaderTask {
+            imageRequests.append((url, completition))
+            return TaskSpy { [weak self] in self?.cacelledImageURLs.append(url) }
+        }
+        
+        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+            imageRequests[index].completition(.success(imageData))
+        }
+        
+        func completeImageLoadingWithError(at index: Int = 0) {
+            let error = anyNSError
+            imageRequests[index].completition(.failure(error))
         }
     }
 }
@@ -153,6 +185,25 @@ final class CompetitionsViewControllerTests: XCTestCase {
 private extension CompetitionsViewController {
     func simulateUserInitiatedFeedReload() {
         refreshControl?.simulatePullToRefresh()
+    }
+    
+    @discardableResult
+    func simulateEventImageViewVisible(at index: Int) -> CompetitionsCell? {
+        return competitionsView(at: index) as? CompetitionsCell
+    }
+    
+    func simulateCompetitionsViewNearVisible(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: competitionsSection)
+        ds?.tableView(tableView, prefetchRowsAt: [index])
+    }
+    
+    func simulateCompetitionsViewNotNearVisible(at row: Int) {
+        simulateCompetitionsViewNearVisible(at: row)
+        
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: competitionsSection)
+        ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
     
     var isShowingLoadingIndicator: Bool {
@@ -173,9 +224,56 @@ private extension CompetitionsViewController {
 }
 
 private extension CompetitionsCell {
-    var dateText: String? { dateLabel.text }
-    var eventText: String? { eventLabel.text }
-    var venueText: String? { venueLabel.text }
+    func simulateRetryAction() {
+        eventImageRetryButton.simulateTap()
+    }
+    
+    var isShowingImageLoadingIndicator: Bool {
+        eventImageContainer.isShimmering
+    }
+
+    var isShowingRetryAction: Bool {
+        !eventImageRetryButton.isHidden
+    }
+        
+    var dateText: String? {
+        dateLabel.text
+    }
+    
+    var eventText: String? {
+        eventLabel.text
+    }
+    
+    var venueText: String? {
+        venueLabel.text
+    }
+    
+    var renderedImage: Data? {
+        eventImageView.image?.pngData()
+    }
+}
+
+private extension UIButton {
+    func simulateTap() {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: .touchUpInside)?.forEach {
+                (target as NSObject).perform(Selector($0))
+            }
+        }
+    }
+}
+
+private extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndPDFContext()
+        return img!
+    }
 }
 
 private extension UIRefreshControl {

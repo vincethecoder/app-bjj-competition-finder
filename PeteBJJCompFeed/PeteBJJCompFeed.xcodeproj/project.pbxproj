@@ -19,6 +19,7 @@
 		EF3BFCC52CD78262008CA424 /* CompetitiveEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC42CD78262008CA424 /* CompetitiveEvent.swift */; };
 		EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */; };
 		EF3BFCC92CD782FD008CA424 /* Competition+EventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC82CD782FD008CA424 /* Competition+EventExtensions.swift */; };
+		EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */; };
 		EF41EDDB2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */; };
 		EF695FF92CD2B618009249D9 /* CompetitionsStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF695FF52CD2B601009249D9 /* CompetitionsStore.xcdatamodeld */; };
 		EF69602F2CD453DA009249D9 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */; };
@@ -118,6 +119,7 @@
 		EF3BFCC42CD78262008CA424 /* CompetitiveEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEvent.swift; sourceTree = "<group>"; };
 		EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCell.swift; sourceTree = "<group>"; };
 		EF3BFCC82CD782FD008CA424 /* Competition+EventExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Competition+EventExtensions.swift"; sourceTree = "<group>"; };
+		EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		EF41EDDA2CD168C500A5F976 /* CoreDataCompetitionsStore+CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataCompetitionsStore+CompetitionsStore.swift"; sourceTree = "<group>"; };
 		EF695FF62CD2B601009249D9 /* CompetitionsStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore.xcdatamodel; sourceTree = "<group>"; };
 		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				EF3BFCC02CD5A7C3008CA424 /* CompetitionsViewController.swift */,
 				EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */,
 				EF3BFCC82CD782FD008CA424 /* Competition+EventExtensions.swift */,
+				EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */,
 			);
 			path = PeteBJJCompFeediOS;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3BFCC92CD782FD008CA424 /* Competition+EventExtensions.swift in Sources */,
+				EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */,
 				EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */,
 				EF3BFCC52CD78262008CA424 /* CompetitiveEvent.swift in Sources */,
 				EF3BFCC12CD5A7C3008CA424 /* CompetitionsViewController.swift in Sources */,
