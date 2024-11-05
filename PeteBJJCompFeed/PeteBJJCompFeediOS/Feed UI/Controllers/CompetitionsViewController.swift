@@ -8,16 +8,6 @@
 import UIKit
 import PeteBJJCompFeed
 
-public protocol EventImageDataLoaderTask {
-    func cancel()
-}
-
-public protocol EventImageDataLoader {
-    typealias Result = Swift.Result<Data, Error>
-    
-    func loadImageData(from url: URL, completition: @escaping (Result) -> Void) -> EventImageDataLoaderTask
-}
-
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var competitionLoader: CompetitionsLoader?
     private var imageLoader: EventImageDataLoader?
