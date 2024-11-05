@@ -296,8 +296,7 @@
 		EF6960262CD453DA009249D9 /* PeteBJJCompFeediOS */ = {
 			isa = PBXGroup;
 			children = (
-				EF96F22A2CD9E38A00DC3B69 /* Controllers */,
-				EF96F2292CD9E37E00DC3B69 /* Views */,
+				EF96F2352CD9E98900DC3B69 /* Feed UI */,
 				EF3BFCC42CD78262008CA424 /* CompetitiveEvent.swift */,
 				EF3BFCC82CD782FD008CA424 /* Competition+EventExtensions.swift */,
 			);
@@ -307,7 +306,7 @@
 		EF6960322CD453DA009249D9 /* PeteBJJCompFeediOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF96F22B2CD9E3D300DC3B69 /* Controllers */,
+				EF96F2362CD9EC2100DC3B69 /* Feed UI */,
 				EF96F2202CD9E00A00DC3B69 /* Helpers */,
 			);
 			path = PeteBJJCompFeediOSTests;
@@ -388,6 +387,23 @@
 				EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		EF96F2352CD9E98900DC3B69 /* Feed UI */ = {
+			isa = PBXGroup;
+			children = (
+				EF96F2292CD9E37E00DC3B69 /* Views */,
+				EF96F22A2CD9E38A00DC3B69 /* Controllers */,
+			);
+			path = "Feed UI";
+			sourceTree = "<group>";
+		};
+		EF96F2362CD9EC2100DC3B69 /* Feed UI */ = {
+			isa = PBXGroup;
+			children = (
+				EF96F22B2CD9E3D300DC3B69 /* Controllers */,
+			);
+			path = "Feed UI";
 			sourceTree = "<group>";
 		};
 		EFAD8AD42CC2E74C00981FB9 /* CompetitionsAPI */ = {
