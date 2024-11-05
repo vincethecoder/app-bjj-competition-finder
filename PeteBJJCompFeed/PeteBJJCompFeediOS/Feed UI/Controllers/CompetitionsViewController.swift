@@ -9,24 +9,22 @@ import UIKit
 import PeteBJJCompFeed
 
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var competitionLoader: CompetitionsLoader?
+    private var refreshController: CompetitionsRefreshViewController?
     private var imageLoader: EventImageDataLoader?
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
-    private var tableModel = [Competition]()
+    private var tableModel = [Competition]() {
+        didSet { tableView.reloadData() }
+    }
     private var tasks = [IndexPath: EventImageDataLoaderTask]()
     
-    public convenience init(loader: CompetitionsLoader, imageLoader: EventImageDataLoader) {
+    public convenience init(competitionLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) {
         self.init()
-        self.competitionLoader = loader
+        self.refreshController = CompetitionsRefreshViewController(competitionLoader: competitionLoader)
         self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        tableView.prefetchDataSource = self
         
         onViewIsAppearing = { vc in
             vc.load()
@@ -41,14 +39,12 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     @objc private func load() {
-        refreshControl?.beginRefreshing()
-        competitionLoader?.load { [weak self] result in
-            if let competitions = try? result.get() {
-                self?.tableModel = competitions
-                self?.tableView.reloadData()
-            }
-            self?.refreshControl?.endRefreshing() 
+        refreshControl = refreshController?.view
+        refreshController?.onRefresh = { [weak self] competition in
+            self?.tableModel = competition
         }
+        tableView.prefetchDataSource = self
+        refreshController?.refresh()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
