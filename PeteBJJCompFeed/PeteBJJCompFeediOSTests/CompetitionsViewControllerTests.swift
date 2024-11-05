@@ -179,6 +179,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
     func test_feedImageViewRetryAction_retriesImageLoad() {
         let competitions = uniqueCompetitions.models
         let (event01, event02) = (competitions[0], competitions[1])
+        let (image0, image1) = (event01.toCompetitiveEvent(), event02.toCompetitiveEvent())
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
@@ -186,7 +187,6 @@ final class CompetitionsViewControllerTests: XCTestCase {
         
         let view0 = sut.simulateCompetitionViewVisible(at: 0)
         let view1 = sut.simulateCompetitionViewVisible(at: 1)
-        let (image0, image1) = (event01.toCompetitiveEvent(), event02.toCompetitiveEvent())
         
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected two image URL request for the two visible views")
         
@@ -199,6 +199,23 @@ final class CompetitionsViewControllerTests: XCTestCase {
         
         view1?.simulateRetryAction()
         XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url, image0.url, image1.url], "Expected fourth imageURL request after second view retry action")
+    }
+    
+    func test_feedImageView_preloadsImageURLWhenNearVisible() {
+        let competitions = uniqueCompetitions.models
+        let (event01, event02) = (competitions[0], competitions[1])
+        let (image0, image1) = (event01.toCompetitiveEvent(), event02.toCompetitiveEvent())
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [event01, event02])
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is near visible")
+        
+        sut.simulateCompetitionViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [image0.url], "Expected first image URL request once first image is near visible")
+        
+        sut.simulateCompetitionViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [image0.url, image1.url], "Expected second image URL request once second image is near visible")
     }
     
     // MARK: - Helpers
