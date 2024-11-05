@@ -37,6 +37,7 @@
 		EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */; };
 		EF96F2302CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */; };
 		EF96F2322CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */; };
+		EF96F2342CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
 		EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
@@ -145,6 +146,7 @@
 		EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsCell+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+LoaderSpy.swift"; sourceTree = "<group>"; };
+		EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+Assertions.swift"; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */,
 				EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */,
 				EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */,
+				EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */,
 				EF96F2302CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift in Sources */,
 				EF96F2222CD9E02600DC3B69 /* UIImage+TestHelpers.swift in Sources */,
+				EF96F2342CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift in Sources */,
 				EF96F2262CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
