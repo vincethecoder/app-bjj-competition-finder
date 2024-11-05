@@ -32,6 +32,7 @@
 		EF73261A2CC8143500E819DE /* CompetitionsStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7326192CC8143500E819DE /* CompetitionsStoreSpy.swift */; };
 		EF96F2222CD9E02600DC3B69 /* UIImage+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2212CD9E02600DC3B69 /* UIImage+TestHelpers.swift */; };
 		EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2232CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift */; };
+		EF96F2262CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2252CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
 		EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
@@ -135,6 +136,7 @@
 		EF7326192CC8143500E819DE /* CompetitionsStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStoreSpy.swift; sourceTree = "<group>"; };
 		EF96F2212CD9E02600DC3B69 /* UIImage+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F2232CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+TestHelpers.swift"; sourceTree = "<group>"; };
+		EF96F2252CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				EF96F2212CD9E02600DC3B69 /* UIImage+TestHelpers.swift */,
 				EF96F2232CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift */,
+				EF96F2252CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 				EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */,
 				EF96F2222CD9E02600DC3B69 /* UIImage+TestHelpers.swift in Sources */,
+				EF96F2262CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
