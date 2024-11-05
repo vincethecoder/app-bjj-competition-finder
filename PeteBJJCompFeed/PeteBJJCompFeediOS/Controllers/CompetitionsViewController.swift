@@ -18,7 +18,7 @@ public protocol EventImageDataLoader {
     func loadImageData(from url: URL, completition: @escaping (Result) -> Void) -> EventImageDataLoaderTask
 }
 
-final public class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
+public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var competitionLoader: CompetitionsLoader?
     private var imageLoader: EventImageDataLoader?
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
