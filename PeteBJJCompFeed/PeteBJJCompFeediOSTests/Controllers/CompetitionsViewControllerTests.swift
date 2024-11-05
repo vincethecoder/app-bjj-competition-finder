@@ -340,36 +340,6 @@ final class CompetitionsViewControllerTests: XCTestCase {
     }
 }
 
-private extension CompetitionsCell {
-    func simulateRetryAction() {
-        eventImageRetryButton.simulateTap()
-    }
-    
-    var isShowingImageLoadingIndicator: Bool {
-        eventImageContainer.isShimmering
-    }
-
-    var isShowingRetryAction: Bool {
-        !eventImageRetryButton.isHidden
-    }
-        
-    var dateText: String? {
-        dateLabel.text
-    }
-    
-    var eventText: String? {
-        eventLabel.text
-    }
-    
-    var venueText: String? {
-        venueLabel.text
-    }
-    
-    var renderedImage: Data? {
-        eventImageView.image?.pngData()
-    }
-}
-
 private extension CompetitionsViewController {
     func simulateAppearance() {
         if !isViewLoaded {
