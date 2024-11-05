@@ -77,6 +77,24 @@ final class CompetitionsViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: [competitions[0]])
     }
     
+    func test_feedImageView_loadsImageURLWhenVisible() {
+        let competitions = uniqueCompetitions.models
+        let (event01, event02) = (competitions[0], competitions[1])
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [event01, event02])
+        
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
+        
+        let (image01, image02) = (event01.toCompetitiveEvent(), event02.toCompetitiveEvent())
+        sut.simulateCompetitionViewVisible(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [image01.url], "Expected first image URL request once first view becomes visible")
+        
+        sut.simulateCompetitionViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [image01.url, image02.url], "Expected second image URL request once second view also becomes visible")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {
@@ -188,7 +206,7 @@ private extension CompetitionsViewController {
     }
     
     @discardableResult
-    func simulateEventImageViewVisible(at index: Int) -> CompetitionsCell? {
+    func simulateCompetitionViewVisible(at index: Int) -> CompetitionsCell? {
         return competitionsView(at: index) as? CompetitionsCell
     }
     
