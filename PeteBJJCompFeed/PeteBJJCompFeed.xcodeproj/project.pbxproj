@@ -34,6 +34,7 @@
 		EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2232CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift */; };
 		EF96F2262CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2252CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift */; };
 		EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2272CD9E27900DC3B69 /* UIControl+TestHelpers.swift */; };
+		EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */; };
 		EFAD8AD12CC2DFC700981FB9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */; };
 		EFAD8AD32CC2E01700981FB9 /* CompetitionsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */; };
 		EFAD8AD62CC30AF200981FB9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */; };
@@ -139,6 +140,7 @@
 		EF96F2232CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F2252CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F2272CD9E27900DC3B69 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
+		EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		EFAD8AD02CC2DFC700981FB9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EFAD8AD22CC2E01700981FB9 /* CompetitionsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsMapper.swift; sourceTree = "<group>"; };
 		EFAD8AD52CC30AF200981FB9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
@@ -365,9 +367,18 @@
 		EF96F22B2CD9E3D300DC3B69 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EF96F22C2CD9E44A00DC3B69 /* Helpers */,
 				EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EF96F22C2CD9E44A00DC3B69 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		EFAD8AD42CC2E74C00981FB9 /* CompetitionsAPI */ = {
@@ -724,6 +735,7 @@
 			files = (
 				EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */,
 				EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */,
+				EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */,
 				EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */,
 				EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */,
