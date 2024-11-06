@@ -50,7 +50,7 @@ final class CompetitionsCellController {
         task = imageLoader.loadImageData(from: model.toCompetitiveEvent().url) { _ in }
     }
     
-    deinit {
+    func cancelLoad() {
         task?.cancel()
     }
 }

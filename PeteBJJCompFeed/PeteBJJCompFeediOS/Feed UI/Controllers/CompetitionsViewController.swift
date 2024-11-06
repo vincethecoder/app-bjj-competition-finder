@@ -10,17 +10,14 @@ import PeteBJJCompFeed
 
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: CompetitionsRefreshViewController?
-    private var imageLoader: EventImageDataLoader?
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
-    private var tableModel = [Competition]() {
+    var tableModel = [CompetitionsCellController]() {
         didSet { tableView.reloadData() }
     }
-    private var cellControllers = [IndexPath: CompetitionsCellController]()
     
-    public convenience init(competitionLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) {
+    convenience init(refreshController: CompetitionsRefreshViewController) {
         self.init()
-        self.refreshController = CompetitionsRefreshViewController(competitionLoader: competitionLoader)
-        self.imageLoader = imageLoader
+        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
@@ -40,9 +37,6 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     
     @objc private func load() {
         refreshControl = refreshController?.view
-        refreshController?.onRefresh = { [weak self] competition in
-            self?.tableModel = competition
-        }
         tableView.prefetchDataSource = self
         refreshController?.refresh()
     }
@@ -57,7 +51,7 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        removeCellController(forRowAt: indexPath)
+        cancelCellController(forRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
@@ -67,17 +61,14 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach(removeCellController)
+        indexPaths.forEach(cancelCellController)
     }
 
     private func cellController(forRowAt indexPath: IndexPath) -> CompetitionsCellController {
-        let cellModel = tableModel[indexPath.row]
-        let cellController = CompetitionsCellController(model: cellModel, imageLoader: imageLoader!)
-        cellControllers[indexPath] = cellController
-        return cellController
+        return tableModel[indexPath.row]
     }
     
-    private func removeCellController(forRowAt indexPath: IndexPath) {
-        cellControllers[indexPath] = nil
+    private func cancelCellController(forRowAt indexPath: IndexPath) {
+        cellController(forRowAt: indexPath).cancelLoad()
     }
 }
