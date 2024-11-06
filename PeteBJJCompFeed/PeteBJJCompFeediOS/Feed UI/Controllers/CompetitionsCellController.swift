@@ -9,9 +9,9 @@ import UIKit
 import PeteBJJCompFeed
 
 final class CompetitionsCellController {
-    private let viewModel: CompetitionsImageViewModel
+    private let viewModel: CompetitionsImageViewModel<UIImage>
     
-    init(viewModel: CompetitionsImageViewModel) {
+    init(viewModel: CompetitionsImageViewModel<UIImage>) {
         self.viewModel = viewModel
     }
     

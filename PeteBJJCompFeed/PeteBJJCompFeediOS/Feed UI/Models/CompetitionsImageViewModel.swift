@@ -8,16 +8,18 @@
 import UIKit
 import PeteBJJCompFeed
 
-final class CompetitionsImageViewModel {
+final class CompetitionsImageViewModel<Image> {
     typealias Observer<T> = (T) -> Void
 
     private var task: EventImageDataLoaderTask?
     private let model: Competition
     private let imageLoader: EventImageDataLoader
+    private let imageTransformer: (Data) -> Image?
     
-    init(model: Competition, imageLoader: EventImageDataLoader) {
+    init(model: Competition, imageLoader: EventImageDataLoader, imageTransformer: @escaping (Data) -> Image?) {
         self.model = model
         self.imageLoader = imageLoader
+        self.imageTransformer = imageTransformer
     }
     
     private var event: CompetitiveEvent {
@@ -37,7 +39,7 @@ final class CompetitionsImageViewModel {
     }
     
     var onImageLoadingStateChange: Observer<Bool>?
-    var onImageLoad: Observer<UIImage>?
+    var onImageLoad: Observer<Image>?
     var onShouldRetryImageLoadStateChange: Observer<Bool>?
     
     func loadImageData() {
@@ -50,7 +52,7 @@ final class CompetitionsImageViewModel {
     }
     
     private func handle(_ result: EventImageDataLoader.Result) {
-        if let image = (try? result.get()).flatMap(UIImage.init) {
+        if let image = (try? result.get()).flatMap(imageTransformer) {
             onImageLoad?(image)
         } else {
             onShouldRetryImageLoadStateChange?(true)

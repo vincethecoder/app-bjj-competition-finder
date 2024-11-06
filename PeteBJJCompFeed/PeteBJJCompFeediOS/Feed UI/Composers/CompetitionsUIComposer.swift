@@ -5,7 +5,7 @@
 //  Created by Kobe Sam on 11/5/24.
 //
 
-import Foundation
+import UIKit
 import PeteBJJCompFeed
 
 public final class CompetitionsUIComposer {
@@ -22,7 +22,7 @@ public final class CompetitionsUIComposer {
     private static func adaptCompetitionsToCellControllers(forwardingTo controller: CompetitionsViewController, loader: EventImageDataLoader) -> ([Competition]) -> Void {
         return { [weak controller] competition in
             controller?.tableModel = competition.map { model in
-                CompetitionsCellController(viewModel: CompetitionsImageViewModel(model: model, imageLoader: loader))
+                CompetitionsCellController(viewModel: CompetitionsImageViewModel(model: model, imageLoader: loader, imageTransformer: UIImage.init))
             }
         }
     }
