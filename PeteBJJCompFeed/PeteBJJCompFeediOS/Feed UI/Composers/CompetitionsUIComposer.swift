@@ -11,10 +11,11 @@ import PeteBJJCompFeed
 public final class CompetitionsUIComposer {
     private init() {}
 
-    public static func competitionsComposedWith(competitionLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) -> CompetitionsViewController {
-        let refreshController = CompetitionsRefreshViewController(competitionLoader: competitionLoader)
+    public static func competitionsComposedWith(competitionsLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) -> CompetitionsViewController {
+        let competitionsViewModel = CompetitionsViewModel(competitionsLoader: competitionsLoader)
+        let refreshController = CompetitionsRefreshViewController(viewModel: competitionsViewModel)
         let competitionsController = CompetitionsViewController(refreshController: refreshController)
-        refreshController.onRefresh =  adaptCompetitionsToCellControllers(forwardingTo: competitionsController, loader: imageLoader)
+        competitionsViewModel.onCompetitionsLoad = adaptCompetitionsToCellControllers(forwardingTo: competitionsController, loader: imageLoader)
         return competitionsController
     }
     
