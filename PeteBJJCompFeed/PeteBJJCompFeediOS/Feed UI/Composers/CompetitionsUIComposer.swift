@@ -14,11 +14,15 @@ public final class CompetitionsUIComposer {
     public static func competitionsComposedWith(competitionLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) -> CompetitionsViewController {
         let refreshController = CompetitionsRefreshViewController(competitionLoader: competitionLoader)
         let competitionsController = CompetitionsViewController(refreshController: refreshController)
-        refreshController.onRefresh = { [weak competitionsController] competition in
-            competitionsController?.tableModel = competition.map { model in
-                CompetitionsCellController(model: model, imageLoader: imageLoader)
+        refreshController.onRefresh =  adaptCompetitionsToCellControllers(forwardingTo: competitionsController, loader: imageLoader)
+        return competitionsController
+    }
+    
+    private static func adaptCompetitionsToCellControllers(forwardingTo controller: CompetitionsViewController, loader: EventImageDataLoader) -> ([Competition]) -> Void {
+        return { [weak controller] competition in
+            controller?.tableModel = competition.map { model in
+                CompetitionsCellController(model: model, imageLoader: loader)
             }
         }
-        return competitionsController
     }
 }
