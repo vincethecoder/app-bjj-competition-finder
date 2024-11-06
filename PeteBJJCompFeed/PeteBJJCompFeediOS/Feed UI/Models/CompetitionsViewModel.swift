@@ -9,26 +9,24 @@ import Foundation
 import PeteBJJCompFeed
 
 final class CompetitionsViewModel {
+    typealias Observer<T> = (T) -> Void
+
     private let competitionsLoader: CompetitionsLoader
     
     init(competitionsLoader: CompetitionsLoader) {
         self.competitionsLoader = competitionsLoader
     }
     
-    var onChange: ((CompetitionsViewModel) -> Void)?
-    var onCompetitionsLoad: (([Competition]) -> Void)?
-
-    private(set) var isLoading: Bool = false {
-        didSet { onChange?(self) }
-    }
+    var onLoadingStateChange: Observer<Bool>?
+    var onCompetitionsLoad: Observer<[Competition]>?
     
     func loadCompetitions() {
-        isLoading = true
+        onLoadingStateChange?(true)
         competitionsLoader.load { [weak self] result in
             if let competitions = try? result.get() {
                 self?.onCompetitionsLoad?(competitions)
             }
-            self?.isLoading = false
+            self?.onLoadingStateChange?(false)
         }
     }
 }
