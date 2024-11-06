@@ -22,7 +22,7 @@ public final class CompetitionsUIComposer {
     private static func adaptCompetitionsToCellControllers(forwardingTo controller: CompetitionsViewController, loader: EventImageDataLoader) -> ([Competition]) -> Void {
         return { [weak controller] competition in
             controller?.tableModel = competition.map { model in
-                CompetitionsCellController(model: model, imageLoader: loader)
+                CompetitionsCellController(viewModel: CompetitionsImageViewModel(model: model, imageLoader: loader))
             }
         }
     }
