@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PeteBJJCompFeed
 
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     private var refreshController: CompetitionsRefreshViewController?
