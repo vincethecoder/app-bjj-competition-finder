@@ -1,13 +1,11 @@
 # Building an iOS App with Swift, TDD & Clean Architecture
 
-Dear reader, 
- thank you for visiting my project repository. 
- 
-This project is designed to display upcoming Jiu Jitsu tournaments. 
+[![Xcode - Build and Analyze](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
 
-Additionally, the project demonstrates the discipline of Test-Driven Development, the power of modular design, and showcases clean iOS app architectures that welcome future requirements.
+👋 Welcome to the **Brazilian Jiu Jitsu Competitions Finder** project!
+ 
+This project doesn’t just display tournaments—it embodies the principles of Test-Driven Development, the power of modular design, and clean, scalable iOS architecture.
+
+It's built with an eye on the future, so it’s ready to flex and grow with new features down the road.
 
 Enjoy!
-
-[![Xcode - Build and Analyze](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
- 
