@@ -239,7 +239,7 @@ final class CompetitionsViewControllerTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = CompetitionsUIComposer.competitionsComposedWith(competitionLoader: loader, imageLoader: loader)
+        let sut = CompetitionsUIComposer.competitionsComposedWith(competitionsLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader)
         trackForMemoryLeaks(sut)
         return (sut, loader)

@@ -9,48 +9,45 @@ import UIKit
 import PeteBJJCompFeed
 
 final class CompetitionsCellController {
-    private var task: EventImageDataLoaderTask?
-    private let model: Competition
-    private let imageLoader: EventImageDataLoader
+    private let viewModel: CompetitionsImageViewModel<UIImage>
     
-    init(model: Competition, imageLoader: EventImageDataLoader) {
-        self.model = model
-        self.imageLoader = imageLoader
+    init(viewModel: CompetitionsImageViewModel<UIImage>) {
+        self.viewModel = viewModel
     }
     
     func view() -> UITableViewCell {
-        let cell = CompetitionsCell()
-        let event = model.toCompetitiveEvent()
-        cell.dateLabel.text = event.date
-        cell.eventLabel.text = event.name
-        cell.venueLabel.text = event.venue
-        cell.eventImageView.image = nil
-        cell.eventImageRetryButton.isHidden = true
-        cell.eventImageContainer.startShimmering()
-        
-        let loadImage = { [weak self, weak cell] in
-            guard let self else { return }
-            
-            self.task = self.imageLoader.loadImageData(from: event.url) { [weak cell] result in
-                let data = try? result.get()
-                let image = data.map(UIImage.init) ?? nil
-                cell?.eventImageView.image = image
-                cell?.eventImageRetryButton.isHidden = (image != nil)
-                cell?.eventImageContainer.stopShimmering()
-            }
-        }
-        
-        cell.onRetry = loadImage
-        loadImage()
-        
+        let cell = binded(CompetitionsCell())
+        viewModel.loadImageData()
         return cell
     }
     
     func preload() {
-        task = imageLoader.loadImageData(from: model.toCompetitiveEvent().url) { _ in }
+        viewModel.loadImageData()
     }
     
     func cancelLoad() {
-        task?.cancel()
+        viewModel.cancelImageDataLoad()
+    }
+    
+    private func binded(_ cell: CompetitionsCell) -> CompetitionsCell {
+        cell.dateLabel.text = viewModel.date
+        cell.eventLabel.text = viewModel.name
+        cell.venueLabel.text = viewModel.venue
+        cell.eventImageView.image = nil
+        cell.onRetry = viewModel.loadImageData
+        
+        viewModel.onImageLoad = { [weak cell] image in
+            cell?.eventImageView.image = image
+        }
+        
+        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
+            cell?.eventImageContainer.isShimmering = isLoading
+        }
+        
+        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
+            cell?.eventImageRetryButton.isHidden = !shouldRetry
+        }
+        
+        return cell
     }
 }

@@ -6,30 +6,29 @@
 //
 
 import UIKit
-import PeteBJJCompFeed
 
 final class CompetitionsRefreshViewController: NSObject {
-    private(set) lazy var view: UIRefreshControl = {
-        let view = UIRefreshControl()
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
-    }()
+    private(set) lazy var view =  binded(UIRefreshControl())
     
-    private let competitionLoader: CompetitionsLoader
-    
-    init(competitionLoader: CompetitionsLoader) {
-        self.competitionLoader = competitionLoader
+    private let viewModel: CompetitionsViewModel
+
+    init(viewModel: CompetitionsViewModel) {
+        self.viewModel = viewModel
     }
     
-    var onRefresh: (([Competition]) -> Void)?
-    
     @objc func refresh() {
-        view.beginRefreshing()
-        competitionLoader.load { [weak self] result in
-            if let competition = try? result.get() {
-                self?.onRefresh?(competition)
+        viewModel.loadCompetitions()
+    }
+    
+    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
+        viewModel.onLoadingStateChange = { [weak view] isLoading in
+            if isLoading {
+                view?.beginRefreshing()
+            } else {
+                view?.endRefreshing()
             }
-            self?.view.endRefreshing()
         }
+        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return view
     }
 }
