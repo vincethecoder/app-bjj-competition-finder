@@ -33,7 +33,7 @@ extension MainQueueDispatchDecorator: CompetitionsLoader where T == Competitions
 }
 
 extension MainQueueDispatchDecorator: EventImageDataLoader where T == EventImageDataLoader {
-    func loadImageData(from url: URL, completition: @escaping (EventImageDataLoader.Result) -> Void) -> any EventImageDataLoaderTask {
+    func loadImageData(from url: URL, completition: @escaping (EventImageDataLoader.Result) -> Void) -> EventImageDataLoaderTask {
         return decoratee.loadImageData(from: url) { [weak self] result in
             self?.dispatch { completition(result) }
         }
