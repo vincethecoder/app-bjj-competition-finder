@@ -7,27 +7,33 @@
 
 import UIKit
 
-final class CompetitionsRefreshViewController: NSObject {
-    private(set) lazy var view =  binded(UIRefreshControl())
-    
-    private let viewModel: CompetitionsViewModel
+protocol CompetitionsRefreshViewControllerDelegate {
+    func didRequestFeedRefresh()
+}
 
-    init(viewModel: CompetitionsViewModel) {
-        self.viewModel = viewModel
+final class CompetitionsRefreshViewController: NSObject, CompetitionsLoadingView {
+    private(set) lazy var view =  loadView()
+    
+    private let delegate: CompetitionsRefreshViewControllerDelegate
+
+    init(delegate: CompetitionsRefreshViewControllerDelegate) {
+        self.delegate = delegate
     }
     
     @objc func refresh() {
-        viewModel.loadCompetitions()
+        delegate.didRequestFeedRefresh()
     }
     
-    private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
-        viewModel.onLoadingStateChange = { [weak view] isLoading in
-            if isLoading {
-                view?.beginRefreshing()
-            } else {
-                view?.endRefreshing()
-            }
+    func display(_ viewModel: CompetitionsLoadingViewModel) {
+        if viewModel.isLoading {
+            view.beginRefreshing()
+        } else {
+            view.endRefreshing()
         }
+    }
+    
+    private func loadView() -> UIRefreshControl {
+        let view = UIRefreshControl()
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return view
     }
