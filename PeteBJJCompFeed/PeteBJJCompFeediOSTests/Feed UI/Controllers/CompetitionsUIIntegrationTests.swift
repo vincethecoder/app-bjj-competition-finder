@@ -1,5 +1,5 @@
 //
-//  CompetitionsViewControllerTests.swift
+//  CompetitionsUIIntegrationTests.swift
 //  PeteBJJCompFeedTests
 //
 //  Created by Kobe Sam on 11/1/24.
@@ -9,7 +9,7 @@ import XCTest
 import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
-final class CompetitionsViewControllerTests: XCTestCase {
+final class CompetitionsUIIntegrationTests: XCTestCase {
 
     func test_init_doesNotLoadCompetitions() {
         let (_, loader) = makeSUT()
@@ -104,13 +104,11 @@ final class CompetitionsViewControllerTests: XCTestCase {
         loader.completeFeedLoading(with: [event01, event02])
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not visible")
         
-        // MARK: - TODO
+        sut.simulateCompetitionsViewNotVisible(at: 0)
+        XCTAssertEqual(loader.cancelledImageURLs, [event01.eventLink], "Expected one cancelled image URL request once first image is not visible anymore")
         
-//        sut.simulateCompetitionViewNotVisible(at: 0)
-//        XCTAssertEqual(loader.cancelledImageURLs, [image0.url], "Expected one cancelled image URL request once first image is not visible anymore")
-//        
-//        sut.simulateFeedImageViewNotVisible(at: 1)
-//        XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected two cancelled image URL requests once second image is also not visible anymore")
+        sut.simulateCompetitionsViewNotVisible(at: 1)
+        XCTAssertEqual(loader.cancelledImageURLs, [event01.eventLink, event02.eventLink], "Expected two cancelled image URL requests once second image is also not visible anymore")
     }
     
     func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
@@ -235,6 +233,49 @@ final class CompetitionsViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
     }
     
+    func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [uniqueCompetition])
+        
+        let view = sut.simulateCompetitionsViewNotVisible(at: 0)
+        loader.completeImageLoading(with: anyImageData)
+        
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
+    
+    func test_feedImageView_doesNotShowDataFromPreviousRequestWhenCellIsReused() throws {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [uniqueCompetition, uniqueCompetition])
+        
+        let view0 = try XCTUnwrap(sut.simulateCompetitionViewVisible(at: 0))
+        view0.prepareForReuse()
+        
+        let imageData0 = anyImageData
+        loader.completeImageLoading(with: imageData0, at: 0)
+        
+        XCTAssertEqual(view0.renderedImage, .none, "Expected no image state change for reused view once image loading completes successfully")
+    }
+    
+    func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [uniqueCompetition, uniqueCompetition])
+        
+        let previousView = try XCTUnwrap(sut.simulateCompetitionsViewNotVisible(at: 0))
+        
+        let newView = try XCTUnwrap(sut.simulateCompetitionViewVisible(at: 0))
+        previousView.prepareForReuse()
+        
+        let imageData = anyImageData
+        loader.completeImageLoading(with: imageData, at: 1)
+        
+        XCTAssertEqual(newView.renderedImage, imageData)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {
@@ -259,6 +300,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
             LocalCompetition(id: $0.id, name: $0.name, startDate: $0.startDate, endDate: $0.endDate, venue: $0.venue, city: $0.city, state: $0.state, country: $0.country, type: $0.type, status: $0.status, registrationStatus: $0.registrationStatus, registrationLink: $0.registrationLink, eventLink: $0.eventLink, categories: $0.categories, rankingPoints: $0.rankingPoints, notes: $0.notes)
         }
         return (models, localCompetitions)
+    }
+    
+    private var anyImageData: Data {
+        UIImage.make(withColor: .red).pngData()!
     }
 }
 

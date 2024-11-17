@@ -7,16 +7,16 @@
 
 import UIKit
 
-public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: CompetitionsRefreshViewController?
+protocol CompetitionsViewControllerDelegate {
+    func didRequestFeedRefresh()
+}
+
+public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView {
+    var delegate: CompetitionsViewControllerDelegate?
+    
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     var tableModel = [CompetitionsCellController]() {
         didSet { tableView.reloadData() }
-    }
-    
-    convenience init(refreshController: CompetitionsRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
@@ -28,6 +28,10 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
         }
     }
     
+    @IBAction private func refresh() {
+        delegate?.didRequestFeedRefresh()
+    }
+    
     public override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         
@@ -35,9 +39,15 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     @objc private func load() {
-        refreshControl = refreshController?.view
-        tableView.prefetchDataSource = self
-        refreshController?.refresh()
+        refresh()
+    }
+    
+    func display(_ viewModel: CompetitionsLoadingViewModel) {
+        if viewModel.isLoading {
+            refreshControl?.beginRefreshing()
+        } else {
+            refreshControl?.endRefreshing()
+        }
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +56,7 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellController = cellController(forRowAt: indexPath)
-        return cellController.view()
+        return cellController.view(in: tableView)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
