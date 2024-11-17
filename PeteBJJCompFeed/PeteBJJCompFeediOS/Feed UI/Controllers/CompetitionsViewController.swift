@@ -8,15 +8,11 @@
 import UIKit
 
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    private var refreshController: CompetitionsRefreshViewController?
+    var refreshController: CompetitionsRefreshViewController?
+    
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     var tableModel = [CompetitionsCellController]() {
         didSet { tableView.reloadData() }
-    }
-    
-    convenience init(refreshController: CompetitionsRefreshViewController) {
-        self.init()
-        self.refreshController = refreshController
     }
     
     public override func viewDidLoad() {
