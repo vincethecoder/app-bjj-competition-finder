@@ -10,15 +10,19 @@ import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
 final class CompetitionsUIIntegrationTests: XCTestCase {
-
-    func test_init_doesNotLoadCompetitions() {
-        let (_, loader) = makeSUT()
+    
+    func test_feedView_hasTitle() {
+        let (sut, _) = makeSUT()
         
-        XCTAssertEqual(loader.loadCompetitionsCallCount, 0)
+        sut.loadViewIfNeeded()
+
+        XCTAssertEqual(sut.title, localized("FEED_VIEW_TITLE"))
     }
     
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
+        
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 0, "Expected no loading requests before view is loaded")
         
         sut.simulateAppearance()
         XCTAssertEqual(loader.loadCompetitionsCallCount, 1, "Expected a loading request once view is loaded")
@@ -34,13 +38,13 @@ final class CompetitionsUIIntegrationTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.simulateAppearance()
-        // XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded") // TODO: - FIXME
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
 
         loader.completeFeedLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
         
         sut.simulateUserInitiatedFeedReload()
-        // XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload") // TODO: - FIXME
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
         
         loader.completeFeedLoadingWithError(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
