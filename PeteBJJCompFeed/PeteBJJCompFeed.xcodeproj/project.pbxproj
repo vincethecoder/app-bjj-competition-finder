@@ -191,6 +191,7 @@
 		EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsUIIntegrationTests+Localization.swift"; sourceTree = "<group>"; };
 		EFE944682CEA78F000E3BD75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		EFE9446A2CEA792A00E3BD75 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
+		EFE9446B2CEA7A4C00E3BD75 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -703,6 +704,7 @@
 				en,
 				Base,
 				"pt-BR",
+				el,
 			);
 			mainGroup = EF0372C42CBDEC8F00694F89;
 			productRefGroup = EF0372CF2CBDEC8F00694F89 /* Products */;
@@ -906,6 +908,7 @@
 			children = (
 				EFE944682CEA78F000E3BD75 /* en */,
 				EFE9446A2CEA792A00E3BD75 /* pt-BR */,
+				EFE9446B2CEA7A4C00E3BD75 /* el */,
 			);
 			name = Feed.strings;
 			sourceTree = "<group>";
