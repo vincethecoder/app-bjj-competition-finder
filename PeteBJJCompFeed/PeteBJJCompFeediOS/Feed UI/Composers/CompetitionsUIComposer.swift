@@ -15,16 +15,25 @@ public final class CompetitionsUIComposer {
 
         let presentationAdapter = CompetitionsLoaderPresentationAdapter(feedLoader: competitionsLoader)
         
-        let bundle = Bundle(for: CompetitionsViewController.self)
-        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
-        let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
-        competitionsController.delegate = presentationAdapter
-        competitionsController.title = CompetitionsPresenter.title
+        let competitionsController = CompetitionsViewController.makeWith(
+            delegate: presentationAdapter,
+            title: CompetitionsPresenter.title)
         
         presentationAdapter.presenter = CompetitionsPresenter(
             competitionsView: CompetitionsViewAdapter(controller: competitionsController, imageLoader: imageLoader),
             loadingView: WeakRefVirtualProxy(competitionsController))
 
+        return competitionsController
+    }
+}
+
+private extension CompetitionsViewController {
+    static func makeWith(delegate: CompetitionsViewControllerDelegate, title: String) -> CompetitionsViewController {
+        let bundle = Bundle(for: CompetitionsViewController.self)
+        let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
+        let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
+        competitionsController.delegate = delegate
+        competitionsController.title = title
         return competitionsController
     }
 }
