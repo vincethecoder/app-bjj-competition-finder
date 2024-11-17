@@ -75,6 +75,7 @@
 		EFE944712CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */; };
 		EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */; };
 		EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */; };
+		EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -202,6 +203,7 @@
 		EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewAdapter.swift; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */,
 				EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */,
 				EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */,
+				EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */,
 			);
 			path = Composers;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */,
 				EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */,
 				EF96F23D2CDAF31F00DC3B69 /* CompetitionsCellController.swift in Sources */,
+				EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */,
 				EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */,
 				EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */,
 				EF96F2392CD9ED5E00DC3B69 /* EventImageDataLoader.swift in Sources */,
