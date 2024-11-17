@@ -5,6 +5,7 @@
 //  Created by Kobe Sam on 11/16/24.
 //
 
+import Foundation
 import PeteBJJCompFeed
 
 protocol CompetitionsLoadingView {
@@ -24,7 +25,12 @@ final class CompetitionsPresenter {
         self.loadingView = loadingView
     }
     
-    static var title: String { "BJJ Tournaments" }
+    static var title: String {
+        NSLocalizedString("FEED_VIEW_TITLE",
+                          tableName: "Feed",
+                          bundle: Bundle(for: CompetitionsPresenter.self),
+                          comment: "Title for the feed view")
+    }
     
     func didStartLoadingFeed() {
         loadingView.display(CompetitionsLoadingViewModel(isLoading: true))

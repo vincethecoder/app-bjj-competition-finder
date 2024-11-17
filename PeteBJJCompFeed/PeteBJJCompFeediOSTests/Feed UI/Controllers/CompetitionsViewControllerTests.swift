@@ -16,7 +16,10 @@ final class CompetitionsViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         
-        XCTAssertEqual(sut.title, "BJJ Tournaments")
+        let bundle = Bundle(for: CompetitionsViewController.self)
+        let localizedKey = "FEED_VIEW_TITLE"
+        let localizedTitle = bundle.localizedString(forKey: localizedKey, value: nil, table: "Feed")
+        XCTAssertEqual(sut.title, localizedTitle)
     }
     
     func test_loadFeedActions_requestFeedFromLoader() {
