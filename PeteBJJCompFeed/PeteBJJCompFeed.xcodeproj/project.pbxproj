@@ -71,6 +71,11 @@
 		EFE944622CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */; };
 		EFE944692CEA78F000E3BD75 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = EFE944672CEA78F000E3BD75 /* Feed.strings */; };
 		EFE9446D2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9446C2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift */; };
+		EFE9446F2CEA8C2400E3BD75 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9446E2CEA8C2400E3BD75 /* MainQueueDispatchDecorator.swift */; };
+		EFE944712CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */; };
+		EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */; };
+		EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */; };
+		EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -194,6 +199,11 @@
 		EFE9446A2CEA792A00E3BD75 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
 		EFE9446B2CEA7A4C00E3BD75 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
 		EFE9446C2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLocalizationTests.swift; sourceTree = "<group>"; };
+		EFE9446E2CEA8C2400E3BD75 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
+		EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
+		EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
+		EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewAdapter.swift; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -457,6 +467,11 @@
 			isa = PBXGroup;
 			children = (
 				EF96F23F2CDAF82B00DC3B69 /* CompetitionsUIComposer.swift */,
+				EFE9446E2CEA8C2400E3BD75 /* MainQueueDispatchDecorator.swift */,
+				EFE944702CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift */,
+				EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */,
+				EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */,
+				EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */,
 			);
 			path = Composers;
 			sourceTree = "<group>";
@@ -818,6 +833,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE9446F2CEA8C2400E3BD75 /* MainQueueDispatchDecorator.swift in Sources */,
 				EFF51A452CE99FAC0076798B /* CompetitionsViewModel.swift in Sources */,
 				EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */,
 				EF3BFCC92CD782FD008CA424 /* Competition+EventExtensions.swift in Sources */,
@@ -825,13 +841,17 @@
 				EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */,
 				EFF51A432CE99E880076798B /* CompetitionsPresenter.swift in Sources */,
 				EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */,
+				EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */,
 				EF96F23D2CDAF31F00DC3B69 /* CompetitionsCellController.swift in Sources */,
+				EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */,
 				EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */,
 				EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */,
 				EF96F2392CD9ED5E00DC3B69 /* EventImageDataLoader.swift in Sources */,
 				EF3BFCC52CD78262008CA424 /* CompetitiveEvent.swift in Sources */,
 				EFE944592CEA571E00E3BD75 /* UITableView+Dequeueing.swift in Sources */,
 				EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */,
+				EFE944712CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift in Sources */,
+				EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */,
 				EF3BFCC12CD5A7C3008CA424 /* CompetitionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
