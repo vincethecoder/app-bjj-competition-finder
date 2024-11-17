@@ -15,7 +15,7 @@ public final class CompetitionsUIComposer {
 
         let presentationAdapter = CompetitionsLoaderPresentationAdapter(feedLoader: MainQueueDispatchDecorator(decoratee: competitionsLoader))
         
-        let competitionsController = CompetitionsViewController.makeWith(
+        let competitionsController = makeCompetitionsViewController(
             delegate: presentationAdapter,
             title: CompetitionsPresenter.title)
         
@@ -27,10 +27,7 @@ public final class CompetitionsUIComposer {
 
         return competitionsController
     }
-}
-
-private extension CompetitionsViewController {
-    static func makeWith(delegate: CompetitionsViewControllerDelegate, title: String) -> CompetitionsViewController {
+    private static func makeCompetitionsViewController(delegate: CompetitionsViewControllerDelegate, title: String) -> CompetitionsViewController {
         let bundle = Bundle(for: CompetitionsViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
