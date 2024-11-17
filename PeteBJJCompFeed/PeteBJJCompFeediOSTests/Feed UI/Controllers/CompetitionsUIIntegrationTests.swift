@@ -244,6 +244,38 @@ final class CompetitionsUIIntegrationTests: XCTestCase {
         XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
     }
     
+    func test_feedImageView_doesNotShowDataFromPreviousRequestWhenCellIsReused() throws {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [uniqueCompetition, uniqueCompetition])
+        
+        let view0 = try XCTUnwrap(sut.simulateCompetitionViewVisible(at: 0))
+        view0.prepareForReuse()
+        
+        let imageData0 = anyImageData
+        loader.completeImageLoading(with: imageData0, at: 0)
+        
+        XCTAssertEqual(view0.renderedImage, .none, "Expected no image state change for reused view once image loading completes successfully")
+    }
+    
+    func test_feedImageView_showsDataForNewViewRequestAfterPreviousViewIsReused() throws {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [uniqueCompetition, uniqueCompetition])
+        
+        let previousView = try XCTUnwrap(sut.simulateCompetitionsViewNotVisible(at: 0))
+        
+        let newView = try XCTUnwrap(sut.simulateCompetitionViewVisible(at: 0))
+        previousView.prepareForReuse()
+        
+        let imageData = anyImageData
+        loader.completeImageLoading(with: imageData, at: 1)
+        
+        XCTAssertEqual(newView.renderedImage, imageData)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: CompetitionsViewController, loader: LoaderSpy) {

@@ -44,10 +44,12 @@ final class CompetitionsCellController: CompetitionsImageView {
         cell?.eventImageView.setImageAnimated(viewModel.image)
         cell?.eventImageContainer.isShimmering = viewModel.isLoading
         cell?.eventImageRetryButton.isHidden = !viewModel.shouldRetry
-        cell?.onRetry = delegate.didRequestImage
+        cell?.onRetry = { [weak self] in self?.delegate.didRequestImage() }
+        cell?.onReuse = { [weak self] in self?.releaseCellForReuse() }
     }
     
     func releaseCellForReuse() {
+        cell?.onReuse = nil
         cell = nil
     }
 }
