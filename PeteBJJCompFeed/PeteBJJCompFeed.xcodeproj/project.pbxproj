@@ -69,6 +69,7 @@
 		EFE944592CEA571E00E3BD75 /* UITableView+Dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */; };
 		EFE9445B2CEA593900E3BD75 /* UIImageView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */; };
 		EFE944602CEA708900E3BD75 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = EFE9445E2CEA708900E3BD75 /* Feed.strings */; };
+		EFE944622CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -188,6 +189,7 @@
 		EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Dequeueing.swift"; sourceTree = "<group>"; };
 		EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animations.swift"; sourceTree = "<group>"; };
 		EFE9445F2CEA708900E3BD75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
+		EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+Localization.swift"; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */,
 				EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */,
 				EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */,
+				EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */,
+				EFE944622CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift in Sources */,
 				EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */,
 				EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */,
 				EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */,
