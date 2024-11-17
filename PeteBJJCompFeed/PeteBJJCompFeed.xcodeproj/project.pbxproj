@@ -14,7 +14,7 @@
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
 		EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EF3BFCC12CD5A7C3008CA424 /* CompetitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC02CD5A7C3008CA424 /* CompetitionsViewController.swift */; };
-		EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */; };
+		EF3BFCC22CD5A87F008CA424 /* CompetitionsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */; };
 		EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
 		EF3BFCC52CD78262008CA424 /* CompetitiveEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC42CD78262008CA424 /* CompetitiveEvent.swift */; };
 		EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */; };
@@ -144,7 +144,7 @@
 		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
 		EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewControllerTests.swift; sourceTree = "<group>"; };
+		EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsUIIntegrationTests.swift; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -401,7 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				EF96F22C2CD9E44A00DC3B69 /* Helpers */,
-				EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */,
+				EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -826,7 +826,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */,
+				EF3BFCC22CD5A87F008CA424 /* CompetitionsUIIntegrationTests.swift in Sources */,
 				EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */,
 				EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */,
 				EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */,

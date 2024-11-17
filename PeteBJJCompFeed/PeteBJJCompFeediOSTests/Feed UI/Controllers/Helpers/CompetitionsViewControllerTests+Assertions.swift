@@ -1,5 +1,5 @@
 //
-//  CompetitionsViewControllerTests+Assertions.swift
+//  CompetitionsUIIntegrationTests+Assertions.swift
 //  PeteBJJCompFeediOSTests
 //
 //  Created by Kobe Sam on 11/4/24.
@@ -9,7 +9,7 @@ import XCTest
 import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
-extension CompetitionsViewControllerTests {
+extension CompetitionsUIIntegrationTests {
     
     func assertThat(_ sut: CompetitionsViewController, isRendering competitions: [Competition], file: StaticString = #file, line: UInt = #line) {
         guard sut.numberOfRenderedCompetitionViews() == competitions.count else {
