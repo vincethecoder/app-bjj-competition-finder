@@ -10,12 +10,6 @@ import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
 final class CompetitionsViewControllerTests: XCTestCase {
-
-    func test_init_doesNotLoadCompetitions() {
-        let (_, loader) = makeSUT()
-        
-        XCTAssertEqual(loader.loadCompetitionsCallCount, 0)
-    }
     
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()
@@ -27,6 +21,8 @@ final class CompetitionsViewControllerTests: XCTestCase {
     
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
+        
+        XCTAssertEqual(loader.loadCompetitionsCallCount, 0, "Expected no loading requests before view is loaded")
         
         sut.simulateAppearance()
         XCTAssertEqual(loader.loadCompetitionsCallCount, 1, "Expected a loading request once view is loaded")
