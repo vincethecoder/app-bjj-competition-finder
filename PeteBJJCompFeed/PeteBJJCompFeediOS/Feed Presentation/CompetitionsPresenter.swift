@@ -24,6 +24,8 @@ final class CompetitionsPresenter {
         self.loadingView = loadingView
     }
     
+    static var title: String { "BJJ Tournaments" }
+    
     func didStartLoadingFeed() {
         loadingView.display(CompetitionsLoadingViewModel(isLoading: true))
     }

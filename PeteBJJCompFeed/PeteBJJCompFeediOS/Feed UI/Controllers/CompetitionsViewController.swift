@@ -22,7 +22,7 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "BJJ Tournaments"
+        title = CompetitionsPresenter.title
         
         onViewIsAppearing = { vc in
             vc.load()
