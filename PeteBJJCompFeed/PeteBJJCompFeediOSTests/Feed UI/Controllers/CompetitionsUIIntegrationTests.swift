@@ -1,5 +1,5 @@
 //
-//  CompetitionsUIIntegrationTests.swift
+//  CompetitionsViewControllerTests.swift
 //  PeteBJJCompFeedTests
 //
 //  Created by Kobe Sam on 11/1/24.
@@ -9,12 +9,20 @@ import XCTest
 import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
-final class CompetitionsUIIntegrationTests: XCTestCase {
+final class CompetitionsViewControllerTests: XCTestCase {
 
     func test_init_doesNotLoadCompetitions() {
         let (_, loader) = makeSUT()
         
         XCTAssertEqual(loader.loadCompetitionsCallCount, 0)
+    }
+    
+    func test_feedView_hasTitle() {
+        let (sut, _) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.title, "BJJ Tournaments")
     }
     
     func test_loadFeedActions_requestFeedFromLoader() {

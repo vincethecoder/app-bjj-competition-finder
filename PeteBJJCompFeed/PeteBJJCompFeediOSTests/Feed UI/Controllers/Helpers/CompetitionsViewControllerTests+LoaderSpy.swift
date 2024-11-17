@@ -1,5 +1,5 @@
 //
-//  CompetitionsUIIntegrationTests+LoaderSpy.swift
+//  CompetitionsViewControllerTests+LoaderSpy.swift
 //  PeteBJJCompFeediOSTests
 //
 //  Created by Kobe Sam on 11/4/24.
@@ -9,7 +9,7 @@ import Foundation
 import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
-extension CompetitionsUIIntegrationTests {
+extension CompetitionsViewControllerTests {
     
     class LoaderSpy: CompetitionsLoader, EventImageDataLoader {
         
