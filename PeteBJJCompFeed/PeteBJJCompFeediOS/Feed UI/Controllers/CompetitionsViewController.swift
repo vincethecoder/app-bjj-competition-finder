@@ -56,7 +56,7 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellController = cellController(forRowAt: indexPath)
-        return cellController.view()
+        return cellController.view(in: tableView)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

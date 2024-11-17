@@ -8,21 +8,16 @@
 import UIKit
 
 public final class CompetitionsCell: UITableViewCell {
-    public let dateLabel = UILabel()
-    public let eventLabel = UILabel()
-    public let venueLabel = UILabel()
-    public let eventImageContainer = UIView()
-    public let eventImageView = UIImageView()
-    
-    private(set) public lazy var eventImageRetryButton: UIButton = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
-        return button
-    }()
+    @IBOutlet private(set) public var dateLabel: UILabel!
+    @IBOutlet private(set) public var eventLabel: UILabel!
+    @IBOutlet private(set) public var venueLabel: UILabel!
+    @IBOutlet private(set) public var eventImageContainer: UIView!
+    @IBOutlet private(set) public var eventImageView: UIImageView!
+    @IBOutlet private(set) public var eventImageRetryButton: UIButton!
     
     var onRetry: (() -> Void)?
     
-    @objc private func retryButtonTapped() {
+    @IBAction private func retryButtonTapped() {
         onRetry?()
     }
 }

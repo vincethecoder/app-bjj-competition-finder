@@ -24,6 +24,17 @@ extension CompetitionsViewController {
         ds?.tableView(tableView, prefetchRowsAt: [index])
     }
     
+    @discardableResult
+    func simulateCompetitionsViewNotVisible(at row: Int) -> CompetitionsCell? {
+        let view = simulateCompetitionViewVisible(at: row)
+        
+        let delegte = tableView.delegate
+        let index = IndexPath(row: row, section: competitionsSection)
+        delegte?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
+        
+        return view
+    }
+    
     func simulateCompetitionsViewNotNearVisible(at row: Int) {
         simulateCompetitionsViewNearVisible(at: row)
         
