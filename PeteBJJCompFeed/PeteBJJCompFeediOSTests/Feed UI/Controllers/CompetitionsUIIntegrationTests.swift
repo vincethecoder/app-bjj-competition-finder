@@ -1,5 +1,5 @@
 //
-//  CompetitionsViewControllerTests.swift
+//  CompetitionsUIIntegrationTests.swift
 //  PeteBJJCompFeedTests
 //
 //  Created by Kobe Sam on 11/1/24.
@@ -9,7 +9,7 @@ import XCTest
 import PeteBJJCompFeed
 import PeteBJJCompFeediOS
 
-final class CompetitionsViewControllerTests: XCTestCase {
+final class CompetitionsUIIntegrationTests: XCTestCase {
     
     func test_feedView_hasTitle() {
         let (sut, _) = makeSUT()

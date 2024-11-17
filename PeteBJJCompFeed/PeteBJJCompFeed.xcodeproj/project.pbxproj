@@ -14,7 +14,7 @@
 		EF0372F12CBEE9F500694F89 /* RemoteCompetitionsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0372F02CBEE9F500694F89 /* RemoteCompetitionsLoader.swift */; };
 		EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD8AD82CC5170700981FB9 /* XCTestCase+MemoryLeakTracking.swift */; };
 		EF3BFCC12CD5A7C3008CA424 /* CompetitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC02CD5A7C3008CA424 /* CompetitionsViewController.swift */; };
-		EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */; };
+		EF3BFCC22CD5A87F008CA424 /* CompetitionsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */; };
 		EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE3B5B92CCCFDFC009E9195 /* SharedTestHelpers.swift */; };
 		EF3BFCC52CD78262008CA424 /* CompetitiveEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC42CD78262008CA424 /* CompetitiveEvent.swift */; };
 		EF3BFCC72CD78290008CA424 /* CompetitionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */; };
@@ -36,8 +36,8 @@
 		EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2272CD9E27900DC3B69 /* UIControl+TestHelpers.swift */; };
 		EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */; };
 		EF96F2302CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */; };
-		EF96F2322CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */; };
-		EF96F2342CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */; };
+		EF96F2322CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2312CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift */; };
+		EF96F2342CD9E6AB00DC3B69 /* CompetitionsUIIntegrationTests+Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2332CD9E6AB00DC3B69 /* CompetitionsUIIntegrationTests+Assertions.swift */; };
 		EF96F2392CD9ED5E00DC3B69 /* EventImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F2382CD9ED5E00DC3B69 /* EventImageDataLoader.swift */; };
 		EF96F23D2CDAF31F00DC3B69 /* CompetitionsCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F23C2CDAF31F00DC3B69 /* CompetitionsCellController.swift */; };
 		EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF96F23F2CDAF82B00DC3B69 /* CompetitionsUIComposer.swift */; };
@@ -69,7 +69,7 @@
 		EFE944592CEA571E00E3BD75 /* UITableView+Dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */; };
 		EFE9445B2CEA593900E3BD75 /* UIImageView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */; };
 		EFE944602CEA708900E3BD75 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = EFE9445E2CEA708900E3BD75 /* Feed.strings */; };
-		EFE944622CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */; };
+		EFE944622CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -146,7 +146,7 @@
 		EF695FF72CD2B601009249D9 /* CompetitionsStore2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompetitionsStore2.xcdatamodel; sourceTree = "<group>"; };
 		EF6960252CD453DA009249D9 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF69602E2CD453DA009249D9 /* PeteBJJCompFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewControllerTests.swift; sourceTree = "<group>"; };
+		EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsUIIntegrationTests.swift; sourceTree = "<group>"; };
 		EF73260C2CC75D3500E819DE /* LocalCompetitionsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetitionsLoader.swift; sourceTree = "<group>"; };
 		EF7326102CC762D500E819DE /* CompetitionsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsStore.swift; sourceTree = "<group>"; };
 		EF7326122CC7FD0300E819DE /* LocalCompetition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCompetition.swift; sourceTree = "<group>"; };
@@ -158,8 +158,8 @@
 		EF96F2272CD9E27900DC3B69 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsCell+TestHelpers.swift"; sourceTree = "<group>"; };
-		EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+LoaderSpy.swift"; sourceTree = "<group>"; };
-		EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+Assertions.swift"; sourceTree = "<group>"; };
+		EF96F2312CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsUIIntegrationTests+LoaderSpy.swift"; sourceTree = "<group>"; };
+		EF96F2332CD9E6AB00DC3B69 /* CompetitionsUIIntegrationTests+Assertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsUIIntegrationTests+Assertions.swift"; sourceTree = "<group>"; };
 		EF96F2382CD9ED5E00DC3B69 /* EventImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventImageDataLoader.swift; sourceTree = "<group>"; };
 		EF96F23C2CDAF31F00DC3B69 /* CompetitionsCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsCellController.swift; sourceTree = "<group>"; };
 		EF96F23F2CDAF82B00DC3B69 /* CompetitionsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsUIComposer.swift; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Dequeueing.swift"; sourceTree = "<group>"; };
 		EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animations.swift"; sourceTree = "<group>"; };
 		EFE9445F2CEA708900E3BD75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
-		EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsViewControllerTests+Localization.swift"; sourceTree = "<group>"; };
+		EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompetitionsUIIntegrationTests+Localization.swift"; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				EF96F22C2CD9E44A00DC3B69 /* Helpers */,
-				EF6960402CD567CB009249D9 /* CompetitionsViewControllerTests.swift */,
+				EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -415,9 +415,9 @@
 			children = (
 				EF96F22D2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift */,
 				EF96F22F2CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift */,
-				EF96F2312CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift */,
-				EF96F2332CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift */,
-				EFE944612CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift */,
+				EF96F2312CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift */,
+				EF96F2332CD9E6AB00DC3B69 /* CompetitionsUIIntegrationTests+Assertions.swift */,
+				EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -833,17 +833,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF3BFCC22CD5A87F008CA424 /* CompetitionsViewControllerTests.swift in Sources */,
-				EFE944622CEA723900E3BD75 /* CompetitionsViewControllerTests+Localization.swift in Sources */,
+				EF3BFCC22CD5A87F008CA424 /* CompetitionsUIIntegrationTests.swift in Sources */,
+				EFE944622CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift in Sources */,
 				EF96F2282CD9E27900DC3B69 /* UIControl+TestHelpers.swift in Sources */,
 				EF96F22E2CD9E4B900DC3B69 /* CompetitionsViewController+TestHelpers.swift in Sources */,
 				EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */,
-				EF96F2322CD9E5EE00DC3B69 /* CompetitionsViewControllerTests+LoaderSpy.swift in Sources */,
+				EF96F2322CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift in Sources */,
 				EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */,
 				EF96F2302CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift in Sources */,
 				EF96F2222CD9E02600DC3B69 /* UIImage+TestHelpers.swift in Sources */,
-				EF96F2342CD9E6AB00DC3B69 /* CompetitionsViewControllerTests+Assertions.swift in Sources */,
+				EF96F2342CD9E6AB00DC3B69 /* CompetitionsUIIntegrationTests+Assertions.swift in Sources */,
 				EF96F2262CD9E1DE00DC3B69 /* UIButton+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

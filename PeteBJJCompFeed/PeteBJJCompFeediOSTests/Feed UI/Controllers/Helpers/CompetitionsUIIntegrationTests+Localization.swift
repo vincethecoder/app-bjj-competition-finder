@@ -1,5 +1,5 @@
 //
-//  CompetitionsViewControllerTests+Localization.swift
+//  CompetitionsUIIntegrationTests+Localization.swift
 //  PeteBJJCompFeediOSTests
 //
 //  Created by Kobe Sam on 11/17/24.
@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 import PeteBJJCompFeediOS
 
-extension CompetitionsViewControllerTests {
+extension CompetitionsUIIntegrationTests {
     func localized(_ key: String, file: StaticString = #file, line: UInt = #line) -> String {
         let table = "Feed"
         let bundle = Bundle(for: CompetitionsViewController.self)
