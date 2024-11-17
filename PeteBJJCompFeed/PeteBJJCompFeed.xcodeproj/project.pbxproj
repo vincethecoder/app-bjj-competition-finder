@@ -70,6 +70,7 @@
 		EFE9445B2CEA593900E3BD75 /* UIImageView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */; };
 		EFE944622CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944612CEA723900E3BD75 /* CompetitionsUIIntegrationTests+Localization.swift */; };
 		EFE944692CEA78F000E3BD75 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = EFE944672CEA78F000E3BD75 /* Feed.strings */; };
+		EFE9446D2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9446C2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -192,6 +193,7 @@
 		EFE944682CEA78F000E3BD75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		EFE9446A2CEA792A00E3BD75 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
 		EFE9446B2CEA7A4C00E3BD75 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
+		EFE9446C2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLocalizationTests.swift; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 			children = (
 				EF96F22C2CD9E44A00DC3B69 /* Helpers */,
 				EF6960402CD567CB009249D9 /* CompetitionsUIIntegrationTests.swift */,
+				EFE9446C2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 				EF96F2242CD9E17900DC3B69 /* UIRefreshControl+TestHelpers.swift in Sources */,
 				EF96F2322CD9E5EE00DC3B69 /* CompetitionsUIIntegrationTests+LoaderSpy.swift in Sources */,
 				EF3BFCBF2CD57F35008CA424 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				EFE9446D2CEA7AFE00E3BD75 /* CompetitionsLocalizationTests.swift in Sources */,
 				EF3BFCC32CD73DCD008CA424 /* SharedTestHelpers.swift in Sources */,
 				EF96F2302CD9E54F00DC3B69 /* CompetitionsCell+TestHelpers.swift in Sources */,
 				EF96F2222CD9E02600DC3B69 /* UIImage+TestHelpers.swift in Sources */,
