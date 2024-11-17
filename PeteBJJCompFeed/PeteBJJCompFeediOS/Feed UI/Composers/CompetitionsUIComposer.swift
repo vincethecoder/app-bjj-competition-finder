@@ -20,7 +20,9 @@ public final class CompetitionsUIComposer {
             title: CompetitionsPresenter.title)
         
         presentationAdapter.presenter = CompetitionsPresenter(
-            competitionsView: CompetitionsViewAdapter(controller: competitionsController, imageLoader: imageLoader),
+            competitionsView: CompetitionsViewAdapter(
+                controller: competitionsController,
+                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
             loadingView: WeakRefVirtualProxy(competitionsController))
 
         return competitionsController
@@ -47,6 +49,14 @@ extension MainQueueDispatchDecorator: CompetitionsLoader where T == Competitions
     func load(completion: @escaping (CompetitionsLoader.Result) -> Void) {
         decoratee.load { [weak self] result in
             self?.dispatch { completion(result) }
+        }
+    }
+}
+
+extension MainQueueDispatchDecorator: EventImageDataLoader where T == EventImageDataLoader {
+    func loadImageData(from url: URL, completition: @escaping (EventImageDataLoader.Result) -> Void) -> any EventImageDataLoaderTask {
+        return decoratee.loadImageData(from: url) { [weak self] result in
+            self?.dispatch { completition(result) }
         }
     }
 }
