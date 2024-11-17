@@ -8,7 +8,7 @@
 import UIKit
 
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    var refreshController: CompetitionsRefreshViewController?
+    @IBOutlet var refreshController: CompetitionsRefreshViewController?
     
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     var tableModel = [CompetitionsCellController]() {
@@ -31,7 +31,6 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     @objc private func load() {
-        refreshControl = refreshController?.view
         tableView.prefetchDataSource = self
         refreshController?.refresh()
     }

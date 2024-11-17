@@ -14,11 +14,13 @@ public final class CompetitionsUIComposer {
     public static func competitionsComposedWith(competitionsLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) -> CompetitionsViewController {
 
         let presentationAdapter = CompetitionsLoaderPresentationAdapter(feedLoader: competitionsLoader)
-        let refreshController = CompetitionsRefreshViewController(delegate: presentationAdapter)
         
         let bundle = Bundle(for: CompetitionsViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
+        let refreshController = competitionsController.refreshController!
+        refreshController.delegate = presentationAdapter
+        
         competitionsController.refreshController = refreshController
         
         presentationAdapter.presenter = CompetitionsPresenter(
