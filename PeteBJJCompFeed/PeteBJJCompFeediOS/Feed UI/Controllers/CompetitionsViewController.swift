@@ -22,8 +22,6 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = CompetitionsPresenter.title
-        
         onViewIsAppearing = { vc in
             vc.load()
             vc.onViewIsAppearing = nil

@@ -19,6 +19,7 @@ public final class CompetitionsUIComposer {
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
         competitionsController.delegate = presentationAdapter
+        competitionsController.title = CompetitionsPresenter.title
         
         presentationAdapter.presenter = CompetitionsPresenter(
             competitionsView: CompetitionsViewAdapter(controller: competitionsController, imageLoader: imageLoader),
