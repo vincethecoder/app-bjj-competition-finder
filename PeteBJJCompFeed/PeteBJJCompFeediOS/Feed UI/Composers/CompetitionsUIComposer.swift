@@ -18,14 +18,11 @@ public final class CompetitionsUIComposer {
         let bundle = Bundle(for: CompetitionsViewController.self)
         let storyboard = UIStoryboard(name: "Feed", bundle: bundle)
         let competitionsController = storyboard.instantiateInitialViewController() as! CompetitionsViewController
-        let refreshController = competitionsController.refreshController!
-        refreshController.delegate = presentationAdapter
-        
-        competitionsController.refreshController = refreshController
+        competitionsController.delegate = presentationAdapter
         
         presentationAdapter.presenter = CompetitionsPresenter(
             competitionsView: CompetitionsViewAdapter(controller: competitionsController, imageLoader: imageLoader),
-            loadingView: WeakRefVirtualProxy(refreshController))
+            loadingView: WeakRefVirtualProxy(competitionsController))
 
         return competitionsController
     }
@@ -74,7 +71,7 @@ private final class CompetitionsViewAdapter: CompetitionsView {
     }
 }
 
-private final class CompetitionsLoaderPresentationAdapter: CompetitionsRefreshViewControllerDelegate {
+private final class CompetitionsLoaderPresentationAdapter: CompetitionsViewControllerDelegate {
     private let feedLoader: CompetitionsLoader
     var presenter: CompetitionsPresenter?
 
