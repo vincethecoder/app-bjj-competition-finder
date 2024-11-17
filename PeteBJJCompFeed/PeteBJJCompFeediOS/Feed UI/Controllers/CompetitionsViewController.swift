@@ -39,7 +39,6 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     @objc private func load() {
-        tableView.prefetchDataSource = self
         refresh()
     }
     
