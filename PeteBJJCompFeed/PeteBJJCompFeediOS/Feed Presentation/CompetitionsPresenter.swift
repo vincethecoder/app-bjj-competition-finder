@@ -33,27 +33,15 @@ final class CompetitionsPresenter {
     }
     
     func didStartLoadingFeed() {
-        guard Thread.isMainThread else {
-            return DispatchQueue.main.async { [weak self] in self?.didStartLoadingFeed() }
-        }
-
         loadingView.display(CompetitionsLoadingViewModel(isLoading: true))
     }
     
     func didFinishLoadingFeed(with competitions: [Competition]) {
-        guard Thread.isMainThread else {
-            return DispatchQueue.main.async { [weak self] in self?.didFinishLoadingFeed(with: competitions) }
-        }
-        
         competitionsView.display(CompetitionsViewModel(competitions: competitions))
         loadingView.display(CompetitionsLoadingViewModel(isLoading: false))
     }
     
     func didFinishLoadingFeed(with error: Error) {
-        guard Thread.isMainThread else {
-            return DispatchQueue.main.async { [weak self] in self?.didFinishLoadingFeed(with: error) }
-        }
-        
         loadingView.display(CompetitionsLoadingViewModel(isLoading: false))
     }
 }

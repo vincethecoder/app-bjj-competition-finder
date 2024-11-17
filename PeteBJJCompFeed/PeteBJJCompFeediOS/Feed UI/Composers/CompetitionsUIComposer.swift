@@ -13,7 +13,7 @@ public final class CompetitionsUIComposer {
 
     public static func competitionsComposedWith(competitionsLoader: CompetitionsLoader, imageLoader: EventImageDataLoader) -> CompetitionsViewController {
 
-        let presentationAdapter = CompetitionsLoaderPresentationAdapter(feedLoader: competitionsLoader)
+        let presentationAdapter = CompetitionsLoaderPresentationAdapter(feedLoader: MainQueueDispatchDecorator(decoratee: competitionsLoader))
         
         let competitionsController = CompetitionsViewController.makeWith(
             delegate: presentationAdapter,
@@ -24,6 +24,30 @@ public final class CompetitionsUIComposer {
             loadingView: WeakRefVirtualProxy(competitionsController))
 
         return competitionsController
+    }
+}
+
+private final class MainQueueDispatchDecorator<T> {
+    private let decoratee: T
+    
+    init(decoratee: T) {
+        self.decoratee = decoratee
+    }
+    
+    func dispatch(completion: @escaping () -> Void) {
+        guard Thread.isMainThread else {
+            return DispatchQueue.main.async(execute: completion)
+        }
+        
+        completion()
+    }
+}
+
+extension MainQueueDispatchDecorator: CompetitionsLoader where T == CompetitionsLoader {
+    func load(completion: @escaping (CompetitionsLoader.Result) -> Void) {
+        decoratee.load { [weak self] result in
+            self?.dispatch { completion(result) }
+        }
     }
 }
 
