@@ -41,9 +41,9 @@ final class CompetitionsCellController: CompetitionsImageView {
         cell?.dateLabel.text = viewModel.date
         cell?.eventLabel.text = viewModel.name
         cell?.venueLabel.text = viewModel.venue
-        cell?.eventImageView?.image = viewModel.image
-        cell?.eventImageContainer?.isShimmering = viewModel.isLoading
-        cell?.eventImageRetryButton?.isHidden = !viewModel.shouldRetry
+        cell?.eventImageView.setImageAnimated(viewModel.image)
+        cell?.eventImageContainer.isShimmering = viewModel.isLoading
+        cell?.eventImageRetryButton.isHidden = !viewModel.shouldRetry
         cell?.onRetry = delegate.didRequestImage
     }
     
