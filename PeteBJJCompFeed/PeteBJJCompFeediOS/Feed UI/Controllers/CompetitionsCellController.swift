@@ -8,46 +8,40 @@
 import UIKit
 import PeteBJJCompFeed
 
-final class CompetitionsCellController {
-    private let viewModel: CompetitionsImageViewModel<UIImage>
+protocol EventImageCellControllerDelegate {
+    func didRequestImage()
+        func didCancelImageRequest()
+}
+
+final class CompetitionsCellController: CompetitionsImageView {
+    private let delegate: EventImageCellControllerDelegate
+    private lazy var cell = CompetitionsCell()
     
-    init(viewModel: CompetitionsImageViewModel<UIImage>) {
-        self.viewModel = viewModel
+    init(delegate: EventImageCellControllerDelegate) {
+        self.delegate = delegate
     }
     
     func view() -> UITableViewCell {
-        let cell = binded(CompetitionsCell())
-        viewModel.loadImageData()
+        delegate.didRequestImage()
         return cell
     }
     
     func preload() {
-        viewModel.loadImageData()
+        delegate.didRequestImage()
     }
     
     func cancelLoad() {
-        viewModel.cancelImageDataLoad()
+        delegate.didCancelImageRequest()
     }
     
-    private func binded(_ cell: CompetitionsCell) -> CompetitionsCell {
+    func display(_ viewModel: CompetitionsImageViewModel<UIImage>) {
+        cell.dateLabel.text = viewModel.date
         cell.dateLabel.text = viewModel.date
         cell.eventLabel.text = viewModel.name
         cell.venueLabel.text = viewModel.venue
-        cell.eventImageView.image = nil
-        cell.onRetry = viewModel.loadImageData
-        
-        viewModel.onImageLoad = { [weak cell] image in
-            cell?.eventImageView.image = image
-        }
-        
-        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
-            cell?.eventImageContainer.isShimmering = isLoading
-        }
-        
-        viewModel.onShouldRetryImageLoadStateChange = { [weak cell] shouldRetry in
-            cell?.eventImageRetryButton.isHidden = !shouldRetry
-        }
-        
-        return cell
+        cell.eventImageView.image = viewModel.image
+        cell.eventImageContainer.isShimmering = viewModel.isLoading
+        cell.eventImageRetryButton.isHidden = !viewModel.shouldRetry
+        cell.onRetry = delegate.didRequestImage
     }
 }
