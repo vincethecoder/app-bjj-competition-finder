@@ -23,7 +23,8 @@ public final class CompetitionsUIComposer {
             competitionsView: CompetitionsViewAdapter(
                 controller: competitionsController,
                 imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
-            loadingView: WeakRefVirtualProxy(competitionsController))
+            loadingView: WeakRefVirtualProxy(competitionsController),
+            errorView: WeakRefVirtualProxy(competitionsController))
 
         return competitionsController
     }

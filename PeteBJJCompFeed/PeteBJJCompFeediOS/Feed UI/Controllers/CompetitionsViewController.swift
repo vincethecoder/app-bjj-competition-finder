@@ -15,7 +15,7 @@ public final class ErrorView: UIView {
     public var message: String?
 }
 
-public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView {
+public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView, CompetitionsErrorView {
     var delegate: CompetitionsViewControllerDelegate?
     
     public let errorView = ErrorView()
@@ -54,6 +54,10 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
         } else {
             refreshControl?.endRefreshing()
         }
+    }
+    
+    func display(_ viewModel: CompetitionsErrorViewModel) {
+        errorView.message = viewModel.message
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

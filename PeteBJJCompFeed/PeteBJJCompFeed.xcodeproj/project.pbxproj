@@ -76,6 +76,7 @@
 		EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */; };
 		EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */; };
 		EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */; };
+		EFE944952CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -204,6 +205,7 @@
 		EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewAdapter.swift; sourceTree = "<group>"; };
+		EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsErrorViewModel.swift; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -549,6 +551,7 @@
 				EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */,
 				EFF51A422CE99E880076798B /* CompetitionsPresenter.swift */,
 				EFF51A442CE99FAC0076798B /* CompetitionsViewModel.swift */,
+				EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */,
 				EFE944672CEA78F000E3BD75 /* Feed.strings */,
 			);
 			path = "Feed Presentation";
@@ -838,6 +841,7 @@
 				EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */,
 				EF3BFCC92CD782FD008CA424 /* Competition+EventExtensions.swift in Sources */,
 				EFE9445B2CEA593900E3BD75 /* UIImageView+Animations.swift in Sources */,
+				EFE944952CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift in Sources */,
 				EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */,
 				EFF51A432CE99E880076798B /* CompetitionsPresenter.swift in Sources */,
 				EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */,
