@@ -11,8 +11,14 @@ protocol CompetitionsViewControllerDelegate {
     func didRequestFeedRefresh()
 }
 
+public final class ErrorView: UIView {
+    public var message: String?
+}
+
 public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView {
     var delegate: CompetitionsViewControllerDelegate?
+    
+    public let errorView = ErrorView()
     
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     var tableModel = [CompetitionsCellController]() {

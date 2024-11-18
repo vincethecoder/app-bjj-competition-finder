@@ -81,6 +81,14 @@ final class CompetitionsUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: [competitions[0]])
     }
     
+    func test_errorView_doesNotRenderErrorOnLoad() {
+        let (sut, _) = makeSUT()
+        
+        sut.simulateAppearance()
+        
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
     func test_feedImageView_loadsImageURLWhenVisible() {
         let competitions = uniqueCompetitions.models
         let (event01, event02) = (competitions[0], competitions[1])
