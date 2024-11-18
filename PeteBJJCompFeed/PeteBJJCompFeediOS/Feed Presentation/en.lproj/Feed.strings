@@ -1,1 +1,2 @@
 "FEED_VIEW_TITLE" = "BJJ Events";
+"FEED_VIEW_CONNECTION_ERROR" = "Couldn't connect to server";
