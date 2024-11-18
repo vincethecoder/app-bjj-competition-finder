@@ -14,9 +14,31 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="7tK-0K-yQG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="xNg-pc-Zl4" customClass="ErrorView" customModule="PeteBJJCompFeediOS" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDA-dw-ftW">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                                    <state key="normal" title="Error label">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.99951404330000004" green="0.41759261489999999" blue="0.4154433012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="zDA-dw-ftW" firstAttribute="top" secondItem="xNg-pc-Zl4" secondAttribute="top" id="26X-01-HsS"/>
+                                <constraint firstItem="zDA-dw-ftW" firstAttribute="leading" secondItem="xNg-pc-Zl4" secondAttribute="leading" id="Idb-w7-VZs"/>
+                                <constraint firstAttribute="bottom" secondItem="zDA-dw-ftW" secondAttribute="bottom" id="lV0-No-46J"/>
+                                <constraint firstAttribute="trailing" secondItem="zDA-dw-ftW" secondAttribute="trailing" id="nbE-Yy-Q3x"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompetitionsCell" rowHeight="153" id="eb8-FD-u7n" customClass="CompetitionsCell" customModule="PeteBJJCompFeediOS" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="153"/>
+                                <rect key="frame" x="20" y="89.333332061767578" width="353" height="153"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eb8-FD-u7n" id="Z2D-m6-RjZ">
                                     <rect key="frame" x="0.0" y="0.0" width="353" height="153"/>
@@ -164,6 +186,9 @@
                             <action selector="refresh" destination="4nk-W5-E3l" eventType="valueChanged" id="dS3-r9-6AF"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="errorView" destination="xNg-pc-Zl4" id="7yX-0y-1Qm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWl-k2-gJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

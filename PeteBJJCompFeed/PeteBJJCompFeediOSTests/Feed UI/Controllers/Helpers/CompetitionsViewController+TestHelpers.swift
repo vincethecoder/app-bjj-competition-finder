@@ -44,7 +44,7 @@ extension CompetitionsViewController {
     }
     
     var errorMessage: String? {
-        errorView.message
+        errorView?.message
     }
     
     var isShowingLoadingIndicator: Bool {
