@@ -18,23 +18,24 @@
                             <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDA-dw-ftW">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-Sb-Ijl" userLabel="Error">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
-                                    <state key="normal" title="Error label">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                </button>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="0.99951404330000004" green="0.41759261489999999" blue="0.4154433012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstItem="zDA-dw-ftW" firstAttribute="top" secondItem="xNg-pc-Zl4" secondAttribute="top" id="26X-01-HsS"/>
-                                <constraint firstItem="zDA-dw-ftW" firstAttribute="leading" secondItem="xNg-pc-Zl4" secondAttribute="leading" id="Idb-w7-VZs"/>
-                                <constraint firstAttribute="bottom" secondItem="zDA-dw-ftW" secondAttribute="bottom" id="lV0-No-46J"/>
-                                <constraint firstAttribute="trailing" secondItem="zDA-dw-ftW" secondAttribute="trailing" id="nbE-Yy-Q3x"/>
+                                <constraint firstItem="Li4-Sb-Ijl" firstAttribute="leading" secondItem="xNg-pc-Zl4" secondAttribute="leading" id="0bU-Cl-un2"/>
+                                <constraint firstAttribute="trailing" secondItem="Li4-Sb-Ijl" secondAttribute="trailing" id="7cg-4r-aMK"/>
+                                <constraint firstItem="Li4-Sb-Ijl" firstAttribute="top" secondItem="xNg-pc-Zl4" secondAttribute="top" id="9XP-Q6-Qvx"/>
+                                <constraint firstAttribute="bottom" secondItem="Li4-Sb-Ijl" secondAttribute="bottom" id="orl-lO-N6z"/>
                             </constraints>
+                            <connections>
+                                <outlet property="label" destination="Li4-Sb-Ijl" id="xKC-mO-A8w"/>
+                            </connections>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompetitionsCell" rowHeight="153" id="eb8-FD-u7n" customClass="CompetitionsCell" customModule="PeteBJJCompFeediOS" customModuleProvider="target">
@@ -187,7 +188,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <outlet property="errorView" destination="xNg-pc-Zl4" id="7yX-0y-1Qm"/>
+                        <outlet property="errorView" destination="xNg-pc-Zl4" id="naG-8I-AwE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWl-k2-gJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
