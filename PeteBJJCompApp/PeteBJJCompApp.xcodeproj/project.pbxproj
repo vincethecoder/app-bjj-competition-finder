@@ -13,7 +13,26 @@
 		EFE944AF2CED8B2600E3BD75 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EFE944AE2CED8B2600E3BD75 /* Base */; };
 		EFE944B12CED8B2700E3BD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B02CED8B2700E3BD75 /* Assets.xcassets */; };
 		EFE944B42CED8B2700E3BD75 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B32CED8B2700E3BD75 /* Base */; };
+		EFE944D42CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; };
+		EFE944D52CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; };
+		EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EFE944D82CED8EED00E3BD75 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Embed Frameworks */,
+				EFE944D52CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		EFE944A42CED8B2600E3BD75 /* PeteBJJCompApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeteBJJCompApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +43,8 @@
 		EFE944B02CED8B2700E3BD75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFE944B32CED8B2700E3BD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFE944B52CED8B2700E3BD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Frameworks */,
+				EFE944D42CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +65,7 @@
 			children = (
 				EFE944A62CED8B2600E3BD75 /* PeteBJJCompApp */,
 				EFE944A52CED8B2600E3BD75 /* Products */,
+				EFE944D12CED8EED00E3BD75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +91,15 @@
 			path = PeteBJJCompApp;
 			sourceTree = "<group>";
 		};
+		EFE944D12CED8EED00E3BD75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */,
+				EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +110,7 @@
 				EFE944A02CED8B2600E3BD75 /* Sources */,
 				EFE944A12CED8B2600E3BD75 /* Frameworks */,
 				EFE944A22CED8B2600E3BD75 /* Resources */,
+				EFE944D82CED8EED00E3BD75 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
