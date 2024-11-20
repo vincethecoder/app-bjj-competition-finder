@@ -7,6 +7,7 @@
 
 import XCTest
 import PeteBJJCompFeed
+import PeteBJJCompFeediOS
 
 final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
 
@@ -27,13 +28,23 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
         }
     }
     
+    func test_endToEndTestServerGETFeedImageDataResult_matchesFixedTestAccountData() {
+        switch getFeedImageDataResult() {
+        case let .success(data)?:
+            XCTAssertFalse(data.isEmpty, "Expected non-empty image data")
+            
+        case let .failure(error)?:
+            XCTFail("Expected successful image data result, got \(error) instead")
+            
+        default:
+            XCTFail("Expected successful image data result, got no result instead")
+        }
+    }
+    
     // MARK: - Helpers
     
     private func getCompetitionsResult(file: StaticString = #filePath, line: UInt = #line) -> CompetitionsLoader.Result? {
-        let testServerURL = URL(string: "https://bit.ly/4hd1liM")!
-        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
-        let loader = RemoteCompetitionsLoader(url: testServerURL, client: client)
-        trackForMemoryLeaks(client, file: file, line: line)
+        let loader = RemoteCompetitionsLoader(url: competitionsTestServerURL, client: ephemeralClient())
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for load completion")
@@ -46,6 +57,33 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
         wait(for: [exp], timeout: 5.0)
         
         return receivedResult
+    }
+    
+    private func getFeedImageDataResult(file: StaticString = #file, line: UInt = #line) -> EventImageDataLoader.Result? {
+        let loader = RemoteFeedImageDataLoader(client: ephemeralClient())
+        trackForMemoryLeaks(loader, file: file, line: line)
+        
+        let exp = expectation(description: "Wait for load completion")
+        let url = competitionsTestServerURL.appendingPathComponent("73A7F70C-75DA-4C2E-B5A3-EED40DC53AA6/image")
+        
+        var receivedResult: EventImageDataLoader.Result?
+        _ = loader.loadImageData(from: url) { result in
+            receivedResult = result
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 5.0)
+        
+        return receivedResult
+    }
+    
+    private var competitionsTestServerURL: URL {
+        URL(string: "https://bit.ly/4hd1liM")!
+    }
+    
+    private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+        trackForMemoryLeaks(client, file: file, line: line)
+        return client
     }
     
     private func expectedCompetition(at index: Int) -> Competition {

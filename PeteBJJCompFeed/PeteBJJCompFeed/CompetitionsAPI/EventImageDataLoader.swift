@@ -14,5 +14,5 @@ public protocol EventImageDataLoaderTask {
 public protocol EventImageDataLoader {
     typealias Result = Swift.Result<Data, Error>
     
-    func loadImageData(from url: URL, completition: @escaping (Result) -> Void) -> EventImageDataLoaderTask
+    func loadImageData(from url: URL, completion: @escaping (Result) -> Void) -> EventImageDataLoaderTask
 }
