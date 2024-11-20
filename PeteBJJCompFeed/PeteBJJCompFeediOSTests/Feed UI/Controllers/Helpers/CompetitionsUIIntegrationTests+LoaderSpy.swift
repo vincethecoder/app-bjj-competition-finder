@@ -41,7 +41,7 @@ extension CompetitionsUIIntegrationTests {
             }
         }
         
-        private var imageRequests = [(url: URL, completition: (EventImageDataLoader.Result) -> Void)]()
+        private var imageRequests = [(url: URL, completion: (EventImageDataLoader.Result) -> Void)]()
         
         var loadedImageURLs: [URL] {
             imageRequests.map { $0.url }
@@ -49,18 +49,18 @@ extension CompetitionsUIIntegrationTests {
         
         private(set) var cancelledImageURLs = [URL]()
         
-        func loadImageData(from url: URL, completition: @escaping (EventImageDataLoader.Result) -> Void) -> any EventImageDataLoaderTask {
-            imageRequests.append((url, completition))
+        func loadImageData(from url: URL, completion: @escaping (EventImageDataLoader.Result) -> Void) -> any EventImageDataLoaderTask {
+            imageRequests.append((url, completion))
             return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
         }
         
         func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
-            imageRequests[index].completition(.success(imageData))
+            imageRequests[index].completion(.success(imageData))
         }
         
         func completeImageLoadingWithError(at index: Int = 0) {
             let error = anyNSError
-            imageRequests[index].completition(.failure(error))
+            imageRequests[index].completion(.failure(error))
         }
     }
 }

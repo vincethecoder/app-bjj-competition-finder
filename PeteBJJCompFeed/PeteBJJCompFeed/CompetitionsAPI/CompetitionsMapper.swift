@@ -12,12 +12,9 @@ enum CompetitionsMapper {
         let competitions: [RemoteCompetition]
     }
     
-    private static var OK_200: Int { 200 }
-    
     static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteCompetition] {
         
-        guard response.statusCode == OK_200,
-              let root = try? JSONDecoder().decode(Root.self, from: data) else {
+        guard response.isOK, let root = try? JSONDecoder().decode(Root.self, from: data) else {
             throw RemoteCompetitionsLoader.Error.invalidData
         }
         
