@@ -45,11 +45,7 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     func display(_ viewModel: CompetitionsLoadingViewModel) {
-        if viewModel.isLoading {
-            refreshControl?.beginRefreshing()
-        } else {
-            refreshControl?.endRefreshing()
-        }
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
     }
     
     func display(_ viewModel: CompetitionsErrorViewModel) {

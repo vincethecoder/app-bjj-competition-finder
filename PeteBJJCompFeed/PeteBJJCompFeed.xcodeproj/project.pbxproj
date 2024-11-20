@@ -78,6 +78,7 @@
 		EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */; };
 		EFE944952CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */; };
 		EFE944972CEADA7500E3BD75 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944962CEADA7500E3BD75 /* ErrorView.swift */; };
+		EFE9449A2CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -208,6 +209,7 @@
 		EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewAdapter.swift; sourceTree = "<group>"; };
 		EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsErrorViewModel.swift; sourceTree = "<group>"; };
 		EFE944962CEADA7500E3BD75 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */,
 				EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */,
 				EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */,
+				EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */,
 				EFF51A432CE99E880076798B /* CompetitionsPresenter.swift in Sources */,
 				EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */,
+				EFE9449A2CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift in Sources */,
 				EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */,
 				EF96F23D2CDAF31F00DC3B69 /* CompetitionsCellController.swift in Sources */,
 				EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */,
