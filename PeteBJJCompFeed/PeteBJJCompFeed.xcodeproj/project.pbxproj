@@ -76,6 +76,9 @@
 		EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */; };
 		EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */; };
 		EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */; };
+		EFE944952CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */; };
+		EFE944972CEADA7500E3BD75 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944962CEADA7500E3BD75 /* ErrorView.swift */; };
+		EFE9449A2CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */; };
 		EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */; };
 		EFF51A3F2CE99D3F0076798B /* CompetitionsImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */; };
 		EFF51A412CE99E4D0076798B /* CompetitionsLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */; };
@@ -204,6 +207,9 @@
 		EFE944722CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageDataLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		EFE944742CEA8E7800E3BD75 /* CompetitionsLoaderPresentationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderPresentationAdapter.swift; sourceTree = "<group>"; };
 		EFE944762CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsViewAdapter.swift; sourceTree = "<group>"; };
+		EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsErrorViewModel.swift; sourceTree = "<group>"; };
+		EFE944962CEADA7500E3BD75 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Helpers.swift"; sourceTree = "<group>"; };
 		EFF51A3C2CE99BE50076798B /* CompetitionsImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImagePresenter.swift; sourceTree = "<group>"; };
 		EFF51A3E2CE99D3F0076798B /* CompetitionsImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsImageViewModel.swift; sourceTree = "<group>"; };
 		EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionsLoadingViewModel.swift; sourceTree = "<group>"; };
@@ -397,11 +403,10 @@
 		EF96F2292CD9E37E00DC3B69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EFE944982CED692900E3BD75 /* Helpers */,
 				EF3BFCC62CD78290008CA424 /* CompetitionsCell.swift */,
-				EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */,
+				EFE944962CEADA7500E3BD75 /* ErrorView.swift */,
 				EFE944562CEA3E0400E3BD75 /* Feed.storyboard */,
-				EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */,
-				EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -541,6 +546,17 @@
 			path = CompetitionsStoreSpecs;
 			sourceTree = "<group>";
 		};
+		EFE944982CED692900E3BD75 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EF3BFCCA2CD96219008CA424 /* UIView+Shimmering.swift */,
+				EFE944582CEA571E00E3BD75 /* UITableView+Dequeueing.swift */,
+				EFE9445A2CEA593900E3BD75 /* UIImageView+Animations.swift */,
+				EFE944992CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		EFF51A3B2CE99BB50076798B /* Feed Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +565,7 @@
 				EFF51A402CE99E4D0076798B /* CompetitionsLoadingViewModel.swift */,
 				EFF51A422CE99E880076798B /* CompetitionsPresenter.swift */,
 				EFF51A442CE99FAC0076798B /* CompetitionsViewModel.swift */,
+				EFE944942CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift */,
 				EFE944672CEA78F000E3BD75 /* Feed.strings */,
 			);
 			path = "Feed Presentation";
@@ -838,9 +855,11 @@
 				EFF51A3D2CE99BE50076798B /* CompetitionsImagePresenter.swift in Sources */,
 				EF3BFCC92CD782FD008CA424 /* Competition+EventExtensions.swift in Sources */,
 				EFE9445B2CEA593900E3BD75 /* UIImageView+Animations.swift in Sources */,
+				EFE944952CEAD20200E3BD75 /* CompetitionsErrorViewModel.swift in Sources */,
 				EF3BFCCB2CD96219008CA424 /* UIView+Shimmering.swift in Sources */,
 				EFF51A432CE99E880076798B /* CompetitionsPresenter.swift in Sources */,
 				EF96F2402CDAF82B00DC3B69 /* CompetitionsUIComposer.swift in Sources */,
+				EFE9449A2CED6AF700E3BD75 /* UIRefreshControl+Helpers.swift in Sources */,
 				EFE944752CEA8E7900E3BD75 /* CompetitionsLoaderPresentationAdapter.swift in Sources */,
 				EF96F23D2CDAF31F00DC3B69 /* CompetitionsCellController.swift in Sources */,
 				EFE944772CEA8EEC00E3BD75 /* CompetitionsViewAdapter.swift in Sources */,
@@ -853,6 +872,7 @@
 				EFE944712CEA8CCD00E3BD75 /* WeakRefVirtualProxy.swift in Sources */,
 				EFE944732CEA8D9B00E3BD75 /* CompetitionsImageDataLoaderPresentationAdapter.swift in Sources */,
 				EF3BFCC12CD5A7C3008CA424 /* CompetitionsViewController.swift in Sources */,
+				EFE944972CEADA7500E3BD75 /* ErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

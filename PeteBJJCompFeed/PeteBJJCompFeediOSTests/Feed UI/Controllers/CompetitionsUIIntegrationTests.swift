@@ -81,6 +81,19 @@ final class CompetitionsUIIntegrationTests: XCTestCase {
         assertThat(sut, isRendering: [competitions[0]])
     }
     
+    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        XCTAssertEqual(sut.errorMessage, nil)
+        
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
     func test_feedImageView_loadsImageURLWhenVisible() {
         let competitions = uniqueCompetitions.models
         let (event01, event02) = (competitions[0], competitions[1])

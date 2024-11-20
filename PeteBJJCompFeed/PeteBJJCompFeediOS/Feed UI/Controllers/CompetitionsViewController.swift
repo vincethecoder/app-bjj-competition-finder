@@ -11,8 +11,10 @@ protocol CompetitionsViewControllerDelegate {
     func didRequestFeedRefresh()
 }
 
-public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView {
+public final class CompetitionsViewController: UITableViewController, UITableViewDataSourcePrefetching, CompetitionsLoadingView, CompetitionsErrorView {
     var delegate: CompetitionsViewControllerDelegate?
+    
+    @IBOutlet private(set) public var errorView: ErrorView?
     
     private var onViewIsAppearing: ((CompetitionsViewController) -> Void)?
     var tableModel = [CompetitionsCellController]() {
@@ -43,11 +45,11 @@ public final class CompetitionsViewController: UITableViewController, UITableVie
     }
     
     func display(_ viewModel: CompetitionsLoadingViewModel) {
-        if viewModel.isLoading {
-            refreshControl?.beginRefreshing()
-        } else {
-            refreshControl?.endRefreshing()
-        }
+        refreshControl?.update(isRefreshing: viewModel.isLoading)
+    }
+    
+    func display(_ viewModel: CompetitionsErrorViewModel) {
+        errorView?.message = viewModel.message
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

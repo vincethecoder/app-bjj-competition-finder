@@ -14,9 +14,37 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="7tK-0K-yQG">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="xNg-pc-Zl4" customClass="ErrorView" customModule="PeteBJJCompFeediOS" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Li4-Sb-Ijl" userLabel="Error">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="34"/>
+                                    <gestureRecognizers/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="NJj-kS-ynR" appends="YES" id="TyP-vc-OOn"/>
+                                    </connections>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.99951404330000004" green="0.41759261489999999" blue="0.4154433012" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="Li4-Sb-Ijl" firstAttribute="leading" secondItem="xNg-pc-Zl4" secondAttribute="leading" id="0bU-Cl-un2"/>
+                                <constraint firstAttribute="trailing" secondItem="Li4-Sb-Ijl" secondAttribute="trailing" id="7cg-4r-aMK"/>
+                                <constraint firstItem="Li4-Sb-Ijl" firstAttribute="top" secondItem="xNg-pc-Zl4" secondAttribute="top" id="9XP-Q6-Qvx"/>
+                                <constraint firstAttribute="bottom" secondItem="Li4-Sb-Ijl" secondAttribute="bottom" id="orl-lO-N6z"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="label" destination="Li4-Sb-Ijl" id="xKC-mO-A8w"/>
+                                <outletCollection property="gestureRecognizers" destination="NJj-kS-ynR" appends="YES" id="5r2-6p-cSO"/>
+                            </connections>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompetitionsCell" rowHeight="153" id="eb8-FD-u7n" customClass="CompetitionsCell" customModule="PeteBJJCompFeediOS" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="153"/>
+                                <rect key="frame" x="20" y="89.333332061767578" width="353" height="153"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eb8-FD-u7n" id="Z2D-m6-RjZ">
                                     <rect key="frame" x="0.0" y="0.0" width="353" height="153"/>
@@ -164,8 +192,16 @@
                             <action selector="refresh" destination="4nk-W5-E3l" eventType="valueChanged" id="dS3-r9-6AF"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="errorView" destination="xNg-pc-Zl4" id="naG-8I-AwE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWl-k2-gJ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NJj-kS-ynR">
+                    <connections>
+                        <action selector="hideMessageAnimated" destination="xNg-pc-Zl4" id="oX6-T7-i9y"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1069.4656488549617" y="-277.46478873239437"/>
         </scene>

@@ -16,13 +16,19 @@ protocol CompetitionsView {
     func display(_ viewModel: CompetitionsViewModel)
 }
 
+protocol CompetitionsErrorView {
+    func display(_ viewModel: CompetitionsErrorViewModel)
+}
+
 final class CompetitionsPresenter {
     private let competitionsView: CompetitionsView
     private let loadingView: CompetitionsLoadingView
+    private let errorView: CompetitionsErrorView
     
-    init(competitionsView: CompetitionsView, loadingView: CompetitionsLoadingView) {
+    init(competitionsView: CompetitionsView, loadingView: CompetitionsLoadingView, errorView: CompetitionsErrorView) {
         self.competitionsView = competitionsView
         self.loadingView = loadingView
+        self.errorView = errorView
     }
     
     static var title: String {
@@ -32,7 +38,15 @@ final class CompetitionsPresenter {
                           comment: "Title for the feed view")
     }
     
+    private var competitionsLoadError: String {
+        NSLocalizedString("FEED_VIEW_CONNECTION_ERROR",
+                          tableName: "Feed",
+                          bundle: Bundle(for: CompetitionsPresenter.self),
+                          comment: "Error message displayed when we can't load the image feed from the server")
+    }
+    
     func didStartLoadingFeed() {
+        errorView.display(.noError)
         loadingView.display(CompetitionsLoadingViewModel(isLoading: true))
     }
     
@@ -42,6 +56,7 @@ final class CompetitionsPresenter {
     }
     
     func didFinishLoadingFeed(with error: Error) {
+        errorView.display(.error(message: competitionsLoadError))
         loadingView.display(CompetitionsLoadingViewModel(isLoading: false))
     }
 }

@@ -27,3 +27,8 @@ extension WeakRefVirtualProxy: CompetitionsImageView where T: CompetitionsImageV
     }
 }
 
+extension WeakRefVirtualProxy: CompetitionsErrorView where T: CompetitionsErrorView {
+    func display(_ viewModel: CompetitionsErrorViewModel) {
+        object?.display(viewModel)
+    }
+}
