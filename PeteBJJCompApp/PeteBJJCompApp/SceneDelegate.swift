@@ -7,9 +7,10 @@
 
 import os
 import CoreData
+import SwiftUI
 import UIKit
 import PeteBJJCompFeed
-import PeteBJJCompFeediOS
+import PeteBJJCompFeedSwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -41,9 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        window?.rootViewController = CompetitionsUIComposer.competitionsComposedWith(
-            competitionsLoader: makeCompetitionsLoader(),
-            imageLoader: RemoteFeedImageDataLoader(client: httpClient))
+        let viewModel = CompetitionsListViewModel(loader: makeCompetitionsLoader())
+        window?.rootViewController = UIHostingController(rootView: CompetitionsFeedView(viewModel: viewModel))
 
         window?.makeKeyAndVisible()
     }

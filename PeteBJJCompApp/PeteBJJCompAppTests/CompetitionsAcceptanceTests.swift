@@ -6,33 +6,34 @@
 //
 
 import Testing
+import SwiftUI
 import UIKit
 import PeteBJJCompFeed
-import PeteBJJCompFeediOS
+import PeteBJJCompFeedSwiftUI
 @testable import PeteBJJCompApp
 
 @MainActor
 struct CompetitionsAcceptanceTests {
 
-    @Test func onLaunch_displaysRemoteCompetitionsWhenCustomerHasConnectivity() throws {
-        let competitions = try launch(httpClient: .online(response), store: .empty)
+    @Test func onLaunch_displaysRemoteCompetitionsWhenCustomerHasConnectivity() async throws {
+        let competitions = try await launch(httpClient: .online(response), store: .empty)
 
-        #expect(competitions.numberOfRenderedCompetitionViews() == 2)
+        #expect(competitions.rows.count == 2)
     }
 
-    @Test func onLaunch_displaysCachedRemoteCompetitionsWhenCustomerHasNoConnectivity() throws {
+    @Test func onLaunch_displaysCachedRemoteCompetitionsWhenCustomerHasNoConnectivity() async throws {
         let sharedStore = InMemoryCompetitionsStore.empty
-        _ = try launch(httpClient: .online(response), store: sharedStore)
+        _ = try await launch(httpClient: .online(response), store: sharedStore)
 
-        let offlineCompetitions = try launch(httpClient: .offline, store: sharedStore)
+        let offlineCompetitions = try await launch(httpClient: .offline, store: sharedStore)
 
-        #expect(offlineCompetitions.numberOfRenderedCompetitionViews() == 2)
+        #expect(offlineCompetitions.rows.count == 2)
     }
 
-    @Test func onLaunch_displaysEmptyCompetitionsWhenCustomerHasNoConnectivityAndEmptyCache() throws {
-        let competitions = try launch(httpClient: .offline, store: .empty)
+    @Test func onLaunch_displaysEmptyCompetitionsWhenCustomerHasNoConnectivityAndEmptyCache() async throws {
+        let competitions = try await launch(httpClient: .offline, store: .empty)
 
-        #expect(competitions.numberOfRenderedCompetitionViews() == 0)
+        #expect(competitions.rows.isEmpty)
     }
 
     @Test func onEnteringBackground_deletesExpiredCompetitionsCache() throws {
@@ -53,15 +54,18 @@ struct CompetitionsAcceptanceTests {
 
     // MARK: - Helpers
 
-    private func launch(httpClient: HTTPClientStub, store: InMemoryCompetitionsStore) throws -> CompetitionsViewController {
+    /// Launches the composed app and loads the feed through its view model, the
+    /// same call the feed view makes in `.task` when it appears.
+    private func launch(httpClient: HTTPClientStub, store: InMemoryCompetitionsStore) async throws -> CompetitionsListViewModel {
         let sut = SceneDelegate(httpClient: httpClient, store: store)
         sut.window = UIWindow()
         sut.configureWindow()
-        // Laying out the window runs the real appearance cycle, which loads
-        // the feed. It only appears if configureWindow made the window visible.
-        sut.window?.layoutIfNeeded()
 
-        return try #require(sut.window?.rootViewController as? CompetitionsViewController)
+        let feed = try #require(sut.window?.rootViewController as? UIHostingController<CompetitionsFeedView>)
+        #expect(sut.window?.isHidden == false, "Expected configureWindow to make the window visible")
+
+        await feed.rootView.viewModel.load()
+        return feed.rootView.viewModel
     }
 
     private func enterBackground(with store: InMemoryCompetitionsStore) throws {
@@ -105,11 +109,5 @@ struct CompetitionsAcceptanceTests {
             "rankingPoints": 1000
         }
         """
-    }
-}
-
-private extension CompetitionsViewController {
-    func numberOfRenderedCompetitionViews() -> Int {
-        tableView.numberOfRows(inSection: 0)
     }
 }
