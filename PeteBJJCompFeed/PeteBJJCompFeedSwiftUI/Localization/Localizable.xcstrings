@@ -1,0 +1,46 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "FEED_VIEW_CONNECTION_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Δεν ήταν δυνατή η σύνδεση στο διακομιστή" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't connect to server" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Não foi possível conectar com o servidor" } }
+      }
+    },
+    "FEED_VIEW_DISMISS_ERROR_HINT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Πατήστε για απόκρυψη" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tap to dismiss" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Toque para dispensar" } }
+      }
+    },
+    "FEED_VIEW_EMPTY_DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Σύρετε προς τα κάτω για ανανέωση." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pull down to refresh." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Puxe para baixo para atualizar." } }
+      }
+    },
+    "FEED_VIEW_EMPTY_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Δεν υπάρχουν διοργανώσεις" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No Competitions" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nenhuma competição" } }
+      }
+    },
+    "FEED_VIEW_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εκδηλώσεις BJJ" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "BJJ Events" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Eventos de Jiu-Jitsu" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
