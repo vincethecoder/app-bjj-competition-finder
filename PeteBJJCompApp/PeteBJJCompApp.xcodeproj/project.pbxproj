@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		EFE944A82CED8B2600E3BD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944A72CED8B2600E3BD75 /* AppDelegate.swift */; };
 		EFE944AA2CED8B2600E3BD75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944A92CED8B2600E3BD75 /* SceneDelegate.swift */; };
-		EFE944AC2CED8B2600E3BD75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944AB2CED8B2600E3BD75 /* ViewController.swift */; };
-		EFE944AF2CED8B2600E3BD75 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EFE944AE2CED8B2600E3BD75 /* Base */; };
 		EFE944B12CED8B2700E3BD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B02CED8B2700E3BD75 /* Assets.xcassets */; };
 		EFE944B42CED8B2700E3BD75 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B32CED8B2700E3BD75 /* Base */; };
 		EFE944D42CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; };
@@ -38,8 +36,6 @@
 		EFE944A42CED8B2600E3BD75 /* PeteBJJCompApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeteBJJCompApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE944A72CED8B2600E3BD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE944A92CED8B2600E3BD75 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EFE944AB2CED8B2600E3BD75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EFE944AE2CED8B2600E3BD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFE944B02CED8B2700E3BD75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFE944B32CED8B2700E3BD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFE944B52CED8B2700E3BD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,8 +78,6 @@
 			children = (
 				EFE944A72CED8B2600E3BD75 /* AppDelegate.swift */,
 				EFE944A92CED8B2600E3BD75 /* SceneDelegate.swift */,
-				EFE944AB2CED8B2600E3BD75 /* ViewController.swift */,
-				EFE944AD2CED8B2600E3BD75 /* Main.storyboard */,
 				EFE944B02CED8B2700E3BD75 /* Assets.xcassets */,
 				EFE944B22CED8B2700E3BD75 /* LaunchScreen.storyboard */,
 				EFE944B52CED8B2700E3BD75 /* Info.plist */,
@@ -161,7 +155,6 @@
 			files = (
 				EFE944B12CED8B2700E3BD75 /* Assets.xcassets in Resources */,
 				EFE944B42CED8B2700E3BD75 /* Base in Resources */,
-				EFE944AF2CED8B2600E3BD75 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +165,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFE944AC2CED8B2600E3BD75 /* ViewController.swift in Sources */,
 				EFE944A82CED8B2600E3BD75 /* AppDelegate.swift in Sources */,
 				EFE944AA2CED8B2600E3BD75 /* SceneDelegate.swift in Sources */,
 			);
@@ -181,14 +173,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EFE944AD2CED8B2600E3BD75 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EFE944AE2CED8B2600E3BD75 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EFE944B22CED8B2700E3BD75 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -331,7 +315,6 @@
 				INFOPLIST_FILE = PeteBJJCompApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -359,7 +342,6 @@
 				INFOPLIST_FILE = PeteBJJCompApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (

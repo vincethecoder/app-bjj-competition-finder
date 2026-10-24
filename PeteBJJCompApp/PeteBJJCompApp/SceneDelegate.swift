@@ -14,8 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
-        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        window = UIWindow(windowScene: windowScene)
+
         let url = URL(string: "https://bit.ly/4hd1liM")!
         let session = URLSession(configuration: .ephemeral)
         let client = URLSessionHTTPClient(session: session)
@@ -27,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             imageLoader: imageLoader)
         
         window?.rootViewController = competitionsViewController
+        window?.makeKeyAndVisible()
     }
 
 }

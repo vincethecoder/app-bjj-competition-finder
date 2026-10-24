@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Xcode per-user state
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.pbxuser
+
+# Build products
+build/
+DerivedData/
+*.ipa
+*.xcarchive
+*.dSYM.zip
+*.dSYM
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Editors and local tool settings
+.vscode/
+.claude/settings.local.json

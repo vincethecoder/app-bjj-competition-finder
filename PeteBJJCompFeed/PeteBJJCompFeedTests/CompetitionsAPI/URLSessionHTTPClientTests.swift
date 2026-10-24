@@ -36,8 +36,8 @@ final class URLSessionHTTPClientTests: XCTestCase {
         }
         
         makeSUT().get(from: url) { _ in }
-        
-        wait(for: [exp], timeout: 1.0)
+
+        wait(for: [exp], timeout: requestTimeout)
     }
     
     func test_getFromURL_failsOnRequestError() {
@@ -128,7 +128,11 @@ final class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         })
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: requestTimeout)
         return receivedResult
     }
+
+    // Requests go through a real URLSession, which can take over a second
+    // to complete on a cold CI simulator. Passing tests don't wait this long.
+    private let requestTimeout: TimeInterval = 5.0
 }
