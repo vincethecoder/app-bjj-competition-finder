@@ -7,7 +7,6 @@
 
 import XCTest
 import PeteBJJCompFeed
-import PeteBJJCompFeediOS
 
 final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
 
