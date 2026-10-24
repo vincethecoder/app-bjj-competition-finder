@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02FC481384490DE579062F0F /* CompetitionsAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D9F6F8C748AC4A67A5FF70 /* CompetitionsAcceptanceTests.swift */; };
+		215A0559866EF92462B0FBA8 /* MemoryLeakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BDB83C968E10FB0DF4E380 /* MemoryLeakTracker.swift */; };
+		234C4A80E423A3C2C3843359 /* InMemoryCompetitionsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3167C932EAE4669EAA99F3 /* InMemoryCompetitionsStore.swift */; };
+		2FC2D7A3AC07AA8AA572AE32 /* CompetitionsLoaderCacheDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F4668C49AD653B097F1CA1 /* CompetitionsLoaderCacheDecoratorTests.swift */; };
+		3A6D1307F22D371A24CF3D8B /* CompetitionsLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3E2C81CD4E8F68E9214C2E /* CompetitionsLoaderCacheDecorator.swift */; };
+		51C82145AE6BE1C3FAABCFE0 /* CompetitionsLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421672ED2453A9EBEF9A6A72 /* CompetitionsLoaderWithFallbackCompositeTests.swift */; };
+		6561050F576DC062FDFED24D /* HTTPClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEF0FF74E4EABD0AE7953B4 /* HTTPClientStub.swift */; };
+		8BC8F5F619CC65A20515DBB9 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F67A1A12D5AC4BBF58AC81 /* SharedTestHelpers.swift */; };
+		DBCFC299E1664A6029249E3E /* CompetitionsLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1102756E3427E656863CC2 /* CompetitionsLoaderStub.swift */; };
+		ED5C504444899F79E282B580 /* CompetitionsLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A6FCB84804FD5F5B1C979 /* CompetitionsLoaderWithFallbackComposite.swift */; };
 		EFE944A82CED8B2600E3BD75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944A72CED8B2600E3BD75 /* AppDelegate.swift */; };
 		EFE944AA2CED8B2600E3BD75 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE944A92CED8B2600E3BD75 /* SceneDelegate.swift */; };
 		EFE944B12CED8B2700E3BD75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B02CED8B2700E3BD75 /* Assets.xcassets */; };
@@ -15,7 +25,18 @@
 		EFE944D52CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; };
 		EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F3EAEF1660EC8D5B8CF17C95 /* CompetitionsLoader+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90A58446AD7948B2F7488BB /* CompetitionsLoader+TestHelpers.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D19EA2475EC1294B6F00D80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFE9449C2CED8B2600E3BD75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFE944A32CED8B2600E3BD75;
+			remoteInfo = PeteBJJCompApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		EFE944D82CED8EED00E3BD75 /* Embed Frameworks */ = {
@@ -33,6 +54,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		011A6FCB84804FD5F5B1C979 /* CompetitionsLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		0BCBEC0A12AADFCF8B44DC8A /* PeteBJJCompAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeteBJJCompAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C3E2C81CD4E8F68E9214C2E /* CompetitionsLoaderCacheDecorator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderCacheDecorator.swift; sourceTree = "<group>"; };
+		421672ED2453A9EBEF9A6A72 /* CompetitionsLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		68F4668C49AD653B097F1CA1 /* CompetitionsLoaderCacheDecoratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderCacheDecoratorTests.swift; sourceTree = "<group>"; };
+		74BDB83C968E10FB0DF4E380 /* MemoryLeakTracker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MemoryLeakTracker.swift; sourceTree = "<group>"; };
+		9B3167C932EAE4669EAA99F3 /* InMemoryCompetitionsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InMemoryCompetitionsStore.swift; sourceTree = "<group>"; };
+		B3D9F6F8C748AC4A67A5FF70 /* CompetitionsAcceptanceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsAcceptanceTests.swift; sourceTree = "<group>"; };
+		D90A58446AD7948B2F7488BB /* CompetitionsLoader+TestHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsLoader+TestHelpers.swift"; sourceTree = "<group>"; };
+		DC1102756E3427E656863CC2 /* CompetitionsLoaderStub.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsLoaderStub.swift; sourceTree = "<group>"; };
+		EAEF0FF74E4EABD0AE7953B4 /* HTTPClientStub.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
 		EFE944A42CED8B2600E3BD75 /* PeteBJJCompApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeteBJJCompApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE944A72CED8B2600E3BD75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFE944A92CED8B2600E3BD75 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,9 +73,17 @@
 		EFE944B52CED8B2700E3BD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6F67A1A12D5AC4BBF58AC81 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DE305AE3A9489B54B97D22EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFE944A12CED8B2600E3BD75 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,12 +96,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02C50F0CC6A5CB964129BF79 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D90A58446AD7948B2F7488BB /* CompetitionsLoader+TestHelpers.swift */,
+				DC1102756E3427E656863CC2 /* CompetitionsLoaderStub.swift */,
+				EAEF0FF74E4EABD0AE7953B4 /* HTTPClientStub.swift */,
+				9B3167C932EAE4669EAA99F3 /* InMemoryCompetitionsStore.swift */,
+				74BDB83C968E10FB0DF4E380 /* MemoryLeakTracker.swift */,
+				F6F67A1A12D5AC4BBF58AC81 /* SharedTestHelpers.swift */,
+			);
+			name = Helpers;
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BF4EFBE1B768CCC7028BBA72 /* PeteBJJCompAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				02C50F0CC6A5CB964129BF79 /* Helpers */,
+				B3D9F6F8C748AC4A67A5FF70 /* CompetitionsAcceptanceTests.swift */,
+				68F4668C49AD653B097F1CA1 /* CompetitionsLoaderCacheDecoratorTests.swift */,
+				421672ED2453A9EBEF9A6A72 /* CompetitionsLoaderWithFallbackCompositeTests.swift */,
+			);
+			name = PeteBJJCompAppTests;
+			path = PeteBJJCompAppTests;
+			sourceTree = "<group>";
+		};
 		EFE9449B2CED8B2600E3BD75 = {
 			isa = PBXGroup;
 			children = (
 				EFE944A62CED8B2600E3BD75 /* PeteBJJCompApp */,
 				EFE944A52CED8B2600E3BD75 /* Products */,
 				EFE944D12CED8EED00E3BD75 /* Frameworks */,
+				BF4EFBE1B768CCC7028BBA72 /* PeteBJJCompAppTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				EFE944A42CED8B2600E3BD75 /* PeteBJJCompApp.app */,
+				0BCBEC0A12AADFCF8B44DC8A /* PeteBJJCompAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,6 +149,8 @@
 				EFE944B02CED8B2700E3BD75 /* Assets.xcassets */,
 				EFE944B22CED8B2700E3BD75 /* LaunchScreen.storyboard */,
 				EFE944B52CED8B2700E3BD75 /* Info.plist */,
+				011A6FCB84804FD5F5B1C979 /* CompetitionsLoaderWithFallbackComposite.swift */,
+				2C3E2C81CD4E8F68E9214C2E /* CompetitionsLoaderCacheDecorator.swift */,
 			);
 			path = PeteBJJCompApp;
 			sourceTree = "<group>";
@@ -97,6 +167,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		361690ADF7D592DF11B63BD1 /* PeteBJJCompAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42EE90452150730B75E8E6EA /* Build configuration list for PBXNativeTarget "PeteBJJCompAppTests" */;
+			buildPhases = (
+				97CA4B796E96CA5F8820355C /* Sources */,
+				DE305AE3A9489B54B97D22EA /* Frameworks */,
+				46709DD0F4DA9CCCEBE86C95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C309BF1CF168AAD695287E2 /* PBXTargetDependency */,
+			);
+			name = PeteBJJCompAppTests;
+			productName = PeteBJJCompAppTests;
+			productReference = 0BCBEC0A12AADFCF8B44DC8A /* PeteBJJCompAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EFE944A32CED8B2600E3BD75 /* PeteBJJCompApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFE944B82CED8B2700E3BD75 /* Build configuration list for PBXNativeTarget "PeteBJJCompApp" */;
@@ -144,11 +232,19 @@
 			projectRoot = "";
 			targets = (
 				EFE944A32CED8B2600E3BD75 /* PeteBJJCompApp */,
+				361690ADF7D592DF11B63BD1 /* PeteBJJCompAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		46709DD0F4DA9CCCEBE86C95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFE944A22CED8B2600E3BD75 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,16 +257,43 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		97CA4B796E96CA5F8820355C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02FC481384490DE579062F0F /* CompetitionsAcceptanceTests.swift in Sources */,
+				2FC2D7A3AC07AA8AA572AE32 /* CompetitionsLoaderCacheDecoratorTests.swift in Sources */,
+				51C82145AE6BE1C3FAABCFE0 /* CompetitionsLoaderWithFallbackCompositeTests.swift in Sources */,
+				F3EAEF1660EC8D5B8CF17C95 /* CompetitionsLoader+TestHelpers.swift in Sources */,
+				DBCFC299E1664A6029249E3E /* CompetitionsLoaderStub.swift in Sources */,
+				6561050F576DC062FDFED24D /* HTTPClientStub.swift in Sources */,
+				234C4A80E423A3C2C3843359 /* InMemoryCompetitionsStore.swift in Sources */,
+				215A0559866EF92462B0FBA8 /* MemoryLeakTracker.swift in Sources */,
+				8BC8F5F619CC65A20515DBB9 /* SharedTestHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFE944A02CED8B2600E3BD75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EFE944A82CED8B2600E3BD75 /* AppDelegate.swift in Sources */,
 				EFE944AA2CED8B2600E3BD75 /* SceneDelegate.swift in Sources */,
+				ED5C504444899F79E282B580 /* CompetitionsLoaderWithFallbackComposite.swift in Sources */,
+				3A6D1307F22D371A24CF3D8B /* CompetitionsLoaderCacheDecorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C309BF1CF168AAD695287E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PeteBJJCompApp;
+			target = EFE944A32CED8B2600E3BD75 /* PeteBJJCompApp */;
+			targetProxy = 7D19EA2475EC1294B6F00D80 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EFE944B22CED8B2700E3BD75 /* LaunchScreen.storyboard */ = {
@@ -184,6 +307,47 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		704BE5FD59BEA971C8316403 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PeteBJJCompApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PeteBJJCompApp";
+			};
+			name = Debug;
+		};
+		D22E21325B39F6E401947BFB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KQ87GPXAXK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vincethecoder.PeteBJJCompAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PeteBJJCompApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PeteBJJCompApp";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		EFE944B62CED8B2700E3BD75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -360,6 +524,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		42EE90452150730B75E8E6EA /* Build configuration list for PBXNativeTarget "PeteBJJCompAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D22E21325B39F6E401947BFB /* Release */,
+				704BE5FD59BEA971C8316403 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFE9449F2CED8B2600E3BD75 /* Build configuration list for PBXProject "PeteBJJCompApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
