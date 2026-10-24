@@ -2,21 +2,25 @@
 
 [![Build and Test](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
 
-An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a SwiftUI feed; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
+An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a server-driven SwiftUI poster grid; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**111 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
+**159 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
-<!-- TODO: add 2–3 Simulator screenshots or a short GIF (feed, loading shimmer, error state) -->
+| Server-driven grid | Dark mode | Offline, cached screen | Built on the device (pt-BR) |
+|---|---|---|---|
+| <img src="docs/screenshots/server-driven-grid/after-server-iphone-light.png" width="200" alt="Poster grid grouped by month with filter chips"> | <img src="docs/screenshots/server-driven-grid/after-server-iphone-dark.png" width="200" alt="The same grid in dark mode"> | <img src="docs/screenshots/server-driven-grid/after-offline-cached-screen.png" width="200" alt="Cached grid under a connection error banner"> | <img src="docs/screenshots/server-driven-grid/after-live-pt-BR.png" width="200" alt="Grid built from competitions only, in Portuguese"> |
 
 ## Features
 
-- **SwiftUI competitions feed** with pull to refresh, a loading indicator, an empty state, and a tappable error banner that VoiceOver announces
+- **Server-driven poster grid** in SwiftUI: the server's `screen` object picks the sections, order, filters, copy and badges from a closed set of components, and the app builds the same screen on the device when an older server or cache sends none
+- **Adaptive layout:** 2 columns on iPhone, 3 at regular width, 1 at the largest text sizes, from size classes and Dynamic Type rather than the screen width
+- Pull to refresh, filter chips, a `ContentUnavailableView` empty state, and a tappable error banner that VoiceOver announces; each card is one button that opens the event
 - **Dynamic Type and dark mode** supported down to the largest accessibility text sizes
-- **Localized** in English, Portuguese (pt-BR) and Greek, with tests that fail if any localization key is missing
-- **Works offline:** competitions load from the network and are saved to a Core Data cache; with no connection, the app shows the cached competitions instead
-- **Core Data cache** with a 7-day max-age cache policy, a versioned data model, and expired-cache cleanup whenever the app moves to the background
+- **Localized** in English, Portuguese (pt-BR) and Greek, with tests that fail if any localization key is missing; requests send `Accept-Language` so server copy matches
+- **Works offline:** the competitions and their screen load from the network and are saved together to a Core Data cache; with no connection, the app shows the cached screen with a banner explaining why
+- **Core Data cache** with a 7-day max-age cache policy, a versioned data model (v3 adds the screen, with a migration test), and expired-cache cleanup whenever the app moves to the background
 
 ## Architecture
 
@@ -26,8 +30,8 @@ flowchart TD
     SwiftUI["PeteBJJCompFeedSwiftUI<br/>SwiftUI views, @Observable view model, async/await (Swift 6)"]
     UI["PeteBJJCompFeediOS<br/>UIKit views, controllers, MVP presentation"]
     subgraph Core["PeteBJJCompFeed (no UIKit)"]
-        Feature["CompetitionsFeature<br/>Competition model, CompetitionsLoader protocol"]
-        API["CompetitionsAPI<br/>RemoteCompetitionsLoader, URLSessionHTTPClient"]
+        Feature["CompetitionsFeature<br/>Competition, CompetitionsScreen, CompetitionsFeedLoader"]
+        API["CompetitionsAPI<br/>RemoteCompetitionsFeedLoader, URLSessionHTTPClient"]
         Cache["CompetitionsCache<br/>LocalCompetitionsLoader, CoreDataCompetitionsStore"]
     end
     App --> SwiftUI
@@ -46,12 +50,13 @@ Patterns worth a look:
 | Concern | Where |
 |---|---|
 | Composition root | [`SceneDelegate.swift`](PeteBJJCompApp/PeteBJJCompApp/SceneDelegate.swift) wires concrete loaders into the UI |
-| Offline-first without touching the UI | [`CompetitionsLoaderWithFallbackComposite`](PeteBJJCompApp/PeteBJJCompApp/CompetitionsLoaderWithFallbackComposite.swift) (remote, then cache) and [`CompetitionsLoaderCacheDecorator`](PeteBJJCompApp/PeteBJJCompApp/CompetitionsLoaderCacheDecorator.swift) (saves remote results) |
+| Offline-first without touching the UI | [`CompetitionsFeedLoaderWithFallbackComposite`](PeteBJJCompApp/PeteBJJCompApp/CompetitionsFeedLoaderWithFallbackComposite.swift) (remote, then cache) and [`CompetitionsFeedLoaderCacheDecorator`](PeteBJJCompApp/PeteBJJCompApp/CompetitionsFeedLoaderCacheDecorator.swift) (saves remote results) |
 | UI composition | [`CompetitionsUIComposer`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/CompetitionsUIComposer.swift) builds the feed from presenters and adapters |
 | Threading kept out of the UI | [`MainQueueDispatchDecorator`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/MainQueueDispatchDecorator.swift) |
 | Breaking retain cycles | [`WeakRefVirtualProxy`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/WeakRefVirtualProxy.swift) |
-| Bridging callbacks to async/await | [`CompetitionsLoader+Async`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Async/CompetitionsLoader+Async.swift) wraps the completion-based loader for the Swift 6 module |
-| Testable SwiftUI state | [`CompetitionsListViewModel`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Feed/CompetitionsListViewModel.swift), an `@MainActor @Observable` view model tested without rendering views |
+| Bridging callbacks to async/await | [`CompetitionsFeedLoader+Async`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Async/CompetitionsFeedLoader+Async.swift) wraps the completion-based loader for the Swift 6 module |
+| Server-driven UI with a device fallback | [`RemoteCompetitionsScreen`](PeteBJJCompFeed/PeteBJJCompFeed/CompetitionsAPI/RemoteCompetitionsScreen.swift) decodes leniently, skipping unknown components; [`PosterScreenMapper`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Presentation/PosterScreenMapper.swift) uses the server screen or builds one from the competitions |
+| Testable SwiftUI state | [`CompetitionsGridViewModel`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Feed/CompetitionsGridViewModel.swift), an `@MainActor @Observable` view model tested without rendering views |
 | Cache rules isolated from storage | [`CompetitionsCachePolicy`](PeteBJJCompFeed/PeteBJJCompFeed/CompetitionsCache/CompetitionsCachePolicy.swift) |
 
 ## Requirements
@@ -67,7 +72,7 @@ cd app-bjj-competition-finder
 open PeteBJJCompApp/PeteBJJCompApp.xcworkspace
 ```
 
-Select the `PeteBJJCompApp` scheme and an iPhone simulator, then run. The app loads its data from a [mock JSON API hosted as a gist](https://gist.github.com/vincethecoder/6cd8e98604d3e5587be79c7f7a4ff3e4).
+Select the `PeteBJJCompApp` scheme and an iPhone simulator, then run. The app loads its data from a [mock JSON API hosted as a gist](https://gist.github.com/vincethecoder/6cd8e98604d3e5587be79c7f7a4ff3e4). That payload has no `screen` yet, so the app builds the grid on the device. In debug builds, pass `-CompetitionsURL <url>` as a launch argument to load a different feed, such as a local file server with a `screen` object.
 
 ## Running the tests
 
@@ -80,17 +85,17 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
-| Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 59 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| SwiftUI view model, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 16 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 79 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
+| SwiftUI view model, screen mapping, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 37 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
 | UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
-| Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
+| Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 1 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |
 
-The app suite runs from the `PeteBJJCompApp` directory. It's written in Swift Testing and covers the offline-first composition plus acceptance tests that launch the composed app online, offline and in the background:
+The app suite runs from the `PeteBJJCompApp` directory. It's written in Swift Testing and covers the offline-first composition, the `Accept-Language` header, plus acceptance tests that launch the composed app online (with and without a server screen), offline and in the background:
 
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
-| App composition and acceptance (Swift Testing) | `PeteBJJCompApp` | 12 | `xcodebuild test -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DEST"` |
+| App composition and acceptance (Swift Testing) | `PeteBJJCompApp` | 20 | `xcodebuild test -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DEST"` |
 
 The core schemes (`PeteBJJCompFeed` and `PeteBJJCompFeedCacheIntegrationTests`) also run on the Mac with `-destination 'platform=macOS'`.
 
@@ -105,7 +110,7 @@ This project started from the case study in [Essential Developer's iOS Lead Esse
 - **A new domain:** BJJ competitions with their own model (venue, dates, registration status, categories, ranking points) and a self-hosted mock API
 - **Localization in three languages** (English, pt-BR, Greek), covered by localization tests
 - **An iOS 17 fix:** `UIRefreshControl` stopped showing its spinner in tests on iOS 17+ deployment targets, which broke the refresh tests. I fixed it in [#5](https://github.com/vincethecoder/app-bjj-competition-finder/pull/5)
-- **A versioned Core Data model** (`CompetitionsStore` → `CompetitionsStore2`)
+- **A versioned Core Data model** (`CompetitionsStore` → `CompetitionsStore2` → `CompetitionsStore3`)
 - **The same feed built three ways:** MVC, then MVVM, then MVP, each refactor landed as its own PR so you can compare them in the history
 
 Every change landed through a pull request. The [closed PRs](https://github.com/vincethecoder/app-bjj-competition-finder/pulls?q=is%3Apr+is%3Aclosed) read as a step-by-step build log.
@@ -114,4 +119,5 @@ Every change landed through a pull request. The [closed PRs](https://github.com/
 
 - [x] **Offline-first:** use a remote loader that falls back to the cache, save remote results to the cache, and validate the cache in the background
 - [x] **SwiftUI UI module** on the same core, with async/await adapters over the existing loaders and new tests in Swift Testing
-- [ ] Competition detail screen, filters (date, location), and favorites
+- [x] **Server-driven poster grid** with filters, a device-built fallback, and the screen cached for offline use
+- [ ] Competition detail screen, date and location filters, and favorites

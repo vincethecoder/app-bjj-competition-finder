@@ -11,7 +11,7 @@ import PeteBJJCompFeed
 class CompetitionsStoreSpy: CompetitionsStore {
     enum ReceivedMessage: Equatable {
         case deleteCachedCompetitions
-        case insert([LocalCompetition], Date)
+        case insert([LocalCompetition], Data?, Date)
         case retrieve
     }
     
@@ -34,9 +34,9 @@ class CompetitionsStoreSpy: CompetitionsStore {
         deletionCompletions[index](.success(()))
     }
     
-    func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
+    func insert(_ competitions: [LocalCompetition], screen: Data?, timestamp: Date, completion: @escaping InsertionCompletion) {
         insertionCompletions.append(completion)
-        receivedMessages.append(.insert(competitions, timestamp))
+        receivedMessages.append(.insert(competitions, screen, timestamp))
     }
     
     func completeInsertion(with error: Error, at index: Int = 0) {
@@ -60,7 +60,7 @@ class CompetitionsStoreSpy: CompetitionsStore {
         retrievalcompletions[index](.success(.none))
     }
     
-    func completeRetrieval(with competitions: [LocalCompetition], timestamp: Date, at index: Int = 0) {
-        retrievalcompletions[index](.success(CachedCompetitions(competitions: competitions, timestamp: timestamp)))
+    func completeRetrieval(with competitions: [LocalCompetition], screen: Data? = nil, timestamp: Date, at index: Int = 0) {
+        retrievalcompletions[index](.success(CachedCompetitions(competitions: competitions, screen: screen, timestamp: timestamp)))
     }
 }

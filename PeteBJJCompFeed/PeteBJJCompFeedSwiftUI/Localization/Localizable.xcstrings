@@ -1,6 +1,70 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "FEED_BADGE_GI" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Gi" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Gi" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Kimono" } }
+      }
+    },
+    "FEED_BADGE_INVITATION_ONLY" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Μόνο με πρόσκληση" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Invitation only" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Somente convidados" } }
+      }
+    },
+    "FEED_BADGE_NOGI" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "No-Gi" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No-Gi" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sem kimono" } }
+      }
+    },
+    "FEED_BADGE_REGISTRATION_CLOSED" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Κλειστές εγγραφές" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration closed" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições encerradas" } }
+      }
+    },
+    "FEED_BADGE_REGISTRATION_NOT_OPEN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Οι εγγραφές δεν έχουν ανοίξει" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration not open yet" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições em breve" } }
+      }
+    },
+    "FEED_BADGE_REGISTRATION_OPEN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοιχτές εγγραφές" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration open" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições abertas" } }
+      }
+    },
+    "FEED_CARD_OPEN_EVENT_HINT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοίγει τον ιστότοπο της διοργάνωσης" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Opens the event website" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Abre o site do evento" } }
+      }
+    },
+    "FEED_FILTER_ALL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Όλα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Todos" } }
+      }
+    },
     "FEED_VIEW_CONNECTION_ERROR" : {
       "extractionState" : "manual",
       "localizations" : {

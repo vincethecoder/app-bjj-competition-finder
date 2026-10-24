@@ -16,9 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private let competitionsURL = URL(string: "https://bit.ly/4hd1liM")!
+    private lazy var competitionsURL = Self.competitionsURL(defaults: .standard)
 
-    private lazy var httpClient: HTTPClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    private lazy var httpClient: HTTPClient = URLSessionHTTPClient(
+        session: URLSession(configuration: .ephemeral(acceptingLanguages: Bundle.main.preferredLocalizations)))
 
     private lazy var store: CompetitionsStore? = makeCompetitionsStore()
 
@@ -42,8 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        let viewModel = CompetitionsListViewModel(loader: makeCompetitionsLoader())
-        window?.rootViewController = UIHostingController(rootView: CompetitionsFeedView(viewModel: viewModel))
+        let viewModel = CompetitionsGridViewModel(loader: makeCompetitionsFeedLoader())
+        window?.rootViewController = UIHostingController(rootView: CompetitionsGridView(viewModel: viewModel))
 
         window?.makeKeyAndVisible()
     }
@@ -52,16 +53,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         localCompetitionsLoader?.validateCache { _ in }
     }
 
-    private func makeCompetitionsLoader() -> CompetitionsLoader {
-        let remoteLoader = RemoteCompetitionsLoader(url: competitionsURL, client: httpClient)
+    private func makeCompetitionsFeedLoader() -> CompetitionsFeedLoader {
+        let remoteLoader = RemoteCompetitionsFeedLoader(url: competitionsURL, client: httpClient)
 
         guard let localCompetitionsLoader else { return remoteLoader }
 
-        return CompetitionsLoaderWithFallbackComposite(
-            primary: CompetitionsLoaderCacheDecorator(
+        return CompetitionsFeedLoaderWithFallbackComposite(
+            primary: CompetitionsFeedLoaderCacheDecorator(
                 decoratee: remoteLoader,
                 cache: localCompetitionsLoader),
             fallback: localCompetitionsLoader)
+    }
+
+    /// Debug builds read `-CompetitionsURL <url>` from the launch arguments,
+    /// so the app can be pointed at a local fixture server.
+    static func competitionsURL(defaults: UserDefaults) -> URL {
+        #if DEBUG
+        if let override = defaults.string(forKey: "CompetitionsURL").flatMap(URL.init(string:)) {
+            return override
+        }
+        #endif
+        return URL(string: "https://bit.ly/4hd1liM")!
     }
 
     // The app still works online without a cache, so a store that fails to

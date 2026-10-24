@@ -20,6 +20,29 @@ func uniqueCompetitions() -> [Competition] {
     [uniqueCompetition(), uniqueCompetition()]
 }
 
+func uniqueFeed() -> CompetitionsFeed {
+    let competitions = uniqueCompetitions()
+    let screen = CompetitionsScreen(
+        title: "Championships",
+        empty: nil,
+        filters: [CompetitionsScreen.Filter(id: "all", title: "All", criterion: .all)],
+        sections: [
+            CompetitionsScreen.Section(id: "2024-05", title: "May 2024", cards: competitions.map { competition in
+                CompetitionsScreen.Card(
+                    id: competition.id,
+                    name: competition.name,
+                    dateLabel: nil,
+                    startDate: competition.startDate,
+                    endDate: competition.endDate,
+                    locationLabel: nil,
+                    imageURL: nil,
+                    eventLink: competition.eventLink,
+                    badges: [])
+            }),
+        ])
+    return CompetitionsFeed(competitions: competitions, screen: screen)
+}
+
 func uniqueCompetition() -> Competition {
     Competition(
         id: UUID().uuidString,

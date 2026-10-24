@@ -23,15 +23,26 @@ public protocol CompetitionsCache {
     func save(_ competitions: [Competition], completion: @escaping (Result) -> Void)
 }
 
+public protocol CompetitionsFeedCache {
+    typealias Result = Swift.Result<Void, Error>
+
+    func save(_ feed: CompetitionsFeed, completion: @escaping (Result) -> Void)
+}
+
 extension LocalCompetitionsLoader {
     public typealias SaveResult = CompetitionsCache.Result
+
     public func save(_ competitions: [Competition], completion: @escaping (SaveResult) -> Void) {
+        save(CompetitionsFeed(competitions: competitions, screen: nil), completion: completion)
+    }
+
+    public func save(_ feed: CompetitionsFeed, completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedCompetitions { [weak self] deletionResult in
             guard let self else { return }
             
             switch deletionResult {
             case .success:
-                self.cache(competitions, with: completion)
+                self.cache(feed, with: completion)
                 
             case let .failure(error):
                 completion(.failure(error))
@@ -39,18 +50,23 @@ extension LocalCompetitionsLoader {
         }
     }
     
-    private func cache(_ competitions: [Competition], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(competitions.local, timestamp: self.currentDate()){ [weak self] insertionResult in
+    private func cache(_ feed: CompetitionsFeed, with completion: @escaping (SaveResult) -> Void) {
+        store.insert(feed.competitions.local, screen: feed.screen.flatMap(Self.encode), timestamp: self.currentDate()) { [weak self] insertionResult in
             guard self != nil else { return }
             
             completion(insertionResult)
         }
     }
 }
+
 extension LocalCompetitionsLoader {
     public typealias LoadResult = Swift.Result<[Competition], Error>
     
     public func load(completion: @escaping (LoadResult) -> Void) {
+        loadFeed { completion($0.map(\.competitions)) }
+    }
+
+    public func loadFeed(completion: @escaping (CompetitionsFeedLoader.Result) -> Void) {
         store.retrieve { [weak self] result in
             guard let self else { return }
             
@@ -60,13 +76,28 @@ extension LocalCompetitionsLoader {
                 completion(.failure(error))
                 
             case let .success(.some(cache)) where CompetitionsCachePolicy.isValid(cache.timestamp, against: self.currentDate()):
-                completion(.success(cache.competitions.mapped))
+                completion(.success(CompetitionsFeed(
+                    competitions: cache.competitions.mapped,
+                    screen: cache.screen.flatMap(Self.decodeScreen),
+                    cachedAt: cache.timestamp)))
             
             case .success:
-                completion(.success([]))
+                completion(.success(CompetitionsFeed(competitions: [], screen: nil)))
                 
             }
         }
+    }
+}
+
+extension LocalCompetitionsLoader {
+    // The screen is presentation the client can rebuild from the competitions,
+    // so a screen that fails to encode or decode is dropped rather than failing the cache.
+    private static func encode(_ screen: CompetitionsScreen) -> Data? {
+        try? JSONEncoder().encode(screen)
+    }
+
+    private static func decodeScreen(from data: Data) -> CompetitionsScreen? {
+        try? JSONDecoder().decode(CompetitionsScreen.self, from: data)
     }
 }
 
@@ -145,3 +176,7 @@ private extension Array where Element == LocalCompetition {
 extension LocalCompetitionsLoader: CompetitionsLoader {}
 
 extension LocalCompetitionsLoader: CompetitionsCache {}
+
+extension LocalCompetitionsLoader: CompetitionsFeedLoader {}
+
+extension LocalCompetitionsLoader: CompetitionsFeedCache {}

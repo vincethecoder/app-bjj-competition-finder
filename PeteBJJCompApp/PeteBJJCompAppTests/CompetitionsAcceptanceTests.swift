@@ -15,25 +15,38 @@ import PeteBJJCompFeedSwiftUI
 @MainActor
 struct CompetitionsAcceptanceTests {
 
-    @Test func onLaunch_displaysRemoteCompetitionsWhenCustomerHasConnectivity() async throws {
-        let competitions = try await launch(httpClient: .online(response), store: .empty)
+    @Test func onLaunch_displaysServerScreenWhenCustomerHasConnectivity() async throws {
+        let feed = try await launch(httpClient: .online(response), store: .empty)
 
-        #expect(competitions.rows.count == 2)
+        #expect(feed.title == "Championships")
+        #expect(feed.visibleSections.map(\.title) == ["May 2024"])
+        #expect(feed.visibleSections.flatMap(\.cards).map(\.id) == ["competition-1", "competition-2"])
+        #expect(feed.errorMessage == nil)
     }
 
-    @Test func onLaunch_displaysCachedRemoteCompetitionsWhenCustomerHasNoConnectivity() async throws {
+    @Test func onLaunch_buildsScreenFromCompetitionsWhenServerSendsNoScreen() async throws {
+        let feed = try await launch(httpClient: .online(competitionsOnlyResponse), store: .empty)
+
+        #expect(feed.visibleSections.count == 1)
+        #expect(feed.visibleSections.flatMap(\.cards).map(\.id) == ["competition-1", "competition-2"])
+        #expect(feed.screen?.filters.isEmpty == false)
+    }
+
+    @Test func onLaunch_displaysCachedServerScreenWithConnectionErrorWhenCustomerHasNoConnectivity() async throws {
         let sharedStore = InMemoryCompetitionsStore.empty
         _ = try await launch(httpClient: .online(response), store: sharedStore)
 
-        let offlineCompetitions = try await launch(httpClient: .offline, store: sharedStore)
+        let offlineFeed = try await launch(httpClient: .offline, store: sharedStore)
 
-        #expect(offlineCompetitions.rows.count == 2)
+        #expect(offlineFeed.title == "Championships")
+        #expect(offlineFeed.visibleSections.flatMap(\.cards).map(\.id) == ["competition-1", "competition-2"])
+        #expect(offlineFeed.errorMessage != nil)
     }
 
     @Test func onLaunch_displaysEmptyCompetitionsWhenCustomerHasNoConnectivityAndEmptyCache() async throws {
-        let competitions = try await launch(httpClient: .offline, store: .empty)
+        let feed = try await launch(httpClient: .offline, store: .empty)
 
-        #expect(competitions.rows.isEmpty)
+        #expect(feed.visibleSections.isEmpty)
     }
 
     @Test func onEnteringBackground_deletesExpiredCompetitionsCache() throws {
@@ -56,12 +69,12 @@ struct CompetitionsAcceptanceTests {
 
     /// Launches the composed app and loads the feed through its view model, the
     /// same call the feed view makes in `.task` when it appears.
-    private func launch(httpClient: HTTPClientStub, store: InMemoryCompetitionsStore) async throws -> CompetitionsListViewModel {
+    private func launch(httpClient: HTTPClientStub, store: InMemoryCompetitionsStore) async throws -> CompetitionsGridViewModel {
         let sut = SceneDelegate(httpClient: httpClient, store: store)
         sut.window = UIWindow()
         sut.configureWindow()
 
-        let feed = try #require(sut.window?.rootViewController as? UIHostingController<CompetitionsFeedView>)
+        let feed = try #require(sut.window?.rootViewController as? UIHostingController<CompetitionsGridView>)
         #expect(sut.window?.isHidden == false, "Expected configureWindow to make the window visible")
 
         await feed.rootView.viewModel.load()
@@ -79,15 +92,48 @@ struct CompetitionsAcceptanceTests {
         return (makeCompetitionsData(), response)
     }
 
-    private func makeCompetitionsData() -> Data {
+    private func competitionsOnlyResponse(for url: URL) -> (Data, HTTPURLResponse) {
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        return (makeCompetitionsData(includingScreen: false), response)
+    }
+
+    private func makeCompetitionsData(includingScreen: Bool = true) -> Data {
         Data("""
         {
             "competitions": [
                 \(makeCompetitionJSON(id: "competition-1")),
                 \(makeCompetitionJSON(id: "competition-2"))
-            ]
+            ]\(includingScreen ? ", \"screen\": \(makeScreenJSON())" : "")
         }
         """.utf8)
+    }
+
+    private func makeScreenJSON() -> String {
+        """
+        {
+            "layout": "posterGrid",
+            "title": "Championships",
+            "filters": [{ "id": "all", "title": "All", "field": "none" }],
+            "sections": [{
+                "id": "2024-05",
+                "title": "May 2024",
+                "cards": [\(makeCardJSON(id: "competition-1")), \(makeCardJSON(id: "competition-2"))]
+            }]
+        }
+        """
+    }
+
+    private func makeCardJSON(id: String) -> String {
+        """
+        {
+            "id": "\(id)",
+            "name": "World IBJJF Jiu-Jitsu Championship",
+            "dateLabel": "May 30 – Jun 2",
+            "locationLabel": "Long Beach, USA",
+            "eventLink": "https://ibjjf.com/events/world-championship",
+            "badges": [{ "id": "gi", "title": "Gi", "token": "type" }]
+        }
+        """
     }
 
     private func makeCompetitionJSON(id: String) -> String {
