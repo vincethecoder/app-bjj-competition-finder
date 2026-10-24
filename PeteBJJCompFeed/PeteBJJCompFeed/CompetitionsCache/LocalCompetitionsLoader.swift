@@ -141,3 +141,7 @@ private extension Array where Element == LocalCompetition {
         }
     }
 }
+
+extension LocalCompetitionsLoader: CompetitionsLoader {}
+
+extension LocalCompetitionsLoader: CompetitionsCache {}
