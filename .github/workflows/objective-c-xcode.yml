@@ -41,6 +41,9 @@ jobs:
       - name: Core Data cache integration tests
         run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
+      - name: SwiftUI feed tests
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedSwiftUI -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
       - name: API end-to-end tests
         run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
