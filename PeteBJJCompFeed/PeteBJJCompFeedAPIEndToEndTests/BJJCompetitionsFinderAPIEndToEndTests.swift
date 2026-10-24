@@ -7,7 +7,6 @@
 
 import XCTest
 import PeteBJJCompFeed
-import PeteBJJCompFeediOS
 
 final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
 
@@ -64,8 +63,8 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
         trackForMemoryLeaks(loader, file: file, line: line)
         
         let exp = expectation(description: "Wait for load completion")
-        let url = competitionsTestServerURL.appendingPathComponent("73A7F70C-75DA-4C2E-B5A3-EED40DC53AA6/image")
-        
+        let url = imageTestServerURL
+
         var receivedResult: EventImageDataLoader.Result?
         _ = loader.loadImageData(from: url) { result in
             receivedResult = result
@@ -78,6 +77,10 @@ final class BJJCompetitionsFinderAPIEndToEndTests: XCTestCase {
     
     private var competitionsTestServerURL: URL {
         URL(string: "https://bit.ly/4hd1liM")!
+    }
+
+    private var imageTestServerURL: URL {
+        URL(string: "https://raw.githubusercontent.com/vincethecoder/app-bjj-competition-finder/5897dc029001efb34332e0896fcff9bc9580045f/fixtures/e2e/event-image.png")!
     }
     
     private func ephemeralClient(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
