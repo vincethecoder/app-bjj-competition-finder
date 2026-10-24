@@ -1,4 +1,4 @@
-name: Xcode - Build and Analyze
+name: Build and Test
 
 on:
   push:
@@ -6,131 +6,57 @@ on:
   pull_request:
     branches: [ "main" ]
 
+defaults:
+  run:
+    working-directory: PeteBJJCompFeed
+
 jobs:
-  prepare:
-    name: Prepare Build Environment
-    runs-on: macos-latest
-    outputs:
-      project_dir: ${{ steps.find-project.outputs.project_dir }}
-      default_scheme: ${{ steps.set-scheme.outputs.default_scheme }}
-    
+  ios:
+    name: Test on iOS Simulator
+    runs-on: macos-15
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Find Xcode project
-        id: find-project
-        run: |
-          project_dir=$(find . -name "*.xcodeproj" -type d | head -n 1)
-          if [ -z "$project_dir" ]; then
-            echo "No Xcode project found."
-            exit 1
-          fi
-          echo "Found project: $project_dir"
-          echo "project_dir=$project_dir" >> "$GITHUB_OUTPUT"
 
-      - name: Set Default Scheme
-        id: set-scheme
+      - name: Pick the newest available iPhone simulator
         run: |
-          cd $(dirname "${{ steps.find-project.outputs.project_dir }}")
-          scheme_list=$(xcodebuild -list -json -project $(basename "${{ steps.find-project.outputs.project_dir }}"))
-          default=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes'][0]")
-          if [ -z "$default" ]; then
-            echo "No scheme found."
-            exit 1
-          fi
-          echo $default | cat >default
-          echo "default_scheme=$default" >> "$GITHUB_OUTPUT"
-          echo Using default scheme: $default
+          udid=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          iphones = [(runtime, d) for runtime, ds in devices.items() if ".iOS-" in runtime for d in ds if d["name"].startswith("iPhone")]
+          version = lambda runtime: [int(p) for p in runtime.split(".iOS-")[1].split("-")]
+          runtime, device = max(iphones, key=lambda t: version(t[0]))
+          print(device["udid"])
+          ')
+          echo "DESTINATION=platform=iOS Simulator,id=$udid" >> "$GITHUB_ENV"
+          xcrun simctl list devices available | grep "$udid"
 
-  build-macos:
-    name: Build and Analyze for macOS
-    needs: prepare
-    runs-on: macos-latest
-    
+      - name: Unit tests (domain, API, cache)
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
+      - name: UI and presentation tests
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
+      - name: Core Data cache integration tests
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
+      - name: API end-to-end tests
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
+      - name: Static analysis
+        run: xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+
+  macos:
+    name: Test core on macOS
+    runs-on: macos-15
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: Set Environment Variables
-        run: |
-          echo "CODE_SIGN_IDENTITY=" >> $GITHUB_ENV
-          echo "CODE_SIGNING_REQUIRED=NO" >> $GITHUB_ENV
 
-      - name: Clean Derived Data
-        run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData
+      - name: Unit tests (domain, API, cache)
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "platform=macOS" CODE_SIGNING_ALLOWED=NO
 
-      - name: Build macOS
-        env:
-          scheme: ${{ needs.prepare.outputs.default_scheme }}
-          WORKSPACE_PATH: ${{ github.workspace }}
-        run: |
-          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
-          xcodebuild clean build \
-            -scheme "$scheme" \
-            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
-            -destination 'platform=macOS,arch=arm64' \
-            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
-            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
-            SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
-            -verbose
-            
-      - name: Analyze macOS
-        env:
-          scheme: ${{ needs.prepare.outputs.default_scheme }}
-        run: |
-          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
-          xcodebuild analyze \
-            -scheme "$scheme" \
-            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
-            -destination 'platform=macOS,arch=arm64' \
-            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
-            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
-            -verbose
-
-  build-ios:
-    name: Build and Analyze for iOS Simulator
-    needs: prepare
-    runs-on: macos-latest
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Set Environment Variables
-        run: |
-          echo "CODE_SIGN_IDENTITY=" >> $GITHUB_ENV
-          echo "CODE_SIGNING_REQUIRED=NO" >> $GITHUB_ENV
-
-      - name: Clean Derived Data
-        run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-
-      - name: Build iOS
-        env:
-          scheme: ${{ needs.prepare.outputs.default_scheme }}
-          WORKSPACE_PATH: ${{ github.workspace }}
-        run: |
-          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
-          xcodebuild clean build \
-            -scheme "$scheme" \
-            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
-            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
-            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
-            SOURCE_ROOT="${WORKSPACE_PATH}/PeteBJJCompFeed/PeteBJJCompFeed" \
-            -verbose
-            
-      - name: Analyze iOS
-        env:
-          scheme: ${{ needs.prepare.outputs.default_scheme }}
-        run: |
-          cd $(dirname "${{ needs.prepare.outputs.project_dir }}")
-          xcodebuild analyze \
-            -scheme "$scheme" \
-            -project $(basename "${{ needs.prepare.outputs.project_dir }}") \
-            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
-            CODE_SIGN_IDENTITY="${{ env.CODE_SIGN_IDENTITY }}" \
-            CODE_SIGNING_REQUIRED="${{ env.CODE_SIGNING_REQUIRED }}" \
-            -verbose
+      - name: Core Data cache integration tests
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "platform=macOS" CODE_SIGNING_ALLOWED=NO
