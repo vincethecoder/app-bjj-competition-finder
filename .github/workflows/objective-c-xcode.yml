@@ -47,9 +47,9 @@ jobs:
       - name: Static analysis
         run: xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
-      - name: Build the app
+      - name: App composition and acceptance tests
         working-directory: PeteBJJCompApp
-        run: xcodebuild build -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
   macos:
     name: Test core on macOS
