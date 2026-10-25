@@ -4,7 +4,7 @@
 
 An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a server-driven SwiftUI poster grid; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**161 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
+**162 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
@@ -86,7 +86,7 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
 | Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 79 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| SwiftUI view model, screen mapping, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 39 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| SwiftUI view model, screen mapping, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 40 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
 | UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
 | Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 1 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |

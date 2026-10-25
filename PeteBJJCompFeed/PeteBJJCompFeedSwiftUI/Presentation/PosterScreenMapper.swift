@@ -87,7 +87,7 @@ enum PosterScreenMapper {
                 PosterFilter(id: "all", title: localized(.feedFilterAll, locale), criterion: .all),
                 PosterFilter(id: "gi", title: localized(.feedBadgeGi, locale), criterion: .type(CompetitionType.gi.rawValue)),
                 PosterFilter(id: "nogi", title: localized(.feedBadgeNogi, locale), criterion: .type(CompetitionType.nogi.rawValue)),
-                PosterFilter(id: "open", title: localized(.feedBadgeRegistrationOpen, locale), criterion: .registrationStatus(RegistrationStatus.open.rawValue)),
+                PosterFilter(id: "open", title: localized(.feedFilterRegistrationOpen, locale), criterion: .registrationStatus(RegistrationStatus.open.rawValue)),
             ],
             sections: monthSections(for: competitions, dates: dates))
     }

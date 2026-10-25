@@ -28,9 +28,9 @@
     "FEED_BADGE_REGISTRATION_CLOSED" : {
       "extractionState" : "manual",
       "localizations" : {
-        "el" : { "stringUnit" : { "state" : "translated", "value" : "Κλειστές εγγραφές" } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration closed" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições encerradas" } }
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ολοκληρώθηκε" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ended" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Encerrado" } }
       }
     },
     "FEED_BADGE_REGISTRATION_NOT_OPEN" : {
@@ -44,9 +44,9 @@
     "FEED_BADGE_REGISTRATION_OPEN" : {
       "extractionState" : "manual",
       "localizations" : {
-        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοιχτές εγγραφές" } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration open" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições abertas" } }
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εγγραφή" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Register" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscreva-se" } }
       }
     },
     "FEED_CARD_OPEN_EVENT_HINT" : {
@@ -63,6 +63,14 @@
         "el" : { "stringUnit" : { "state" : "translated", "value" : "Όλα" } },
         "en" : { "stringUnit" : { "state" : "translated", "value" : "All" } },
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Todos" } }
+      }
+    },
+    "FEED_FILTER_REGISTRATION_OPEN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοιχτές εγγραφές" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Registration open" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições abertas" } }
       }
     },
     "FEED_VIEW_CONNECTION_ERROR" : {

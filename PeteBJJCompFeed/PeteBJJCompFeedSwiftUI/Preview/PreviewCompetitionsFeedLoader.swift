@@ -78,8 +78,8 @@ final class PreviewCompetitionsFeedLoader: CompetitionsFeedLoader {
             badges: [
                 CompetitionsScreen.Badge(id: "gi", title: "Gi", token: .type),
                 registrationOpen
-                    ? CompetitionsScreen.Badge(id: "open", title: "Registration open", token: .registrationOpen)
-                    : CompetitionsScreen.Badge(id: "closed", title: "Registration closed", token: .registrationClosed),
+                    ? CompetitionsScreen.Badge(id: "open", title: "Register", token: .registrationOpen)
+                    : CompetitionsScreen.Badge(id: "closed", title: "Ended", token: .registrationClosed),
             ])
     }
 }

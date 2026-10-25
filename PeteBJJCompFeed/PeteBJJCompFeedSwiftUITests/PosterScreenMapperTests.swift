@@ -106,7 +106,7 @@ struct PosterScreenMapperTests {
         #expect(screen.title == localized(.feedViewTitle))
         #expect(screen.sections.map(\.title) == ["May 2026", "June 2026"])
         #expect(screen.sections.map { $0.cards.map(\.id) } == [["early-may", "late-may"], ["june"]])
-        #expect(screen.filters.map(\.title) == [localized(.feedFilterAll), localized(.feedBadgeGi), localized(.feedBadgeNogi), localized(.feedBadgeRegistrationOpen)])
+        #expect(screen.filters.map(\.title) == [localized(.feedFilterAll), localized(.feedBadgeGi), localized(.feedBadgeNogi), localized(.feedFilterRegistrationOpen)])
     }
 
     @Test func map_buildsCardWithoutArtworkAndWithBadgesFromCompetition() throws {
