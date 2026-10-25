@@ -9,14 +9,22 @@ import SwiftUI
 
 struct CompetitionsEmptyStateView: View {
     let isLoading: Bool
-    let title: String
-    let message: String
+    let title: Text
+    let message: Text
 
     var body: some View {
         if isLoading {
             ProgressView()
         } else {
-            ContentUnavailableView(title, systemImage: "figure.martial.arts", description: Text(message))
+            ContentUnavailableView {
+                Label {
+                    title
+                } icon: {
+                    Image(systemName: "figure.martial.arts")
+                }
+            } description: {
+                message
+            }
         }
     }
 }

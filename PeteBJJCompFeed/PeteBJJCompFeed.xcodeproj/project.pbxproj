@@ -18,7 +18,6 @@
 		1E0C523686BAE585F2EB6362 /* CompetitionsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA61FBDF8A331EFDDD272098 /* CompetitionsGridView.swift */; };
 		2D2FC4F292177FFB0ABA4E9B /* CompetitionsScreen+Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB30B68CAA9581E4C10D6CC /* CompetitionsScreen+Card.swift */; };
 		360706BB7D0A0AAB843F5234 /* FilterChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A8BF5316800807BC13D8DF /* FilterChipView.swift */; };
-		363D8BC247B5B9115C009379 /* FeedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62305D364658ACE20780DF95 /* FeedStrings.swift */; };
 		40CD4FF70A459D7E642BA77A /* RemoteCompetitionsFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FFB9DAAF628C64625AEB8 /* RemoteCompetitionsFeedLoader.swift */; };
 		44B0183E897A8A7CFB644F0C /* ErrorBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7333F268417447226C200484 /* ErrorBannerView.swift */; };
 		46379B95294ECEB47A8B719D /* PosterScreenMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615E8CD39CC77279B079BD8 /* PosterScreenMapperTests.swift */; };
@@ -238,7 +237,6 @@
 		578C0CA16C559871330D237A /* PosterScreenMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterScreenMapper.swift; sourceTree = "<group>"; };
 		5DB4C90AF82D4DEA77FB28EE /* PreviewCompetitionsFeedLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PreviewCompetitionsFeedLoader.swift; sourceTree = "<group>"; };
 		61E5C49984A58D3A7558FF31 /* CompetitionsScreen+Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsScreen+Section.swift"; sourceTree = "<group>"; };
-		62305D364658ACE20780DF95 /* FeedStrings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedStrings.swift; sourceTree = "<group>"; };
 		65529BCDBB8A683F901D8373 /* BadgeFlowLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BadgeFlowLayout.swift; sourceTree = "<group>"; };
 		6733912A90976C3382029903 /* CompetitionsEmptyStateView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsEmptyStateView.swift; sourceTree = "<group>"; };
 		6F4158B9F5A127A3B0D86C0C /* PosterGridView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterGridView.swift; sourceTree = "<group>"; };
@@ -502,7 +500,6 @@
 		724579FBC6E92CF96FA1D360 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				62305D364658ACE20780DF95 /* FeedStrings.swift */,
 				CB3D70AA4C5FA5C9BBDE953B /* Localizable.xcstrings */,
 			);
 			name = Localization;
@@ -1185,7 +1182,6 @@
 				73C959B312F4105E91C5B71C /* CompetitionsEmptyStateView.swift in Sources */,
 				44B0183E897A8A7CFB644F0C /* ErrorBannerView.swift in Sources */,
 				CD5A44672BFDAC56C7D1A3AB /* FeedDesign.swift in Sources */,
-				363D8BC247B5B9115C009379 /* FeedStrings.swift in Sources */,
 				DD8BA42ED974BBB0911CCDBC /* PreviewCompetitionsFeedLoader.swift in Sources */,
 				6E87425E8DF984A6195BE2DF /* PosterScreen.swift in Sources */,
 				B7FC7A332E3E9839EE7A372D /* PosterFilter.swift in Sources */,

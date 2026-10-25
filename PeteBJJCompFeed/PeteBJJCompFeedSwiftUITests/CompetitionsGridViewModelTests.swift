@@ -57,7 +57,7 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .success(makeFeed(screen: makeScreen())), on: loader)
 
-        #expect(sut.title == "Championships")
+        #expect(sut.screen?.title == "Championships")
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
         #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["worlds", "nogi-worlds"], ["brasileiro"]])
         #expect(sut.state == .loaded(screen: map(makeFeed(screen: makeScreen()))))
@@ -70,7 +70,7 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
 
-        #expect(sut.state == .failed(screen: loadedScreen, message: FeedStrings.connectionError))
+        #expect(sut.state == .failed(screen: loadedScreen, message: .feedViewConnectionError))
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
     }
 
@@ -79,7 +79,7 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .success(makeFeed(screen: makeScreen(), cachedAt: .now)), on: loader)
 
-        #expect(sut.state == .failed(screen: map(makeFeed(screen: makeScreen())), message: FeedStrings.connectionError))
+        #expect(sut.state == .failed(screen: map(makeFeed(screen: makeScreen())), message: .feedViewConnectionError))
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
     }
 

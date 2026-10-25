@@ -32,9 +32,9 @@ struct PosterScreenMapperTests {
     @Test func map_fallsBackToLocalizedCopyWhenServerOmitsIt() {
         let screen = map(makeFeed(screen: CompetitionsScreen(title: nil, empty: nil, filters: [], sections: [])))
 
-        #expect(screen.title == FeedStrings.title)
-        #expect(screen.emptyTitle == FeedStrings.emptyTitle)
-        #expect(screen.emptyMessage == FeedStrings.emptyDescription)
+        #expect(screen.title == localized(.feedViewTitle))
+        #expect(screen.emptyTitle == localized(.feedViewEmptyTitle))
+        #expect(screen.emptyMessage == localized(.feedViewEmptyDescription))
     }
 
     @Test func map_formatsCardDatesOnDeviceWhenServerSendsNoLabel() throws {
@@ -103,10 +103,10 @@ struct PosterScreenMapperTests {
 
         let screen = map(makeFeed(competitions: [june, lateMay, earlyMay], screen: nil))
 
-        #expect(screen.title == FeedStrings.title)
+        #expect(screen.title == localized(.feedViewTitle))
         #expect(screen.sections.map(\.title) == ["May 2026", "June 2026"])
         #expect(screen.sections.map { $0.cards.map(\.id) } == [["early-may", "late-may"], ["june"]])
-        #expect(screen.filters.map(\.title) == [FeedStrings.filterAll, FeedStrings.gi, FeedStrings.noGi, FeedStrings.registrationOpen])
+        #expect(screen.filters.map(\.title) == [localized(.feedFilterAll), localized(.feedBadgeGi), localized(.feedBadgeNogi), localized(.feedBadgeRegistrationOpen)])
     }
 
     @Test func map_buildsCardWithoutArtworkAndWithBadgesFromCompetition() throws {
@@ -119,8 +119,8 @@ struct PosterScreenMapperTests {
         #expect(card.imageURL == nil)
         #expect(card.eventLink == competition.eventLink)
         #expect(card.badges == [
-            PosterBadge(id: "gi", title: FeedStrings.gi, token: .type),
-            PosterBadge(id: "open", title: FeedStrings.registrationOpen, token: .registrationOpen),
+            PosterBadge(id: "gi", title: localized(.feedBadgeGi), token: .type),
+            PosterBadge(id: "open", title: localized(.feedBadgeRegistrationOpen), token: .registrationOpen),
         ])
     }
 
@@ -151,6 +151,13 @@ struct PosterScreenMapperTests {
     }
 
     // MARK: - Helpers
+
+    /// Catalog copy in the locale the mapper is given.
+    private func localized(_ resource: LocalizedStringResource) -> String {
+        var resource = resource
+        resource.locale = testLocale
+        return String(localized: resource)
+    }
 
     private var dates: PosterDateFormatting {
         PosterDateFormatting(locale: testLocale, calendar: testCalendar)

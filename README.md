@@ -61,7 +61,7 @@ Patterns worth a look:
 
 ## Requirements
 
-- Xcode 15.4 or later
+- Xcode 26 or later (it generates the symbols for the SwiftUI feed's string catalog)
 - iOS 17.5 or later (the `PeteBJJCompFeed` framework also builds for macOS 14.4)
 
 ## Running the app

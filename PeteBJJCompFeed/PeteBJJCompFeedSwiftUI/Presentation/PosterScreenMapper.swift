@@ -42,9 +42,9 @@ enum PosterScreenMapper {
         }
 
         return PosterScreen(
-            title: screen.title.nonEmpty ?? FeedStrings.title,
-            emptyTitle: screen.empty?.title.nonEmpty ?? FeedStrings.emptyTitle,
-            emptyMessage: screen.empty?.message.nonEmpty ?? FeedStrings.emptyDescription,
+            title: screen.title.nonEmpty ?? localized(.feedViewTitle, dates.locale),
+            emptyTitle: screen.empty?.title.nonEmpty ?? localized(.feedViewEmptyTitle, dates.locale),
+            emptyMessage: screen.empty?.message.nonEmpty ?? localized(.feedViewEmptyDescription, dates.locale),
             filters: screen.filters.map { PosterFilter(id: $0.id, title: $0.title, criterion: $0.criterion) },
             sections: sections)
     }
@@ -77,15 +77,17 @@ enum PosterScreenMapper {
     // MARK: - Screen built on the device
 
     private static func deviceScreen(for competitions: [Competition], dates: PosterDateFormatting) -> PosterScreen {
-        PosterScreen(
-            title: FeedStrings.title,
-            emptyTitle: FeedStrings.emptyTitle,
-            emptyMessage: FeedStrings.emptyDescription,
+        let locale = dates.locale
+
+        return PosterScreen(
+            title: localized(.feedViewTitle, locale),
+            emptyTitle: localized(.feedViewEmptyTitle, locale),
+            emptyMessage: localized(.feedViewEmptyDescription, locale),
             filters: [
-                PosterFilter(id: "all", title: FeedStrings.filterAll, criterion: .all),
-                PosterFilter(id: "gi", title: FeedStrings.gi, criterion: .type(CompetitionType.gi.rawValue)),
-                PosterFilter(id: "nogi", title: FeedStrings.noGi, criterion: .type(CompetitionType.nogi.rawValue)),
-                PosterFilter(id: "open", title: FeedStrings.registrationOpen, criterion: .registrationStatus(RegistrationStatus.open.rawValue)),
+                PosterFilter(id: "all", title: localized(.feedFilterAll, locale), criterion: .all),
+                PosterFilter(id: "gi", title: localized(.feedBadgeGi, locale), criterion: .type(CompetitionType.gi.rawValue)),
+                PosterFilter(id: "nogi", title: localized(.feedBadgeNogi, locale), criterion: .type(CompetitionType.nogi.rawValue)),
+                PosterFilter(id: "open", title: localized(.feedBadgeRegistrationOpen, locale), criterion: .registrationStatus(RegistrationStatus.open.rawValue)),
             ],
             sections: monthSections(for: competitions, dates: dates))
     }
@@ -118,30 +120,38 @@ enum PosterScreenMapper {
             locationText: location(of: competition),
             imageURL: nil,
             eventLink: competition.eventLink,
-            badges: [typeBadge(for: competition.type), registrationBadge(for: competition.registrationStatus)],
+            badges: [typeBadge(for: competition.type, locale: dates.locale), registrationBadge(for: competition.registrationStatus, locale: dates.locale)],
             type: competition.type.rawValue,
             registrationStatus: competition.registrationStatus.rawValue)
     }
 
-    private static func typeBadge(for type: CompetitionType) -> PosterBadge {
+    private static func typeBadge(for type: CompetitionType, locale: Locale) -> PosterBadge {
         switch type {
-        case .gi: PosterBadge(id: type.rawValue, title: FeedStrings.gi, token: .type)
-        case .nogi: PosterBadge(id: type.rawValue, title: FeedStrings.noGi, token: .type)
+        case .gi: PosterBadge(id: type.rawValue, title: localized(.feedBadgeGi, locale), token: .type)
+        case .nogi: PosterBadge(id: type.rawValue, title: localized(.feedBadgeNogi, locale), token: .type)
         @unknown default: PosterBadge(id: type.rawValue, title: type.rawValue, token: .type)
         }
     }
 
-    private static func registrationBadge(for status: RegistrationStatus) -> PosterBadge {
+    private static func registrationBadge(for status: RegistrationStatus, locale: Locale) -> PosterBadge {
         switch status {
-        case .open: PosterBadge(id: status.rawValue, title: FeedStrings.registrationOpen, token: .registrationOpen)
-        case .closed: PosterBadge(id: status.rawValue, title: FeedStrings.registrationClosed, token: .registrationClosed)
-        case .notOpen: PosterBadge(id: status.rawValue, title: FeedStrings.registrationNotOpen, token: .neutral)
-        case .invitationOnly: PosterBadge(id: status.rawValue, title: FeedStrings.invitationOnly, token: .neutral)
+        case .open: PosterBadge(id: status.rawValue, title: localized(.feedBadgeRegistrationOpen, locale), token: .registrationOpen)
+        case .closed: PosterBadge(id: status.rawValue, title: localized(.feedBadgeRegistrationClosed, locale), token: .registrationClosed)
+        case .notOpen: PosterBadge(id: status.rawValue, title: localized(.feedBadgeRegistrationNotOpen, locale), token: .neutral)
+        case .invitationOnly: PosterBadge(id: status.rawValue, title: localized(.feedBadgeInvitationOnly, locale), token: .neutral)
         @unknown default: PosterBadge(id: status.rawValue, title: status.rawValue, token: .neutral)
         }
     }
 
     // MARK: - Helpers
+
+    /// Copy the device supplies sits in the screen next to the server's strings,
+    /// so it's resolved here, in the same locale the dates are formatted in.
+    private static func localized(_ resource: LocalizedStringResource, _ locale: Locale) -> String {
+        var resource = resource
+        resource.locale = locale
+        return String(localized: resource)
+    }
 
     private static func firstDay(of competition: Competition) -> Date {
         min(competition.startDate, competition.endDate)

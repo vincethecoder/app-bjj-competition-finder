@@ -31,7 +31,7 @@ struct PosterCardView: View {
             .contentShape(.rect(cornerRadius: FeedDesign.cardCornerRadius))
         }
         .buttonStyle(.plain)
-        .accessibilityHint(FeedStrings.openEventHint)
+        .accessibilityHint(Text(.feedCardOpenEventHint))
         // The spoken label includes dates, location and badges; Voice Control
         // users only need to say the event's name.
         .accessibilityInputLabels([card.name])

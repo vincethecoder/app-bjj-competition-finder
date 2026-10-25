@@ -34,8 +34,8 @@ public struct CompetitionsGridView: View {
                     // Let drags reach the scroll view underneath, so pull to refresh works.
                     CompetitionsEmptyStateView(
                         isLoading: viewModel.state == .loading(screen: nil),
-                        title: viewModel.screen?.emptyTitle ?? FeedStrings.emptyTitle,
-                        message: viewModel.screen?.emptyMessage ?? FeedStrings.emptyDescription)
+                        title: viewModel.screen.map { Text($0.emptyTitle) } ?? Text(.feedViewEmptyTitle),
+                        message: viewModel.screen.map { Text($0.emptyMessage) } ?? Text(.feedViewEmptyDescription))
                     .allowsHitTesting(false)
                 }
             }
@@ -44,7 +44,8 @@ public struct CompetitionsGridView: View {
                     ErrorBannerView(message: message, dismiss: viewModel.dismissError)
                 }
             }
-            .navigationTitle(viewModel.title)
+            // The app's own title shows until a screen has loaded.
+            .navigationTitle(viewModel.screen.map { Text($0.title) } ?? Text(.feedViewTitle))
             .task { await load() }
             .refreshable { await load() }
         }

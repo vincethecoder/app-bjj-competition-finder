@@ -18,7 +18,7 @@ struct CompetitionsAcceptanceTests {
     @Test func onLaunch_displaysServerScreenWhenCustomerHasConnectivity() async throws {
         let feed = try await launch(httpClient: .online(response), store: .empty)
 
-        #expect(feed.title == "Championships")
+        #expect(feed.screen?.title == "Championships")
         #expect(feed.visibleSections.map(\.title) == ["May 2024"])
         #expect(feed.visibleSections.flatMap(\.cards).map(\.id) == ["competition-1", "competition-2"])
         #expect(feed.errorMessage == nil)
@@ -38,7 +38,7 @@ struct CompetitionsAcceptanceTests {
 
         let offlineFeed = try await launch(httpClient: .offline, store: sharedStore)
 
-        #expect(offlineFeed.title == "Championships")
+        #expect(offlineFeed.screen?.title == "Championships")
         #expect(offlineFeed.visibleSections.flatMap(\.cards).map(\.id) == ["competition-1", "competition-2"])
         #expect(offlineFeed.errorMessage != nil)
     }

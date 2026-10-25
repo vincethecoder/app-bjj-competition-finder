@@ -20,7 +20,7 @@ public final class CompetitionsGridViewModel {
         case loaded(screen: PosterScreen)
         /// The server couldn't be reached. The screen is the one already on
         /// display, or the cached one the fallback loaded instead.
-        case failed(screen: PosterScreen?, message: String)
+        case failed(screen: PosterScreen?, message: LocalizedStringResource)
     }
 
     public private(set) var state: State = .idle
@@ -49,12 +49,8 @@ public final class CompetitionsGridViewModel {
         if case .loading = state { true } else { false }
     }
 
-    public var errorMessage: String? {
+    public var errorMessage: LocalizedStringResource? {
         if case let .failed(_, message) = state { message } else { nil }
-    }
-
-    public var title: String {
-        screen?.title ?? FeedStrings.title
     }
 
     /// Loads the feed, keeping the current screen if loading fails.
@@ -74,9 +70,9 @@ public final class CompetitionsGridViewModel {
             // cached feed is shown with the error that explains why it may be stale.
             state = feed.cachedAt == nil
                 ? .loaded(screen: newScreen)
-                : .failed(screen: newScreen, message: FeedStrings.connectionError)
+                : .failed(screen: newScreen, message: .feedViewConnectionError)
         } catch {
-            state = .failed(screen: previousScreen, message: FeedStrings.connectionError)
+            state = .failed(screen: previousScreen, message: .feedViewConnectionError)
         }
     }
 

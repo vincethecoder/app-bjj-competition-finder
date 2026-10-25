@@ -65,6 +65,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             fallback: localCompetitionsLoader)
     }
 
+    private static let defaultCompetitionsURL: URL = {
+        guard let url = URL(string: "https://bit.ly/4hd1liM") else {
+            fatalError("Invalid competitions URL")
+        }
+        return url
+    }()
+
     /// Debug builds read `-CompetitionsURL <url>` from the launch arguments,
     /// so the app can be pointed at a local fixture server.
     static func competitionsURL(defaults: UserDefaults) -> URL {
@@ -73,7 +80,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return override
         }
         #endif
-        return URL(string: "https://bit.ly/4hd1liM")!
+        return defaultCompetitionsURL
     }
 
     // The app still works online without a cache, so a store that fails to
