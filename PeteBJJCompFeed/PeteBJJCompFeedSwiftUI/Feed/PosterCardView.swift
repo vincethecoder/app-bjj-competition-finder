@@ -8,15 +8,14 @@
 import SwiftUI
 
 /// One event: the poster, then name, dates and location. The whole card is a
-/// single button, so VoiceOver reads it as one element that opens the event.
+/// single link, so VoiceOver reads it as one element that opens the event's details.
 struct PosterCardView: View {
     let card: PosterCard
 
-    @Environment(\.openURL) private var openURL
     @Environment(\.pixelLength) private var pixelLength
 
     var body: some View {
-        Button(action: openEvent) {
+        NavigationLink(value: card) {
             VStack(alignment: .leading, spacing: FeedDesign.cardPadding) {
                 PosterArtworkView(card: card)
                 PosterCardDetailsView(card: card)
@@ -31,13 +30,9 @@ struct PosterCardView: View {
             .contentShape(.rect(cornerRadius: FeedDesign.cardCornerRadius))
         }
         .buttonStyle(.plain)
-        .accessibilityHint(Text(.feedCardOpenEventHint))
+        .accessibilityHint(Text(.feedCardShowDetailsHint))
         // The spoken label includes dates, location and badges; Voice Control
         // users only need to say the event's name.
         .accessibilityInputLabels([card.name])
-    }
-
-    private func openEvent() {
-        openURL(card.eventLink)
     }
 }

@@ -7,7 +7,7 @@
 
 import PeteBJJCompFeed
 
-public struct PosterBadge: Identifiable, Equatable, Sendable {
+public struct PosterBadge: Identifiable, Hashable, Sendable {
     public typealias Token = CompetitionsScreen.Badge.Token
 
     public let id: String

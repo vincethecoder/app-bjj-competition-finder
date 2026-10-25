@@ -38,25 +38,30 @@ func uniqueCompetition(
     state: String? = "CA",
     country: String = "USA",
     type: CompetitionType = .gi,
-    registrationStatus: RegistrationStatus = .open
+    registrationStatus: RegistrationStatus = .open,
+    venue: String = "Walter Pyramid",
+    registrationLink: URL? = nil,
+    categories: [CompetitionCategory] = [.adult],
+    rankingPoints: Int = 1000,
+    notes: String? = nil
 ) -> Competition {
     Competition(
         id: id,
         name: name,
         startDate: startDate,
         endDate: endDate,
-        venue: "Walter Pyramid",
+        venue: venue,
         city: city,
         state: state,
         country: country,
         type: type,
         status: .upcoming,
         registrationStatus: registrationStatus,
-        registrationLink: nil,
+        registrationLink: registrationLink,
         eventLink: anyURL,
-        categories: [.adult],
-        rankingPoints: 1000,
-        notes: nil)
+        categories: categories,
+        rankingPoints: rankingPoints,
+        notes: notes)
 }
 
 func makeFeed(competitions: [Competition] = [], screen: CompetitionsScreen?, cachedAt: Date? = nil) -> CompetitionsFeed {

@@ -24,6 +24,9 @@ struct BadgeCapsuleView: View {
             Image(systemName: symbolName)
                 .foregroundStyle(tint)
         }
+        // A List widens the gap after a label's icon; badges keep theirs tight
+        // wherever they're drawn, including the detail screen's header.
+        .labelStyle(BadgeLabelStyle())
         .font(.caption)
         .bold()
         .padding(.horizontal, FeedDesign.cardPadding)
