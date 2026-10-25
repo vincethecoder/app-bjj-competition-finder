@@ -172,6 +172,32 @@ final class CompetitionsGridViewModelTests {
         #expect(sut.visibleSections.flatMap(\.cards).count == 3)
     }
 
+    @Test func selectFilter_reportsFilteredToNothingOnlyWhileTheFilterHidesEveryEvent() async {
+        let seminarFilter = CompetitionsScreen.Filter(id: "seminar", title: "Seminars", criterion: .type("seminar"))
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(makeFeed(screen: makeScreen(filters: [allFilter, seminarFilter]))), on: loader)
+        #expect(!sut.isFilteredToNothing)
+
+        sut.selectFilter("seminar")
+
+        #expect(sut.visibleSections.isEmpty)
+        #expect(sut.isFilteredToNothing)
+
+        sut.selectFilter("all")
+
+        #expect(!sut.isFilteredToNothing)
+    }
+
+    @Test func load_doesNotReportFilteredToNothingForScreenWithoutEvents() async {
+        let (sut, loader) = makeSUT()
+        #expect(!sut.isFilteredToNothing)
+
+        await load(sut, completingWith: .success(makeFeed(screen: makeScreen(sections: []))), on: loader)
+
+        #expect(sut.visibleSections.isEmpty)
+        #expect(!sut.isFilteredToNothing)
+    }
+
     @Test func load_keepsSelectedFilterWhenReloadedScreenStillOffersIt() async {
         let (sut, loader) = makeSUT()
         await load(sut, completingWith: .success(makeFeed(screen: makeScreen())), on: loader)

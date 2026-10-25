@@ -65,6 +65,22 @@
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Todos" } }
       }
     },
+    "FEED_FILTER_EMPTY_DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Καμία από τις διοργανώσεις που φορτώθηκαν δεν ταιριάζει με αυτό το φίλτρο." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "None of the loaded events match this filter." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nenhum dos eventos carregados corresponde a este filtro." } }
+      }
+    },
+    "FEED_FILTER_EMPTY_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Κανένα αποτέλεσμα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No matches" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nenhum resultado" } }
+      }
+    },
     "FEED_FILTER_REGISTRATION_OPEN" : {
       "extractionState" : "manual",
       "localizations" : {

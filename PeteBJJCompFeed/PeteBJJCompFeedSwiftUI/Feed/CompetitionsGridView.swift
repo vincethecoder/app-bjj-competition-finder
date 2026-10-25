@@ -34,8 +34,8 @@ public struct CompetitionsGridView: View {
                     // Let drags reach the scroll view underneath, so pull to refresh works.
                     CompetitionsEmptyStateView(
                         isLoading: viewModel.state == .loading(screen: nil),
-                        title: viewModel.screen.map { Text($0.emptyTitle) } ?? Text(.feedViewEmptyTitle),
-                        message: viewModel.screen.map { Text($0.emptyMessage) } ?? Text(.feedViewEmptyDescription))
+                        title: emptyTitle,
+                        message: emptyMessage)
                     .allowsHitTesting(false)
                 }
             }
@@ -49,6 +49,18 @@ public struct CompetitionsGridView: View {
             .task { await load() }
             .refreshable { await load() }
         }
+    }
+
+    // A filter that hides every event gets the app's own copy; a screen with
+    // no events at all keeps the server's.
+    private var emptyTitle: Text {
+        if viewModel.isFilteredToNothing { return Text(.feedFilterEmptyTitle) }
+        return viewModel.screen.map { Text($0.emptyTitle) } ?? Text(.feedViewEmptyTitle)
+    }
+
+    private var emptyMessage: Text {
+        if viewModel.isFilteredToNothing { return Text(.feedFilterEmptyDescription) }
+        return viewModel.screen.map { Text($0.emptyMessage) } ?? Text(.feedViewEmptyDescription)
     }
 
     private func load() async {

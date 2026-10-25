@@ -53,6 +53,12 @@ public final class CompetitionsGridViewModel {
         if case let .failed(_, message) = state { message } else { nil }
     }
 
+    /// Whether the screen has events but the selected filter hides all of them,
+    /// as opposed to a screen that has no events at all.
+    public var isFilteredToNothing: Bool {
+        screen?.sections.isEmpty == false && visibleSections.isEmpty
+    }
+
     /// Loads the feed, keeping the current screen if loading fails.
     /// Calls made while a load is in flight are ignored.
     public func load() async {
