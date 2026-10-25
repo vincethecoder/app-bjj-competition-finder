@@ -5,6 +5,7 @@
 //  Created by Kobe Sam on 10/24/26.
 //
 
+import Foundation
 import Observation
 import PeteBJJCompFeed
 
@@ -17,7 +18,7 @@ public final class CompetitionsListViewModel {
         case idle
         case loading(rows: [CompetitionRow])
         case loaded(rows: [CompetitionRow])
-        case failed(rows: [CompetitionRow], message: String)
+        case failed(rows: [CompetitionRow], message: LocalizedStringResource)
     }
 
     public private(set) var state: State = .idle
@@ -39,7 +40,7 @@ public final class CompetitionsListViewModel {
         if case .loading = state { true } else { false }
     }
 
-    public var errorMessage: String? {
+    public var errorMessage: LocalizedStringResource? {
         if case let .failed(_, message) = state { message } else { nil }
     }
 
@@ -54,7 +55,7 @@ public final class CompetitionsListViewModel {
         do {
             state = .loaded(rows: try await loader.load().map(CompetitionRow.init))
         } catch {
-            state = .failed(rows: previousRows, message: FeedStrings.connectionError)
+            state = .failed(rows: previousRows, message: .feedViewConnectionError)
         }
     }
 

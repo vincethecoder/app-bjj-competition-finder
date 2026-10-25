@@ -4,7 +4,7 @@
 
 An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a SwiftUI feed; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**111 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
+**112 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
@@ -56,7 +56,7 @@ Patterns worth a look:
 
 ## Requirements
 
-- Xcode 15.4 or later
+- Xcode 26 or later (it generates the symbols for the SwiftUI feed's string catalog)
 - iOS 17.5 or later (the `PeteBJJCompFeed` framework also builds for macOS 14.4)
 
 ## Running the app
@@ -81,7 +81,7 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
 | Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 59 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| SwiftUI view model, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 16 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| SwiftUI view model, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 17 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
 | UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
 | Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |

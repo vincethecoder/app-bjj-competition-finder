@@ -19,7 +19,7 @@ struct CompetitionRowTests {
 
         #expect(row.id == competition.id)
         #expect(row.name == competition.name)
-        #expect(row.dates == competition.startDate..<competition.endDate)
+        #expect(row.dates == competition.startDate...competition.endDate)
     }
 
     @Test func init_joinsVenueCityAndStateIntoLocation() {
@@ -41,6 +41,15 @@ struct CompetitionRowTests {
 
         let row = CompetitionRow(uniqueCompetition(startDate: later, endDate: earlier))
 
-        #expect(row.dates == earlier..<later)
+        #expect(row.dates == earlier...later)
+    }
+
+    @Test func init_keepsOneDayEventAsSingleDate() {
+        let day = Date(timeIntervalSince1970: 1_717_027_200)
+
+        let row = CompetitionRow(uniqueCompetition(startDate: day, endDate: day))
+
+        #expect(row.dates == day...day)
+        #expect(row.dates.lowerBound == row.dates.upperBound)
     }
 }

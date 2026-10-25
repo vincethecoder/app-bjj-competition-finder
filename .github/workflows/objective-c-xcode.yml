@@ -10,8 +10,10 @@ defaults:
   run:
     working-directory: PeteBJJCompFeed
 
-# A warning anywhere in the workspace fails the build.
+# A warning anywhere in the workspace fails the build. Xcode 26 generates the
+# string catalog symbols the SwiftUI feed uses; macos-15 defaults to Xcode 16.4.
 env:
+  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
   BUILD_FLAGS: CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES GCC_TREAT_WARNINGS_AS_ERRORS=YES
 
 jobs:

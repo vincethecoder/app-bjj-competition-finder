@@ -9,8 +9,10 @@ import SwiftUI
 
 /// A tappable banner that shows a loading error until the user dismisses it.
 struct ErrorBannerView: View {
-    let message: String
+    let message: LocalizedStringResource
     let dismiss: @MainActor () -> Void
+
+    @Environment(\.locale) private var locale
 
     var body: some View {
         Button(action: dismiss) {
@@ -23,13 +25,15 @@ struct ErrorBannerView: View {
         .buttonStyle(.plain)
         .foregroundStyle(.white)
         .background(.red.gradient)
-        .accessibilityHint(FeedStrings.dismissErrorHint)
+        .accessibilityHint(Text(.feedViewDismissErrorHint))
         .onAppear(perform: announceToVoiceOver)
     }
 
     /// The banner appears without focus moving to it, so VoiceOver users
     /// would otherwise not learn that loading failed.
     private func announceToVoiceOver() {
-        AccessibilityNotification.Announcement(message).post()
+        var announcement = message
+        announcement.locale = locale
+        AccessibilityNotification.Announcement(String(localized: announcement)).post()
     }
 }

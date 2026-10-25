@@ -32,7 +32,7 @@ public struct CompetitionsFeedView: View {
                     ErrorBannerView(message: message, dismiss: viewModel.dismissError)
                 }
             }
-            .navigationTitle(FeedStrings.title)
+            .navigationTitle(Text(.feedViewTitle))
             .task { await load() }
             .refreshable { await load() }
         }

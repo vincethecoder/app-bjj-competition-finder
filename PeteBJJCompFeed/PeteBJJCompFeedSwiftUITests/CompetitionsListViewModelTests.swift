@@ -66,7 +66,7 @@ final class CompetitionsListViewModelTests {
 
         await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
 
-        #expect(sut.state == .failed(rows: competitions.map(CompetitionRow.init), message: FeedStrings.connectionError))
+        #expect(sut.state == .failed(rows: competitions.map(CompetitionRow.init), message: .feedViewConnectionError))
     }
 
     @Test func load_clearsErrorOnSuccessfulReload() async {

@@ -12,7 +12,7 @@ struct CompetitionRowView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(row.dates, format: .interval.month(.abbreviated).day())
+            dates
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
@@ -24,5 +24,17 @@ struct CompetitionRowView: View {
                 .foregroundStyle(.secondary)
         }
         .accessibilityElement(children: .combine)
+    }
+
+    /// An interval needs two different dates, so a one-day event shows its date alone.
+    private var dates: Text {
+        let start = row.dates.lowerBound
+        let end = row.dates.upperBound
+
+        if start < end {
+            return Text(start..<end, format: .interval.month(.abbreviated).day())
+        } else {
+            return Text(start, format: .dateTime.month(.abbreviated).day())
+        }
     }
 }

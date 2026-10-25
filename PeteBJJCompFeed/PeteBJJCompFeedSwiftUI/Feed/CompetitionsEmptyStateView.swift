@@ -14,10 +14,15 @@ struct CompetitionsEmptyStateView: View {
         if isLoading {
             ProgressView()
         } else {
-            ContentUnavailableView(
-                FeedStrings.emptyTitle,
-                systemImage: "figure.martial.arts",
-                description: Text(FeedStrings.emptyDescription))
+            ContentUnavailableView {
+                Label {
+                    Text(.feedViewEmptyTitle)
+                } icon: {
+                    Image(systemName: "figure.martial.arts")
+                }
+            } description: {
+                Text(.feedViewEmptyDescription)
+            }
         }
     }
 }

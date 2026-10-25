@@ -12,7 +12,9 @@ import PeteBJJCompFeed
 public struct CompetitionRow: Identifiable, Equatable, Sendable {
     public let id: String
     public let name: String
-    public let dates: Range<Date>
+    /// Closed, so a one-day event (start equal to end) is a single date
+    /// rather than an empty range.
+    public let dates: ClosedRange<Date>
     public let location: String
 
     public init(_ competition: Competition) {
@@ -22,7 +24,7 @@ public struct CompetitionRow: Identifiable, Equatable, Sendable {
         // Bad data shouldn't crash the feed: a range requires lower <= upper.
         let start = min(competition.startDate, competition.endDate)
         let end = max(competition.startDate, competition.endDate)
-        dates = start..<end
+        dates = start...end
 
         location = [competition.venue, competition.city, competition.state]
             .compactMap { $0 }

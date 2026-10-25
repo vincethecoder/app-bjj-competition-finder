@@ -16,7 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private let competitionsURL = URL(string: "https://bit.ly/4hd1liM")!
+    private let competitionsURL: URL = {
+        guard let url = URL(string: "https://bit.ly/4hd1liM") else {
+            fatalError("Invalid competitions URL")
+        }
+        return url
+    }()
 
     private lazy var httpClient: HTTPClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
 
