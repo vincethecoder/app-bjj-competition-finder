@@ -29,27 +29,34 @@ jobs:
           runtime, device = max(iphones, key=lambda t: version(t[0]))
           print(device["udid"])
           ')
+          echo "SIMULATOR_UDID=$udid" >> "$GITHUB_ENV"
           echo "DESTINATION=platform=iOS Simulator,id=$udid" >> "$GITHUB_ENV"
           xcrun simctl list devices available | grep "$udid"
 
+      # Tests run on this one booted simulator rather than on parallel clones.
+      # Cold clones on a busy runner made fast tests take 7-15s and timed out
+      # URLSessionHTTPClientTests (run 40116604041).
+      - name: Boot the simulator
+        run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+
       - name: Unit tests (domain, API, cache)
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
       - name: UI and presentation tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
       - name: Core Data cache integration tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
       - name: API end-to-end tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
       - name: Static analysis
         run: xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
       - name: App composition and acceptance tests
         working-directory: PeteBJJCompApp
-        run: xcodebuild test -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
 
   macos:
     name: Test core on macOS
