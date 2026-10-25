@@ -7,8 +7,6 @@
 
 import Foundation
 
-public typealias CachedCompetitions = (competitions: [LocalCompetition], timestamp: Date)
-
 public protocol CompetitionsStore {
     typealias DeletionResult = Result<Void, Error>
     typealias DeletionCompletion = (DeletionResult) -> Void
@@ -25,9 +23,16 @@ public protocol CompetitionsStore {
     
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropriate threads, if needed.
-    func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion)
-   
+    func insert(_ competitions: [LocalCompetition], screen: Data?, timestamp: Date, completion: @escaping InsertionCompletion)
+
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropriate threads, if needed.
     func retrieve(completion: @escaping RetrievalCompletion)
+}
+
+extension CompetitionsStore {
+    /// Inserts competitions without a server-driven screen.
+    public func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
+        insert(competitions, screen: nil, timestamp: timestamp, completion: completion)
+    }
 }

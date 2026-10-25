@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Pick the newest available iPhone simulator
         run: |
@@ -76,7 +76,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Unit tests (domain, API, cache)
         run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "platform=macOS" $BUILD_FLAGS

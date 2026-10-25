@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CompetitionsEmptyStateView: View {
     let isLoading: Bool
+    let title: Text
+    let message: Text
 
     var body: some View {
         if isLoading {
@@ -16,12 +18,12 @@ struct CompetitionsEmptyStateView: View {
         } else {
             ContentUnavailableView {
                 Label {
-                    Text(.feedViewEmptyTitle)
+                    title
                 } icon: {
                     Image(systemName: "figure.martial.arts")
                 }
             } description: {
-                Text(.feedViewEmptyDescription)
+                message
             }
         }
     }

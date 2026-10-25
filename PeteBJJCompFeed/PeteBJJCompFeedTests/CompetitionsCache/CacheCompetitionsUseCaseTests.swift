@@ -44,7 +44,7 @@ class CacheCompetitionsUseCaseTests: XCTestCase {
         sut.save(competitions) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedCompetitions, .insert(localCompetitions, timestamp)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedCompetitions, .insert(localCompetitions, nil, timestamp)])
     }
     
     func test_save_failsOnDeletionError() {

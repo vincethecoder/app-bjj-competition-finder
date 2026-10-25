@@ -13,7 +13,7 @@ struct FeedLocalizationTests {
     private let table = "Localizable"
 
     @Test func localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() throws {
-        let bundle = Bundle(for: CompetitionsListViewModel.self)
+        let bundle = Bundle(for: CompetitionsGridViewModel.self)
         let localizations = bundle.localizations.filter { $0 != "Base" }
         let keys = try allLocalizedKeys(in: localizations, of: bundle)
 
@@ -30,7 +30,19 @@ struct FeedLocalizationTests {
         }
     }
 
+    @Test func registrationLabels_readAsShortCallsToActionWhileTheFilterKeepsItsDescription() {
+        #expect(english(.feedBadgeRegistrationOpen) == "Register")
+        #expect(english(.feedBadgeRegistrationClosed) == "Ended")
+        #expect(english(.feedFilterRegistrationOpen) == "Registration open")
+    }
+
     // MARK: - Helpers
+
+    private func english(_ resource: LocalizedStringResource) -> String {
+        var resource = resource
+        resource.locale = Locale(identifier: "en")
+        return String(localized: resource)
+    }
 
     private func allLocalizedKeys(in localizations: [String], of bundle: Bundle) throws -> Set<String> {
         try localizations.reduce(into: Set<String>()) { keys, localization in

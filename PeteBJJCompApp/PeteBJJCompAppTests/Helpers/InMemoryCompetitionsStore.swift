@@ -20,8 +20,8 @@ final class InMemoryCompetitionsStore: CompetitionsStore {
         completion(.success(()))
     }
 
-    func insert(_ competitions: [LocalCompetition], timestamp: Date, completion: @escaping InsertionCompletion) {
-        cache = (competitions, timestamp)
+    func insert(_ competitions: [LocalCompetition], screen: Data?, timestamp: Date, completion: @escaping InsertionCompletion) {
+        cache = CachedCompetitions(competitions: competitions, screen: screen, timestamp: timestamp)
         completion(.success(()))
     }
 
@@ -34,10 +34,10 @@ final class InMemoryCompetitionsStore: CompetitionsStore {
     }
 
     static var withExpiredCache: InMemoryCompetitionsStore {
-        InMemoryCompetitionsStore(cache: ([], .distantPast))
+        InMemoryCompetitionsStore(cache: CachedCompetitions(competitions: [], timestamp: .distantPast))
     }
 
     static var withNonExpiredCache: InMemoryCompetitionsStore {
-        InMemoryCompetitionsStore(cache: ([], .now))
+        InMemoryCompetitionsStore(cache: CachedCompetitions(competitions: [], timestamp: .now))
     }
 }

@@ -16,32 +16,97 @@ var anyURL: URL {
     URL(string: "http://any-url.com")!
 }
 
-func uniqueCompetitions() -> [Competition] {
-    [uniqueCompetition(), uniqueCompetition()]
+/// A fixed calendar and locale, so formatted dates don't depend on the machine running the tests.
+let testCalendar: Calendar = {
+    var calendar = Calendar(identifier: .gregorian)
+    calendar.timeZone = TimeZone(identifier: "America/Los_Angeles")!
+    return calendar
+}()
+
+let testLocale = Locale(identifier: "en_US")
+
+func date(_ year: Int, _ month: Int, _ day: Int) -> Date {
+    testCalendar.date(from: DateComponents(year: year, month: month, day: day))!
 }
 
 func uniqueCompetition(
-    startDate: Date = Date(timeIntervalSince1970: 1_717_027_200),
-    endDate: Date = Date(timeIntervalSince1970: 1_717_286_400),
-    venue: String = "Walter Pyramid",
+    id: String = UUID().uuidString,
+    name: String = "World IBJJF Jiu-Jitsu Championship",
+    startDate: Date = date(2026, 5, 30),
+    endDate: Date = date(2026, 6, 2),
     city: String = "Long Beach",
-    state: String? = "CA"
+    state: String? = "CA",
+    country: String = "USA",
+    type: CompetitionType = .gi,
+    registrationStatus: RegistrationStatus = .open
 ) -> Competition {
     Competition(
-        id: UUID().uuidString,
-        name: "World IBJJF Jiu-Jitsu Championship",
+        id: id,
+        name: name,
         startDate: startDate,
         endDate: endDate,
-        venue: venue,
+        venue: "Walter Pyramid",
         city: city,
         state: state,
-        country: "USA",
-        type: .gi,
+        country: country,
+        type: type,
         status: .upcoming,
-        registrationStatus: .open,
+        registrationStatus: registrationStatus,
         registrationLink: nil,
         eventLink: anyURL,
         categories: [.adult],
         rankingPoints: 1000,
         notes: nil)
+}
+
+func makeFeed(competitions: [Competition] = [], screen: CompetitionsScreen?, cachedAt: Date? = nil) -> CompetitionsFeed {
+    CompetitionsFeed(competitions: competitions, screen: screen, cachedAt: cachedAt)
+}
+
+let allFilter = CompetitionsScreen.Filter(id: "all", title: "All", criterion: .all)
+let giFilter = CompetitionsScreen.Filter(id: "gi", title: "Gi", criterion: .type("gi"))
+let noGiFilter = CompetitionsScreen.Filter(id: "nogi", title: "No-Gi", criterion: .type("nogi"))
+let openFilter = CompetitionsScreen.Filter(id: "open", title: "Registration open", criterion: .registrationStatus("open"))
+
+func makeScreen(
+    title: String? = "Championships",
+    filters: [CompetitionsScreen.Filter] = [allFilter, giFilter, noGiFilter, openFilter],
+    sections: [CompetitionsScreen.Section] = [
+        CompetitionsScreen.Section(id: "2026-05", title: "May 2026", cards: [makeCard(id: "worlds"), makeCard(id: "nogi-worlds", type: "nogi", registrationOpen: false)]),
+        CompetitionsScreen.Section(id: "2026-06", title: "June 2026", cards: [makeCard(id: "brasileiro")]),
+    ]
+) -> CompetitionsScreen {
+    CompetitionsScreen(
+        title: title,
+        empty: CompetitionsScreen.EmptyState(title: "No competitions", message: "Pull down to refresh."),
+        filters: filters,
+        sections: sections)
+}
+
+func makeCard(
+    id: String,
+    name: String = "World IBJJF Jiu-Jitsu Championship",
+    dateLabel: String? = "May 30 – Jun 2",
+    startDate: Date? = nil,
+    endDate: Date? = nil,
+    locationLabel: String? = "Long Beach, USA",
+    imageURL: URL? = URL(string: "https://example.com/poster.jpg"),
+    type: String = "gi",
+    registrationOpen: Bool = true
+) -> CompetitionsScreen.Card {
+    CompetitionsScreen.Card(
+        id: id,
+        name: name,
+        dateLabel: dateLabel,
+        startDate: startDate,
+        endDate: endDate,
+        locationLabel: locationLabel,
+        imageURL: imageURL,
+        eventLink: anyURL,
+        badges: [
+            CompetitionsScreen.Badge(id: type, title: type, token: .type),
+            registrationOpen
+                ? CompetitionsScreen.Badge(id: "open", title: "Register", token: .registrationOpen)
+                : CompetitionsScreen.Badge(id: "closed", title: "Ended", token: .registrationClosed),
+        ])
 }
