@@ -33,23 +33,30 @@ jobs:
           runtime, device = max(iphones, key=lambda t: version(t[0]))
           print(device["udid"])
           ')
+          echo "SIMULATOR_UDID=$udid" >> "$GITHUB_ENV"
           echo "DESTINATION=platform=iOS Simulator,id=$udid" >> "$GITHUB_ENV"
           xcrun simctl list devices available | grep "$udid"
 
+      # Tests run on this one booted simulator rather than on parallel clones.
+      # Cold clones on a busy runner made fast tests take 7-15s and timed out
+      # URLSessionHTTPClientTests (run 40116604041).
+      - name: Boot the simulator
+        run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+
       - name: Unit tests (domain, API, cache)
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: UI and presentation tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: Core Data cache integration tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: SwiftUI feed tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedSwiftUI -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedSwiftUI -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: API end-to-end tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: Static analysis
         run: |
@@ -59,7 +66,7 @@ jobs:
 
       - name: App composition and acceptance tests
         working-directory: PeteBJJCompApp
-        run: xcodebuild test -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" $BUILD_FLAGS
+        run: xcodebuild test -parallel-testing-enabled NO -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" $BUILD_FLAGS
 
   macos:
     name: Test core on macOS
