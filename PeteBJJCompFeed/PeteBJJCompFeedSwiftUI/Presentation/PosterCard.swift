@@ -7,8 +7,9 @@
 
 import Foundation
 
-/// One event card, ready to draw.
-public struct PosterCard: Identifiable, Equatable, Sendable {
+/// One event card, ready to draw. It's also the value the grid navigates to,
+/// so the detail screen draws the same card the user tapped.
+public struct PosterCard: Identifiable, Hashable, Sendable {
     public let id: String
     public let name: String
     public let dateText: String?
@@ -16,6 +17,8 @@ public struct PosterCard: Identifiable, Equatable, Sendable {
     public let imageURL: URL?
     public let eventLink: URL
     public let badges: [PosterBadge]
+    /// `nil` when the server sent the card without a matching competition.
+    public let details: PosterEventDetails?
 
     /// The values filters match on, e.g. `"gi"` and `"open"`.
     let type: String?
@@ -29,6 +32,7 @@ public struct PosterCard: Identifiable, Equatable, Sendable {
         imageURL: URL?,
         eventLink: URL,
         badges: [PosterBadge],
+        details: PosterEventDetails?,
         type: String?,
         registrationStatus: String?
     ) {
@@ -39,6 +43,7 @@ public struct PosterCard: Identifiable, Equatable, Sendable {
         self.imageURL = imageURL
         self.eventLink = eventLink
         self.badges = badges
+        self.details = details
         self.type = type
         self.registrationStatus = registrationStatus
     }

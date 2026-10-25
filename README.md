@@ -4,19 +4,20 @@
 
 An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a server-driven SwiftUI poster grid; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**164 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
+**169 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
-| Server-driven grid | Dark mode | Offline, cached screen | Built on the device (pt-BR) |
+| Server-driven grid | Event details | Offline, cached screen | Built on the device (pt-BR) |
 |---|---|---|---|
-| <img src="docs/screenshots/server-driven-grid/after-server-iphone-light.png" width="200" alt="Poster grid grouped by month with filter chips"> | <img src="docs/screenshots/server-driven-grid/after-server-iphone-dark.png" width="200" alt="The same grid in dark mode"> | <img src="docs/screenshots/server-driven-grid/after-offline-cached-screen.png" width="200" alt="Cached grid under a connection error banner"> | <img src="docs/screenshots/server-driven-grid/after-live-pt-BR.png" width="200" alt="Grid built from competitions only, in Portuguese"> |
+| <img src="docs/screenshots/server-driven-grid/after-server-iphone-light.png" width="200" alt="Poster grid grouped by month with filter chips"> | <img src="docs/screenshots/competition-detail/after-detail-iphone-light.png" width="200" alt="Event detail screen with poster, dates, venue, location, divisions and ranking points"> | <img src="docs/screenshots/server-driven-grid/after-offline-cached-screen.png" width="200" alt="Cached grid under a connection error banner"> | <img src="docs/screenshots/server-driven-grid/after-live-pt-BR.png" width="200" alt="Grid built from competitions only, in Portuguese"> |
 
 ## Features
 
 - **Server-driven poster grid** in SwiftUI: the server's `screen` object picks the sections, order, filters, copy and badges from a closed set of components, and the app builds the same screen on the device when an older server or cache sends none
+- **Event details:** venue, location, divisions, ranking points and notes, with links to register (only while registration is open) and to the event website, and a share button
 - **Adaptive layout:** 2 columns on iPhone, 3 at regular width, 1 at the largest text sizes, from size classes and Dynamic Type rather than the screen width
-- Pull to refresh, filter chips, a `ContentUnavailableView` empty state, and a tappable error banner that VoiceOver announces; each card is one button that opens the event
+- Pull to refresh, filter chips, a `ContentUnavailableView` empty state, and a tappable error banner that VoiceOver announces; each card is one link that opens the event's details
 - **Dynamic Type and dark mode** supported down to the largest accessibility text sizes
 - **Localized** in English, Portuguese (pt-BR) and Greek, with tests that fail if any localization key is missing; requests send `Accept-Language` so server copy matches
 - **Works offline:** the competitions and their screen load from the network and are saved together to a Core Data cache; with no connection, the app shows the cached screen with a banner explaining why
@@ -86,7 +87,7 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
 | Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 79 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| SwiftUI view model, screen mapping, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 42 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| SwiftUI view model, screen and detail mapping, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 47 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
 | UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
 | Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 1 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |
@@ -120,4 +121,6 @@ Every change landed through a pull request. The [closed PRs](https://github.com/
 - [x] **Offline-first:** use a remote loader that falls back to the cache, save remote results to the cache, and validate the cache in the background
 - [x] **SwiftUI UI module** on the same core, with async/await adapters over the existing loaders and new tests in Swift Testing
 - [x] **Server-driven poster grid** with filters, a device-built fallback, and the screen cached for offline use
-- [ ] Competition detail screen, date and location filters, and favorites
+- [x] **Competition detail screen** with the facts the card has no room for, registration and event links, and sharing
+- [ ] Date and location filters
+- [ ] Favorites

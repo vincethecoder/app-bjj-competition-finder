@@ -150,6 +150,59 @@ struct PosterScreenMapperTests {
         #expect(card.dateText == date(2026, 5, 30).formatted(Date.FormatStyle(locale: testLocale, calendar: testCalendar, timeZone: testCalendar.timeZone).month(.abbreviated).day()))
     }
 
+    // MARK: - Details
+
+    @Test func map_buildsDetailsFromCompetition() throws {
+        let registrationLink = try #require(URL(string: "https://example.com/register"))
+        let competition = uniqueCompetition(
+            registrationStatus: .open,
+            venue: "Walter Pyramid",
+            registrationLink: registrationLink,
+            categories: [.juvenile, .adult, .master],
+            rankingPoints: 1000,
+            notes: "  Weigh-in before the first match.\n")
+
+        let details = try #require(deviceCard(for: competition)?.details)
+
+        #expect(details.venue == "Walter Pyramid")
+        #expect(details.divisionsText == [localized(.detailDivisionJuvenile), localized(.detailDivisionAdult), localized(.detailDivisionMaster)].formatted(.list(type: .and).locale(testLocale)))
+        #expect(details.rankingPoints == 1000)
+        #expect(details.notes == "Weigh-in before the first match.")
+        #expect(details.registrationLink == registrationLink)
+    }
+
+    @Test(arguments: [RegistrationStatus.closed, .notOpen, .invitationOnly])
+    func map_offersRegistrationLinkOnlyWhileRegistrationIsOpen(status: RegistrationStatus) throws {
+        let competition = uniqueCompetition(registrationStatus: status, registrationLink: URL(string: "https://example.com/register"))
+
+        let details = try #require(deviceCard(for: competition)?.details)
+
+        #expect(details.registrationLink == nil)
+    }
+
+    @Test func map_leavesOutDetailsTheCompetitionHasNoValueFor() throws {
+        let competition = uniqueCompetition(venue: "", categories: [], rankingPoints: 0, notes: " \n ")
+
+        let details = try #require(deviceCard(for: competition)?.details)
+
+        #expect(details.venue == nil)
+        #expect(details.divisionsText == nil)
+        #expect(details.rankingPoints == nil)
+        #expect(details.notes == nil)
+    }
+
+    @Test func map_addsCompetitionDetailsToServerCard() throws {
+        let card = try #require(mapCard(makeCard(id: "worlds"), competitions: [uniqueCompetition(id: "worlds", venue: "Walter Pyramid")]))
+
+        #expect(card.details?.venue == "Walter Pyramid")
+    }
+
+    @Test func map_hasNoDetailsForServerCardWithoutCompetition() throws {
+        let card = try #require(mapCard(makeCard(id: "worlds")))
+
+        #expect(card.details == nil)
+    }
+
     // MARK: - Helpers
 
     /// Catalog copy in the locale the mapper is given.

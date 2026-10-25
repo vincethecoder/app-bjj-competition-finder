@@ -1,6 +1,102 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "DETAIL_DATES" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ημερομηνίες" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dates" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Datas" } }
+      }
+    },
+    "DETAIL_DIVISIONS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Κατηγορίες" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Divisions" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Divisões" } }
+      }
+    },
+    "DETAIL_DIVISION_ADULT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ενηλίκων" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Adult" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Adulto" } }
+      }
+    },
+    "DETAIL_DIVISION_JUVENILE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εφήβων" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Juvenile" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Juvenil" } }
+      }
+    },
+    "DETAIL_DIVISION_KIDS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Παίδων" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Kids" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Infantil" } }
+      }
+    },
+    "DETAIL_DIVISION_MASTER" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Masters" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Master" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Master" } }
+      }
+    },
+    "DETAIL_EVENT_WEBSITE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ιστότοπος διοργάνωσης" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Event website" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Site do evento" } }
+      }
+    },
+    "DETAIL_LOCATION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Τοποθεσία" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Localização" } }
+      }
+    },
+    "DETAIL_NOTES" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Σημειώσεις" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Notes" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Observações" } }
+      }
+    },
+    "DETAIL_RANKING_POINTS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Βαθμοί κατάταξης" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ranking points" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pontos no ranking" } }
+      }
+    },
+    "DETAIL_REGISTER" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εγγραφή" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Register" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscreva-se" } }
+      }
+    },
+    "DETAIL_VENUE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Χώρος" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Venue" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Local" } }
+      }
+    },
     "FEED_BADGE_GI" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -49,12 +145,12 @@
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscreva-se" } }
       }
     },
-    "FEED_CARD_OPEN_EVENT_HINT" : {
+    "FEED_CARD_SHOW_DETAILS_HINT" : {
       "extractionState" : "manual",
       "localizations" : {
-        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοίγει τον ιστότοπο της διοργάνωσης" } },
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Opens the event website" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Abre o site do evento" } }
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εμφανίζει τις λεπτομέρειες της διοργάνωσης" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shows the event details" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mostra os detalhes do evento" } }
       }
     },
     "FEED_FILTER_ALL" : {

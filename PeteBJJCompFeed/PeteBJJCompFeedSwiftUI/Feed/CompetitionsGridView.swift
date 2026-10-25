@@ -46,6 +46,7 @@ public struct CompetitionsGridView: View {
             }
             // The app's own title shows until a screen has loaded.
             .navigationTitle(viewModel.screen.map { Text($0.title) } ?? Text(.feedViewTitle))
+            .navigationDestination(for: PosterCard.self, destination: CompetitionDetailView.init)
             .task { await load() }
             .refreshable { await load() }
         }

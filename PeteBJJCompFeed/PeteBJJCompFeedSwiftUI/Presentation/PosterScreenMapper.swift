@@ -59,6 +59,7 @@ enum PosterScreenMapper {
             imageURL: card.imageURL,
             eventLink: card.eventLink,
             badges: card.badges.map { PosterBadge(id: $0.id, title: $0.title, token: $0.token) },
+            details: competition.map { details(for: $0, locale: dates.locale) },
             type: competition?.type.rawValue ?? card.badges.first { $0.token == .type }?.id,
             registrationStatus: competition?.registrationStatus.rawValue ?? registrationStatus(from: card.badges))
     }
@@ -121,6 +122,7 @@ enum PosterScreenMapper {
             imageURL: nil,
             eventLink: competition.eventLink,
             badges: [typeBadge(for: competition.type, locale: dates.locale), registrationBadge(for: competition.registrationStatus, locale: dates.locale)],
+            details: details(for: competition, locale: dates.locale),
             type: competition.type.rawValue,
             registrationStatus: competition.registrationStatus.rawValue)
     }
@@ -140,6 +142,29 @@ enum PosterScreenMapper {
         case .notOpen: PosterBadge(id: status.rawValue, title: localized(.feedBadgeRegistrationNotOpen, locale), token: .neutral)
         case .invitationOnly: PosterBadge(id: status.rawValue, title: localized(.feedBadgeInvitationOnly, locale), token: .neutral)
         @unknown default: PosterBadge(id: status.rawValue, title: status.rawValue, token: .neutral)
+        }
+    }
+
+    // MARK: - Details
+
+    private static func details(for competition: Competition, locale: Locale) -> PosterEventDetails {
+        PosterEventDetails(
+            venue: competition.venue.nonEmpty,
+            divisionsText: competition.categories.isEmpty
+                ? nil
+                : competition.categories.map { division(for: $0, locale: locale) }.formatted(.list(type: .and).locale(locale)),
+            rankingPoints: competition.rankingPoints > 0 ? competition.rankingPoints : nil,
+            notes: competition.notes?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
+            registrationLink: competition.registrationStatus == .open ? competition.registrationLink : nil)
+    }
+
+    private static func division(for category: CompetitionCategory, locale: Locale) -> String {
+        switch category {
+        case .kids: localized(.detailDivisionKids, locale)
+        case .juvenile: localized(.detailDivisionJuvenile, locale)
+        case .adult: localized(.detailDivisionAdult, locale)
+        case .master: localized(.detailDivisionMaster, locale)
+        @unknown default: category.rawValue
         }
     }
 
