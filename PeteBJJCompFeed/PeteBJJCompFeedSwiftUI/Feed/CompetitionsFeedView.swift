@@ -33,9 +33,13 @@ public struct CompetitionsFeedView: View {
                 }
             }
             .navigationTitle(FeedStrings.title)
-            .task { await viewModel.load() }
-            .refreshable { await viewModel.load() }
+            .task { await load() }
+            .refreshable { await load() }
         }
+    }
+
+    private func load() async {
+        await viewModel.load()
     }
 }
 

@@ -22,9 +22,7 @@ final class CompetitionsListViewModelTests {
         let (sut, loader) = makeSUT()
 
         #expect(loader.loadCallCount == 0)
-        #expect(sut.rows.isEmpty)
-        #expect(!sut.isLoading)
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .idle)
     }
 
     @Test func load_showsLoadingIndicatorUntilLoaderCompletes() async {
@@ -32,11 +30,24 @@ final class CompetitionsListViewModelTests {
 
         let loading = Task { await sut.load() }
         await loader.waitForLoadRequest()
-        #expect(sut.isLoading)
+        #expect(sut.state == .loading(rows: []))
 
         loader.completeLoading(with: uniqueCompetitions())
         await loading.value
         #expect(!sut.isLoading)
+    }
+
+    @Test func load_keepsRowsOnScreenWhileReloading() async {
+        let competitions = uniqueCompetitions()
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(competitions), on: loader)
+
+        let reloading = Task { await sut.load() }
+        await loader.waitForLoadRequest(count: 2)
+        #expect(sut.state == .loading(rows: competitions.map(CompetitionRow.init)))
+
+        loader.completeLoading(at: 1)
+        await reloading.value
     }
 
     @Test func load_rendersRowsOnLoaderSuccess() async {
@@ -45,8 +56,7 @@ final class CompetitionsListViewModelTests {
 
         await load(sut, completingWith: .success(competitions), on: loader)
 
-        #expect(sut.rows == competitions.map(CompetitionRow.init))
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .loaded(rows: competitions.map(CompetitionRow.init)))
     }
 
     @Test func load_showsConnectionErrorAndKeepsRowsOnLoaderFailure() async {
@@ -56,18 +66,17 @@ final class CompetitionsListViewModelTests {
 
         await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
 
-        #expect(sut.errorMessage == FeedStrings.connectionError)
-        #expect(sut.rows == competitions.map(CompetitionRow.init))
-        #expect(!sut.isLoading)
+        #expect(sut.state == .failed(rows: competitions.map(CompetitionRow.init), message: FeedStrings.connectionError))
     }
 
     @Test func load_clearsErrorOnSuccessfulReload() async {
+        let competitions = uniqueCompetitions()
         let (sut, loader) = makeSUT()
         await load(sut, completingWith: .failure(anyNSError), on: loader)
 
-        await load(sut, completingWith: .success(uniqueCompetitions()), on: loader, at: 1)
+        await load(sut, completingWith: .success(competitions), on: loader, at: 1)
 
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .loaded(rows: competitions.map(CompetitionRow.init)))
     }
 
     @Test func load_doesNotRequestAgainWhileLoading() async {
@@ -86,13 +95,15 @@ final class CompetitionsListViewModelTests {
         await secondLoad.value
     }
 
-    @Test func dismissError_clearsErrorMessage() async {
+    @Test func dismissError_clearsErrorAndKeepsRows() async {
+        let competitions = uniqueCompetitions()
         let (sut, loader) = makeSUT()
-        await load(sut, completingWith: .failure(anyNSError), on: loader)
+        await load(sut, completingWith: .success(competitions), on: loader)
+        await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
 
         sut.dismissError()
 
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .loaded(rows: competitions.map(CompetitionRow.init)))
     }
 
     // MARK: - Helpers
