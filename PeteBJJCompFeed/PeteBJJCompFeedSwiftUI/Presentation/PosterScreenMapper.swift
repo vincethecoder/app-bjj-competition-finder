@@ -61,7 +61,10 @@ enum PosterScreenMapper {
             badges: card.badges.map { PosterBadge(id: $0.id, title: $0.title, token: $0.token) },
             details: competition.map { details(for: $0, locale: dates.locale) },
             type: competition?.type.rawValue ?? card.badges.first { $0.token == .type }?.id,
-            registrationStatus: competition?.registrationStatus.rawValue ?? registrationStatus(from: card.badges))
+            registrationStatus: competition?.registrationStatus.rawValue ?? registrationStatus(from: card.badges),
+            startDate: card.startDate ?? competition?.startDate,
+            endDate: card.endDate ?? competition?.endDate,
+            country: competition?.country.nonEmpty)
     }
 
     private static func registrationStatus(from badges: [CompetitionsScreen.Badge]) -> String? {
@@ -124,7 +127,10 @@ enum PosterScreenMapper {
             badges: [typeBadge(for: competition.type, locale: dates.locale), registrationBadge(for: competition.registrationStatus, locale: dates.locale)],
             details: details(for: competition, locale: dates.locale),
             type: competition.type.rawValue,
-            registrationStatus: competition.registrationStatus.rawValue)
+            registrationStatus: competition.registrationStatus.rawValue,
+            startDate: competition.startDate,
+            endDate: competition.endDate,
+            country: competition.country.nonEmpty)
     }
 
     private static func typeBadge(for type: CompetitionType, locale: Locale) -> PosterBadge {

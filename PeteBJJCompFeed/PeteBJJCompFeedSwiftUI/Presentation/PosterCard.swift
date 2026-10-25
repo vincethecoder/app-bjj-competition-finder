@@ -24,6 +24,11 @@ public struct PosterCard: Identifiable, Hashable, Sendable {
     let type: String?
     let registrationStatus: String?
 
+    /// The values the date and location refinements match on.
+    let startDate: Date?
+    let endDate: Date?
+    let country: String?
+
     init(
         id: String,
         name: String,
@@ -34,7 +39,10 @@ public struct PosterCard: Identifiable, Hashable, Sendable {
         badges: [PosterBadge],
         details: PosterEventDetails?,
         type: String?,
-        registrationStatus: String?
+        registrationStatus: String?,
+        startDate: Date?,
+        endDate: Date?,
+        country: String?
     ) {
         self.id = id
         self.name = name
@@ -46,6 +54,9 @@ public struct PosterCard: Identifiable, Hashable, Sendable {
         self.details = details
         self.type = type
         self.registrationStatus = registrationStatus
+        self.startDate = startDate
+        self.endDate = endDate
+        self.country = country
     }
 
     /// The first letter of the name, shown on the poster when there's no artwork.

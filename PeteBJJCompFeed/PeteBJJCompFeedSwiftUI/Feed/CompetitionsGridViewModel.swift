@@ -26,15 +26,29 @@ public final class CompetitionsGridViewModel {
     public private(set) var state: State = .idle
     public private(set) var selectedFilterID: PosterFilter.ID?
     public private(set) var visibleSections: [PosterSection] = []
+    /// The countries the location refinement offers, from the loaded events.
+    public private(set) var countries: [String] = []
+
+    /// The date and location the feed is narrowed to, kept across reloads.
+    public var refinement = PosterRefinement() {
+        didSet { updateVisibleSections() }
+    }
 
     @ObservationIgnored private let loader: CompetitionsFeedLoader
     @ObservationIgnored private let locale: Locale
     @ObservationIgnored private let calendar: Calendar
+    @ObservationIgnored private let now: () -> Date
 
-    public init(loader: CompetitionsFeedLoader, locale: Locale = .autoupdatingCurrent, calendar: Calendar = .autoupdatingCurrent) {
+    public init(
+        loader: CompetitionsFeedLoader,
+        locale: Locale = .autoupdatingCurrent,
+        calendar: Calendar = .autoupdatingCurrent,
+        now: @escaping () -> Date = Date.init
+    ) {
         self.loader = loader
         self.locale = locale
         self.calendar = calendar
+        self.now = now
     }
 
     public var screen: PosterScreen? {
@@ -53,7 +67,7 @@ public final class CompetitionsGridViewModel {
         if case let .failed(_, message) = state { message } else { nil }
     }
 
-    /// Whether the screen has events but the selected filter hides all of them,
+    /// Whether the screen has events but the selected filter or the refinement hides all of them,
     /// as opposed to a screen that has no events at all.
     public var isFilteredToNothing: Bool {
         screen?.sections.isEmpty == false && visibleSections.isEmpty
@@ -86,7 +100,7 @@ public final class CompetitionsGridViewModel {
         guard screen?.filters.contains(where: { $0.id == id }) == true else { return }
 
         selectedFilterID = id
-        visibleSections = screen?.sections(filteredBy: id) ?? []
+        updateVisibleSections()
     }
 
     /// Hides the error banner. With no screen to fall back to, the feed
@@ -99,11 +113,28 @@ public final class CompetitionsGridViewModel {
 
     /// Shows the sections of a new screen, keeping the selected filter when the
     /// new screen still offers it, and selecting the first filter otherwise.
+    /// A country the new screen has no events in is cleared the same way.
     private func show(_ newScreen: PosterScreen) {
         if !newScreen.filters.contains(where: { $0.id == selectedFilterID }) {
             selectedFilterID = newScreen.filters.first?.id
         }
 
-        visibleSections = newScreen.sections(filteredBy: selectedFilterID)
+        countries = newScreen.countries(locale: locale)
+        if let country = refinement.country, !countries.contains(country) {
+            refinement.country = nil
+        }
+
+        updateVisibleSections(on: newScreen)
+    }
+
+    private func updateVisibleSections(on screen: PosterScreen? = nil) {
+        guard let screen = screen ?? self.screen else { return }
+
+        let refinement = refinement
+        let now = now()
+        let calendar = calendar
+        visibleSections = screen.sections(filteredBy: selectedFilterID) {
+            refinement.matches($0, now: now, calendar: calendar)
+        }
     }
 }

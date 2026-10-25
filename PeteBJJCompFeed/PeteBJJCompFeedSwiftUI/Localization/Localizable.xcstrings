@@ -185,6 +185,70 @@
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscrições abertas" } }
       }
     },
+    "FEED_REFINE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Περιορισμός" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Refine" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Refinar" } }
+      }
+    },
+    "FEED_REFINE_ANYWHERE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Οπουδήποτε" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Anywhere" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Qualquer lugar" } }
+      }
+    },
+    "FEED_REFINE_ANY_DATE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Οποιαδήποτε ημερομηνία" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Any date" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Qualquer data" } }
+      }
+    },
+    "FEED_REFINE_DATE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ημερομηνία" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Date" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Data" } }
+      }
+    },
+    "FEED_REFINE_LOCATION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Τοποθεσία" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Location" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Local" } }
+      }
+    },
+    "FEED_REFINE_NEXT_THREE_MONTHS" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Επόμενοι 3 μήνες" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next 3 months" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Próximos 3 meses" } }
+      }
+    },
+    "FEED_REFINE_RESET" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Όλες οι ημερομηνίες και τοποθεσίες" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show all dates and locations" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar todas as datas e locais" } }
+      }
+    },
+    "FEED_REFINE_THIS_MONTH" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Αυτόν τον μήνα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "This month" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Este mês" } }
+      }
+    },
     "FEED_VIEW_CONNECTION_ERROR" : {
       "extractionState" : "manual",
       "localizations" : {

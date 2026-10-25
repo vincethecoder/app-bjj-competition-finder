@@ -40,15 +40,18 @@
 		7FB6121BE223D045A315A149 /* CompetitionsGridViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B1594DB78E0FB552319B07 /* CompetitionsGridViewModelTests.swift */; };
 		86094032C8AF44C56C662A5B /* CompetitionsFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE45234CE6CA632F2F0CFB /* CompetitionsFeedLoader.swift */; };
 		8C4B732E1FB28DC6B0F3536A /* PeteBJJCompFeedSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29D5E9B85461706FAD7801BE /* PeteBJJCompFeedSwiftUI.framework */; };
+		93A546B78570FFF157747696 /* PosterDateRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA963EF0C9378EE484E03B2 /* PosterDateRangeTests.swift */; };
 		944FE09F490AF35C33C43631 /* CompetitionsScreen+EmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C63729A4F948DDB05E3695 /* CompetitionsScreen+EmptyState.swift */; };
 		974797DD022093317C513EE0 /* FeedColors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5CA18268981CCB0810E9BC /* FeedColors.xcassets */; };
 		9948BC32EE548F15EB3B74EF /* BadgeLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F216A0433DF657551A38D3E /* BadgeLabelStyle.swift */; };
 		9DACE485EB325C64D9AAD81E /* CompetitionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A8E0E89D1CE5BE690C0D7 /* CompetitionsScreen.swift */; };
+		9E93DF977E546E1F7BB85544 /* FeedRefineMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242CA5567657AEA554882CE7 /* FeedRefineMenu.swift */; };
 		A123EB5F0698C5E5BA3E9B21 /* PosterEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB92E3F48D2564436188A4A7 /* PosterEventDetails.swift */; };
 		A4AD2AD91F3FEF7E2C1741E1 /* RemoteCompetitionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A342E3DFC789720A9E9BE0 /* RemoteCompetitionsScreen.swift */; };
 		AA09F5086EA1C1ED57B3A042 /* PosterCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182B1EDD4DB27D0F3B1F603 /* PosterCardView.swift */; };
 		B7FC7A332E3E9839EE7A372D /* PosterFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305163F96026EF32B6C2426 /* PosterFilter.swift */; };
 		B9605C688F265EF160C9FF86 /* MemoryLeakTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54094AD1BC813A445C73CA2 /* MemoryLeakTracker.swift */; };
+		BAC2534052A681B9BA2439D8 /* PosterDateRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AA5FC77B484979B183B3D1 /* PosterDateRange.swift */; };
 		BC4598CB3BB86C36E8301982 /* PosterPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4658A2DC4B958C89C55D515D /* PosterPlaceholderView.swift */; };
 		BF587465BC02B502446DB546 /* CompetitionDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4425F23275C92174990DA2B /* CompetitionDetailHeaderView.swift */; };
 		C2B66E8CAA695D1E5681E5A8 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CB3D70AA4C5FA5C9BBDE953B /* Localizable.xcstrings */; };
@@ -57,6 +60,7 @@
 		C82D9ABEBD737DCC222B40E8 /* CompetitionsFeedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925BED7DC434E8756D3E32E6 /* CompetitionsFeedTestHelpers.swift */; };
 		CAFDFD53CC4EFFC3DE395377 /* CoreDataCompetitionsStoreScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F135E79E5EF2D21FDDE5EE07 /* CoreDataCompetitionsStoreScreenTests.swift */; };
 		CD5A44672BFDAC56C7D1A3AB /* FeedDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA3F851B8478258144079CE /* FeedDesign.swift */; };
+		CEED6B7344CCC7A5A85851A6 /* PosterRefinement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E9D647AB42C354AD0400F6 /* PosterRefinement.swift */; };
 		CFFB60247DDCE8FFE286D0ED /* CompetitionDetailFactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB2520E98AB9F0BE3063865 /* CompetitionDetailFactsView.swift */; };
 		D2AC49BCEB13924F685AC540 /* CompetitionsFeedLoaderAsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB754F21A8DB59E104B971C /* CompetitionsFeedLoaderAsyncTests.swift */; };
 		DAF01ED907C99BC56A7EC0B0 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8525212C6C08BB8DC2C62EF0 /* SharedTestHelpers.swift */; };
@@ -225,12 +229,15 @@
 		03413465D4C825075BB16B92 /* GridColumnsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GridColumnsTests.swift; sourceTree = "<group>"; };
 		041A8E0E89D1CE5BE690C0D7 /* CompetitionsScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsScreen.swift; sourceTree = "<group>"; };
 		065B51B0A61085F5AC5BB1DF /* PosterBadge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterBadge.swift; sourceTree = "<group>"; };
+		07E9D647AB42C354AD0400F6 /* PosterRefinement.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterRefinement.swift; sourceTree = "<group>"; };
 		0C91477CCF7530B7B12EE384 /* PosterCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterCard.swift; sourceTree = "<group>"; };
 		10E7022FB39908F7E96DA163 /* CompetitionsScreen+Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsScreen+Filter.swift"; sourceTree = "<group>"; };
 		12B1594DB78E0FB552319B07 /* CompetitionsGridViewModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsGridViewModelTests.swift; sourceTree = "<group>"; };
 		132FFB9DAAF628C64625AEB8 /* RemoteCompetitionsFeedLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsFeedLoader.swift; sourceTree = "<group>"; };
 		15C63729A4F948DDB05E3695 /* CompetitionsScreen+EmptyState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsScreen+EmptyState.swift"; sourceTree = "<group>"; };
 		225259928307807DEF30BE7E /* PosterScreenFilteringTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterScreenFilteringTests.swift; sourceTree = "<group>"; };
+		23AA5FC77B484979B183B3D1 /* PosterDateRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterDateRange.swift; sourceTree = "<group>"; };
+		242CA5567657AEA554882CE7 /* FeedRefineMenu.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedRefineMenu.swift; sourceTree = "<group>"; };
 		27A342E3DFC789720A9E9BE0 /* RemoteCompetitionsScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RemoteCompetitionsScreen.swift; sourceTree = "<group>"; };
 		29D5E9B85461706FAD7801BE /* PeteBJJCompFeedSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeteBJJCompFeedSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E0B863EF4424B337C43E2B1 /* CompetitionsScreen+Criterion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsScreen+Criterion.swift"; sourceTree = "<group>"; };
@@ -239,6 +246,7 @@
 		3CC74B86A4905332422F6130 /* CompetitionsFeed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsFeed.swift; sourceTree = "<group>"; };
 		4090BBD41AFB564FF337714B /* GridColumns.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GridColumns.swift; sourceTree = "<group>"; };
 		4658A2DC4B958C89C55D515D /* PosterPlaceholderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterPlaceholderView.swift; sourceTree = "<group>"; };
+		4FA963EF0C9378EE484E03B2 /* PosterDateRangeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterDateRangeTests.swift; sourceTree = "<group>"; };
 		578C0CA16C559871330D237A /* PosterScreenMapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PosterScreenMapper.swift; sourceTree = "<group>"; };
 		5DB4C90AF82D4DEA77FB28EE /* PreviewCompetitionsFeedLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PreviewCompetitionsFeedLoader.swift; sourceTree = "<group>"; };
 		61E5C49984A58D3A7558FF31 /* CompetitionsScreen+Section.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsScreen+Section.swift"; sourceTree = "<group>"; };
@@ -446,6 +454,8 @@
 				7ADDE8D671A6E6B7CA6C3D55 /* PosterDateFormatting.swift */,
 				578C0CA16C559871330D237A /* PosterScreenMapper.swift */,
 				DB92E3F48D2564436188A4A7 /* PosterEventDetails.swift */,
+				23AA5FC77B484979B183B3D1 /* PosterDateRange.swift */,
+				07E9D647AB42C354AD0400F6 /* PosterRefinement.swift */,
 			);
 			name = Presentation;
 			path = Presentation;
@@ -470,6 +480,7 @@
 				8D11C58098B8CAD476510041 /* Helpers */,
 				03413465D4C825075BB16B92 /* GridColumnsTests.swift */,
 				225259928307807DEF30BE7E /* PosterScreenFilteringTests.swift */,
+				4FA963EF0C9378EE484E03B2 /* PosterDateRangeTests.swift */,
 			);
 			name = PeteBJJCompFeedSwiftUITests;
 			path = PeteBJJCompFeedSwiftUITests;
@@ -504,6 +515,7 @@
 				EBB0EA222D92B482B92389C1 /* FilterChipsView.swift */,
 				F4A8BF5316800807BC13D8DF /* FilterChipView.swift */,
 				7F216A0433DF657551A38D3E /* BadgeLabelStyle.swift */,
+				242CA5567657AEA554882CE7 /* FeedRefineMenu.swift */,
 			);
 			name = Feed;
 			path = Feed;
@@ -1195,6 +1207,7 @@
 				DAF01ED907C99BC56A7EC0B0 /* SharedTestHelpers.swift in Sources */,
 				1347732029E2795F88657E6F /* GridColumnsTests.swift in Sources */,
 				6814B5CD62D8D50719F053C7 /* PosterScreenFilteringTests.swift in Sources */,
+				93A546B78570FFF157747696 /* PosterDateRangeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,6 +1245,9 @@
 				BF587465BC02B502446DB546 /* CompetitionDetailHeaderView.swift in Sources */,
 				CFFB60247DDCE8FFE286D0ED /* CompetitionDetailFactsView.swift in Sources */,
 				9948BC32EE548F15EB3B74EF /* BadgeLabelStyle.swift in Sources */,
+				BAC2534052A681B9BA2439D8 /* PosterDateRange.swift in Sources */,
+				CEED6B7344CCC7A5A85851A6 /* PosterRefinement.swift in Sources */,
+				9E93DF977E546E1F7BB85544 /* FeedRefineMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
