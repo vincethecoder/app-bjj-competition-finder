@@ -12,11 +12,20 @@ import PeteBJJCompFeed
 @MainActor
 @Observable
 public final class CompetitionsGridViewModel {
-    public private(set) var screen: PosterScreen?
+    /// Where the feed is in its load cycle. Each state carries the screen on
+    /// display, so a reload or a failure never hides what was already shown.
+    public enum State: Equatable {
+        case idle
+        case loading(screen: PosterScreen?)
+        case loaded(screen: PosterScreen)
+        /// The server couldn't be reached. The screen is the one already on
+        /// display, or the cached one the fallback loaded instead.
+        case failed(screen: PosterScreen?, message: String)
+    }
+
+    public private(set) var state: State = .idle
     public private(set) var selectedFilterID: PosterFilter.ID?
     public private(set) var visibleSections: [PosterSection] = []
-    public private(set) var isLoading = false
-    public private(set) var errorMessage: String?
 
     @ObservationIgnored private let loader: CompetitionsFeedLoader
     @ObservationIgnored private let locale: Locale
@@ -28,6 +37,22 @@ public final class CompetitionsGridViewModel {
         self.calendar = calendar
     }
 
+    public var screen: PosterScreen? {
+        switch state {
+        case .idle: nil
+        case let .loading(screen), let .failed(screen, _): screen
+        case let .loaded(screen): screen
+        }
+    }
+
+    public var isLoading: Bool {
+        if case .loading = state { true } else { false }
+    }
+
+    public var errorMessage: String? {
+        if case let .failed(_, message) = state { message } else { nil }
+    }
+
     public var title: String {
         screen?.title ?? FeedStrings.title
     }
@@ -37,18 +62,21 @@ public final class CompetitionsGridViewModel {
     public func load() async {
         guard !isLoading else { return }
 
-        isLoading = true
-        defer { isLoading = false }
+        let previousScreen = screen
+        state = .loading(screen: previousScreen)
 
         do {
             let feed = try await loader.loadFeed()
-            show(PosterScreenMapper.map(feed, locale: locale, calendar: calendar))
+            let newScreen = PosterScreenMapper.map(feed, locale: locale, calendar: calendar)
+            show(newScreen)
 
             // The app reads the cache only when the server can't be reached, so a
             // cached feed is shown with the error that explains why it may be stale.
-            errorMessage = feed.cachedAt == nil ? nil : FeedStrings.connectionError
+            state = feed.cachedAt == nil
+                ? .loaded(screen: newScreen)
+                : .failed(screen: newScreen, message: FeedStrings.connectionError)
         } catch {
-            errorMessage = FeedStrings.connectionError
+            state = .failed(screen: previousScreen, message: FeedStrings.connectionError)
         }
     }
 
@@ -59,15 +87,17 @@ public final class CompetitionsGridViewModel {
         visibleSections = screen?.sections(filteredBy: id) ?? []
     }
 
+    /// Hides the error banner. With no screen to fall back to, the feed
+    /// returns to idle and shows its empty state.
     public func dismissError() {
-        errorMessage = nil
+        guard case let .failed(screen, _) = state else { return }
+
+        state = screen.map { .loaded(screen: $0) } ?? .idle
     }
 
-    /// Shows a new screen, keeping the selected filter when the new screen still
-    /// offers it, and selecting the first filter otherwise.
+    /// Shows the sections of a new screen, keeping the selected filter when the
+    /// new screen still offers it, and selecting the first filter otherwise.
     private func show(_ newScreen: PosterScreen) {
-        screen = newScreen
-
         if !newScreen.filters.contains(where: { $0.id == selectedFilterID }) {
             selectedFilterID = newScreen.filters.first?.id
         }

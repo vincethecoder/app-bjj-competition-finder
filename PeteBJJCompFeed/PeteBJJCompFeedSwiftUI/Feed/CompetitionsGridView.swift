@@ -33,7 +33,7 @@ public struct CompetitionsGridView: View {
                 if viewModel.visibleSections.isEmpty {
                     // Let drags reach the scroll view underneath, so pull to refresh works.
                     CompetitionsEmptyStateView(
-                        isLoading: viewModel.isLoading && viewModel.screen == nil,
+                        isLoading: viewModel.state == .loading(screen: nil),
                         title: viewModel.screen?.emptyTitle ?? FeedStrings.emptyTitle,
                         message: viewModel.screen?.emptyMessage ?? FeedStrings.emptyDescription)
                     .allowsHitTesting(false)
@@ -45,9 +45,13 @@ public struct CompetitionsGridView: View {
                 }
             }
             .navigationTitle(viewModel.title)
-            .task { await viewModel.load() }
-            .refreshable { await viewModel.load() }
+            .task { await load() }
+            .refreshable { await load() }
         }
+    }
+
+    private func load() async {
+        await viewModel.load()
     }
 }
 

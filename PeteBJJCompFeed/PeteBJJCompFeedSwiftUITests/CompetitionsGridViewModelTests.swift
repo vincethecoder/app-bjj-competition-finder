@@ -22,10 +22,8 @@ final class CompetitionsGridViewModelTests {
         let (sut, loader) = makeSUT()
 
         #expect(loader.loadCallCount == 0)
-        #expect(sut.screen == nil)
+        #expect(sut.state == .idle)
         #expect(sut.visibleSections.isEmpty)
-        #expect(!sut.isLoading)
-        #expect(sut.errorMessage == nil)
     }
 
     @Test func load_showsLoadingIndicatorUntilLoaderCompletes() async {
@@ -33,11 +31,25 @@ final class CompetitionsGridViewModelTests {
 
         let loading = Task { await sut.load() }
         await loader.waitForLoadRequest()
-        #expect(sut.isLoading)
+        #expect(sut.state == .loading(screen: nil))
 
         loader.completeLoading(with: makeFeed(screen: makeScreen()))
         await loading.value
         #expect(!sut.isLoading)
+    }
+
+    @Test func load_keepsScreenOnDisplayWhileReloading() async throws {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(makeFeed(screen: makeScreen())), on: loader)
+        let loadedScreen = try #require(sut.screen)
+
+        let reloading = Task { await sut.load() }
+        await loader.waitForLoadRequest(count: 2)
+        #expect(sut.state == .loading(screen: loadedScreen))
+        #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
+
+        loader.completeLoading(at: 1)
+        await reloading.value
     }
 
     @Test func load_rendersServerSectionsInServerOrderOnLoaderSuccess() async {
@@ -48,7 +60,7 @@ final class CompetitionsGridViewModelTests {
         #expect(sut.title == "Championships")
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
         #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["worlds", "nogi-worlds"], ["brasileiro"]])
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .loaded(screen: map(makeFeed(screen: makeScreen()))))
     }
 
     @Test func load_showsConnectionErrorAndKeepsScreenOnLoaderFailure() async {
@@ -58,10 +70,8 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
 
-        #expect(sut.errorMessage == FeedStrings.connectionError)
-        #expect(sut.screen == loadedScreen)
+        #expect(sut.state == .failed(screen: loadedScreen, message: FeedStrings.connectionError))
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
-        #expect(!sut.isLoading)
     }
 
     @Test func load_showsCachedScreenWithConnectionErrorWhenFeedComesFromCache() async {
@@ -69,8 +79,8 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .success(makeFeed(screen: makeScreen(), cachedAt: .now)), on: loader)
 
+        #expect(sut.state == .failed(screen: map(makeFeed(screen: makeScreen())), message: FeedStrings.connectionError))
         #expect(sut.visibleSections.map(\.id) == ["2026-05", "2026-06"])
-        #expect(sut.errorMessage == FeedStrings.connectionError)
     }
 
     @Test func load_clearsErrorOnSuccessfulReload() async {
@@ -79,7 +89,7 @@ final class CompetitionsGridViewModelTests {
 
         await load(sut, completingWith: .success(makeFeed(screen: makeScreen())), on: loader, at: 1)
 
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .loaded(screen: map(makeFeed(screen: makeScreen()))))
     }
 
     @Test func load_doesNotRequestAgainWhileLoading() async {
@@ -98,13 +108,24 @@ final class CompetitionsGridViewModelTests {
         await secondLoad.value
     }
 
-    @Test func dismissError_clearsErrorMessage() async {
+    @Test func dismissError_keepsScreenOnDisplay() async throws {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(makeFeed(screen: makeScreen())), on: loader)
+        let loadedScreen = try #require(sut.screen)
+        await load(sut, completingWith: .failure(anyNSError), on: loader, at: 1)
+
+        sut.dismissError()
+
+        #expect(sut.state == .loaded(screen: loadedScreen))
+    }
+
+    @Test func dismissError_returnsToIdleWithNoScreenToShow() async {
         let (sut, loader) = makeSUT()
         await load(sut, completingWith: .failure(anyNSError), on: loader)
 
         sut.dismissError()
 
-        #expect(sut.errorMessage == nil)
+        #expect(sut.state == .idle)
     }
 
     @Test func load_buildsSectionsFromCompetitionsWhenScreenIsMissing() async {
@@ -180,6 +201,10 @@ final class CompetitionsGridViewModelTests {
         leakTracker.track(loader, sourceLocation: sourceLocation)
         leakTracker.track(sut, sourceLocation: sourceLocation)
         return (sut, loader)
+    }
+
+    private func map(_ feed: CompetitionsFeed) -> PosterScreen {
+        PosterScreenMapper.map(feed, locale: testLocale, calendar: testCalendar)
     }
 
     private func load(_ sut: CompetitionsGridViewModel, completingWith result: CompetitionsFeedLoader.Result, on loader: CompetitionsFeedLoaderSpy, at index: Int = 0) async {
