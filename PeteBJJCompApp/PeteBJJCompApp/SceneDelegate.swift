@@ -7,15 +7,21 @@
 
 import os
 import CoreData
+import SwiftUI
 import UIKit
 import PeteBJJCompFeed
-import PeteBJJCompFeediOS
+import PeteBJJCompFeedSwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    private let competitionsURL = URL(string: "https://bit.ly/4hd1liM")!
+    private let competitionsURL: URL = {
+        guard let url = URL(string: "https://bit.ly/4hd1liM") else {
+            fatalError("Invalid competitions URL")
+        }
+        return url
+    }()
 
     private lazy var httpClient: HTTPClient = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
 
@@ -41,9 +47,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        window?.rootViewController = CompetitionsUIComposer.competitionsComposedWith(
-            competitionsLoader: makeCompetitionsLoader(),
-            imageLoader: RemoteFeedImageDataLoader(client: httpClient))
+        let viewModel = CompetitionsListViewModel(loader: makeCompetitionsLoader())
+        window?.rootViewController = UIHostingController(rootView: CompetitionsFeedView(viewModel: viewModel))
 
         window?.makeKeyAndVisible()
     }

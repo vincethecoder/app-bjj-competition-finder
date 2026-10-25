@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Competition
 
-public struct Competition: Decodable, Equatable {
+public struct Competition: Decodable, Equatable, Sendable {
     public let id: String
     public let name: String
     public let startDate: Date
@@ -66,14 +66,14 @@ public struct Competition: Decodable, Equatable {
 
 // MARK: - CompetitionType
 
-public enum CompetitionType: String, Codable {
+public enum CompetitionType: String, Codable, Sendable {
     case gi
     case nogi
 }
 
 // MARK: - CompetitionStatus
 
-public enum CompetitionStatus: String, Codable {
+public enum CompetitionStatus: String, Codable, Sendable {
     case upcoming
     case ongoing
     case finished
@@ -82,7 +82,7 @@ public enum CompetitionStatus: String, Codable {
 
 // MARK: - RegistrationStatus
 
-public enum RegistrationStatus: String, Codable {
+public enum RegistrationStatus: String, Codable, Sendable {
     case open
     case closed
     case notOpen = "not_open"
@@ -91,7 +91,7 @@ public enum RegistrationStatus: String, Codable {
 
 // MARK: - Category
 
-public enum CompetitionCategory: String, Codable {
+public enum CompetitionCategory: String, Codable, Sendable {
     case kids
     case juvenile
     case adult

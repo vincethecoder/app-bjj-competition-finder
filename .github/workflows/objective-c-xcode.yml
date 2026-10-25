@@ -10,6 +10,12 @@ defaults:
   run:
     working-directory: PeteBJJCompFeed
 
+# A warning anywhere in the workspace fails the build. Xcode 26 generates the
+# string catalog symbols the SwiftUI feed uses; macos-15 defaults to Xcode 16.4.
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+  BUILD_FLAGS: CODE_SIGNING_ALLOWED=NO SWIFT_TREAT_WARNINGS_AS_ERRORS=YES GCC_TREAT_WARNINGS_AS_ERRORS=YES
+
 jobs:
   ios:
     name: Test on iOS Simulator
@@ -40,23 +46,29 @@ jobs:
         run: xcrun simctl bootstatus "$SIMULATOR_UDID" -b
 
       - name: Unit tests (domain, API, cache)
-        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: UI and presentation tests
-        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: Core Data cache integration tests
-        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DESTINATION" $BUILD_FLAGS
+
+      - name: SwiftUI feed tests
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedSwiftUI -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: API end-to-end tests
-        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: Static analysis
-        run: xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: |
+          xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeediOS -destination "$DESTINATION" $BUILD_FLAGS
+          xcodebuild analyze -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedSwiftUI -destination "$DESTINATION" $BUILD_FLAGS
+          xcodebuild analyze -workspace ../PeteBJJCompApp/PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" $BUILD_FLAGS
 
       - name: App composition and acceptance tests
         working-directory: PeteBJJCompApp
-        run: xcodebuild test -parallel-testing-enabled NO -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -parallel-testing-enabled NO -workspace PeteBJJCompApp.xcworkspace -scheme PeteBJJCompApp -destination "$DESTINATION" $BUILD_FLAGS
 
   macos:
     name: Test core on macOS
@@ -67,7 +79,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Unit tests (domain, API, cache)
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "platform=macOS" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeed -destination "platform=macOS" $BUILD_FLAGS
 
       - name: Core Data cache integration tests
-        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "platform=macOS" CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -project PeteBJJCompFeed.xcodeproj -scheme PeteBJJCompFeedCacheIntegrationTests -destination "platform=macOS" $BUILD_FLAGS

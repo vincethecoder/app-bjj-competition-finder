@@ -2,9 +2,9 @@
 
 [![Build and Test](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml/badge.svg)](https://github.com/vincethecoder/app-bjj-competition-finder/actions/workflows/objective-c-xcode.yml)
 
-An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in a separate iOS framework, and the app target only composes them, so either side can change without touching the other.
+An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a SwiftUI feed; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**95 tests** cover the domain, networking, Core Data cache, presentation, UI and app composition layers; there is more test code than production code.
+**112 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
@@ -12,8 +12,8 @@ An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first
 
 ## Features
 
-- **Competitions feed** with per-cell image loading: a shimmer placeholder while loading and a fade-in when the image arrives (the mock API doesn't serve event images yet, so the app shows placeholders)
-- **Pull to refresh**, plus an error banner when loading fails
+- **SwiftUI competitions feed** with pull to refresh, a loading indicator, an empty state, and a tappable error banner that VoiceOver announces
+- **Dynamic Type and dark mode** supported down to the largest accessibility text sizes
 - **Localized** in English, Portuguese (pt-BR) and Greek, with tests that fail if any localization key is missing
 - **Works offline:** competitions load from the network and are saved to a Core Data cache; with no connection, the app shows the cached competitions instead
 - **Core Data cache** with a 7-day max-age cache policy, a versioned data model, and expired-cache cleanup whenever the app moves to the background
@@ -23,13 +23,15 @@ An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first
 ```mermaid
 flowchart TD
     App["PeteBJJCompApp<br/>composition root (SceneDelegate)"]
+    SwiftUI["PeteBJJCompFeedSwiftUI<br/>SwiftUI views, @Observable view model, async/await (Swift 6)"]
     UI["PeteBJJCompFeediOS<br/>UIKit views, controllers, MVP presentation"]
     subgraph Core["PeteBJJCompFeed (no UIKit)"]
         Feature["CompetitionsFeature<br/>Competition model, CompetitionsLoader protocol"]
         API["CompetitionsAPI<br/>RemoteCompetitionsLoader, URLSessionHTTPClient"]
         Cache["CompetitionsCache<br/>LocalCompetitionsLoader, CoreDataCompetitionsStore"]
     end
-    App --> UI
+    App --> SwiftUI
+    SwiftUI --> Feature
     App --> API
     App --> Cache
     UI --> Feature
@@ -37,7 +39,7 @@ flowchart TD
     Cache --> Feature
 ```
 
-Arrows point toward the dependency. Everything depends on the `CompetitionsFeature` abstractions, and nothing in the core knows about UIKit.
+Arrows point toward the dependency. Everything depends on the `CompetitionsFeature` abstractions, and nothing in the core knows about UIKit or SwiftUI. The app composes the SwiftUI module; the UIKit module (`UI`) depends on the core the same way and could be swapped back in by changing one line in `SceneDelegate`.
 
 Patterns worth a look:
 
@@ -48,11 +50,13 @@ Patterns worth a look:
 | UI composition | [`CompetitionsUIComposer`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/CompetitionsUIComposer.swift) builds the feed from presenters and adapters |
 | Threading kept out of the UI | [`MainQueueDispatchDecorator`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/MainQueueDispatchDecorator.swift) |
 | Breaking retain cycles | [`WeakRefVirtualProxy`](PeteBJJCompFeed/PeteBJJCompFeediOS/Feed%20UI/Composers/WeakRefVirtualProxy.swift) |
+| Bridging callbacks to async/await | [`CompetitionsLoader+Async`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Async/CompetitionsLoader+Async.swift) wraps the completion-based loader for the Swift 6 module |
+| Testable SwiftUI state | [`CompetitionsListViewModel`](PeteBJJCompFeed/PeteBJJCompFeedSwiftUI/Feed/CompetitionsListViewModel.swift), an `@MainActor @Observable` view model tested without rendering views |
 | Cache rules isolated from storage | [`CompetitionsCachePolicy`](PeteBJJCompFeed/PeteBJJCompFeed/CompetitionsCache/CompetitionsCachePolicy.swift) |
 
 ## Requirements
 
-- Xcode 15.4 or later
+- Xcode 26 or later (it generates the symbols for the SwiftUI feed's string catalog)
 - iOS 17.5 or later (the `PeteBJJCompFeed` framework also builds for macOS 14.4)
 
 ## Running the app
@@ -77,7 +81,8 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
 | Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 59 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| Presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
+| SwiftUI view model, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 17 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
 | Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |
 
@@ -91,7 +96,7 @@ The core schemes (`PeteBJJCompFeed` and `PeteBJJCompFeedCacheIntegrationTests`) 
 
 The same suites run in [GitHub Actions](.github/workflows/objective-c-xcode.yml) on every pull request, on the newest available iPhone simulator and on macOS.
 
-The tests follow a few conventions: behavior-named test cases (`test_loadImageDataFromURL_deliversInvalidDataErrorOnNon200HTTPResponse`), a `makeSUT` factory in each suite, spies and `URLProtocolStub` instead of real networking, and memory-leak checks that fail a test if the system under test is never deallocated (`trackForMemoryLeaks` in XCTest, and a `MemoryLeakTracker` verified from the suite's `deinit` in Swift Testing).
+The tests follow a few conventions: behavior-named test cases (`test_loadImageDataFromURL_deliversInvalidDataErrorOnNon200HTTPResponse`), a `makeSUT` factory in each suite, spies and `URLProtocolStub` instead of real networking, and memory-leak checks that fail a test if the system under test is never deallocated (`trackForMemoryLeaks` in XCTest, and a `MemoryLeakTracker` verified from the suite's `deinit` in Swift Testing). New suites are written in Swift Testing; the original suites stay in XCTest.
 
 ## Background
 
@@ -108,5 +113,5 @@ Every change landed through a pull request. The [closed PRs](https://github.com/
 ## Roadmap
 
 - [x] **Offline-first:** use a remote loader that falls back to the cache, save remote results to the cache, and validate the cache in the background
-- [ ] **SwiftUI UI module** on the same core, with async/await adapters over the existing loaders and new tests in Swift Testing
+- [x] **SwiftUI UI module** on the same core, with async/await adapters over the existing loaders and new tests in Swift Testing
 - [ ] Competition detail screen, filters (date, location), and favorites

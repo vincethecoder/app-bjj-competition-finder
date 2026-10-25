@@ -23,8 +23,8 @@
 		EFE944B42CED8B2700E3BD75 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = EFE944B32CED8B2700E3BD75 /* Base */; };
 		EFE944D42CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; };
 		EFE944D52CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; };
-		EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework */; };
+		EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F3EAEF1660EC8D5B8CF17C95 /* CompetitionsLoader+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90A58446AD7948B2F7488BB /* CompetitionsLoader+TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Embed Frameworks */,
+				EFE944D72CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework in Embed Frameworks */,
 				EFE944D52CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -72,7 +72,7 @@
 		EFE944B32CED8B2700E3BD75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EFE944B52CED8B2700E3BD75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PeteBJJCompFeedSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F67A1A12D5AC4BBF58AC81 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework in Frameworks */,
+				EFE944D62CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework in Frameworks */,
 				EFE944D42CED8EED00E3BD75 /* PeteBJJCompFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				EFE944D22CED8EED00E3BD75 /* PeteBJJCompFeed.framework */,
-				EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeediOS.framework */,
+				EFE944D32CED8EED00E3BD75 /* PeteBJJCompFeedSwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -210,8 +210,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2700;
 				TargetAttributes = {
 					EFE944A32CED8B2600E3BD75 = {
 						CreatedOnToolsVersion = 15.4;
@@ -311,7 +311,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
@@ -331,7 +330,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
@@ -382,6 +380,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -406,6 +405,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -445,6 +445,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -462,6 +463,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
