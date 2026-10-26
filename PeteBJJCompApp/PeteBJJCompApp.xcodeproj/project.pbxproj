@@ -68,6 +68,7 @@
 		9B3167C932EAE4669EAA99F3 /* InMemoryCompetitionsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InMemoryCompetitionsStore.swift; sourceTree = "<group>"; };
 		9FBCF8D01C818178DAEE21D3 /* AcceptLanguageTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AcceptLanguageTests.swift; sourceTree = "<group>"; };
 		B3D9F6F8C748AC4A67A5FF70 /* CompetitionsAcceptanceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsAcceptanceTests.swift; sourceTree = "<group>"; };
+		BE4C03D4850D0D2D3A7920D8 /* PeteBJJCompApp.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; path = PeteBJJCompApp.entitlements; sourceTree = "<group>"; };
 		D90A58446AD7948B2F7488BB /* CompetitionsFeedLoader+TestHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "CompetitionsFeedLoader+TestHelpers.swift"; sourceTree = "<group>"; };
 		DC1102756E3427E656863CC2 /* CompetitionsFeedLoaderStub.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompetitionsFeedLoaderStub.swift; sourceTree = "<group>"; };
 		EAEF0FF74E4EABD0AE7953B4 /* HTTPClientStub.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPClientStub.swift; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 				011A6FCB84804FD5F5B1C979 /* CompetitionsFeedLoaderWithFallbackComposite.swift */,
 				2C3E2C81CD4E8F68E9214C2E /* CompetitionsFeedLoaderCacheDecorator.swift */,
 				83FFC09800E5A1E3F9C696CD /* URLSessionConfiguration+AcceptLanguage.swift */,
+				BE4C03D4850D0D2D3A7920D8 /* PeteBJJCompApp.entitlements */,
 			);
 			path = PeteBJJCompApp;
 			sourceTree = "<group>";
@@ -486,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PeteBJJCompApp/PeteBJJCompApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;
@@ -513,6 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PeteBJJCompApp/PeteBJJCompApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KQ87GPXAXK;

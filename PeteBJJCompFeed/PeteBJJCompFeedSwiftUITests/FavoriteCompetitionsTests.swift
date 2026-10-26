@@ -43,6 +43,16 @@ final class FavoriteCompetitionsTests {
         #expect(store.savedIDs == [["pans"]])
     }
 
+    @Test func reload_picksUpFavoritesChangedElsewhereWithoutSaving() {
+        let (sut, store) = makeSUT(ids: ["worlds"])
+        store.changeElsewhere(to: ["pans", "brasileiro"])
+
+        sut.reload()
+
+        #expect(sut.ids == ["pans", "brasileiro"])
+        #expect(store.savedIDs.isEmpty)
+    }
+
     // MARK: - Helpers
 
     private func makeSUT(ids: Set<String>, sourceLocation: SourceLocation = #_sourceLocation) -> (sut: FavoriteCompetitions, store: FavoritesStoreSpy) {
