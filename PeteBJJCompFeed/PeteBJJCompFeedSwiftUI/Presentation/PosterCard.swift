@@ -15,7 +15,8 @@ public struct PosterCard: Identifiable, Hashable, Sendable {
     public let dateText: String?
     public let locationText: String?
     public let imageURL: URL?
-    public let eventLink: URL
+    /// `nil` when the feed's link can't be opened in a browser.
+    public let eventLink: URL?
     public let badges: [PosterBadge]
     /// `nil` when the server sent the card without a matching competition.
     public let details: PosterEventDetails?
@@ -35,7 +36,7 @@ public struct PosterCard: Identifiable, Hashable, Sendable {
         dateText: String?,
         locationText: String?,
         imageURL: URL?,
-        eventLink: URL,
+        eventLink: URL?,
         badges: [PosterBadge],
         details: PosterEventDetails?,
         type: String?,

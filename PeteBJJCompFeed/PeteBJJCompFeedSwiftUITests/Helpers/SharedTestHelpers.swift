@@ -41,6 +41,7 @@ func uniqueCompetition(
     registrationStatus: RegistrationStatus = .open,
     venue: String = "Walter Pyramid",
     registrationLink: URL? = nil,
+    eventLink: URL = anyURL,
     categories: [CompetitionCategory] = [.adult],
     rankingPoints: Int = 1000,
     notes: String? = nil
@@ -58,7 +59,7 @@ func uniqueCompetition(
         status: .upcoming,
         registrationStatus: registrationStatus,
         registrationLink: registrationLink,
-        eventLink: anyURL,
+        eventLink: eventLink,
         categories: categories,
         rankingPoints: rankingPoints,
         notes: notes)
@@ -96,6 +97,7 @@ func makeCard(
     endDate: Date? = nil,
     locationLabel: String? = "Long Beach, USA",
     imageURL: URL? = URL(string: "https://example.com/poster.jpg"),
+    eventLink: URL = anyURL,
     type: String = "gi",
     registrationOpen: Bool = true
 ) -> CompetitionsScreen.Card {
@@ -107,7 +109,7 @@ func makeCard(
         endDate: endDate,
         locationLabel: locationLabel,
         imageURL: imageURL,
-        eventLink: anyURL,
+        eventLink: eventLink,
         badges: [
             CompetitionsScreen.Badge(id: type, title: type, token: .type),
             registrationOpen

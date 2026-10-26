@@ -203,6 +203,37 @@ struct PosterScreenMapperTests {
         #expect(card.details == nil)
     }
 
+    // MARK: - Links
+
+    /// The test-account feed sends links such as `https:\registration-url-1.com`,
+    /// which parse as URLs but have no host, so no browser can open them.
+    @Test(arguments: [#"https:\registration-url-1.com"#, "example.com/register", "ftp://example.com/register", "mailto:events@example.com"])
+    func map_dropsLinksABrowserCannotOpen(link: String) throws {
+        let url = try #require(URL(string: link))
+        let competition = uniqueCompetition(id: "worlds", registrationStatus: .open, registrationLink: url, eventLink: url)
+
+        let deviceCard = try #require(deviceCard(for: competition))
+        let serverCard = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
+
+        #expect(deviceCard.eventLink == nil)
+        #expect(deviceCard.details?.registrationLink == nil)
+        #expect(serverCard.eventLink == nil)
+        #expect(serverCard.details?.registrationLink == nil)
+    }
+
+    @Test(arguments: ["https://example.com/register", "http://example.com/register", "HTTPS://example.com/register"])
+    func map_keepsWebLinks(link: String) throws {
+        let url = try #require(URL(string: link))
+        let competition = uniqueCompetition(id: "worlds", registrationStatus: .open, registrationLink: url, eventLink: url)
+
+        let deviceCard = try #require(deviceCard(for: competition))
+        let serverCard = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
+
+        #expect(deviceCard.eventLink == url)
+        #expect(deviceCard.details?.registrationLink == url)
+        #expect(serverCard.eventLink == url)
+    }
+
     // MARK: - Refinement values
 
     @Test func map_takesRefinementValuesFromCompetition() throws {

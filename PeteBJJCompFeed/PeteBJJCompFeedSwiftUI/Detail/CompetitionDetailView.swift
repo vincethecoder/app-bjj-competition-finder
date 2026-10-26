@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// One event in full: the poster, the facts the card has no room for, and
-/// links to register and to the event website.
+/// links to register and to the event website when the feed has usable ones.
 struct CompetitionDetailView: View {
     let card: PosterCard
     let favorites: FavoriteCompetitions
@@ -34,11 +34,13 @@ struct CompetitionDetailView: View {
                     }
                 }
 
-                Link(destination: card.eventLink) {
-                    Label {
-                        Text(.detailEventWebsite)
-                    } icon: {
-                        Image(systemName: "safari")
+                if let eventLink = card.eventLink {
+                    Link(destination: eventLink) {
+                        Label {
+                            Text(.detailEventWebsite)
+                        } icon: {
+                            Image(systemName: "safari")
+                        }
                     }
                 }
             }
@@ -57,7 +59,9 @@ struct CompetitionDetailView: View {
         .toolbarTitleDisplayMode(.inline)
         .toolbar {
             FavoriteButton(id: card.id, favorites: favorites)
-            ShareLink(item: card.eventLink, subject: Text(card.name))
+            if let eventLink = card.eventLink {
+                ShareLink(item: eventLink, subject: Text(card.name))
+            }
         }
     }
 }
