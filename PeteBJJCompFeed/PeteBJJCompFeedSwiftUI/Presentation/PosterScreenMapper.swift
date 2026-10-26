@@ -55,7 +55,7 @@ enum PosterScreenMapper {
             name: card.name,
             dateText: card.dateLabel.nonEmpty
                 ?? dates.eventDates(from: card.startDate ?? competition?.startDate, to: card.endDate ?? competition?.endDate),
-            locationText: card.locationLabel.nonEmpty ?? competition.flatMap(location(of:)),
+            locationText: card.locationLabel.nonEmpty ?? competition.flatMap { location(of: $0, locale: dates.locale) },
             imageURL: card.imageURL,
             eventLink: card.eventLink,
             badges: card.badges.map { PosterBadge(id: $0.id, title: $0.title, token: $0.token) },
@@ -64,7 +64,7 @@ enum PosterScreenMapper {
             registrationStatus: competition?.registrationStatus.rawValue ?? registrationStatus(from: card.badges),
             startDate: card.startDate ?? competition?.startDate,
             endDate: card.endDate ?? competition?.endDate,
-            country: competition?.country.nonEmpty)
+            country: competition.flatMap { country(of: $0, locale: dates.locale) })
     }
 
     private static func registrationStatus(from badges: [CompetitionsScreen.Badge]) -> String? {
@@ -121,7 +121,7 @@ enum PosterScreenMapper {
             id: competition.id,
             name: competition.name,
             dateText: dates.eventDates(from: competition.startDate, to: competition.endDate),
-            locationText: location(of: competition),
+            locationText: location(of: competition, locale: dates.locale),
             imageURL: nil,
             eventLink: competition.eventLink,
             badges: [typeBadge(for: competition.type, locale: dates.locale), registrationBadge(for: competition.registrationStatus, locale: dates.locale)],
@@ -130,7 +130,7 @@ enum PosterScreenMapper {
             registrationStatus: competition.registrationStatus.rawValue,
             startDate: competition.startDate,
             endDate: competition.endDate,
-            country: competition.country.nonEmpty)
+            country: country(of: competition, locale: dates.locale))
     }
 
     private static func typeBadge(for type: CompetitionType, locale: Locale) -> PosterBadge {
@@ -184,13 +184,19 @@ enum PosterScreenMapper {
         return String(localized: resource)
     }
 
+    /// The country in the reader's language, which is also the value the
+    /// location refinement matches on.
+    private static func country(of competition: Competition, locale: Locale) -> String? {
+        competition.country.nonEmpty.map { CountryNames.localized($0, locale: locale) }
+    }
+
     private static func firstDay(of competition: Competition) -> Date {
         min(competition.startDate, competition.endDate)
     }
 
     /// "Long Beach, CA, USA", skipping parts that are missing or empty.
-    private static func location(of competition: Competition) -> String? {
-        [competition.city, competition.state, competition.country]
+    private static func location(of competition: Competition, locale: Locale) -> String? {
+        [competition.city, competition.state, country(of: competition, locale: locale)]
             .compactMap { $0 }
             .filter { !$0.isEmpty }
             .joined(separator: ", ")

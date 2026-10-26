@@ -48,4 +48,17 @@ struct PosterScreenFilteringTests {
 
         #expect(screen.countries(locale: testLocale) == ["Brazil", "Österreich", "USA"])
     }
+
+    @Test func countries_listsTranslatedNamesInTheReadersAlphabeticalOrder() {
+        let competitions = [
+            uniqueCompetition(id: "worlds", country: "USA"),
+            uniqueCompetition(id: "brasileiro", country: "Brazil"),
+            uniqueCompetition(id: "asian", country: "Japan"),
+        ]
+        let portuguese = Locale(identifier: "pt_BR")
+
+        let screen = PosterScreenMapper.map(makeFeed(competitions: competitions, screen: nil), locale: portuguese, calendar: testCalendar)
+
+        #expect(screen.countries(locale: portuguese) == ["Brasil", "Estados Unidos", "Japão"])
+    }
 }
