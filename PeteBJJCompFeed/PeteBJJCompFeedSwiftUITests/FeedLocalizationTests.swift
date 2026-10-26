@@ -36,6 +36,13 @@ struct FeedLocalizationTests {
         #expect(english(.feedFilterRegistrationOpen) == "Registration open")
     }
 
+    /// With Favorites on and nothing starred there's no card to open, and the
+    /// reset item also turns Favorites off, so both say so.
+    @Test func favoritesCopy_pointsBackToTheFullFeedAndNamesEverythingResetClears() {
+        #expect(english(.feedFavoritesEmptyDescription) == "Turn off Favorites to browse events, then open one and tap the star.")
+        #expect(english(.feedRefineReset) == "Show all dates, locations, and favorites")
+    }
+
     // MARK: - Helpers
 
     private func english(_ resource: LocalizedStringResource) -> String {

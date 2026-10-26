@@ -300,6 +300,54 @@ final class CompetitionsGridViewModelTests {
         #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["march"]])
     }
 
+    // MARK: - Favorites
+
+    @Test func refinement_showsOnlyFavoritesWhenAsked() async {
+        let (sut, loader) = makeSUT(favoriteIDs: ["november", "march"])
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        sut.refinement.favoritesOnly = true
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["november"], ["march"]])
+        #expect(!sut.hasNoFavoritesToShow)
+    }
+
+    @Test func favorites_updateTheFeedWhenAnEventIsStarredOrUnstarred() async {
+        let (sut, loader) = makeSUT(favoriteIDs: ["november"])
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+        sut.refinement.favoritesOnly = true
+
+        sut.favorites.toggle("october")
+        sut.favorites.toggle("november")
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["october"]])
+    }
+
+    @Test func hasNoFavoritesToShow_onlyWhileShowingFavoritesAndNoEventIsOne() async {
+        let (sut, loader) = makeSUT(favoriteIDs: ["an-event-no-longer-listed"])
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+        #expect(!sut.hasNoFavoritesToShow)
+
+        sut.refinement.favoritesOnly = true
+
+        #expect(sut.hasNoFavoritesToShow)
+        #expect(sut.isFilteredToNothing)
+
+        sut.favorites.toggle("march")
+
+        #expect(!sut.hasNoFavoritesToShow)
+    }
+
+    @Test func hasNoFavoritesToShow_isFalseWhenAFilterHidesTheFavorites() async {
+        let (sut, loader) = makeSUT(favoriteIDs: ["march"])
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        sut.refinement = PosterRefinement(dateRange: .thisMonth, favoritesOnly: true)
+
+        #expect(sut.isFilteredToNothing)
+        #expect(!sut.hasNoFavoritesToShow)
+    }
+
     // MARK: - Helpers
 
     /// Today, in the middle of the afternoon.
@@ -316,9 +364,11 @@ final class CompetitionsGridViewModelTests {
         makeFeed(competitions: refinableCompetitions, screen: nil)
     }
 
-    private func makeSUT(sourceLocation: SourceLocation = #_sourceLocation) -> (sut: CompetitionsGridViewModel, loader: CompetitionsFeedLoaderSpy) {
+    private func makeSUT(favoriteIDs: Set<String> = [], sourceLocation: SourceLocation = #_sourceLocation) -> (sut: CompetitionsGridViewModel, loader: CompetitionsFeedLoaderSpy) {
         let loader = CompetitionsFeedLoaderSpy()
-        let sut = CompetitionsGridViewModel(loader: loader, locale: testLocale, calendar: testCalendar, now: { Self.now })
+        let favorites = FavoriteCompetitions(store: FavoritesStoreSpy(ids: favoriteIDs))
+        let sut = CompetitionsGridViewModel(loader: loader, favorites: favorites, locale: testLocale, calendar: testCalendar, now: { Self.now })
+        leakTracker.track(favorites, sourceLocation: sourceLocation)
         leakTracker.track(loader, sourceLocation: sourceLocation)
         leakTracker.track(sut, sourceLocation: sourceLocation)
         return (sut, loader)
