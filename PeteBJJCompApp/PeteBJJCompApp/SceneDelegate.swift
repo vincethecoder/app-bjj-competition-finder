@@ -27,6 +27,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         LocalCompetitionsLoader(store: $0, currentDate: Date.init)
     }
 
+    private lazy var favorites = FavoriteCompetitions(store: UbiquitousFavoritesStore(
+        cloud: NSUbiquitousKeyValueStore.default,
+        local: UserDefaultsFavoritesStore(defaults: .standard)))
+
+    private var favoritesChangedElsewhereObserver: NSObjectProtocol?
+
     private static let logger = Logger(subsystem: "com.vincethecoder.PeteBJJCompApp", category: "SceneDelegate")
 
     convenience init(httpClient: HTTPClient, store: CompetitionsStore) {
@@ -43,9 +49,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
+        observeFavoritesChangedElsewhere()
+
         let viewModel = CompetitionsGridViewModel(
             loader: makeCompetitionsFeedLoader(),
-            favorites: FavoriteCompetitions(store: UserDefaultsFavoritesStore(defaults: .standard)))
+            favorites: favorites)
         window?.rootViewController = UIHostingController(rootView: CompetitionsGridView(viewModel: viewModel))
 
         window?.makeKeyAndVisible()
@@ -53,6 +61,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneWillResignActive(_ scene: UIScene) {
         localCompetitionsLoader?.validateCache { _ in }
+    }
+
+    /// Stars added or removed on another device arrive while the app runs.
+    private func observeFavoritesChangedElsewhere() {
+        guard favoritesChangedElsewhereObserver == nil else { return }
+
+        let cloud = NSUbiquitousKeyValueStore.default
+        favoritesChangedElsewhereObserver = NotificationCenter.default.addObserver(
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: cloud,
+            queue: .main
+        ) { [favorites] _ in
+            MainActor.assumeIsolated {
+                favorites.reload()
+            }
+        }
+        // Asks iCloud for changes made while the app wasn't running.
+        cloud.synchronize()
     }
 
     private func makeCompetitionsFeedLoader() -> CompetitionsFeedLoader {

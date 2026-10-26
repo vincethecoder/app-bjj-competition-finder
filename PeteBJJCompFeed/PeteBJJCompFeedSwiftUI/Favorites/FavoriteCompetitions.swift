@@ -32,4 +32,13 @@ public final class FavoriteCompetitions {
         }
         store.saveFavoriteIDs(ids)
     }
+
+    /// Reads the store again after another device changed it, so the feed
+    /// and the detail screen show stars added or removed there.
+    public func reload() {
+        let storedIDs = store.loadFavoriteIDs()
+        if storedIDs != ids {
+            ids = storedIDs
+        }
+    }
 }
