@@ -226,6 +226,20 @@ struct PosterScreenMapperTests {
         #expect(mapped.country == "Brazil")
     }
 
+    @Test func map_showsCountryInTheReadersLanguageInLocationAndRefinement() throws {
+        let competition = uniqueCompetition(id: "worlds", city: "Long Beach", state: "CA", country: "USA")
+        let portuguese = Locale(identifier: "pt_BR")
+
+        let deviceCard = try #require(PosterScreenMapper.map(makeFeed(competitions: [competition], screen: nil), locale: portuguese, calendar: testCalendar).sections.first?.cards.first)
+        let serverScreen = makeScreen(sections: [CompetitionsScreen.Section(id: "section", title: "Section", cards: [makeCard(id: "worlds", locationLabel: nil)])])
+        let serverCard = try #require(PosterScreenMapper.map(makeFeed(competitions: [competition], screen: serverScreen), locale: portuguese, calendar: testCalendar).sections.first?.cards.first)
+
+        #expect(deviceCard.locationText == "Long Beach, CA, Estados Unidos")
+        #expect(deviceCard.country == "Estados Unidos")
+        #expect(serverCard.locationText == "Long Beach, CA, Estados Unidos")
+        #expect(serverCard.country == "Estados Unidos")
+    }
+
     @Test func map_hasNoCountryForServerCardWithoutCompetition() throws {
         let mapped = try #require(mapCard(makeCard(id: "worlds", startDate: date(2026, 5, 28), endDate: date(2026, 5, 31))))
 
