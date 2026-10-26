@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Narrows the feed to a date range and a country, on top of the filter chips.
+/// Narrows the feed to a date range, a country and favorites, on top of the filter chips.
 struct FeedRefineMenu: View {
     @Bindable var viewModel: CompetitionsGridViewModel
 
@@ -42,6 +42,14 @@ struct FeedRefineMenu: View {
                 .pickerStyle(.menu)
             }
 
+            Toggle(isOn: $viewModel.refinement.favoritesOnly) {
+                Label {
+                    Text(.feedFavoritesOnly)
+                } icon: {
+                    Image(systemName: "star")
+                }
+            }
+
             if viewModel.refinement.isActive {
                 Button(action: reset) {
                     Label {
@@ -67,9 +75,14 @@ struct FeedRefineMenu: View {
         viewModel.refinement.country ?? String(localized: .feedRefineAnywhere)
     }
 
-    /// "This month, Brazil"
+    /// "This month, Brazil", then "Favorites" when the feed shows only those.
     private var summary: String {
-        [String(localized: viewModel.refinement.dateRange.title), countryTitle].joined(separator: ", ")
+        let refinement = viewModel.refinement
+        var parts = [String(localized: refinement.dateRange.title), countryTitle]
+        if refinement.favoritesOnly {
+            parts.append(String(localized: .feedFavoritesOnly))
+        }
+        return parts.joined(separator: ", ")
     }
 
     private func reset() {

@@ -97,6 +97,22 @@
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Local" } }
       }
     },
+    "FAVORITE_ADD" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Προσθήκη στα αγαπημένα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add to Favorites" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Adicionar aos favoritos" } }
+      }
+    },
+    "FAVORITE_REMOVE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Αφαίρεση από τα αγαπημένα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove from Favorites" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Remover dos favoritos" } }
+      }
+    },
     "FEED_BADGE_GI" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -145,12 +161,44 @@
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Inscreva-se" } }
       }
     },
+    "FEED_CARD_FAVORITE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Αγαπημένο" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Favorite" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Favorito" } }
+      }
+    },
     "FEED_CARD_SHOW_DETAILS_HINT" : {
       "extractionState" : "manual",
       "localizations" : {
         "el" : { "stringUnit" : { "state" : "translated", "value" : "Εμφανίζει τις λεπτομέρειες της διοργάνωσης" } },
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Shows the event details" } },
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mostra os detalhes do evento" } }
+      }
+    },
+    "FEED_FAVORITES_EMPTY_DESCRIPTION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Ανοίξτε μια εκδήλωση και πατήστε το αστέρι για να την κρατήσετε εδώ." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open an event and tap the star to keep it here." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Abra um evento e toque na estrela para guardá-lo aqui." } }
+      }
+    },
+    "FEED_FAVORITES_EMPTY_TITLE" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Κανένα αγαπημένο" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No favorites" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Nenhum favorito" } }
+      }
+    },
+    "FEED_FAVORITES_ONLY" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Αγαπημένα" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Favorites" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Favoritos" } }
       }
     },
     "FEED_FILTER_ALL" : {

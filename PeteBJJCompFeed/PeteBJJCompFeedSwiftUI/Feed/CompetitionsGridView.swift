@@ -24,7 +24,7 @@ public struct CompetitionsGridView: View {
                         FilterChipsView(filters: filters, selectedID: viewModel.selectedFilterID, select: viewModel.selectFilter)
                     }
 
-                    PosterGridView(sections: viewModel.visibleSections)
+                    PosterGridView(sections: viewModel.visibleSections, favorites: viewModel.favorites)
                 }
                 .padding(.bottom, FeedDesign.screenInset)
             }
@@ -46,7 +46,7 @@ public struct CompetitionsGridView: View {
             }
             // The app's own title shows until a screen has loaded.
             .navigationTitle(viewModel.screen.map { Text($0.title) } ?? Text(.feedViewTitle))
-            .navigationDestination(for: PosterCard.self, destination: CompetitionDetailView.init)
+            .navigationDestination(for: PosterCard.self, destination: detail)
             .toolbar {
                 if viewModel.screen != nil {
                     ToolbarItem(placement: .primaryAction) {
@@ -59,16 +59,23 @@ public struct CompetitionsGridView: View {
         }
     }
 
-    // A filter that hides every event gets the app's own copy; a screen with
-    // no events at all keeps the server's.
+    // A filter that hides every event gets the app's own copy, which explains
+    // how to add favorites when there are none; a screen with no events at all
+    // keeps the server's.
     private var emptyTitle: Text {
+        if viewModel.hasNoFavoritesToShow { return Text(.feedFavoritesEmptyTitle) }
         if viewModel.isFilteredToNothing { return Text(.feedFilterEmptyTitle) }
         return viewModel.screen.map { Text($0.emptyTitle) } ?? Text(.feedViewEmptyTitle)
     }
 
     private var emptyMessage: Text {
+        if viewModel.hasNoFavoritesToShow { return Text(.feedFavoritesEmptyDescription) }
         if viewModel.isFilteredToNothing { return Text(.feedFilterEmptyDescription) }
         return viewModel.screen.map { Text($0.emptyMessage) } ?? Text(.feedViewEmptyDescription)
+    }
+
+    private func detail(for card: PosterCard) -> some View {
+        CompetitionDetailView(card: card, favorites: viewModel.favorites)
     }
 
     private func load() async {
@@ -78,18 +85,18 @@ public struct CompetitionsGridView: View {
 
 #if DEBUG
 #Preview("Loaded") {
-    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.loaded)))
+    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.loaded), favorites: .preview))
 }
 
 #Preview("Filtered, no matches") {
-    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.filteredEmpty)))
+    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.filteredEmpty), favorites: .preview))
 }
 
 #Preview("Offline") {
-    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.offline)))
+    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.offline), favorites: .preview))
 }
 
 #Preview("Artwork fails to load") {
-    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.imageFailed)))
+    CompetitionsGridView(viewModel: CompetitionsGridViewModel(loader: PreviewCompetitionsFeedLoader(.imageFailed), favorites: .preview))
 }
 #endif

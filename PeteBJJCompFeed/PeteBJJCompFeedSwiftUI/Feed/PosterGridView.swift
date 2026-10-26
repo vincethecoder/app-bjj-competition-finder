@@ -10,6 +10,7 @@ import SwiftUI
 /// The sections and their poster cards, in server order.
 struct PosterGridView: View {
     let sections: [PosterSection]
+    let favorites: FavoriteCompetitions
 
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -23,7 +24,7 @@ struct PosterGridView: View {
             ForEach(sections) { section in
                 Section {
                     ForEach(section.cards) { card in
-                        PosterCardView(card: card)
+                        PosterCardView(card: card, favorites: favorites)
                     }
                 } header: {
                     PosterSectionHeaderView(title: section.title)

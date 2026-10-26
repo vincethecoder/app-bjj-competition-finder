@@ -4,7 +4,7 @@
 
 An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first with a modular Clean Architecture. The feature logic lives in a platform-agnostic framework, the UI lives in separate frameworks, and the app target only composes them, so either side can change without touching the other. The app runs on a server-driven SwiftUI poster grid; the original UIKit feed is kept as a second UI over the same core, and both are tested in CI.
 
-**188 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
+**199 tests** cover the domain, networking, Core Data cache, presentation, both UIs and app composition; there is more test code than production code.
 
 ## Screenshots
 
@@ -17,7 +17,7 @@ An iOS app that lists upcoming Brazilian Jiu-Jitsu tournaments, built test-first
 - **Server-driven poster grid** in SwiftUI: the server's `screen` object picks the sections, order, filters, copy and badges from a closed set of components, and the app builds the same screen on the device when an older server or cache sends none
 - **Event details:** venue, location, divisions, ranking points and notes, with links to register (only while registration is open) and to the event website, and a share button
 - **Adaptive layout:** 2 columns on iPhone, 3 at regular width, 1 at the largest text sizes, from size classes and Dynamic Type rather than the screen width
-- Pull to refresh, filter chips, a date and location menu that narrows the feed further, a `ContentUnavailableView` empty state, and a tappable error banner that VoiceOver announces; each card is one link that opens the event's details
+- Pull to refresh, filter chips, a date, location and favorites menu that narrows the feed further, favorites starred from an event's details or its card's context menu and kept between launches, a `ContentUnavailableView` empty state, and a tappable error banner that VoiceOver announces; each card is one link that opens the event's details
 - **Dynamic Type and dark mode** supported down to the largest accessibility text sizes
 - **Localized** in English, Portuguese (pt-BR) and Greek, with tests that fail if any localization key is missing; requests send `Accept-Language` so server copy matches
 - **Works offline:** the competitions and their screen load from the network and are saved together to a Core Data cache; with no connection, the app shows the cached screen with a banner explaining why
@@ -87,7 +87,7 @@ DEST='platform=iOS Simulator,name=iPhone 17 Pro'
 | Layer | Scheme | Tests | Command |
 |---|---|---|---|
 | Domain, API and cache use cases (unit) | `PeteBJJCompFeed` | 79 | `xcodebuild test -scheme PeteBJJCompFeed -destination "$DEST"` |
-| SwiftUI view model, screen and detail mapping, date and location refinement, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 66 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
+| SwiftUI view model, screen and detail mapping, date and location refinement, favorites, grid columns, async adapter and localization (Swift Testing) | `PeteBJJCompFeedSwiftUI` | 77 | `xcodebuild test -scheme PeteBJJCompFeedSwiftUI -destination "$DEST"` |
 | UIKit presentation, UI integration and localization | `PeteBJJCompFeediOS` | 20 | `xcodebuild test -scheme PeteBJJCompFeediOS -destination "$DEST"` |
 | Core Data cache integration | `PeteBJJCompFeedCacheIntegrationTests` | 1 | `xcodebuild test -scheme PeteBJJCompFeedCacheIntegrationTests -destination "$DEST"` |
 | API end-to-end (live mock API and [hosted image fixture](fixtures/)) | `PeteBJJCompFeedAPIEndToEndTests` | 2 | `xcodebuild test -scheme PeteBJJCompFeedAPIEndToEndTests -destination "$DEST"` |
@@ -123,4 +123,4 @@ Every change landed through a pull request. The [closed PRs](https://github.com/
 - [x] **Server-driven poster grid** with filters, a device-built fallback, and the screen cached for offline use
 - [x] **Competition detail screen** with the facts the card has no room for, registration and event links, and sharing
 - [x] **Date and location filters:** this month or the next three months, and any country with an event, on top of the server's filter chips
-- [ ] Favorites
+- [x] **Favorites:** star an event from its detail screen, its card's context menu or the VoiceOver actions rotor, and show only favorites from the Refine menu

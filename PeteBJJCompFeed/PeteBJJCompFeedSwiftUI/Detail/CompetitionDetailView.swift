@@ -11,6 +11,7 @@ import SwiftUI
 /// links to register and to the event website.
 struct CompetitionDetailView: View {
     let card: PosterCard
+    let favorites: FavoriteCompetitions
 
     var body: some View {
         List {
@@ -55,6 +56,7 @@ struct CompetitionDetailView: View {
         .navigationTitle(card.name)
         .toolbarTitleDisplayMode(.inline)
         .toolbar {
+            FavoriteButton(id: card.id, favorites: favorites)
             ShareLink(item: card.eventLink, subject: Text(card.name))
         }
     }
@@ -63,13 +65,13 @@ struct CompetitionDetailView: View {
 #if DEBUG
 #Preview("Registration open") {
     NavigationStack {
-        CompetitionDetailView(card: .preview(registrationLink: URL(string: "https://example.com/register")))
+        CompetitionDetailView(card: .preview(registrationLink: URL(string: "https://example.com/register")), favorites: .preview)
     }
 }
 
 #Preview("Server card without details") {
     NavigationStack {
-        CompetitionDetailView(card: .preview(details: false))
+        CompetitionDetailView(card: .preview(details: false), favorites: .preview)
     }
 }
 

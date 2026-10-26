@@ -43,7 +43,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureWindow() {
-        let viewModel = CompetitionsGridViewModel(loader: makeCompetitionsFeedLoader())
+        let viewModel = CompetitionsGridViewModel(
+            loader: makeCompetitionsFeedLoader(),
+            favorites: FavoriteCompetitions(store: UserDefaultsFavoritesStore(defaults: .standard)))
         window?.rootViewController = UIHostingController(rootView: CompetitionsGridView(viewModel: viewModel))
 
         window?.makeKeyAndVisible()
