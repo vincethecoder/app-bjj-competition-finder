@@ -284,7 +284,7 @@
     "FEED_REFINE_RESET" : {
       "extractionState" : "manual",
       "localizations" : {
-        "el" : { "stringUnit" : { "state" : "translated", "value" : "Όλες οι ημερομηνίες, τοποθεσίες και αγαπημένα" } },
+        "el" : { "stringUnit" : { "state" : "translated", "value" : "Εμφάνιση όλων" } },
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Show all dates, locations, and favorites" } },
         "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar todas as datas, locais e favoritos" } }
       }
