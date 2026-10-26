@@ -57,7 +57,7 @@ enum PosterScreenMapper {
                 ?? dates.eventDates(from: card.startDate ?? competition?.startDate, to: card.endDate ?? competition?.endDate),
             locationText: card.locationLabel.nonEmpty ?? competition.flatMap(location(of:)),
             imageURL: card.imageURL,
-            eventLink: card.eventLink,
+            eventLink: card.eventLink.webLink,
             badges: card.badges.map { PosterBadge(id: $0.id, title: $0.title, token: $0.token) },
             details: competition.map { details(for: $0, locale: dates.locale) },
             type: competition?.type.rawValue ?? card.badges.first { $0.token == .type }?.id,
@@ -123,7 +123,7 @@ enum PosterScreenMapper {
             dateText: dates.eventDates(from: competition.startDate, to: competition.endDate),
             locationText: location(of: competition),
             imageURL: nil,
-            eventLink: competition.eventLink,
+            eventLink: competition.eventLink.webLink,
             badges: [typeBadge(for: competition.type, locale: dates.locale), registrationBadge(for: competition.registrationStatus, locale: dates.locale)],
             details: details(for: competition, locale: dates.locale),
             type: competition.type.rawValue,
@@ -161,7 +161,7 @@ enum PosterScreenMapper {
                 : competition.categories.map { division(for: $0, locale: locale) }.formatted(.list(type: .and).locale(locale)),
             rankingPoints: competition.rankingPoints > 0 ? competition.rankingPoints : nil,
             notes: competition.notes?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty,
-            registrationLink: competition.registrationStatus == .open ? competition.registrationLink : nil)
+            registrationLink: competition.registrationStatus == .open ? competition.registrationLink?.webLink : nil)
     }
 
     private static func division(for category: CompetitionCategory, locale: Locale) -> String {
@@ -208,5 +208,15 @@ private extension Optional<String> {
 private extension String {
     var nonEmpty: String? {
         isEmpty ? nil : self
+    }
+}
+
+private extension URL {
+    /// The URL, or `nil` when a browser can't open it, such as
+    /// `https:\example.com`, which parses with no host.
+    var webLink: URL? {
+        guard let scheme = scheme?.lowercased(), ["http", "https"].contains(scheme),
+              host(percentEncoded: false)?.isEmpty == false else { return nil }
+        return self
     }
 }
