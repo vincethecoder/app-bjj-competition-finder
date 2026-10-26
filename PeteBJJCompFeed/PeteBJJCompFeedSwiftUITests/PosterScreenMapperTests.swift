@@ -212,13 +212,13 @@ struct PosterScreenMapperTests {
         let url = try #require(URL(string: link))
         let competition = uniqueCompetition(id: "worlds", registrationStatus: .open, registrationLink: url, eventLink: url)
 
-        let deviceCard = try #require(deviceCard(for: competition))
-        let serverCard = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
+        let builtOnDevice = try #require(deviceCard(for: competition))
+        let fromServer = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
 
-        #expect(deviceCard.eventLink == nil)
-        #expect(deviceCard.details?.registrationLink == nil)
-        #expect(serverCard.eventLink == nil)
-        #expect(serverCard.details?.registrationLink == nil)
+        #expect(builtOnDevice.eventLink == nil)
+        #expect(builtOnDevice.details?.registrationLink == nil)
+        #expect(fromServer.eventLink == nil)
+        #expect(fromServer.details?.registrationLink == nil)
     }
 
     @Test(arguments: ["https://example.com/register", "http://example.com/register", "HTTPS://example.com/register"])
@@ -226,12 +226,12 @@ struct PosterScreenMapperTests {
         let url = try #require(URL(string: link))
         let competition = uniqueCompetition(id: "worlds", registrationStatus: .open, registrationLink: url, eventLink: url)
 
-        let deviceCard = try #require(deviceCard(for: competition))
-        let serverCard = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
+        let builtOnDevice = try #require(deviceCard(for: competition))
+        let fromServer = try #require(mapCard(makeCard(id: "worlds", eventLink: url), competitions: [competition]))
 
-        #expect(deviceCard.eventLink == url)
-        #expect(deviceCard.details?.registrationLink == url)
-        #expect(serverCard.eventLink == url)
+        #expect(builtOnDevice.eventLink == url)
+        #expect(builtOnDevice.details?.registrationLink == url)
+        #expect(fromServer.eventLink == url)
     }
 
     // MARK: - Refinement values
