@@ -203,6 +203,36 @@ struct PosterScreenMapperTests {
         #expect(card.details == nil)
     }
 
+    // MARK: - Refinement values
+
+    @Test func map_takesRefinementValuesFromCompetition() throws {
+        let competition = uniqueCompetition(startDate: date(2026, 5, 30), endDate: date(2026, 6, 2), country: "USA")
+
+        let card = try #require(deviceCard(for: competition))
+
+        #expect(card.startDate == date(2026, 5, 30))
+        #expect(card.endDate == date(2026, 6, 2))
+        #expect(card.country == "USA")
+    }
+
+    @Test func map_prefersServerCardDatesAndTakesCountryFromItsCompetition() throws {
+        let card = makeCard(id: "worlds", startDate: date(2026, 5, 28), endDate: date(2026, 5, 31))
+        let competition = uniqueCompetition(id: "worlds", startDate: date(2026, 5, 30), endDate: date(2026, 6, 2), country: "Brazil")
+
+        let mapped = try #require(mapCard(card, competitions: [competition]))
+
+        #expect(mapped.startDate == date(2026, 5, 28))
+        #expect(mapped.endDate == date(2026, 5, 31))
+        #expect(mapped.country == "Brazil")
+    }
+
+    @Test func map_hasNoCountryForServerCardWithoutCompetition() throws {
+        let mapped = try #require(mapCard(makeCard(id: "worlds", startDate: date(2026, 5, 28), endDate: date(2026, 5, 31))))
+
+        #expect(mapped.startDate == date(2026, 5, 28))
+        #expect(mapped.country == nil)
+    }
+
     // MARK: - Helpers
 
     /// Catalog copy in the locale the mapper is given.

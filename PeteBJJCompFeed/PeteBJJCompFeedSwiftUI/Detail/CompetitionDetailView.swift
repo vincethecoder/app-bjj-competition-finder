@@ -95,7 +95,10 @@ private extension PosterCard {
                     registrationLink: registrationLink)
                 : nil,
             type: "gi",
-            registrationStatus: "open")
+            registrationStatus: "open",
+            startDate: nil,
+            endDate: nil,
+            country: "USA")
     }
 }
 #endif

@@ -219,11 +219,106 @@ final class CompetitionsGridViewModelTests {
         #expect(sut.selectedFilterID == "gi")
     }
 
+    // MARK: - Date and location refinement
+
+    @Test func load_offersEachCountryWithAnEventOnceInAlphabeticalOrder() async {
+        let (sut, loader) = makeSUT()
+
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        #expect(sut.countries == ["Brazil", "Portugal", "USA"])
+        #expect(!sut.refinement.isActive)
+    }
+
+    @Test func refinement_hidesEventsOutsideTheDateRange() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        sut.refinement.dateRange = .thisMonth
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["october"]])
+
+        sut.refinement.dateRange = .nextThreeMonths
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["october"], ["november"], ["december"]])
+    }
+
+    @Test func refinement_hidesEventsInOtherCountries() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        sut.refinement.country = "USA"
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["october"], ["december"]])
+    }
+
+    @Test func refinement_narrowsTheSelectedFilterFurther() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+        sut.selectFilter("nogi")
+
+        sut.refinement.dateRange = .nextThreeMonths
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["december"]])
+
+        sut.refinement = PosterRefinement()
+
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["december"], ["march"]])
+    }
+
+    @Test func refinement_reportsFilteredToNothingWhenItHidesEveryEvent() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+
+        sut.refinement = PosterRefinement(dateRange: .thisMonth, country: "Brazil")
+
+        #expect(sut.visibleSections.isEmpty)
+        #expect(sut.isFilteredToNothing)
+    }
+
+    @Test func load_keepsRefinementAndClearsACountryTheReloadedFeedNoLongerHas() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+        sut.refinement = PosterRefinement(dateRange: .nextThreeMonths, country: "Brazil")
+        let withoutBrazil = makeFeed(competitions: refinableCompetitions.filter { $0.country != "Brazil" }, screen: nil)
+
+        await load(sut, completingWith: .success(withoutBrazil), on: loader, at: 1)
+
+        #expect(sut.refinement == PosterRefinement(dateRange: .nextThreeMonths))
+        #expect(sut.countries == ["Portugal", "USA"])
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["october"], ["december"]])
+    }
+
+    @Test func load_keepsACountryTheReloadedFeedStillHas() async {
+        let (sut, loader) = makeSUT()
+        await load(sut, completingWith: .success(refinableFeed), on: loader)
+        sut.refinement.country = "Portugal"
+
+        await load(sut, completingWith: .success(refinableFeed), on: loader, at: 1)
+
+        #expect(sut.refinement.country == "Portugal")
+        #expect(sut.visibleSections.map { $0.cards.map(\.id) } == [["march"]])
+    }
+
     // MARK: - Helpers
+
+    /// Today, in the middle of the afternoon.
+    private static let now = date(2026, 10, 25).addingTimeInterval(15 * 60 * 60)
+
+    private let refinableCompetitions = [
+        uniqueCompetition(id: "october", startDate: date(2026, 10, 30), endDate: date(2026, 11, 1), country: "USA", type: .gi),
+        uniqueCompetition(id: "november", startDate: date(2026, 11, 14), endDate: date(2026, 11, 15), country: "Brazil", type: .gi),
+        uniqueCompetition(id: "december", startDate: date(2026, 12, 10), endDate: date(2026, 12, 13), country: "USA", type: .nogi),
+        uniqueCompetition(id: "march", startDate: date(2027, 3, 18), endDate: date(2027, 3, 21), country: "Portugal", type: .nogi),
+    ]
+
+    private var refinableFeed: CompetitionsFeed {
+        makeFeed(competitions: refinableCompetitions, screen: nil)
+    }
 
     private func makeSUT(sourceLocation: SourceLocation = #_sourceLocation) -> (sut: CompetitionsGridViewModel, loader: CompetitionsFeedLoaderSpy) {
         let loader = CompetitionsFeedLoaderSpy()
-        let sut = CompetitionsGridViewModel(loader: loader, locale: testLocale, calendar: testCalendar)
+        let sut = CompetitionsGridViewModel(loader: loader, locale: testLocale, calendar: testCalendar, now: { Self.now })
         leakTracker.track(loader, sourceLocation: sourceLocation)
         leakTracker.track(sut, sourceLocation: sourceLocation)
         return (sut, loader)

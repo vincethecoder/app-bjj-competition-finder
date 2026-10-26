@@ -26,4 +26,26 @@ struct PosterScreenFilteringTests {
 
         #expect(screen.sections(filteredBy: filterID) == screen.sections)
     }
+
+    @Test func sectionsFilteredBy_keepsOnlyCardsThePredicateAcceptsToo() {
+        let screen = PosterScreenMapper.map(makeFeed(screen: makeScreen()), locale: testLocale, calendar: testCalendar)
+
+        let sections = screen.sections(filteredBy: "gi") { $0.id == "brasileiro" }
+
+        #expect(sections.map { $0.cards.map(\.id) } == [["brasileiro"]])
+    }
+
+    @Test func countries_listsEachCountryOnceInAlphabeticalOrder() {
+        let competitions = [
+            uniqueCompetition(id: "worlds", country: "USA"),
+            uniqueCompetition(id: "brasileiro", country: "Brazil"),
+            uniqueCompetition(id: "pans", country: "USA"),
+            uniqueCompetition(id: "euro", country: "Österreich"),
+            uniqueCompetition(id: "missing", country: ""),
+        ]
+
+        let screen = PosterScreenMapper.map(makeFeed(competitions: competitions, screen: nil), locale: testLocale, calendar: testCalendar)
+
+        #expect(screen.countries(locale: testLocale) == ["Brazil", "Österreich", "USA"])
+    }
 }
